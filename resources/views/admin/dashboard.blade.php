@@ -4,4 +4,6 @@
 
 	<h1>Dashboard</h1>
 	
+	<body> Helouuu </body>
+	
 @stop

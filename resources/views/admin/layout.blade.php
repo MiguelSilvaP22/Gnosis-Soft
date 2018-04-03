@@ -260,7 +260,7 @@ desired effect
         <li class="header">Gnosis</li>
         <!-- Optionally, you can add icons to the links -->
         <li class="active"><a href="#"><i class="fa fa-link"></i> <span>HOME</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Usuarios/span></a></li>
+        <li><a href="#"><i class="fa fa-link"></i> <span>Usuarios</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Competencias</span>
             <span class="pull-right-container">

@@ -3,10 +3,13 @@
 @section ('content')
 <body> 
 	<!-- Calendario -->
-	<div id='calendar' align='center' style="max-width: 900px; margin: 0 auto;">
-			
-	</div>		
-
+	<div class="col-md-12">
+    <div class="box box-primary">
+      <div class="box-body no-padding">
+				<div id='calendar'></div>		
+			</div>
+		</div>
+	</div>
 </body>
 @stop
 @section ('script-js')

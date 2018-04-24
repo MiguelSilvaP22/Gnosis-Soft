@@ -22,6 +22,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="/adminlte/css/skins/skin-blue.min.css">
 
+
+  <link rel="stylesheet" href="/adminlte/bower_components/fullcalendar/dist/fullcalendar.min.css">
+  <link rel="stylesheet" href="/adminlte/bower_components/fullcalendar/dist/fullcalendar.print.min.css"  media="print">
+
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -62,9 +67,9 @@ desired effect
     <!-- Logo -->
     <a href="index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>G</b>S</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>Gnosis</b>Soft</span>
     </a>
 
     <!-- Header Navbar -->
@@ -76,6 +81,9 @@ desired effect
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
+
+        {{--
+          
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
             <!-- Menu toggle button -->
@@ -111,7 +119,7 @@ desired effect
             </ul>
           </li>
           <!-- /.messages-menu -->
-
+       
           <!-- Notifications Menu -->
           <li class="dropdown notifications-menu">
             <!-- Menu toggle button -->
@@ -135,6 +143,8 @@ desired effect
               <li class="footer"><a href="#">View all</a></li>
             </ul>
           </li>
+
+
           <!-- Tasks Menu -->
           <li class="dropdown tasks-menu">
             <!-- Menu Toggle Button -->
@@ -172,6 +182,8 @@ desired effect
               </li>
             </ul>
           </li>
+
+          --}}
           <!-- User Account Menu -->
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
@@ -179,7 +191,7 @@ desired effect
               <!-- The user image in the navbar-->
               <img src="/adminlte/img/user3-128x128.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Cata</span>
+              <span class="hidden-xs">Catalina</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -187,7 +199,7 @@ desired effect
                 <img src="/adminlte/img/user3-128x128.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  Cata - Web Developer
+                  Catalina - Web Developer
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -237,7 +249,7 @@ desired effect
           <img src="/adminlte/img/user3-128x128.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Cata</p>
+          <p>Catalina</p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
@@ -257,10 +269,19 @@ desired effect
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">Gnosis</li>
+        <li class="header">GnosisSoft</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>HOME</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Usuarios</span></a></li>
+        <li class="active"><a href="#"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
+        <li><a href="#"><i class="fa fa-user-secret"></i> <span>Usuarios</span></a></li>
+        <li><a href="#"><i class="fa fa-user"></i> <span>Colaboradores</span></a></li>
+        <li><a href="#"><i class="fa fa-building"></i> <span>Empresas</span></a></li>
+        <li><a href="#"><i class="fa fa-graduation-cap"></i> <span>Cursos</span></a></li>
+        <li><a href="#"><i class="fa fa-book"></i> <span>Actividad</span></a></li>
+        <li><a href="#"><i class="fa fa-pencil-square-o"></i> <span>Evaluación</span></a></li>
+        <li><a href="#"><i class="fa fa-th-list"></i> <span>Competencias</span></a></li>
+        <li><a href="#"><i class="fa fa-paper-plane"></i> <span>Encuesta</span></a></li>
+        
+        {{--
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Competencias</span>
             <span class="pull-right-container">
@@ -272,6 +293,8 @@ desired effect
             <li><a href="#">Link in level 2</a></li>
           </ul>
         </li>
+        --}}
+
       </ul>
       <!-- /.sidebar-menu -->
     </section>
@@ -283,11 +306,11 @@ desired effect
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Gnosis 
+        Página principal de Administrador
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i>Empresa</a></li>
+        <li class="active">Inicio</li>
       </ol>
     </section>
 
@@ -308,7 +331,7 @@ desired effect
       Anything you want
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2018 <a href="#">MCJ</a>.</strong> All rights reserved.
   </footer>
 
   <!-- Control Sidebar -->
@@ -396,11 +419,17 @@ desired effect
 <script src="/adminlte/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+<script src="/adminlte/bower_components/moment/moment.js"></script>
+<script src="/adminlte/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/adminlte/js/adminlte.min.js"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
+@yield('script-js')
+
 </body>
 </html>

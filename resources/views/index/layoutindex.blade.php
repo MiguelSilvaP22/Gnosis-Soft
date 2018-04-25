@@ -49,7 +49,7 @@
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input type="checkbox"> Recuerdame bb
+              <input type="checkbox"> Recordar mi cuenta
             </label>
           </div>
         </div>

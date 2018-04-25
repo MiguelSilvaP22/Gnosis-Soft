@@ -36,7 +36,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">Ingresa al sistema</p>
 
-    <form action="#" method="post">
+    <form action="/admin" method="post">
       <div class="form-group has-feedback">
         <input type="email" class="form-control" placeholder="Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

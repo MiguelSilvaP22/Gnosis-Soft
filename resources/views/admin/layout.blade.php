@@ -22,10 +22,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="/adminlte/css/skins/skin-blue.min.css">
 
-
+  <!--FullCalendar-->
   <link rel="stylesheet" href="/adminlte/bower_components/fullcalendar/dist/fullcalendar.min.css">
   <link rel="stylesheet" href="/adminlte/bower_components/fullcalendar/dist/fullcalendar.print.min.css"  media="print">
 
+  <!--DataTable-->
+  <link rel="stylesheet" href="/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -271,8 +273,8 @@ desired effect
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">GnosisSoft</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
-        <li><a href="#"><i class="fa fa-user-secret"></i> <span>Usuarios</span></a></li>
+        <li class="active"><a href="/admin"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
+        <li><a href="/usuario"><i class="fa fa-user-secret"></i> <span>Usuarios</span></a></li>
         <li><a href="#"><i class="fa fa-user"></i> <span>Colaboradores</span></a></li>
         <li><a href="#"><i class="fa fa-building"></i> <span>Empresas</span></a></li>
         <li><a href="#"><i class="fa fa-graduation-cap"></i> <span>Cursos</span></a></li>
@@ -420,12 +422,17 @@ desired effect
 <!-- Bootstrap 3.3.7 -->
 <script src="/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
-
+<!-- FullCalendar-->
 <script src="/adminlte/bower_components/moment/moment.js"></script>
 <script src="/adminlte/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+
+
 <!-- AdminLTE App -->
 <script src="/adminlte/js/adminlte.min.js"></script>
 
+<!--DataTable-->
+<script src="/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->

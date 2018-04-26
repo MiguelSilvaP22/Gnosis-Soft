@@ -36,7 +36,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">Ingresa al sistema</p>
 
-    <form action="/admin" method="post">
+    <form action="#" method="post">
       <div class="form-group has-feedback">
         <input type="email" class="form-control" placeholder="Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -55,7 +55,8 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Ingresar</button>
+          <!-- Submit  <button type="submit" class="btn btn-primary btn-block btn-flat">Ingresar</button> -->
+          <a type="button" href="/admin" class="btn btn-primary btn-block btn-flat">Ingresar</a>
         </div>
         <!-- /.col -->
       </div>

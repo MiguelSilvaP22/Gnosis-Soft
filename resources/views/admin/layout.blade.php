@@ -273,7 +273,7 @@ desired effect
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">GnosisSoft</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="/admin"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
+        <li><a href="/admin"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
         <li><a href="/usuario"><i class="fa fa-user-secret"></i> <span>Usuarios</span></a></li>
         <li><a href="#"><i class="fa fa-user"></i> <span>Colaboradores</span></a></li>
         <li><a href="#"><i class="fa fa-building"></i> <span>Empresas</span></a></li>
@@ -308,7 +308,7 @@ desired effect
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Página principal de Administrador
+        Bienvenido a GnosisSoft
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i>Empresa</a></li>

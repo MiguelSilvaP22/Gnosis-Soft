@@ -73,7 +73,7 @@ class PerfilController extends Controller
             $estado="Inactivo";
         }
         $vista ="
-        Datos del Perfil
+        <h3 style='align:center;'>Datos del Perfil</h3>
         <table class='table'>
             <thead>
             </thead>

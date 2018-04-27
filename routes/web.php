@@ -36,3 +36,6 @@ Route::get('/eliminarPerfil/{id}', 'PerfilController@destroy',function($id) {
 Route::get('/verPerfil/{id}', 'PerfilController@show',function($id) {
     return  $id;
   });
+  Route::get('/modificarPerfil/{id}', 'PerfilController@edit',function($id) {
+    return  $id;
+  });

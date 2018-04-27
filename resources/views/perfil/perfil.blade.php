@@ -37,7 +37,7 @@
 							@endif
 							<td>
 								<button id="btnVer" value="{{ $perfil->id_perfil}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
-								<button class="btn btn btn-info" href="/modificarPerfil?id={{ $perfil->id_perfil}}"><i class="fa fa-edit"></i> Editar</button>
+								<a class="btn btn btn-info" href="/modificarPerfil/{{ $perfil->id_perfil}}"><i class="fa fa-edit"></i> Editar</a>
 								<button class="btn btn btn-info" onclick="eliminarPerfil({{ $perfil->id_perfil}});"><i class="fa fa-eraser"></i> Eliminar</button>
 							</td>
 						</tr>
@@ -55,8 +55,16 @@
 <div class="modal fade" id="modal">
 	<div class="modal-dialog">
 	<div class="modal-content">
-		<div id="datosPerfil" class="modal-body">
-			
+		<div class="modal-body">	
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="box box-primary">
+						<div id="datosPerfil" class="box-body">
+
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<!-- /.modal-content -->

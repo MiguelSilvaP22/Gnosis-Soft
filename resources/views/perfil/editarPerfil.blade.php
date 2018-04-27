@@ -21,13 +21,16 @@
 				<div class='form-group'>
 				{!! Form::label('estado_perfil', 'Estado: Activo') !!}
 				{!! Form::radio('estado_perfil', '1', true); !!}
-				
+
 				{!! Form::label('estado_perfil', 'Inactivo') !!}
 				{!! Form::radio('estado_perfil', '0'); !!}
 				
 				</div>
 				<div class='form-group'>
 				{!! Form::submit("Editar Perfil", ['class' => 'btn btn-lg btn-success form-control']) !!}
+				</div>
+				<div class='form-group'>
+				<a href='/perfil' class="btn btn-lg btn-success form-control" > Volver </a>
 				</div>
 				{!! Form::close() !!}
 				</div>

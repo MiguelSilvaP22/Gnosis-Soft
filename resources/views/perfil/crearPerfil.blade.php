@@ -13,7 +13,15 @@
 				</div>
 
 				<div class="box-body">
-				
+				{!! Form::open(['action' => 'PerfilController@store']) !!}
+				<div class='form-group'>
+				{!! Form::label('nombre_perfil', 'Nombre:') !!}
+				{!! Form::text('nombre_perfil', null, ['class' => 'form-control']) !!}
+				</div>
+				<div class='form-group'>
+				{!! Form::submit("Agregar Perfil", ['class' => 'btn btn-lg btn-success form-control']) !!}
+				</div>
+  				{!! Form::close() !!}
 				</div>
 			</div>
 		</div>

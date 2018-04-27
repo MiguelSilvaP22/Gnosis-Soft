@@ -26,5 +26,13 @@ Route::get('usuario', function () {
     return view('admin.usuario');
 });
 
-Route::view('/perfil', 'perfil.perfil');
-Route::view('/crearPerfil', 'perfil.crearPerfil');
+Route::resource('perfil', 'PerfilController');
+Route::get('/perfil', 'PerfilController@index');
+Route::get('/crearPerfil', 'PerfilController@create');
+
+Route::get('/eliminarPerfil/{id}', 'PerfilController@destroy',function($id) {
+  return  $id;
+});
+Route::get('/verPerfil/{id}', 'PerfilController@show',function($id) {
+    return  $id;
+  });

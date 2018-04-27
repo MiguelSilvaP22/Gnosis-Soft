@@ -13,7 +13,7 @@
 				</div>
 				<div style="widtn:100%;align:center;">
 					<div id="btnAgregar" class="btn btn-block btn-success" style="float: right;margin-bottom: 10px;margin-right: 10px;width:200px;">
-						Agregar
+					<i class="fa fa-plus"></i>	Agregar
 					</div>
 				</div>
 				<div class="box-body">
@@ -27,11 +27,23 @@
 						</tr>
 					</thead>
 					<tbody>
+						@foreach ($perfiles as $perfil) 
 						<tr>
-							<td>Nombre Perfil</td>
-							<td>Estado</td>
-							<td>Acciones</td>
+							<td style="width:35%;">{{ $perfil->nombre_perfil}}</td>
+							@if($perfil->estado_perfil == 1)
+							<td style="width:35%;color:green;">Activo</td>
+							@else
+							<td style="width:35%;color:red">inactivo</td>
+							@endif
+							<td>
+								<button id="btnVer" value="{{ $perfil->id_perfil}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
+								<button class="btn btn btn-info" href="/modificarPerfil?id={{ $perfil->id_perfil}}"><i class="fa fa-edit"></i> Editar</button>
+								<button class="btn btn btn-info" onclick="eliminarPerfil({{ $perfil->id_perfil}});"><i class="fa fa-eraser"></i> Eliminar</button>
+							</td>
 						</tr>
+						@endforeach
+						
+							
 					</tbody>
 				</table>
 				</div>
@@ -40,11 +52,56 @@
 	</div>
 
 </body>
+<div class="modal fade" id="modal">
+	<div class="modal-dialog">
+	<div class="modal-content">
+		<div id="datosPerfil" class="modal-body">
+			
+		</div>
+	</div>
+	<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 @stop
+
 @section('script-js')
 <script >
-$("#btnAgregar").click(function(){
+$(document).on('click', '#btnVer', function () {
+		$.ajax({
+		url: "/verPerfil/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#datosPerfil").html(datos);
+			$('#modal').modal('show');
+		}
+
+		});
+		//alert("asda");
+});	
+$(document).ready(function() {
+
+    $('#tablaPerfil').DataTable({
+			
+		});
+
+	$("#btnAgregar").click(function(){
 	location.href = '/crearPerfil';
 	});
+
+	
+
+} );
+function eliminarPerfil (id)
+{
+	var eliminar = confirm("¿Esta seguro de eliminar el perfil?");
+	if(eliminar)
+	{
+		location.href = '/eliminarPerfil/'+id;
+	}
+}
+
+
 </script>
 @stop

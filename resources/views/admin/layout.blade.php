@@ -274,7 +274,17 @@ desired effect
         <li class="header">GnosisSoft</li>
         <!-- Optionally, you can add icons to the links -->
         <li><a href="/admin"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
-        <li><a href="/usuario"><i class="fa fa-user-secret"></i> <span>Usuarios</span></a></li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-user-secret"></i> <span>Usuarios</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="/usuario"><i class="fa fa-user-secret"></i> <span>Usuarios</span></a></li>
+            <li><a href="/perfil"><i class="fa fa-user-secret"></i> <span>Perfiles</span></a></li>
+          </ul>
+        </li>
         <li><a href="#"><i class="fa fa-user"></i> <span>Colaboradores</span></a></li>
         <li><a href="#"><i class="fa fa-building"></i> <span>Empresas</span></a></li>
         <li><a href="#"><i class="fa fa-graduation-cap"></i> <span>Cursos</span></a></li>

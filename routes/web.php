@@ -25,3 +25,6 @@ Route::get('admin', function () {
 Route::get('usuario', function () {
     return view('admin.usuario');
 });
+
+Route::view('/perfil', 'perfil.perfil');
+Route::view('/crearPerfil', 'perfil.crearPerfil');

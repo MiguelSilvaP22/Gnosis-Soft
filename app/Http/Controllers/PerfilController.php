@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Appp\Perfil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -22,9 +23,13 @@ class PerfilController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        //Crear un perfil,
+        $perfil = new Perfil;
+        $perfil->nombre_perfil = $request->nombre_perfil;
+        
+        $perfil->save();
     }
 
     /**

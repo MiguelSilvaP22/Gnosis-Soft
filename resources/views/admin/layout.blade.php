@@ -256,7 +256,7 @@ desired effect
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
-
+      {{--
       <!-- search form (Optional) -->
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
@@ -268,31 +268,77 @@ desired effect
         </div>
       </form>
       <!-- /.search form -->
-
+      --}}
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">GnosisSoft</li>
         <!-- Optionally, you can add icons to the links -->
         <li><a href="/admin"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-user-secret"></i> <span>Usuarios</span>
-              <span class="pull-right-container">
+        <a href="#"><i class="fa fa-folder-o"></i> <span>Mantenedores</span>
+            <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="/usuario"><i class="fa fa-user-secret"></i> <span>Usuarios</span></a></li>
-            <li><a href="/perfil"><i class="fa fa-user-secret"></i> <span>Perfiles</span></a></li>
+        <ul class="treeview-menu">  
+          <li class="treeview">
+            <a href="#"><i class="fa fa-group"></i> <span>Usuarios</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="/usuario"><i class="fa fa-user-secret"></i> <span>Usuarios</span></a></li>
+              <li><a href="/perfil"><i class="fa fa-user-secret"></i> <span>Perfiles</span></a></li>
+            </ul>
+          </li>
+          <li><a href="#"><i class="fa fa-user"></i> <span>Colaboradores</span></a></li>
+          <li><a href="#"><i class="fa fa-building"></i> <span>Empresas</span></a></li>
+          <li><a href="#"><i class="fa fa-graduation-cap"></i> <span>Cursos</span></a></li>
+          <li><a href="#"><i class="fa fa-book"></i> <span>Actividad</span></a></li>
+          <li><a href="#"><i class="fa fa-pencil-square-o"></i> <span>Evaluación</span></a></li>
+          <li><a href="#"><i class="fa fa-th-list"></i> <span>Competencias</span></a></li>
+          <li><a href="#"><i class="fa fa-paper-plane"></i> <span>Encuesta</span></a></li>
           </ul>
         </li>
-        <li><a href="#"><i class="fa fa-user"></i> <span>Colaboradores</span></a></li>
-        <li><a href="#"><i class="fa fa-building"></i> <span>Empresas</span></a></li>
-        <li><a href="#"><i class="fa fa-graduation-cap"></i> <span>Cursos</span></a></li>
-        <li><a href="#"><i class="fa fa-book"></i> <span>Actividad</span></a></li>
-        <li><a href="#"><i class="fa fa-pencil-square-o"></i> <span>Evaluación</span></a></li>
-        <li><a href="#"><i class="fa fa-th-list"></i> <span>Competencias</span></a></li>
-        <li><a href="#"><i class="fa fa-paper-plane"></i> <span>Encuesta</span></a></li>
-        
+
+        <li class="treeview">
+        <a href="#"><i class="fa fa-sitemap"></i> <span>Empresa</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+        <ul class="treeview-menu">  
+          <li class="treeview">
+          <li><a href="#"><i class="fa fa-pie-chart"></i> <span>Dashboard</span></a></li>
+          <li><a href="#"><i class="fa fa-user"></i> <span>Colaboradores</span></a></li>
+          <li class="treeview">
+            <a href="#"><i class="fa fa-mortar-board"></i> <span>Curso</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="#"><i class="fa fa-sticky-note-o"></i> <span>Estado Curso</span></a></li>
+              <li><a href="#"><i class="fa fa-exclamation"></i> <span>Información Curso</span></a></li>
+            </ul>
+          </li>
+          <li><a href="#"><i class="fa fa-street-view"></i> <span>Competencias</span></a></li>
+          </ul>
+        </li>
+
+        <li class="treeview">
+        <a href="#"><i class="fa fa-graduation-cap"></i> <span>Facilitador</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+        <ul class="treeview-menu">  
+          <li class="treeview">
+            <li><a href="#"><i class="fa fa-edit"></i> <span>Actividades</span></a></li>
+          </ul>
+        </li>
+
         {{--
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Competencias</span>

@@ -22,6 +22,7 @@
 					<thead>
 						<tr>
 							<th>Nombre Perfil</th>
+							<th>Fecha de Modificación</th>
 							<th>Estado</th>
 							<th>Acciones</th>
 						</tr>
@@ -29,11 +30,12 @@
 					<tbody>
 						@foreach ($perfiles as $perfil) 
 						<tr>
-							<td style="width:35%;">{{ $perfil->nombre_perfil}}</td>
+							<td style="width:25%;">{{ $perfil->nombre_perfil}}</td>
+							<td style="width:25%;">{{ $perfil->fecha_mod_perfil}}</td>
 							@if($perfil->estado_perfil == 1)
-							<td style="width:35%;color:green;">Activo</td>
+							<td style="width:25%;color:green;">Activo</td>
 							@else
-							<td style="width:35%;color:red">inactivo</td>
+							<td style="width:25%;color:red">inactivo</td>
 							@endif
 							<td>
 								<button id="btnVer" value="{{ $perfil->id_perfil}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>

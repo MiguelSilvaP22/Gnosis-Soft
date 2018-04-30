@@ -15,7 +15,7 @@ Route::get('index', function () {
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index.layoutindex');
 });
 
 Route::get('admin', function () {
@@ -26,8 +26,13 @@ Route::get('usuario', function () {
     return view('admin.usuario');
 });
 
-Route::resource('perfil', 'PerfilController');
-Route::get('/perfil', 'PerfilController@index');
+
+
+Route::get('perfil/{estado?}', 'PerfilController@index',function($estado = null)
+{
+    return $estado;
+});
+
 Route::get('/crearPerfil', 'PerfilController@create');
 
 Route::get('/eliminarPerfil/{id}', 'PerfilController@destroy',function($id) {
@@ -39,3 +44,4 @@ Route::get('/verPerfil/{id}', 'PerfilController@show',function($id) {
   Route::get('/modificarPerfil/{id}', 'PerfilController@edit',function($id) {
     return  $id;
   });
+Route::resource('perfil', 'PerfilController');

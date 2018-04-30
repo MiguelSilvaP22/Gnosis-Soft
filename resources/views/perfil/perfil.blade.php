@@ -9,11 +9,15 @@
 			<div class="box">
 			
 				<div class="box-header">
-					<h3 class="box-title">Tabla de Perfiles</h3>
+					<h1 class="box-title">Tabla de Perfiles</h1>
 				</div>
 				<div style="widtn:100%;align:center;">
+					
 					<div id="btnAgregar" class="btn btn-block btn-success" style="float: right;margin-bottom: 10px;margin-right: 10px;width:200px;">
-					<i class="fa fa-plus"></i>	Agregar
+						<i class="fa fa-plus"></i>	Agregar
+					</div>
+					<div id="btnVerTrash" class="btn btn-block btn-success" style="float: right;margin-top: 0px;margin-bottom: 10px;margin-right: 10px;width:200px;">
+						<i class="fa fa-trash"></i>	Ver Eliminados
 					</div>
 				</div>
 				<div class="box-body">
@@ -90,18 +94,18 @@ $(document).on('click', '#btnVer', function () {
 		});
 		//alert("asda");
 });	
+
+$("#btnAgregar").click(function(){
+	location.href = '/crearPerfil';
+	});
+$("#btnVerTrash").click(function(){
+	location.href = '/perfil/0';
+	});	
 $(document).ready(function() {
 
     $('#tablaPerfil').DataTable({
 			
 		});
-
-	$("#btnAgregar").click(function(){
-	location.href = '/crearPerfil';
-	});
-
-	
-
 } );
 function eliminarPerfil (id)
 {

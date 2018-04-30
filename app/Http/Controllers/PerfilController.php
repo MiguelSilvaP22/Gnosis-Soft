@@ -15,12 +15,14 @@ class PerfilController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        
-        $perfiles = Perfil::all();
-        
-        return view('perfil.perfil', ['perfiles' => $perfiles]);
+    public function index($estado = null)
+    {   
+        //dd($estado);    
+        if($estado!="0")
+            $perfiles = Perfil::all()->where('estado_perfil',1);
+        else
+            $perfiles = Perfil::all()->where('estado_perfil',0);
+        return view('perfil.perfil', compact('perfiles'));
     }
 
     /**
@@ -48,6 +50,7 @@ class PerfilController extends Controller
         $perfil->save();*/
 
         //Crear un perfil,
+        
         $perfil = new Perfil;
         $perfil->nombre_perfil = $request->nombre_perfil;
         $perfil->estado_perfil = 1;
@@ -67,28 +70,10 @@ class PerfilController extends Controller
     {
         $perfil = Perfil::find($id);
         if($perfil->estado_perfil == 1)
-        {
             $estado="Activo";
-        }else{
+        else
             $estado="Inactivo";
-        }
-        $vista ="
-        <h3 style='align:center;'>Datos del Perfil</h3>
-        <table class='table'>
-            <thead>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Nombre: </td>
-                    <td>$perfil->nombre_perfil</td>
-                </tr>
-                <tr>
-                    <td>Estado: </td>
-                    <td>$estado</td>
-                </tr>
-            </tbody>
-        </table>";
-        echo $vista;
+        return view('perfil.verPerfil',compact('perfil','estado') );
     }
 
     /**

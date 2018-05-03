@@ -43,7 +43,7 @@
 							@endif
 							<td>
 								<button id="btnVer" value="{{ $perfil->id_perfil}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
-								<a class="btn btn btn-info" href="/modificarPerfil/{{ $perfil->id_perfil}}"><i class="fa fa-edit"></i> Editar</a>
+								<a class="btn btn btn-info" href="{{ route('perfil.edit', ['id'=>$perfil->id_perfil] ) }}"><i class="fa fa-edit"></i> Editar</a>
 								<button class="btn btn btn-info" onclick="eliminarPerfil({{ $perfil->id_perfil}});"><i class="fa fa-eraser"></i> Eliminar</button>
 							</td>
 						</tr>
@@ -81,7 +81,7 @@
 @stop
 
 @section('script-js')
-<script >
+<script>
 $(document).on('click', '#btnVer', function () {
 		$.ajax({
 		url: "/verPerfil/"+this.value,

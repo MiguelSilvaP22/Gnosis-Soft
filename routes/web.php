@@ -43,5 +43,6 @@ Route::get('/verPerfil/{id}', 'PerfilController@show',function($id) {
   });
   Route::get('/modificarPerfil/{id}', 'PerfilController@edit',function($id) {
     return  $id;
-  });
+  })
+  ->name('perfil.edit');
 Route::resource('perfil', 'PerfilController');

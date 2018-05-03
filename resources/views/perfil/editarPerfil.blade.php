@@ -30,7 +30,7 @@
 				{!! Form::submit("Editar Perfil", ['class' => 'btn btn-lg btn-success form-control']) !!}
 				</div>
 				<div class='form-group'>
-				<a href='/perfil' class="btn btn-lg btn-success form-control" > Volver </a>
+				<a href='{{ url()->previous() }}' class="btn btn-lg btn-success form-control" > Volver </a>
 				</div>
 				{!! Form::close() !!}
 				</div>

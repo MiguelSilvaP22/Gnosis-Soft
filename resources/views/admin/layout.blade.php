@@ -10,24 +10,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>Administrador</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="/adminlte/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="/adminlte/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="/adminlte/bower_components/Ionicons/css/ionicons.min.css">
+  <!--Select2-->
+  <link rel="stylesheet" href="/adminlte/bower_components/select2/dist/css/select2.min.css">
+  <!--FullCalendar-->
+  <link rel="stylesheet" href="/adminlte/bower_components/fullcalendar/dist/fullcalendar.min.css">
+  <link rel="stylesheet" href="/adminlte/bower_components/fullcalendar/dist/fullcalendar.print.min.css"  media="print">
+  <!--DataTable-->
+  <link rel="stylesheet" href="/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="/adminlte/css/AdminLTE.min.css">
+  
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="/adminlte/css/skins/skin-blue.min.css">
-
-  <!--FullCalendar-->
-  <link rel="stylesheet" href="/adminlte/bower_components/fullcalendar/dist/fullcalendar.min.css">
-  <link rel="stylesheet" href="/adminlte/bower_components/fullcalendar/dist/fullcalendar.print.min.css"  media="print">
-
-  <!--DataTable-->
-  <link rel="stylesheet" href="/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -293,7 +295,7 @@ desired effect
             </ul>
           </li>
           <li><a href="#"><i class="fa fa-user"></i> <span>Colaboradores</span></a></li>
-          <li><a href="#"><i class="fa fa-building"></i> <span>Empresas</span></a></li>
+          <li><a href="/empresa"><i class="fa fa-building"></i> <span>Empresas</span></a></li>
           <li><a href="#"><i class="fa fa-graduation-cap"></i> <span>Cursos</span></a></li>
           <li><a href="#"><i class="fa fa-book"></i> <span>Actividad</span></a></li>
           <li><a href="#"><i class="fa fa-pencil-square-o"></i> <span>Evaluación</span></a></li>
@@ -482,7 +484,8 @@ desired effect
 <script src="/adminlte/bower_components/moment/moment.js"></script>
 <script src="/adminlte/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 
-
+<!--Select2-->
+<script src="/adminlte/bower_components/select2/dist/js/select2.full.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/adminlte/js/adminlte.min.js"></script>
 

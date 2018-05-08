@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Empresa;
+use App\Region;
+use App\Giro;
+use App\GiroEmpresa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 
 class EmpresaController extends Controller
 {
@@ -12,9 +17,14 @@ class EmpresaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index($estado = null)
+    {   
+        //dd($estado);    
+        if($estado!="0")
+            $empresas = Empresa::all()->where('estado_empresa',1);
+        else
+            $empresas = Empresa::all()->where('estado_empresa',0);
+        return view('empresa.index', compact('empresas'));
     }
 
     /**
@@ -24,7 +34,11 @@ class EmpresaController extends Controller
      */
     public function create()
     {
-        //
+        $regiones = Region::All()->pluck('nombre_region','id_region');
+        $giros = Giro::All()->where('estado_giro',1)->pluck('nombre_giro','id_giro');
+        //dd($regiones);
+       
+        return view('empresa.crearEmpresa',compact('regiones','giros'));
     }
 
     /**
@@ -35,7 +49,33 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $giros = $request->id_giro;
+        
+        $empresa = new Empresa;
+        $empresa->nombre_empresa = $request->nombre_empresa;
+        $empresa->razon_social_empresa = $request->razon_social_empresa;
+        $empresa->rut_matriz_empresa = $request->rut_matriz_empresa;
+        $empresa->id_comuna = $request->id_comuna;
+        $empresa->direccion_empresa = $request->direccion_empresa;
+        $empresa->email_empresa = $request->email_empresa;
+        $empresa->estado_empresa = 1;
+
+        if($empresa->save())
+        {
+            foreach($giros as $giro)
+            {
+                $giroEmpresa = new GiroEmpresa;
+                $giroEmpresa->id_giro = $giro;
+                $giroEmpresa->id_empresa = $empresa->id_empresa;
+                $giroEmpresa->estado_giroempresa = 1;
+                $giroEmpresa->save();
+            }
+    
+        }
+
+        
+        return redirect('index');
     }
 
     /**
@@ -82,4 +122,6 @@ class EmpresaController extends Controller
     {
         //
     }
+
+    
 }

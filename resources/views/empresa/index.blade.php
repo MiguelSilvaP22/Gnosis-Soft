@@ -1,52 +1,52 @@
-
 @extends('admin.layout')
-@section ('content')
-<body> 
 
+@section ('content')
+
+<body> 
   <div class="row">
 		<div class="col-xs-12">
 			
 			<div class="box">
 			
 				<div class="box-header">
-					<h1 class="box-title">Tabla de Perfiles</h1>
+					<h1 class="box-title">Tabla de Empresas</h1>
 				</div>
 				<div style="widtn:100%;align:center;">
 					
 					<div id="btnAgregar" class="btn btn-block btn-success" style="float: right;margin-bottom: 10px;margin-right: 10px;width:200px;">
 						<i class="fa fa-plus"></i>	Agregar
 					</div>
-					<div id="btnVerTrash" class="btn btn-block btn-success" style="float: right;margin-top: 0px;margin-bottom: 10px;margin-right: 10px;width:200px;">
+					{{--<div id="btnVerTrash" class="btn btn-block btn-success" style="float: right;margin-top: 0px;margin-bottom: 10px;margin-right: 10px;width:200px;">
 						<i class="fa fa-trash"></i>	Ver Eliminados
-					</div>
+					</div>--}}
 				</div>
 				<div class="box-body">
-				
+				@if (count($empresas)>0)
 				<table id="tablaPerfil" class="table">
 					<thead>
 						<tr>
-							<th>Nombre Perfil</th>
+							<th>Nombre Empresa</th>
 							<th>Fecha de Modificación</th>
 							<th>Estado</th>
 							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
-						@foreach ($perfiles as $perfil) 
+						@foreach ($empresas as $empresa) 
 						<tr>
-							<td style="width:25%;">{{ $perfil->nombre_perfil}}</td>
-							<td style="width:25%;">{{ $perfil->fecha_mod_perfil}}</td>
-							@if($perfil->estado_perfil == 1)
+							<td style="width:25%;">{{ $empresa->nombre_empresa}}</td>
+							<td style="width:25%;">{{ $empresa->fecha_mod_empresa}}</td>
+							@if($empresa->estado_empresa == 1)
 							<td style="width:25%;color:green;">Activo</td>
 							@else
 							<td style="width:25%;color:red">inactivo</td>
 							@endif
 							<td>
-								<button id="btnVer" value="{{ $perfil->id_perfil}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
+								<button id="btnVer" value="{{ $empresa->id_empresa}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
 
-								<a class="btn btn btn-info" href="{{ route('perfil.edit', ['id'=>$perfil->id_perfil] ) }}"><i class="fa fa-edit"></i> Editar</a>
+								<a class="btn btn btn-info" href="{{ route('empresa.edit', ['id'=>$empresa->id_empresa] ) }}"><i class="fa fa-edit"></i> Editar</a>
 
-								<button class="btn btn btn-info" onclick="eliminarPerfil({{ $perfil->id_perfil}});"><i class="fa fa-eraser"></i> Eliminar</button>
+								<button class="btn btn btn-info" onclick="eliminarEmpresa({{ $empresa->id_empresa}});"><i class="fa fa-eraser"></i> Eliminar</button>
 							</td>
 						</tr>
 						@endforeach
@@ -54,6 +54,9 @@
 							
 					</tbody>
 				</table>
+				@else
+				<h1>No Hay empresas registradas</h1>
+				@endif
 				</div>
 			</div>
 		</div>
@@ -67,7 +70,7 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="box box-primary">
-						<div id="datosPerfil" class="box-body">
+						<div id="datosEmpresa" class="box-body">
 
 						</div>
 					</div>
@@ -86,10 +89,10 @@
 <script>
 $(document).on('click', '#btnVer', function () {
 		$.ajax({
-		url: "/verPerfil/"+this.value,
+		url: "/verEmpresa/"+this.value,
 		type: "GET",
 		success: function (datos) {
-			$("#datosPerfil").html(datos);
+			$("#datosEmpresa").html(datos);
 			$('#modal').modal('show');
 		}
 
@@ -98,23 +101,23 @@ $(document).on('click', '#btnVer', function () {
 });	
 
 $("#btnAgregar").click(function(){
-	location.href = '/crearPerfil';
+	location.href = '{{route("empresa.crear")}}';
 	});
 $("#btnVerTrash").click(function(){
-	location.href = '/perfil/0';
+	location.href = '/empresa/0';
 	});	
 $(document).ready(function() {
 
-    $('#tablaPerfil').DataTable({
+    $('#tablaEmpresa').DataTable({
 			
 		});
 } );
-function eliminarPerfil (id)
+function eliminarEmpresa (id)
 {
 	var eliminar = confirm("¿Esta seguro de eliminar el perfil?");
 	if(eliminar)
 	{
-		location.href = '/eliminarPerfil/'+id;
+		location.href = '/eliminarEmpresa/'+id;
 	}
 }
 

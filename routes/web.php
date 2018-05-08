@@ -26,7 +26,7 @@ Route::get('usuario', function () {
     return view('admin.usuario');
 });
 
-
+//Perfiles
 
 Route::get('perfil/{estado?}', 'PerfilController@index',function($estado = null)
 {
@@ -40,9 +40,29 @@ Route::get('/eliminarPerfil/{id}', 'PerfilController@destroy',function($id) {
 });
 Route::get('/verPerfil/{id}', 'PerfilController@show',function($id) {
     return  $id;
-  });
-  Route::get('/modificarPerfil/{id}', 'PerfilController@edit',function($id) {
+  })
+  ->name('perfil.show');
+
+
+Route::get('/modificarPerfil/{id}', 'PerfilController@edit',function($id) {
     return  $id;
   })
   ->name('perfil.edit');
+  
 Route::resource('perfil', 'PerfilController');
+
+//Empresas
+
+Route::get('empresa/{estado?}', 'EmpresaController@index',function($estado = null)
+{
+    return $estado;
+});
+
+Route::get('/crearEmpresa', 'EmpresaController@create')->name('empresa.crear');
+
+Route::get('/verComuna/{id}', 'ComunaController@comunas',function($id) {
+    return  $id;
+  });
+
+
+Route::resource('empresa', 'EmpresaController');

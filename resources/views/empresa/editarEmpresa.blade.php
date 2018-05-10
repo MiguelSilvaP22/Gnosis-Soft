@@ -9,13 +9,11 @@
 			<div class="box">
 			
 				<div class="box-header">
-					<h3 class="box-title">Crear Empresa</h3>
+					<h3 class="box-title">Editar Empresa</h3>
 				</div>
 
 				<div class="box-body">
-					{!! Form::open(['action' => 'EmpresaController@store']) !!}
-				
-
+				{!! Form::model($empresa, ['method' => 'PATCH', 'action' => ['EmpresaController@update',$empresa->id_empresa]]) !!}
 				<div class='form-group'>
 					{!! Form::label('nombre_empresa', 'Nombre:') !!}
 					{!! Form::text('nombre_empresa', null, ['class' => 'form-control']) !!}
@@ -43,7 +41,7 @@
 				<div class='form-group' id="comuna">
 					{!! Form::label('comuna_empresa', 'Comuna:') !!}
 					{!! Form::select('id_comuna', $comunas,null ,['class' => 'form-control select2', 'style'=>'width:100%']) !!}
-				</div>				
+				</div>					
 
 				<div class='form-group'>
 					{!! Form::label('direccion_empresa', 'Dirección:') !!}
@@ -73,7 +71,7 @@
 					{!! Form::select('id_empresa[]', $empresas,null ,['class' => 'select2','multiple', 'data-placeholder'=>'Seleccione una o varias empresas','id'=>'id_empresa', 'style'=>'width:100%']) !!}
 				</div>
 				<div class='form-group'>
-					{!! Form::submit("Agregar empresa", ['class' => 'form-control btn btn-success ']) !!}
+					{!! Form::submit("Editar empresa", ['class' => 'form-control btn btn-success ']) !!}
 				</div>
 				<div class='form-group'>
 					<a href='{{ url()->previous() }}' class="form-control btn btn-success " > Volver </a>
@@ -86,12 +84,17 @@
 
 </body>
 @stop
-
 @section('script-js')
 <script>
 $(document).ready(function() {
     $('.select2').select2();
-	$("#id_region").prop("selectedIndex", -1);
+
+	//mostrar giros
+	var idGiro = {{$girosEmpresa}};
+	var idRegion = {{$idRegion}};
+	$('#id_giro').select2().val(idGiro).trigger("change");
+	$('#id_region').select2().val(idRegion);
+
 });
 
 $(document).on('change', '#id_region', function () {

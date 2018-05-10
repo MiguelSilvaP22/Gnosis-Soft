@@ -23,6 +23,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="/adminlte/bower_components/fullcalendar/dist/fullcalendar.print.min.css"  media="print">
   <!--DataTable-->
   <link rel="stylesheet" href="/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <!--iCheck-->
+  <link rel="stylesheet" href="/adminlte/plugins/iCheck/all.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="/adminlte/css/AdminLTE.min.css">
   
@@ -486,6 +488,8 @@ desired effect
 
 <!--Select2-->
 <script src="/adminlte/bower_components/select2/dist/js/select2.full.min.js"></script>
+<!--iCheck-->
+<script src="/adminlte/plugins/iCheck/icheck.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/adminlte/js/adminlte.min.js"></script>
 

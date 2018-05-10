@@ -44,7 +44,7 @@ Route::get('/verPerfil/{id}', 'PerfilController@show',function($id) {
   ->name('perfil.show');
 
 
-Route::get('/modificarPerfil/{id}', 'PerfilController@edit',function($id) {
+Route::get('/editarPerfil/{id}', 'PerfilController@edit',function($id) {
     return  $id;
   })
   ->name('perfil.edit');
@@ -64,5 +64,9 @@ Route::get('/verComuna/{id}', 'ComunaController@comunas',function($id) {
     return  $id;
   });
 
+Route::get('/editarEmpresa/{id}', 'EmpresaController@edit',function($id) {
+    return  $id;
+  })
+  ->name('empresa.edit');
 
 Route::resource('empresa', 'EmpresaController');

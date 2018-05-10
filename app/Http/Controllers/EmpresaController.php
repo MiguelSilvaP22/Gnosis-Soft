@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Empresa;
+use App\HoldingEmpresa;
 use App\Region;
+use App\Comuna;
 use App\Giro;
 use App\GiroEmpresa;
 use Illuminate\Http\Request;
@@ -34,11 +36,13 @@ class EmpresaController extends Controller
      */
     public function create()
     {
-        $regiones = Region::All()->pluck('nombre_region','id_region');
-        $giros = Giro::All()->where('estado_giro',1)->pluck('nombre_giro','id_giro');
+        $regiones = Region::All()->sortBy('nombre_region')->pluck('nombre_region','id_region');
+        $giros = Giro::All()->where('estado_giro',1)->sortBy('nombre_giro')->pluck('nombre_giro','id_giro');
+        $empresas = Empresa::All()->where('estado_empresa',1)->sortBy('nombre_empresa')->pluck('nombre_empresa','id_empresa');
+        $comunas = Comuna::All()->sortBy('nombre_comuna')->pluck('nombre_comuna','id_comuna');
         //dd($regiones);
        
-        return view('empresa.crearEmpresa',compact('regiones','giros'));
+        return view('empresa.crearEmpresa',compact('regiones','giros','empresas','comunas'));
     }
 
     /**
@@ -51,7 +55,8 @@ class EmpresaController extends Controller
     {
         
         $giros = $request->id_giro;
-        
+        $empresas = $request->id_empresa;
+
         $empresa = new Empresa;
         $empresa->nombre_empresa = $request->nombre_empresa;
         $empresa->razon_social_empresa = $request->razon_social_empresa;
@@ -71,11 +76,22 @@ class EmpresaController extends Controller
                 $giroEmpresa->estado_giroempresa = 1;
                 $giroEmpresa->save();
             }
-    
+            if($empresas != null)
+            {
+                foreach($empresas as $emp)
+                {
+                    $holdingEmpresa = new HoldingEmpresa;
+                    $holdingEmpresa->id_empresa = $emp;
+                    $holdingEmpresa->emp_id_empresa = $empresa->id_empresa;
+                    $holdingEmpresa->estado_holdingempresa = 1;
+                    $holdingEmpresa->save();
+                }
+            }
+            
         }
 
         
-        return redirect('index');
+        return redirect('empresa');
     }
 
     /**
@@ -97,7 +113,18 @@ class EmpresaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $empresa = Empresa::findOrFail($id);
+        $giros = Giro::All()->where('estado_giro',1)->pluck('nombre_giro','id_giro')->sortBy('nombre_giro');
+        $regiones = Region::All()->pluck('nombre_region','id_region')->sortBy('nombre_region');
+        $empresas = Empresa::All()->where('estado_empresa',1)->pluck('nombre_empresa','id_empresa')->sortBy('nombre_empresa');
+        $comunas = Comuna::All()->sortBy('nombre_comuna')->pluck('nombre_comuna','id_comuna');
+
+        //id de otras tablas relacionadas a la empresa.
+        $girosEmpresa = GiroEmpresa::All()->where('id_empresa',$empresa->id_empresa)->pluck('id_giro');
+        $comuna = Comuna::findOrFail($empresa->id_comuna);
+        $idRegion = $comuna->id_region;
+
+        return view('empresa.editarEmpresa',compact('empresa','giros','regiones','empresas','comunas','girosEmpresa','idRegion'));
     }
 
     /**

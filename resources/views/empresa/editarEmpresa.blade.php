@@ -1,7 +1,6 @@
 @extends('admin.layout')
 
 @section ('content')
-
 <body> 
   <div class="row">
 		<div class="col-xs-12">
@@ -56,12 +55,12 @@
 					{!! Form::label('', 'Tipo de Empresa:') !!}
 					<div class='radio'>
 						<label>
-						{!! Form::radio('tipo_empresa', '0',true); !!} Empresa
+						{!! Form::radio('tipo_empresa', '0',['id'=>'empresa']); !!} Empresa
 						</label>
 					</div>
 					<div class='radio'>
 						<label>
-						{!! Form::radio('tipo_empresa', '1'); !!} Holding
+						{!! Form::radio('tipo_empresa', '1',['id'=>'holding']); !!} Holding
 						</label>
 					</div>
 				</div>
@@ -86,12 +85,22 @@
 @stop
 @section('script-js')
 <script>
+
 $(document).ready(function() {
     $('.select2').select2();
 
 	//mostrar giros
+	
 	var idGiro = {{$girosEmpresa}};
 	var idRegion = {{$idRegion}};
+	var empresasHolding={{$empresasHolding}};
+	
+	if(empresasHolding.length >0)
+	{
+		$("#id_empresa").prop("checked", true);
+		$('#id_empresa').select2().val(empresasHolding).trigger("change");
+		$("#empresas").show();
+	}
 	$('#id_giro').select2().val(idGiro).trigger("change");
 	$('#id_region').select2().val(idRegion);
 

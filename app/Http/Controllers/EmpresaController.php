@@ -120,11 +120,12 @@ class EmpresaController extends Controller
         $comunas = Comuna::All()->sortBy('nombre_comuna')->pluck('nombre_comuna','id_comuna');
 
         //id de otras tablas relacionadas a la empresa.
-        $girosEmpresa = GiroEmpresa::All()->where('id_empresa',$empresa->id_empresa)->pluck('id_giro');
+        $girosEmpresa = GiroEmpresa::All()->where('id_empresa',$empresa->id_empresa)->where('estado_giroempresa',1)->pluck('id_giro');
         $comuna = Comuna::findOrFail($empresa->id_comuna);
         $idRegion = $comuna->id_region;
-
-        return view('empresa.editarEmpresa',compact('empresa','giros','regiones','empresas','comunas','girosEmpresa','idRegion'));
+        $empresasHolding =HoldingEmpresa::All()->where('emp_id_empresa',$empresa->id_empresa)->where('estado_holdingempresa',1)->pluck('id_empresa');
+       
+        return view('empresa.editarEmpresa',compact('empresa','giros','regiones','empresas','comunas','girosEmpresa','idRegion','empresasHolding'));
     }
 
     /**
@@ -136,7 +137,12 @@ class EmpresaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $empresa = Empresa::findOrFail($id);
+        $giros = $request->id_giro;
+        dd($giros);
+        $girosEmpresa = GiroEmpresa::All()->where('id_empresa',$empresa->id_empresa)->where('estado_giroempresa',1);
+        
+        $empresasHolding =HoldingEmpresa::All()->where('emp_id_empresa',$empresa->id_empresa)->where('estado_holdingempresa',1);
     }
 
     /**

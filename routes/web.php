@@ -70,3 +70,27 @@ Route::get('/editarEmpresa/{id}', 'EmpresaController@edit',function($id) {
   ->name('empresa.edit');
 
 Route::resource('empresa', 'EmpresaController');
+
+// Oganigrama Empresa
+Route::get('/organigrama/{id}', 'OrganigramaController@index',function($id)
+{
+    return $id;
+})->name('organigrama.index');
+
+Route::get('/gerencia/{id}', 'GerenciaController@index',function($id)
+{
+    return $id;
+})->name('gerencia.index');
+
+Route::get('/crearGerencia/{id}', 'GerenciaController@create',function($id)
+{
+    return $id;
+})->name('gerencia.crearGerencia');
+
+Route::get('/editarGerencia/{id}', 'GerenciaController@edit',function($id) {
+    return  $id;
+  })
+  ->name('gerencia.edit');
+Route::post('gerenciaGerencia', [
+    'uses' => 'GerenciaController@store'
+  ]);

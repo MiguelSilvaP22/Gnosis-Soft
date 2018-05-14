@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Empresa;
 use App\Gerencia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class GerenciaController extends Controller
+class OrganigramaController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index($id)
     {
-        $idEmpresa = $id;
-        $gerencias = Gerencia::all()->where('id_empresa',$idEmpresa)->where('estado_gerencia',1);
-        return view('gerencia.index', compact('gerencias','idEmpresa'));
+        $empresa = Empresa::find($id);
+        return view('organigrama.index', compact('empresa'));
     }
 
     /**
@@ -25,10 +25,10 @@ class GerenciaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+
+    public function create()
     {
-        $idEmpresa = $id;
-        return view('gerencia.crearGerencia', compact('idEmpresa'));
+        //
     }
 
     /**
@@ -39,12 +39,7 @@ class GerenciaController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->id_empresa);
-        $gerencia = new Gerencia;
-        $gerencia->id_empresa = $request->id_empresa;
-        $gerencia->nombre_gerencia = $request->nombre_gerencia;
-        $gerencia->estado_gerencia = 1;
-        $gerencia->save();
+        //
     }
 
     /**

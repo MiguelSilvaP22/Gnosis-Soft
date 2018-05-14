@@ -42,6 +42,7 @@
 							<td style="width:25%;color:red">inactivo</td>
 							@endif
 							<td>
+								<a id="btnOrg" href="{{ route('organigrama.index', ['id'=>$empresa->id_empresa] ) }}" class="btn btn btn-info"><i class="fa fa-sitemap"></i> Organigrama</a>
 								<button id="btnVer" value="{{ $empresa->id_empresa}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
 
 								<a class="btn btn btn-info" href="{{ route('empresa.edit', ['id'=>$empresa->id_empresa] ) }}"><i class="fa fa-edit"></i> Editar</a>

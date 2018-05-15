@@ -39,7 +39,7 @@ class GerenciaController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->id_empresa);
+        //dd($request->id_empresa);
         $gerencia = new Gerencia;
         $gerencia->id_empresa = $request->id_empresa;
         $gerencia->nombre_gerencia = $request->nombre_gerencia;

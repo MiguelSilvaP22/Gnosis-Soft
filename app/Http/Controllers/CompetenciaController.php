@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Competencia;
+use App\CategoriaCompetencia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +16,8 @@ class CompetenciaController extends Controller
      */
     public function index()
     {
-        //
+        $competencias = Competencia::all()->where('estado_comp',1);
+        return view('competencia.index', compact('competencias'));
     }
 
     /**
@@ -24,7 +27,9 @@ class CompetenciaController extends Controller
      */
     public function create()
     {
-        //
+        $categoriascompetencias = categoriacompetencia::All()->where('estado_categoriacomp',1)->sortBy('nombre_caterogiacomp')->pluck('nombre_categoriacomp','id_categoriacomp');
+        //dd($categoriascompetencias);
+        return view('competencia.crearCompetencia',compact('categoriascompetencias'));
     }
 
     /**
@@ -35,8 +40,18 @@ class CompetenciaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $competencia = new competencia;
+        $competencia->nombre_comp = $request->nombre_comp;
+        $competencia->desc_comp = $request->desc_comp;
+        $competencia->id_categoriacomp = $request->id_categoriacomp;
+        $competencia->estado_comp = 1;
+        
+        if($competencia->save())
+        {
+            return redirect('competencia');
+        }
     }
+
 
     /**
      * Display the specified resource.

@@ -301,7 +301,7 @@ desired effect
           <li><a href="#"><i class="fa fa-graduation-cap"></i> <span>Cursos</span></a></li>
           <li><a href="#"><i class="fa fa-book"></i> <span>Actividad</span></a></li>
           <li><a href="#"><i class="fa fa-pencil-square-o"></i> <span>Evaluación</span></a></li>
-          <li><a href="#"><i class="fa fa-th-list"></i> <span>Competencias</span></a></li>
+          <li><a href="/competencia"><i class="fa fa-th-list"></i> <span>Competencias</span></a></li>
           <li><a href="#"><i class="fa fa-paper-plane"></i> <span>Encuesta</span></a></li>
           </ul>
         </li>

@@ -51,6 +51,16 @@ Route::get('/editarPerfil/{id}', 'PerfilController@edit',function($id) {
   
 Route::resource('perfil', 'PerfilController');
 
+
+
+
+//Competencias
+
+Route::resource('competencia', 'CompetenciaController');
+
+Route::get('/crearCompetencia', 'CompetenciaController@create')->name('competencia.crear');
+
+
 //Empresas
 
 Route::get('empresa/{estado?}', 'EmpresaController@index',function($estado = null)

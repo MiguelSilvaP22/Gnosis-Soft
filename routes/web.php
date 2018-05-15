@@ -81,7 +81,7 @@ Route::get('/editarEmpresa/{id}', 'EmpresaController@edit',function($id) {
 
 Route::resource('empresa', 'EmpresaController');
 
-// Oganigrama Empresa
+// Organigrama Empresa
 Route::get('/organigrama/{id}', 'OrganigramaController@index',function($id)
 {
     return $id;
@@ -101,6 +101,52 @@ Route::get('/editarGerencia/{id}', 'GerenciaController@edit',function($id) {
     return  $id;
   })
   ->name('gerencia.edit');
-Route::post('gerenciaGerencia', [
-    'uses' => 'GerenciaController@store'
-  ]);
+
+Route::get('/desactivarGerencia/{id}', 'GerenciaController@confirmDestroy',function($id) {
+return  $id;
+})
+->name('gerencia.delete');  
+
+Route::get('/eliminarGerencia/{id}', 'GerenciaController@destroy',function($id) {
+    return  $id;
+    })
+    ->name('gerencia.destroy');  
+
+Route::resource('gerencia', 'GerenciaController');
+
+//Areas
+
+Route::get('/selectGerencia/{id}', 'GerenciaController@selectGerencia',function($id) {
+    return  $id;
+    })
+    ->name('gerencia.select');  
+
+Route::get('/area/{id}', 'AreaController@index',function($id)
+{
+    return $id;
+})->name('area.index');
+
+Route::get('/crearArea/{id}', 'AreaController@create',function($id)
+{
+    return $id;
+})->name('area.crearArea');
+
+
+Route::get('/editarArea/{id}', 'AreaController@edit',function($id) {
+    return  $id;
+  })
+  ->name('area.edit');
+
+  
+Route::get('/desactivarArea/{id}', 'AreaController@confirmDestroy',function($id) {
+    return  $id;
+    })
+    ->name('area.delete');  
+    
+    Route::get('/eliminarArea/{id}', 'AreaController@destroy',function($id) {
+        return  $id;
+        })
+        ->name('area.destroy');  
+
+Route::resource('area', 'AreaController');
+//-----------------------------------------------------------------------------------------------------------

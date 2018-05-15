@@ -66,7 +66,9 @@ class GerenciaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $gerencia = Gerencia::findOrFail($id);
+       
+        return view('gerencia.editarGerencia', compact('gerencia'));
     }
 
     /**
@@ -78,17 +80,34 @@ class GerenciaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $gerencia = Gerencia::findOrFail($id);
+        $gerencia->nombre_gerencia = $request->nombre_gerencia;
+        $gerencia->save();
+        
     }
-
+    public function confirmDestroy($id)
+    {
+        $gerencia = Gerencia::findOrFail($id);
+        return view('gerencia.desactivarGerencia', compact('gerencia'));
+    }
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+   
     public function destroy($id)
     {
-        //
+        $gerencia = Gerencia::findOrFail($id);
+        $gerencia->estado_gerencia = 0;
+        $gerencia->save();
+    }
+
+    public function selectGerencia($id)
+    {
+        $gerencias = Gerencia::all()->where('id_empresa',$id)->where('estado_gerencia',1);
+        return view('gerencia.selectGerencia', compact('gerencias'));
     }
 }

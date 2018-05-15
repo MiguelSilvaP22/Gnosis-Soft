@@ -26,6 +26,8 @@ class EmpresaController extends Controller
             $empresas = Empresa::all()->where('estado_empresa',1);
         else
             $empresas = Empresa::all()->where('estado_empresa',0);
+
+        
         return view('empresa.index', compact('empresas'));
     }
 
@@ -124,7 +126,7 @@ class EmpresaController extends Controller
         $comuna = Comuna::findOrFail($empresa->id_comuna);
         $idRegion = $comuna->id_region;
         $empresasHolding =HoldingEmpresa::All()->where('emp_id_empresa',$empresa->id_empresa)->where('estado_holdingempresa',1)->pluck('id_empresa');
-       
+        
         return view('empresa.editarEmpresa',compact('empresa','giros','regiones','empresas','comunas','girosEmpresa','idRegion','empresasHolding'));
     }
 

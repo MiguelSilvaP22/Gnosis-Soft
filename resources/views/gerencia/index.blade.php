@@ -16,8 +16,8 @@
 			<td style="width:25%;">{{ $gerencia->fecha_mod_gerencia}}</td>
 			<td>
 				<button id="btnVer" value="{{ $gerencia->id_gerencia}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Areas</button>
-				<a class="btn btn btn-info" href="{{ route('gerencia.edit', ['id'=>$gerencia->id_gerencia] ) }}"><i class="fa fa-edit"></i> Editar</a>
-				<button class="btn btn btn-info" onclick="eliminargerencia({{ $gerencia->id_gerencia}});"><i class="fa fa-eraser"></i> Eliminar</button>
+				<button id="editGerencia" class="btn btn btn-info" value="{{ $gerencia->id_gerencia}}" ><i class="fa fa-edit"></i> Editar</button>
+				<button id="deleteGerencia" class="btn btn btn-info" value="{{ $gerencia->id_gerencia}}"><i class="fa fa-eraser"></i> Eliminar</button>
 			</td>
 		</tr>
 		@endforeach

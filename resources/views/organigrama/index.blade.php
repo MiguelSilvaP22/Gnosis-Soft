@@ -16,12 +16,15 @@
 					<button  type="button" id="btnGerencia"  value="{{$empresa->id_empresa}}" class="btn btn-success" >
 						<i class="fa fa-plus"></i>	Gerencias
 					</button>
-					<button type="button" id="btnAgregar" class="btn btn-success" >
+					<button type="button" id="btnArea" value="{{$empresa->id_empresa}}" class="btn btn-success" >
 						<i class="fa fa-plus"></i>	Areas
 					</button>
-					<button type="button" id="btnAgregar" class="btn  btn-success" >
+					<button type="button" id="btnPerfil"  value="{{$empresa->id_empresa}}" class="btn  btn-success" >
 						<i class="fa fa-plus"></i>	Perfiles
 					</button>
+				</div>
+				<div id='selectGerencias'>
+
 				</div>
 				<div class="box-body">
 					
@@ -80,8 +83,10 @@ function refrescarGerencia($id)
 
 		});
 }
+
 $(document).on('click', '#btnGerencia', function () {
-		
+	
+	$("#selectGerencias").html('');	
 	refrescarGerencia(this.value);
 });	
 
@@ -99,7 +104,108 @@ $(document).on('click', '#addGerencia', function () {
 		//alert("asda");
 });	
 
-        
+$(document).on('click', '#editGerencia', function () {
+		
+		$.ajax({
+		url: "/editarGerencia/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#formModal").html(datos);
+			$('#modal').modal('show');
+		}
+
+		});
+		//alert("asda");
+});	
+
+$(document).on('click', '#deleteGerencia', function () {
+		
+		$.ajax({
+		url: "/desactivarGerencia/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#formModal").html(datos);
+			$('#modal').modal('show');
+		}
+
+		});
+		//alert("asda");
+});	
+function refrescarArea($id)
+{
+	$.ajax({
+		url: "/area/"+$id,
+		type: "GET",
+		success: function (datos) {
+			$("#datosTabla").html(datos);
+
+			$('#tablaArea').DataTable({
+			
+		});
+		}
+
+		});
+}
+$(document).on('click', '#btnArea', function () {
+		
+		$("#datosTabla").html('');
+		$.ajax({
+		url: "/selectGerencia/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#selectGerencias").html(datos);
+			$('#select_gerencia').select2();			
+		}
+
+		});
+	});	
+	$(document).on('change', '#select_gerencia', function () {
+		
+		refrescarArea(this.value);
+	});	     
+
+	
+$(document).on('click', '#addArea', function () {
+		
+		$.ajax({
+		url: "/crearArea/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#formModal").html(datos);
+			$('#modal').modal('show');
+		}
+
+		});
+		//alert("asda");
+});	  
+
+$(document).on('click', '#editArea', function () {
+		
+		$.ajax({
+		url: "/editarArea/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#formModal").html(datos);
+			$('#modal').modal('show');
+		}
+
+		});
+		//alert("asda");
+});	
+
+$(document).on('click', '#deleteArea', function () {
+		
+		$.ajax({
+		url: "/desactivarArea/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#formModal").html(datos);
+			$('#modal').modal('show');
+		}
+
+		});
+		//alert("asda");
+});	
 </script>
 
 @stop

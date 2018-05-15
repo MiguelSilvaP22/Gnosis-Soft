@@ -6,17 +6,17 @@
 			<div class="box">
 			
 				<div class="box-header">
-					<h3 class="box-title">Editar gerencia </h3>
+					<h3 class="box-title">Editar area</h3>
 				</div>
 
 				<div class="box-body">
-				{!! Form::model($gerencia, ['method' => 'PATCH', 'action' => ['GerenciaController@update',$gerencia->id_gerencia],'id'=>'formGerencia']) !!}
+				{!! Form::model($area, ['method' => 'PATCH', 'action' => ['AreaController@update',$area->id_area],'id'=>'formArea']) !!}
 				<div class='form-group'>
-					{!! Form::label('nombre_gerencia', 'Nombre:') !!}
-					{!! Form::text('nombre_gerencia', null, ['class' => 'form-control']) !!}
+					{!! Form::label('nombre_area', 'Nombre:') !!}
+					{!! Form::text('nombre_area', null, ['class' => 'form-control']) !!}
 				</div>
 				<div class='form-group'>
-					{!! Form::submit("Editar gerencia", ['class' => 'form-control btn btn-success ']) !!}
+					{!! Form::submit("Editar Area", ['class' => 'form-control btn btn-success ']) !!}
 				</div>
 				<div class='form-group'>
 					<a href='{{ url()->previous() }}' class="form-control btn btn-success " > Volver </a>
@@ -31,13 +31,13 @@
 
 <script>
 
-$('#formGerencia').submit(function (e) {
+$('#formArea').submit(function (e) {
 	e.preventDefault();  // prevent the form from 'submitting'
 	var url = e.target.action  // get the target
 	var formData = $(this).serialize() // get form data
 	$.post(url, formData, function (response) { // send; response.data will be what is returned
 		$('#modal').modal('hide');
-		refrescarGerencia({{$gerencia->id_empresa}});
+		refrescarArea({{$area->id_gerencia}});
 		})
 })
 </script>

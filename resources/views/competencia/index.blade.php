@@ -47,7 +47,7 @@
 							<td>
 								<button id="btnVer" value="{{ $competencia->id_comp}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
 
-								<a class="btn btn btn-info" href="{{ route('competencia.edit', ['id'=>$competencia->id_comp] ) }}"><i class="fa fa-edit"></i> Editar</a>
+								<button class="btn btn btn-info" id="editCompetencia" value="{{$competencia->id_comp}}"><i class="fa fa-edit"></i> Editar</button>
 
 								<button class="btn btn btn-info" onclick="eliminarCompetencia({{ $competencia->id_comp}});"><i class="fa fa-eraser"></i> Eliminar</button>
 							</td>
@@ -98,24 +98,26 @@ $(document).on('click', '#btnAgregar', function () {
 			$(document).ready(function() {
 				$('.select').select();
 			});
-		$(document).on('change', "input[name='tipo_empresa']", function () {
-				
-				if(this.value == 1)
-				{
-					$("#empresas").show();
-				}else
-				{
-					$("#id_empresa").val(null).trigger("change"); //Eliminar las empresas de holding luego de cambiar a tipo empresa.
-					$("#empresas").hide();
-				}
-		});	
-
 		}
 
 		});
 
 });	
 
+$(document).on('click', '#editCompetencia', function () {
+		
+		
+		$.ajax({
+		url: "/editarCompetencia/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#datosCompetencia").html(datos);
+			$('#modal').modal('show');
+		}
+
+		});
+		//alert("asda");
+});	
 
 
 

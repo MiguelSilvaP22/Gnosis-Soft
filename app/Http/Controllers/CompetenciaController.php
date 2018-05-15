@@ -72,7 +72,10 @@ class CompetenciaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $competencia = Competencia::findOrFail($id);
+        $categoriascompetencias = categoriacompetencia::All()->where('estado_categoriacomp',1)->sortBy('nombre_caterogiacomp')->pluck('nombre_categoriacomp','id_categoriacomp');
+
+        return view('Competencia.editarCompetencia', compact('competencia','categoriascompetencias'));
     }
 
     /**

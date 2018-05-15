@@ -99,6 +99,33 @@ $(document).on('click', '#addGerencia', function () {
 		//alert("asda");
 });	
 
+$(document).on('click', '#editGerencia', function () {
+		
+		$.ajax({
+		url: "/editarGerencia/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#formModal").html(datos);
+			$('#modal').modal('show');
+		}
+
+		});
+		//alert("asda");
+});	
+
+$(document).on('click', '#deleteGerencia', function () {
+		
+		$.ajax({
+		url: "/desactivarGerencia/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#formModal").html(datos);
+			$('#modal').modal('show');
+		}
+
+		});
+		//alert("asda");
+});	
         
 </script>
 

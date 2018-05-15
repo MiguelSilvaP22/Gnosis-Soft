@@ -91,6 +91,15 @@ Route::get('/editarGerencia/{id}', 'GerenciaController@edit',function($id) {
     return  $id;
   })
   ->name('gerencia.edit');
-Route::post('gerenciaGerencia', [
-    'uses' => 'GerenciaController@store'
-  ]);
+
+Route::get('/desactivarGerencia/{id}', 'GerenciaController@confirmDestroy',function($id) {
+return  $id;
+})
+->name('gerencia.delete');  
+
+Route::get('/eliminarGerencia/{id}', 'GerenciaController@destroy',function($id) {
+    return  $id;
+    })
+    ->name('gerencia.destroy');  
+
+Route::resource('gerencia', 'GerenciaController');

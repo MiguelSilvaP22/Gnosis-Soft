@@ -13,7 +13,7 @@
 		@foreach ($gerencias as $gerencia) 
 		<tr>
 			<td style="width:25%;">{{ $gerencia->nombre_gerencia}}</td>
-			<td style="width:25%;">{{ $gerencia->fecha_mod_gerencia}}</td>
+			<td style="width:25%;">{{ $gerencia->}}</td>
 			<td>
 				<button id="btnVer" value="{{ $gerencia->id_gerencia}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Areas</button>
 				<button id="editGerencia" class="btn btn btn-info" value="{{ $gerencia->id_gerencia}}" ><i class="fa fa-edit"></i> Editar</button>

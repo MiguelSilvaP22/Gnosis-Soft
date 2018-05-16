@@ -45,7 +45,7 @@
 							<td style="width:25%;color:red">inactivo</td>
 							@endif
 							<td>
-								<button id="btnVer" value="{{ $competencia->id_comp}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
+								<button id="verCompetencia" value="{{ $competencia->id_comp}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
 
 								<button class="btn btn btn-info" id="editCompetencia" value="{{$competencia->id_comp}}"><i class="fa fa-edit"></i> Editar</button>
 
@@ -119,6 +119,20 @@ $(document).on('click', '#editCompetencia', function () {
 		//alert("asda");
 });	
 
+$(document).on('click', '#verCompetencia', function () {
+		
+		
+		$.ajax({
+		url: "/verCompetencia/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#datosCompetencia").html(datos);
+			$('#modal').modal('show');
+		}
+
+		});
+		//alert("asda");
+});	
 
 
 $("#btnVerTrash").click(function(){
@@ -130,12 +144,12 @@ $(document).ready(function() {
 			
 		});
 } );
-function eliminarPerfil (id)
+function eliminarCompetencia(id)
 {
-	var eliminar = confirm("¿Esta seguro de eliminar el perfil?");
+	var eliminar = confirm("¿Esta seguro de eliminar la competencia?");
 	if(eliminar)
 	{
-		location.href = '/eliminarPerfil/'+id;
+		location.href = '/eliminarCompetencia/'+id;
 	}
 }
 

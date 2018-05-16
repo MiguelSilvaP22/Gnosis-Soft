@@ -61,7 +61,9 @@ class CompetenciaController extends Controller
      */
     public function show($id)
     {
-        //
+        $competencia = Competencia::findOrFail($id);
+        $categoriascompetencias = categoriacompetencia::All()->where('estado_categoriacomp',1)->sortBy('nombre_caterogiacomp')->pluck('nombre_categoriacomp','id_categoriacomp');
+        return view('Competencia.verCompetencia', compact('competencia','categoriascompetencias'));
     }
 
     /**
@@ -74,7 +76,6 @@ class CompetenciaController extends Controller
     {
         $competencia = Competencia::findOrFail($id);
         $categoriascompetencias = categoriacompetencia::All()->where('estado_categoriacomp',1)->sortBy('nombre_caterogiacomp')->pluck('nombre_categoriacomp','id_categoriacomp');
-
         return view('Competencia.editarCompetencia', compact('competencia','categoriascompetencias'));
     }
 
@@ -87,7 +88,15 @@ class CompetenciaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $competencia = Competencia::findOrFail($id);
+        $competencia->nombre_comp = $request->nombre_comp;
+        $competencia->desc_comp = $request->desc_comp;
+        $competencia->id_categoriacomp = $request->id_categoriacomp;
+
+        if($competencia->save())
+        {
+            return redirect('competencia');
+        }
     }
 
     /**
@@ -98,6 +107,11 @@ class CompetenciaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $competencia = Competencia::findOrFail($id);
+        $competencia->estado_comp = 0;
+        if($competencia->save())
+        {
+            return redirect('competencia');
+        }
     }
 }

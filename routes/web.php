@@ -58,6 +58,18 @@ Route::resource('perfil', 'PerfilController');
 
 Route::resource('competencia', 'CompetenciaController');
 
+Route::get('/editarCompetencia/{id}', 'CompetenciaController@edit',function($id) {
+    return  $id;
+  })->name('competencia.edit');
+
+  Route::get('/verCompetencia/{id}', 'CompetenciaController@show',function($id) {
+    return  $id;
+  })->name('competencia.ver');
+
+  Route::get('/eliminarCompetencia/{id}', 'CompetenciaController@destroy',function($id) {
+    return  $id;
+  })->name('competencia.eliminar');
+
 Route::get('/crearCompetencia', 'CompetenciaController@create')->name('competencia.crear');
 
 

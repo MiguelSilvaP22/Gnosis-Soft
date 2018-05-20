@@ -162,3 +162,38 @@ Route::get('/desactivarArea/{id}', 'AreaController@confirmDestroy',function($id)
 
 Route::resource('area', 'AreaController');
 //-----------------------------------------------------------------------------------------------------------
+//Perfil Ocupacional
+
+Route::get('/selectArea/{id}', 'AreaController@selectArea',function($id) {
+    return  $id;
+    })
+    ->name('area.select');  
+
+Route::get('/perfilOcupacional/{id}', 'PerfilOcupacionalController@index',function($id)
+{
+    return $id;
+})->name('perfilOcupacional.index');
+
+Route::get('/crearPerfilOcupacional/{id}', 'PerfilOcupacionalController@create',function($id)
+{
+    return $id;
+})->name('perfilOcupacional.crearPerfilOcupacional');
+
+
+Route::get('/editarPerfilOcupacional/{id}', 'PerfilOcupacionalController@edit',function($id) {
+    return  $id;
+  })
+  ->name('perfilOcupacional.edit');
+
+  
+Route::get('/desactivarPerfilOcupacional/{id}', 'PerfilOcupacionalController@confirmDestroy',function($id) {
+    return  $id;
+    })
+    ->name('perfilOcupacional.delete');  
+    
+    Route::get('/eliminarPerfilOcupacional/{id}', 'PerfilOcupacionalController@destroy',function($id) {
+        return  $id;
+        })
+        ->name('perfilOcupacional.destroy');  
+
+Route::resource('perfilOcupacional', 'PerfilOcupacionalController');

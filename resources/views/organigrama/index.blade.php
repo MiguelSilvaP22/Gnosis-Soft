@@ -26,6 +26,9 @@
 				<div id='selectGerencias'>
 
 				</div>
+				<div id='selectAreas'>
+
+				</div>
 				<div class="box-body">
 					
 				</div>
@@ -68,10 +71,10 @@
 @section('script-js')
 <script>
 
-function refrescarGerencia($id)
+function refrescarGerencia(id)
 {
 	$.ajax({
-		url: "/gerencia/"+$id,
+		url: "/gerencia/"+id,
 		type: "GET",
 		success: function (datos) {
 			$("#datosTabla").html(datos);
@@ -83,6 +86,7 @@ function refrescarGerencia($id)
 
 		});
 }
+
 
 $(document).on('click', '#btnGerencia', function () {
 	
@@ -131,10 +135,10 @@ $(document).on('click', '#deleteGerencia', function () {
 		});
 		//alert("asda");
 });	
-function refrescarArea($id)
+function refrescarArea(id)
 {
 	$.ajax({
-		url: "/area/"+$id,
+		url: "/area/"+id,
 		type: "GET",
 		success: function (datos) {
 			$("#datosTabla").html(datos);
@@ -146,23 +150,41 @@ function refrescarArea($id)
 
 		});
 }
-$(document).on('click', '#btnArea', function () {
-		
-		$("#datosTabla").html('');
+function selectGerenciaArea(id,area)
+{
+	$("#datosTabla").html('');
 		$.ajax({
-		url: "/selectGerencia/"+this.value,
+		url: "/selectGerencia/"+id,
 		type: "GET",
 		success: function (datos) {
 			$("#selectGerencias").html(datos);
-			$('#select_gerencia').select2();			
+			$('#select_gerencia').select2();	
+
+			if(area == 1)
+			{
+				$.ajax({
+				url: "/selectArea/"+$('#select_gerencia').val,
+				type: "GET",
+				success: function (datos) {
+					$("#selectAreas").html(datos);
+					$('#select_area').select2();			
+				}
+
+				});
+			}		
 		}
 
 		});
-	});	
-	$(document).on('change', '#select_gerencia', function () {
+}
+$(document).on('click', '#btnArea', function () {
 		
-		refrescarArea(this.value);
-	});	     
+		selectGerencia(this.value,0);
+});
+
+$(document).on('change', '#select_gerencia', function () {
+	
+	refrescarArea(this.value);
+});	     
 
 	
 $(document).on('click', '#addArea', function () {
@@ -197,6 +219,85 @@ $(document).on('click', '#deleteArea', function () {
 		
 		$.ajax({
 		url: "/desactivarArea/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#formModal").html(datos);
+			$('#modal').modal('show');
+		}
+
+		});
+		//alert("asda");
+});	
+
+// Perfil-----------------------------------------------
+function refrescarPerfil(id)
+{
+	$.ajax({
+		url: "/perfilOcupacional/"+id,
+		type: "GET",
+		success: function (datos) {
+			$("#datosTabla").html(datos);
+
+			$('#tablaArea').DataTable({
+			
+		});
+		}
+
+		});
+}
+
+
+
+$(document).on('click', '#btnPerfil', function () {
+		
+		selectGerenciaArea(this.value,1);
+		$("#datosTabla").html('');
+		
+
+		
+	});
+	$(document).on('change', '#select_gerencia', function () {
+	
+		refrescarArea(this.value);
+	});	     	
+	$(document).on('change', '#select_area', function () {
+		
+		refrescarPerfil(this.value);
+	});	     
+
+	
+$(document).on('click', '#addPerfil', function () {
+		
+		$.ajax({
+		url: "/crearPerfilOcupacional/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#formModal").html(datos);
+			$('#modal').modal('show');
+		}
+
+		});
+		//alert("asda");
+});	  
+
+$(document).on('click', '#editPerfil', function () {
+		
+		$.ajax({
+		url: "/editarPerfilOcupacional/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#formModal").html(datos);
+			$('#modal').modal('show');
+		}
+
+		});
+		//alert("asda");
+});	
+
+$(document).on('click', '#deletePerfil', function () {
+		
+		$.ajax({
+		url: "/desactivarPerfilOcupacional/"+this.value,
 		type: "GET",
 		success: function (datos) {
 			$("#formModal").html(datos);

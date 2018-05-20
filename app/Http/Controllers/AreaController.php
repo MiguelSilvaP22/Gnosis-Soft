@@ -101,4 +101,10 @@ class AreaController extends Controller
         $area->estado_area = 0;
         $area->save();
     }
+    public function selectArea($id)
+    {
+        $areas = Area::all()->where('id_area',$id)->where('estado_area',1);
+        return view('area.selectArea', compact('areas'));
+    }
+
 }

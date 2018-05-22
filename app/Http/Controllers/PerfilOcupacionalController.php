@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\PerfilOcupacional;
+use App\Competencia;
+use App\CompetenciaPerfil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -13,7 +15,7 @@ class PerfilOcupacionalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
         $idArea = $id;
         $perfilesOcu = PerfilOcupacional::all()->where('id_area',$idArea)->where('estado_perfilocu',1);
@@ -25,11 +27,11 @@ class PerfilOcupacionalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         $idArea = $id;
         //$categoriasCompetencias = categoriacompetencia::All()->where('estado_categoriacomp',1)->sortBy('nombre_caterogiacomp')->pluck('nombre_categoriacomp','id_categoriacomp');
-        $competencias = Competencias::All()->where('estado_comp',1)->sortBy('nombre_comp')->pluck('nombre_comp','id_comp');
+        $competencias = Competencia::All()->where('estado_comp',1)->sortBy('nombre_comp')->pluck('nombre_comp','id_comp');
         return view('perfilOcupacional.crearPerfilOcupacional', compact('idArea','competencias'));
     }
 
@@ -41,11 +43,23 @@ class PerfilOcupacionalController extends Controller
      */
     public function store(Request $request)
     {
-        $perfilOcu = new Area;
+        $competencias = $request->id_comp;
+        $perfilOcu = new PerfilOcupacional;
         $perfilOcu->id_area = $request->id_area;
         $perfilOcu->nombre_perfilocu = $request->nombre_perfilocu;
         $perfilOcu->estado_perfilocu = 1;
-        $perfilOcu->save();
+        if($perfilOcu->save())
+        {
+            foreach($competencias as $competencia)
+            {
+                $competenciaPerfil = new CompetenciaPerfil;
+                $competenciaPerfil->id_comp = $competencia;
+                $competenciaPerfil->id_perfilocu = $perfilOcu->id_perfilocu;
+                $competenciaPerfil->estado_comperfil = 1;
+                $competenciaPerfil->save();
+            }
+        }
+            
     }
 
     /**
@@ -68,8 +82,10 @@ class PerfilOcupacionalController extends Controller
     public function edit($id)
     {
         $perfilOcu = PerfilOcupacional::findOrFail($id);
-       
-        return view('perfilOcupacional.editarPerfilOcupacional', compact('perfilOcu'));
+        $competencias = Competencia::All()->where('estado_comp',1)->sortBy('nombre_comp')->pluck('nombre_comp','id_comp');
+
+        $competenciasPerfil = CompetenciaPerfil::All()->where('id_perfilocu',$perfilOcu->id_perfilocu)->where('estado_comperfil',1)->pluck('id_comp');
+        return view('perfilOcupacional.editarPerfilOcupacional', compact('perfilOcu','competenciasPerfil','competencias'));
     }
 
     /**
@@ -80,10 +96,39 @@ class PerfilOcupacionalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+        
+        $competencias = $request->id_comp;     
         $perfilOcu = PerfilOcupacional::findOrFail($id);
+        $competenciasPerfil = CompetenciaPerfil::All()->where('id_perfilocu',$perfilOcu->id_perfilocu)->pluck('id_comp');
+        //$competenciasPerfil = CompetenciaPerfil::select('id_comp','estado_comperfil')->where('id_perfilocu',$perfilOcu->id_perfilocu)->get();
         $perfilOcu->nombre_perfilocu = $request->nombre_perfilocu;
-        $perfilOcu->save();
+        //dd($competenciasPerfil);
+        
+        
+        /*foreach($competencias as $competencia)
+        {
+            $compPerfil = CompetenciaPerfil::All()->where('id_perfilocu',$perfilOcu->id_perfilocu)->where('id_comp',$competencia)->first();          
+            if($compPerfil != null)
+            {
+                if($compPerfil->estado_comperfil == 0 )
+                {
+                    $compPerfil->estado_comperfil = 1;
+                    $compPerfil->save();
+                }
+                else
+                {
+                    echo  "activado";
+                }
+            }
+            else
+            {
+                echo " hay que crear";
+            }
+        }*/
+        
+       
+        //$perfilOcu->save();
     }
     public function confirmDestroy($id)
     {

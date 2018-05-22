@@ -4,7 +4,7 @@
 		<div class="col-xs-12">
 			
 			<div class="box">
-			
+				
 				<div class="box-header">
 					<h3 class="box-title">Crear Perfil Ocupacional</h3>
 				</div>
@@ -16,7 +16,7 @@
 				</div>
 				<div class='form-group'>
 					{!! Form::label('nombre_comp', 'Competencias:') !!}
-					{!! Form::select('id_comp[]', $competencias,null ,['class' => 'form-control', 'multiple',id'=>'id_comp', 'style'=>'width:100%']) !!}
+					{!! Form::select('id_comp[]', $competencias,null ,['class' => 'form-control', 'multiple','id'=>'id_comp', 'style'=>'width:100%']) !!}
 				</div>	
 				<div class='form-group'>
 					{!! Form::hidden('id_area',$idArea, ['class' => 'form-control']) !!}
@@ -37,13 +37,13 @@
 
 <script>
 
-	$('#formArea').submit(function (e) {
+	$('#formPerfilOcupacional').submit(function (e) {
 		e.preventDefault();  // prevent the form from 'submitting'
 		var url = e.target.action  // get the target
 		var formData = $(this).serialize() // get form data
 		$.post(url, formData, function (response) { // send; response.data will be what is returned
 			$('#modal').modal('hide');
-			refrescarArea({{$idGerencia}});
+			refrescarPerfil({{$idArea}});
 			})
 	})
 </script>

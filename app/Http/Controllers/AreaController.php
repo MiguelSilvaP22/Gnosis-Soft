@@ -103,7 +103,7 @@ class AreaController extends Controller
     }
     public function selectArea($id)
     {
-        $areas = Area::all()->where('id_area',$id)->where('estado_area',1);
+        $areas = Area::all()->where('id_gerencia',$id)->where('estado_area',1);
         return view('area.selectArea', compact('areas'));
     }
 

@@ -1,5 +1,5 @@
 <div style="widtn:100%;align:center;">
-	<button id="addPerfil" value="{{$idGerencia}}" class="btn btn btn-info"><i class="fa fa-plus"></i> Agregar Perfil Ocupacional</button>
+	<button id="addPerfil" value="{{$idArea}}" class="btn btn btn-info"><i class="fa fa-plus"></i> Agregar Perfil Ocupacional</button>
 </div>
 <table id="tablaPerfil" class="table">
 	<thead>

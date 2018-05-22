@@ -162,28 +162,40 @@ function selectGerenciaArea(id,area)
 
 			if(area == 1)
 			{
-				$.ajax({
-				url: "/selectArea/"+$('#select_gerencia').val,
-				type: "GET",
-				success: function (datos) {
-					$("#selectAreas").html(datos);
-					$('#select_area').select2();			
-				}
-
-				});
+				$("#llamadoGerencia").val('1');
+				
+			}else
+			{
+				$("#llamadoGerencia").val('0');
 			}		
 		}
 
 		});
 }
 $(document).on('click', '#btnArea', function () {
-		
-		selectGerencia(this.value,0);
+	
+	selectGerenciaArea(this.value,0);
+	
 });
 
 $(document).on('change', '#select_gerencia', function () {
+	if($("#llamadoGerencia").val() == 0)
+	{
+		refrescarArea(this.value);
+	}else
+	{
+		
+		$.ajax({
+		url: "/selectArea/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#selectAreas").html(datos);
+			$('#select_area').select2();			
+		}
+
+		});
+	}
 	
-	refrescarArea(this.value);
 });	     
 
 	
@@ -233,12 +245,12 @@ $(document).on('click', '#deleteArea', function () {
 function refrescarPerfil(id)
 {
 	$.ajax({
-		url: "/perfilOcupacional/"+id,
+		url: "/indexPerfilOcupacional/"+id,
 		type: "GET",
 		success: function (datos) {
 			$("#datosTabla").html(datos);
 
-			$('#tablaArea').DataTable({
+			$('#tablaPerfil').DataTable({
 			
 		});
 		}
@@ -256,10 +268,6 @@ $(document).on('click', '#btnPerfil', function () {
 
 		
 	});
-	$(document).on('change', '#select_gerencia', function () {
-	
-		refrescarArea(this.value);
-	});	     	
 	$(document).on('change', '#select_area', function () {
 		
 		refrescarPerfil(this.value);
@@ -274,6 +282,7 @@ $(document).on('click', '#addPerfil', function () {
 		success: function (datos) {
 			$("#formModal").html(datos);
 			$('#modal').modal('show');
+			$('#id_comp').select2();	
 		}
 
 		});

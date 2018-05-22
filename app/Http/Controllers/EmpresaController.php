@@ -141,7 +141,7 @@ class EmpresaController extends Controller
     {
         $empresa = Empresa::findOrFail($id);
         $giros = $request->id_giro;
-        dd($giros);
+
         $girosEmpresa = GiroEmpresa::All()->where('id_empresa',$empresa->id_empresa)->where('estado_giroempresa',1);
         
         $empresasHolding =HoldingEmpresa::All()->where('emp_id_empresa',$empresa->id_empresa)->where('estado_holdingempresa',1);

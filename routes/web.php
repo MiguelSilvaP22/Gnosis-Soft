@@ -169,7 +169,7 @@ Route::get('/selectArea/{id}', 'AreaController@selectArea',function($id) {
     })
     ->name('area.select');  
 
-Route::get('/perfilOcupacional/{id}', 'PerfilOcupacionalController@index',function($id)
+Route::get('/indexPerfilOcupacional/{id}', 'PerfilOcupacionalController@index',function($id)
 {
     return $id;
 })->name('perfilOcupacional.index');

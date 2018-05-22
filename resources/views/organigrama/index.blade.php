@@ -91,6 +91,7 @@ function refrescarGerencia(id)
 $(document).on('click', '#btnGerencia', function () {
 	
 	$("#selectGerencias").html('');	
+	$("#selectAreas").html('');	
 	refrescarGerencia(this.value);
 });	
 
@@ -174,6 +175,7 @@ function selectGerenciaArea(id,area)
 }
 $(document).on('click', '#btnArea', function () {
 	
+	$("#selectAreas").html('');	
 	selectGerenciaArea(this.value,0);
 	
 });

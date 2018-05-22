@@ -1,7 +1,7 @@
 @extends('admin.layout')
 
 @section ('content')
-<body> 
+<body>
 	<!-- Calendario -->
 	<div class="col-md-12">
     <div class="box box-primary">

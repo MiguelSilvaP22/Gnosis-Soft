@@ -32,25 +32,11 @@
 </body>
 
 <script>
-function marcarErrorGeneral(id,idErr){
-	document.getElementById(id).style.background='#FFEEEE'; document.getElementById(id).style.borderColor='#FF3333'; 
-	document.getElementById(idErr).innerHTML='Campo Obligatorio';
-	document.getElementById(idErr).style.color = '#FF3333';
-
-}
-function desmarcarErrorGeneral(id,idErr){
-	document.getElementById(id).style.background="";
-	document.getElementById(id).style.borderColor="";
-	document.getElementById(idErr).innerHTML='';
-}
-
 $('#formGerencia').submit(function (e) {
-var verifica=true;
 e.preventDefault();
 var url = e.target.action  // get the target
 var formData = $(this).serialize() // get form data
-if($("#nombre_gerencia").val() == "" ){verifica = false; marcarErrorGeneral('nombre_gerencia','errNombreGerencia');}else{desmarcarErrorGeneral('nombre_gerencia','errNombreGerencia');}
-if(verifica)	
+if(validarGerencia())	
 {
 	$.post(url, formData, function (response) { // send; response.data will be what is returned
 	$('#modal').modal('hide');
@@ -58,6 +44,4 @@ if(verifica)
 	});
 }
 });
-
-	
 </script>

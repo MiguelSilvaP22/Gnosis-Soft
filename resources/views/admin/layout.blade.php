@@ -492,6 +492,9 @@ desired effect
 <!-- AdminLTE App -->
 <script src="/adminlte/js/adminlte.min.js"></script>
 
+<!-- Validador -->
+<script src="/adminlte/js/validacion.js"></script>
+
 <!--DataTable-->
 <script src="/adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="/adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>

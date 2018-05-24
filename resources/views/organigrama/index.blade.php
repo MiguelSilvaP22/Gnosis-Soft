@@ -102,7 +102,11 @@ $(document).on('click', '#addGerencia', function () {
 		type: "GET",
 		success: function (datos) {
 			$("#formModal").html(datos);
-			$('#modal').modal('show');
+			$('#modal').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                }); 
 		}
 
 		});

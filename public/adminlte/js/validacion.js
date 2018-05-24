@@ -13,7 +13,8 @@ function desmarcarErrorGeneral(id,idErr){
 
 function validarGerencia (){
 	var verificar = true;
-    if($("#nombre_gerencia").val() == "" ){verificar = false; marcarErrorGeneral('nombre_gerencia','errNombreGerencia');}
-    else{desmarcarErrorGeneral('nombre_gerencia','errNombreGerencia');}
-    return verificar;
+	if($("#nombre_gerencia").val() == "" ){verificar = false; marcarErrorGeneral('nombre_gerencia','errNombreGerencia');}
+	else{desmarcarErrorGeneral('nombre_gerencia','errNombreGerencia');}
+	return verificar;
+    	
 };

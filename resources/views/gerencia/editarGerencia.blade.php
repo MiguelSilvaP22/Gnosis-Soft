@@ -13,7 +13,8 @@
 				{!! Form::model($gerencia, ['method' => 'PATCH', 'action' => ['GerenciaController@update',$gerencia->id_gerencia],'id'=>'formGerencia']) !!}
 				<div class='form-group'>
 					{!! Form::label('nombre_gerencia', 'Nombre:') !!}
-					{!! Form::text('nombre_gerencia', null, ['class' => 'form-control']) !!}
+					{!! Form::text('nombre_gerencia', null, ['class' => 'form-control','id'=>'nombre_gerencia']) !!}
+					{!! Form::label('', '',['id' => 'errNombreGerencia']) !!}
 				</div>
 				<div class='form-group'>
 					{!! Form::submit("Editar gerencia", ['class' => 'form-control btn btn-success ']) !!}
@@ -35,9 +36,12 @@ $('#formGerencia').submit(function (e) {
 	e.preventDefault();  // prevent the form from 'submitting'
 	var url = e.target.action  // get the target
 	var formData = $(this).serialize() // get form data
-	$.post(url, formData, function (response) { // send; response.data will be what is returned
+	if(validarGerencia())
+	{
+		$.post(url, formData, function (response) { // send; response.data will be what is returned
 		$('#modal').modal('hide');
 		refrescarGerencia({{$gerencia->id_empresa}});
 		})
+	}
 })
 </script>

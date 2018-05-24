@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\PerfilOcupacional;
 use App\Competencia;
 use App\CompetenciaPerfil;
@@ -100,35 +101,26 @@ class PerfilOcupacionalController extends Controller
         
         $competencias = $request->id_comp;     
         $perfilOcu = PerfilOcupacional::findOrFail($id);
-        $competenciasPerfil = CompetenciaPerfil::All()->where('id_perfilocu',$perfilOcu->id_perfilocu)->pluck('id_comp');
+        CompetenciaPerfil::where('id_perfilocu',$perfilOcu->id_perfilocu)->get()->each->delete();
+
         //$competenciasPerfil = CompetenciaPerfil::select('id_comp','estado_comperfil')->where('id_perfilocu',$perfilOcu->id_perfilocu)->get();
-        $perfilOcu->nombre_perfilocu = $request->nombre_perfilocu;
-        //dd($competenciasPerfil);
+        $perfilOcu->nombre_perfilocu = $request->nombre_perfilocu;    
         
         
-        /*foreach($competencias as $competencia)
+        foreach($competencias as $competencia)
         {
-            $compPerfil = CompetenciaPerfil::All()->where('id_perfilocu',$perfilOcu->id_perfilocu)->where('id_comp',$competencia)->first();          
-            if($compPerfil != null)
-            {
-                if($compPerfil->estado_comperfil == 0 )
-                {
-                    $compPerfil->estado_comperfil = 1;
-                    $compPerfil->save();
-                }
-                else
-                {
-                    echo  "activado";
-                }
-            }
-            else
-            {
-                echo " hay que crear";
-            }
-        }*/
+            $competenciaPerfil = new CompetenciaPerfil;
+            $competenciaPerfil->id_comp = $competencia;
+            $competenciaPerfil->id_perfilocu = $perfilOcu->id_perfilocu;
+            $competenciaPerfil->estado_comperfil = 1;
+           
+            $competenciaPerfil->save();
+        }
+    \Debugbar::info($perfilOcu);
+      return redirect()->back();
+
         
-       
-        //$perfilOcu->save();
+
     }
     public function confirmDestroy($id)
     {

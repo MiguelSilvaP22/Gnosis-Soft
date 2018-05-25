@@ -37,7 +37,7 @@
 					{!! Form::select('id_region', $regiones,null ,['class' => 'select2','data-placeholder'=>'Seleccione una región','id'=>'id_region', 'style'=>'width:100%']) !!}
 				</div>	
 
-				<div class='form-group' id="comuna">
+				<div class='form-group' id="comuna" style="display:none">
 					{!! Form::label('comuna_empresa', 'Comuna:') !!}
 					{!! Form::select('id_comuna', $comunas,null ,['class' => 'form-control select2', 'style'=>'width:100%']) !!}
 				</div>				
@@ -82,3 +82,36 @@
 	</div>
 
 </body>
+
+<script>
+	$(document).ready(function() {
+		$('.select2').select2();
+		
+	});
+
+	$(document).on('change', '#id_region', function () {
+	
+		$.ajax({
+		url: "/verComuna/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#comuna").show();
+			$("#comuna").html(datos);
+		}
+		});
+		//alert("asda");
+		});	
+
+	$(document).on('change', "input[name='tipo_empresa']", function () {
+			
+		if(this.value == 1)
+		{
+			$("#empresas").show();
+		}else
+		{
+			$("#id_empresa").val(null).trigger("change"); //Eliminar las empresas de holding luego de cambiar a tipo empresa.
+			$("#empresas").hide();
+		}
+		//alert("asda");
+	});	
+</script>

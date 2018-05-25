@@ -14,7 +14,7 @@
 					<tbody>
 						<tr>
 							<td><button id="confirmDelete" value="{{ $area->id_area}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Si </button></td>
-							<td><button class="btn btn btn-info"><i class="fa fa-eye"></i> No </button></td>
+							<td><button id="exit" class="btn btn btn-info"><i class="fa fa-eye"></i> No </button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -39,4 +39,9 @@ $(document).on('click', '#confirmDelete', function () {
 		});
 		//alert("asda");
 });	
+$(document).on('click', '#exit', function () {
+		$('#modal').modal('hide');
+		refrescarArea({{$area->id_gerencia}});
+		//alert("asda");
+});
 </script>

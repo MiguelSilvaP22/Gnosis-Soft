@@ -15,4 +15,20 @@ class Gerencia extends Model
     {
         return $this->belongsTo(Empresa::class,'id_empresa');
     }
+    public function areas()
+    {
+        return $this->hasMany(Area::class,'id_gerencia');
+    }
+
+    public function eliminar()
+    {
+        $this->estado_gerencia= 0;
+        if($this->save())
+        {
+            foreach($this->areas as $area)
+            {
+                $area->eliminar();
+            }
+        }
+    }
 }

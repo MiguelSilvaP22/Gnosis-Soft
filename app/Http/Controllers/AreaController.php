@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Area;
+use App\PerfilOcupacional;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -97,9 +98,14 @@ class AreaController extends Controller
      */
     public function destroy($id)
     {
+
         $area = Area::findOrFail($id);
-        $area->estado_area = 0;
-        $area->save();
+        $area->eliminar();
+        /*$area->estado_area = 0;
+        if($area->save())
+        {
+            PerfilOcupacional::where('id_area',$area->id_area)->update( ['estado_perfilocu' => 0]);
+        }*/
     }
     public function selectArea($id)
     {

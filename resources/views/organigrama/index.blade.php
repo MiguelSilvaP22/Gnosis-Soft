@@ -95,6 +95,8 @@ $(document).on('click', '#btnGerencia', function () {
 	refrescarGerencia(this.value);
 });	
 
+
+
 $(document).on('click', '#addGerencia', function () {
 		
 		$.ajax({

@@ -45,7 +45,7 @@
 								<a id="btnOrg" href="{{ route('organigrama.index', ['id'=>$empresa->id_empresa] ) }}" class="btn btn btn-info"><i class="fa fa-sitemap"></i> Organigrama</a>
 								<button id="btnVer" value="{{ $empresa->id_empresa}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
 
-								<a class="btn btn btn-info" href="{{ route('empresa.edit', ['id'=>$empresa->id_empresa] ) }}"><i class="fa fa-edit"></i> Editar</a>
+								<button id="btnEditar" value="{{ $empresa->id_empresa}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>
 
 								<button class="btn btn btn-info" onclick="eliminarEmpresa({{ $empresa->id_empresa}});"><i class="fa fa-eraser"></i> Eliminar</button>
 							</td>
@@ -88,6 +88,7 @@
 
 @section('script-js')
 <script>
+
 $(document).on('click', '#btnVer', function () {
 		$.ajax({
 		url: "/verEmpresa/"+this.value,
@@ -108,39 +109,28 @@ $(document).on('click', '#btnAgregar', function () {
 		success: function (datos) {
 			$("#datosEmpresa").html(datos);
 			$('#modal').modal('show');
-			$(document).ready(function() {
-				$('.select2').select2();
-				$("#id_region").prop("selectedIndex", -1);
-			});
-			$(document).on('change', '#id_region', function () {
-		
-		$.ajax({
-		url: "/verComuna/"+this.value,
-		type: "GET",
-		success: function (datos) {
-			$("#comuna").html(datos);
-		}
-		});
-		//alert("asda");
-		});	
-		$(document).on('change', "input[name='tipo_empresa']", function () {
-				
-				if(this.value == 1)
-				{
-					$("#empresas").show();
-				}else
-				{
-					$("#id_empresa").val(null).trigger("change"); //Eliminar las empresas de holding luego de cambiar a tipo empresa.
-					$("#empresas").hide();
-				}
-				//alert("asda");
-		});	
-
 		}
 
 		});
 		//alert("asda");
 });	
+
+
+$(document).on('click', '#btnEditar', function () {
+		$.ajax({
+		url: "/editarEmpresa/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			
+			$("#datosEmpresa").html(datos);
+			$('#modal').modal('show');
+			
+		}
+
+		});
+		//alert("asda");
+});	
+
 /*$("#btnAgregar").click(function(){
 	location.href = '{{route("empresa.crear")}}';
 	});*/

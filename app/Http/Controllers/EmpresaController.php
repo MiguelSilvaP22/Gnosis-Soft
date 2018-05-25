@@ -141,10 +141,66 @@ class EmpresaController extends Controller
     {
         $empresa = Empresa::findOrFail($id);
         $giros = $request->id_giro;
-
-        $girosEmpresa = GiroEmpresa::All()->where('id_empresa',$empresa->id_empresa)->where('estado_giroempresa',1);
+        $empresas = $request->id_empresa;
         
-        $empresasHolding =HoldingEmpresa::All()->where('emp_id_empresa',$empresa->id_empresa)->where('estado_holdingempresa',1);
+        $empresa->nombre_empresa = $request->nombre_empresa;
+        $empresa->razon_social_empresa = $request->razon_social_empresa;
+        $empresa->rut_matriz_empresa = $request->rut_matriz_empresa;
+        $empresa->id_comuna = $request->id_comuna;
+        $empresa->direccion_empresa = $request->direccion_empresa;
+        $empresa->email_empresa = $request->email_empresa;
+        $empresa->estado_empresa = 1;
+
+        if($empresa->save())
+        {
+            
+            GiroEmpresa::where('id_empresa',$empresa->id_empresa)->update( ['estado_giroempresa' => 0]);
+            HoldingEmpresa::where('emp_id_empresa',$empresa->id_empresa)->update( ['estado_holdingempresa' => 0]);
+
+            foreach($giros as $giro)
+            {
+                $girosEmpresa = GiroEmpresa::All()->where('id_empresa',$empresa->id_empresa)->where('id_giro',$giro)->first();
+                if($girosEmpresa != null)
+                {
+                    $girosEmpresa->estado_giroempresa = 1;
+                    $girosEmpresa->save();
+
+                }
+                else
+                {
+                    $giroEmpresa = new GiroEmpresa;
+                    $giroEmpresa->id_giro = $giro;
+                    $giroEmpresa->id_empresa = $empresa->id_empresa;
+                    $giroEmpresa->estado_giroempresa = 1;
+                    $giroEmpresa->save();
+                }
+
+            }
+            if($empresas != null)
+            {
+                foreach($empresas as $emp)
+                {
+                    $empresasHolding =HoldingEmpresa::All()->where('emp_id_empresa',$empresa->id_empresa)->where('id_empresa',$emp)->first();
+                    if($empresasHolding != null)
+                    {
+                        $empresasHolding->estado_holdingempresa = 1;
+                        $empresasHolding->save();
+    
+                    }
+                    else
+                    {
+                        $holdingEmpresa = new HoldingEmpresa;
+                        $holdingEmpresa->id_empresa = $emp;
+                        $holdingEmpresa->emp_id_empresa = $empresa->id_empresa;
+                        $holdingEmpresa->estado_holdingempresa = 1;
+                        $holdingEmpresa->save();
+                    }
+                }
+            }
+            
+        }
+    
+        return redirect('empresa');
     }
 
     /**

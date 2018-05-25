@@ -1,3 +1,10 @@
 
 {!! Form::label('comuna_empresa', 'Comuna:') !!}
-{!! Form::select('id_comuna', $comunas,null ,['class' => 'form-control select2', 'style'=>'width:100%']) !!}
+{!! Form::select('id_comuna', $comunas,null ,['class' => 'form-control select2', 'id'=>'idComuna','style'=>'width:100%']) !!}
+
+<script>
+	$(document).ready(function() {
+		$('#idComuna').select2();
+	});
+
+</script>

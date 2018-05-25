@@ -1,6 +1,4 @@
-@extends('admin.layout')
 
-@section ('content')
 <body> 
   <div class="row">
 		<div class="col-xs-12">
@@ -12,7 +10,7 @@
 				</div>
 
 				<div class="box-body">
-				{!! Form::model($empresa, ['method' => 'PATCH', 'action' => ['EmpresaController@update',$empresa->id_empresa]]) !!}
+				{!! Form::model($empresa, ['method' => 'PATCH', 'action' => ['EmpresaController@update',$empresa->id_empresa,'id'=>'formEmpresa']]) !!}
 				<div class='form-group'>
 					{!! Form::label('nombre_empresa', 'Nombre:') !!}
 					{!! Form::text('nombre_empresa', null, ['class' => 'form-control']) !!}
@@ -55,7 +53,7 @@
 					{!! Form::label('', 'Tipo de Empresa:') !!}
 					<div class='radio'>
 						<label>
-						{!! Form::radio('tipo_empresa', '0',['id'=>'empresa']); !!} Empresa
+						{!! Form::radio('tipo_empresa', '0',['checked'=>'true','id'=>'empresa']); !!} Empresa
 						</label>
 					</div>
 					<div class='radio'>
@@ -82,8 +80,8 @@
 	</div>
 
 </body>
-@stop
-@section('script-js')
+
+
 <script>
 
 $(document).ready(function() {
@@ -96,15 +94,21 @@ $(document).ready(function() {
 	var empresasHolding={{$empresasHolding}};
 	
 	if(empresasHolding.length >0)
-	{
-		$("#id_empresa").prop("checked", true);
+	{	
 		$('#id_empresa').select2().val(empresasHolding).trigger("change");
 		$("#empresas").show();
+	}else
+	{
+		$('#holding').prop("checked", false);
+		
+		
 	}
 	$('#id_giro').select2().val(idGiro).trigger("change");
 	$('#id_region').select2().val(idRegion);
 
 });
+
+
 
 $(document).on('change', '#id_region', function () {
 		
@@ -130,5 +134,6 @@ $(document).on('change', "input[name='tipo_empresa']", function () {
 		//alert("asda");
 });	
 
+
+
 </script>
-@stop

@@ -101,22 +101,34 @@ class PerfilOcupacionalController extends Controller
         
         $competencias = $request->id_comp;     
         $perfilOcu = PerfilOcupacional::findOrFail($id);
-        CompetenciaPerfil::where('id_perfilocu',$perfilOcu->id_perfilocu)->get()->each->delete();
-
-        //$competenciasPerfil = CompetenciaPerfil::select('id_comp','estado_comperfil')->where('id_perfilocu',$perfilOcu->id_perfilocu)->get();
-        $perfilOcu->nombre_perfilocu = $request->nombre_perfilocu;    
-        $perfilOcu->save();
-        
-        foreach($competencias as $competencia)
+        $perfilOcu->nombre_perfilocu = $request->nombre_perfilocu;   
+         
+        if($perfilOcu->save())
         {
-            $competenciaPerfil = new CompetenciaPerfil;
-            $competenciaPerfil->id_comp = $competencia;
-            $competenciaPerfil->id_perfilocu = $perfilOcu->id_perfilocu;
-            $competenciaPerfil->estado_comperfil = 1;
-           
-            $competenciaPerfil->save();
+            CompetenciaPerfil::where('id_perfilocu',$perfilOcu->id_perfilocu)->update( ['estado_comperfil' => 0]);
+            foreach($competencias as $competencia)
+            {
+                $compPerfil = CompetenciaPerfil::All()->where('id_perfilocu',$perfilOcu->id_perfilocu)->where('id_comp',$competencia)->first();          
+                if($compPerfil != null)
+                {
+                    $compPerfil->estado_comperfil = 1;
+                    $compPerfil->save();
+
+                }
+                else
+                {
+                    $competenciaPerfil = new CompetenciaPerfil;
+                    $competenciaPerfil->id_comp = $competencia;
+                    $competenciaPerfil->id_perfilocu = $perfilOcu->id_perfilocu;
+                    $competenciaPerfil->estado_comperfil = 1;
+
+                    $competenciaPerfil->save();
+                }
+            }
         }
-    
+
+        
+        
     //\Debugbar::info($perfilOcu);
       //return redirect()->back();
 
@@ -136,8 +148,12 @@ class PerfilOcupacionalController extends Controller
      */
     public function destroy($id)
     {
+        
+
         $perfilOcu = PerfilOcupacional::findOrFail($id);
-        $perfilOcu->estado_perfilocu = 0;
-        $perfilOcu->save();
+        $perfilOcu->eliminar();
+        /*$perfilOcu->estado_perfilocu = 0;
+
+        $perfilOcu->save();*/
     }
 }

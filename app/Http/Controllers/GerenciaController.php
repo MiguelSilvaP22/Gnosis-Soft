@@ -101,8 +101,12 @@ class GerenciaController extends Controller
     public function destroy($id)
     {
         $gerencia = Gerencia::findOrFail($id);
-        $gerencia->estado_gerencia = 0;
-        $gerencia->save();
+        $gerencia->eliminar();
+        /* $gerencia->estado_gerencia = 0;
+        if($gerencia->save())
+        {
+            //PerfilOcupacional::where('id_area',$area->id_area)->update( ['estado_perfilocu' => 0]);
+        }*/
     }
 
     public function selectGerencia($id)

@@ -53,12 +53,12 @@
 					{!! Form::label('', 'Tipo de Empresa:') !!}
 					<div class='radio'>
 						<label>
-						{!! Form::radio('tipo_empresa', '0',['checked'=>'true','id'=>'empresa']); !!} Empresa
+						{!! Form::radio('tipo_empresa', '0',false,['id'=>'CheckEmpresa']); !!} Empresa
 						</label>
 					</div>
 					<div class='radio'>
 						<label>
-						{!! Form::radio('tipo_empresa', '1',['id'=>'holding']); !!} Holding
+						{!! Form::radio('tipo_empresa', '1',false,['id'=>'CheckHolding']); !!} Holding
 						</label>
 					</div>
 				</div>
@@ -94,13 +94,12 @@ $(document).ready(function() {
 	var empresasHolding={{$empresasHolding}};
 	
 	if(empresasHolding.length >0)
-	{	$('#holding').prop("checked", true);
+	{	$('#CheckHolding').prop("checked", true);
 		$('#id_empresa').select2().val(empresasHolding).trigger("change");
 		$("#empresas").show();
 	}else
-	{
-		$('#empresa').prop("checked", true);
-		
+	{		
+		$('#CheckEmpresa').prop("checked", true);		
 		
 	}
 	$('#id_giro').select2().val(idGiro).trigger("change");

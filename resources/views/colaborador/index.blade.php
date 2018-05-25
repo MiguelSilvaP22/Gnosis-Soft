@@ -31,20 +31,19 @@
 					<tbody>
 						@foreach ($colaboradores as $colaborador) 
 						<tr>
-							<td style="width:25%;">{{ $colaborador->nombre_colaborador}}</td>
-							<td style="width:25%;">{{ $colaborador->fecha_mod_colaborador}}</td>
-							@if($colaborador->estado_colaborador == 1)
+							<td style="width:25%;">{{ $colaborador->nombre_usuario}}</td>
+							<td style="width:25%;">{{ $colaborador->fecha_mod_usuario}}</td>
+							@if($colaborador->estado_usuario == 1)
 							<td style="width:25%;color:green;">Activo</td>
 							@else
 							<td style="width:25%;color:red">inactivo</td>
 							@endif
 							<td>
-								<a id="btnOrg" href="{{ route('organigrama.index', ['id'=>$colaborador->id_colaborador] ) }}" class="btn btn btn-info"><i class="fa fa-sitemap"></i> Organigrama</a>
-								<button id="btnVer" value="{{ $colaborador->id_colaborador}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
+							<button id="btnVer" value="{{ $colaborador->id_usuario}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
 
-								<a class="btn btn btn-info" href="{{ route('colaborador.edit', ['id'=>$colaborador->id_colaborador] ) }}"><i class="fa fa-edit"></i> Editar</a>
+							<button id="btnEditar" value="{{ $colaborador->id_usuario}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>
 
-								<button class="btn btn btn-info" onclick="eliminarcolaborador({{ $colaborador->id_colaborador}});"><i class="fa fa-eraser"></i> Eliminar</button>
+							<button id="deleteColaborador" class="btn btn btn-info" value="{{ $colaborador->id_usuario}}"><i class="fa fa-eraser"></i> Eliminar</button>
 							</td>
 						</tr>
 						@endforeach
@@ -85,12 +84,14 @@
 
 @section('script-js')
 <script>
+<script>
+
 $(document).on('click', '#btnVer', function () {
 		$.ajax({
-		url: "/vercolaborador/"+this.value,
+		url: "/verEmpresa/"+this.value,
 		type: "GET",
 		success: function (datos) {
-			$("#datoscolaborador").html(datos);
+			$("#datosEmpresa").html(datos);
 			$('#modal').modal('show');
 		}
 
@@ -100,64 +101,64 @@ $(document).on('click', '#btnVer', function () {
 
 $(document).on('click', '#btnAgregar', function () {
 		$.ajax({
-		url: "/crearcolaborador/",
+		url: "/crearEmpresa/",
 		type: "GET",
 		success: function (datos) {
-			$("#datoscolaborador").html(datos);
+			$("#datosEmpresa").html(datos);
 			$('#modal').modal('show');
-			$(document).ready(function() {
-				$('.select2').select2();
-				$("#id_region").prop("selectedIndex", -1);
-			});
-			$(document).on('change', '#id_region', function () {
-		
-		$.ajax({
-		url: "/verComuna/"+this.value,
-		type: "GET",
-		success: function (datos) {
-			$("#comuna").html(datos);
-		}
-		});
-		//alert("asda");
-		});	
-		$(document).on('change', "input[name='tipo_colaborador']", function () {
-				
-				if(this.value == 1)
-				{
-					$("#colaboradores").show();
-				}else
-				{
-					$("#id_colaborador").val(null).trigger("change"); //Eliminar las colaboradores de holding luego de cambiar a tipo colaborador.
-					$("#colaboradores").hide();
-				}
-				//alert("asda");
-		});	
-
 		}
 
 		});
 		//alert("asda");
 });	
+
+
+$(document).on('click', '#btnEditar', function () {
+		$.ajax({
+		url: "/editarEmpresa/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			
+			$("#datosEmpresa").html(datos);
+			$('#modal').modal('show');
+			
+		}
+
+		});
+		//alert("asda");
+});	
+
 /*$("#btnAgregar").click(function(){
-	location.href = '{{route("colaborador.crear")}}';
+	location.href = '{{route("empresa.crear")}}';
 	});*/
 $("#btnVerTrash").click(function(){
-	location.href = '/colaborador/0';
+	location.href = '/empresa/0';
 	});	
 $(document).ready(function() {
 
-    $('#tablacolaborador').DataTable({
+    $('#tablaEmpresa').DataTable({
 			
 		});
 } );
-function eliminarcolaborador (id)
-{
-	var eliminar = confirm("¿Esta seguro de eliminar el perfil?");
-	if(eliminar)
-	{
-		location.href = '/eliminarcolaborador/'+id;
-	}
-}
+
+$(document).on('click', '#deleteEmpresa', function () {
+		
+		$.ajax({
+		url: "/desactivarEmpresa/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#datosEmpresa").html(datos);
+			$('#modal').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                }); 
+		}
+
+		});
+		//alert("asda");
+});
+
 
 
 </script>

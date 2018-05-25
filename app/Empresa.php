@@ -15,4 +15,16 @@ class Empresa extends Model
     {
         return $this->hasMany(Gerencia::class,'id_empresa');
     }
+
+    public function eliminar()
+    {
+        $this->estado_empresa= 0;
+        if($this->save())
+        {
+            foreach($this->gerencias as $gerencia)
+            {
+                $area->eliminar();
+            }
+        }
+    }
 }

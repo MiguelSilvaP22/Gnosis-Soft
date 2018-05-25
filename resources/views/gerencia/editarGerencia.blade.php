@@ -13,7 +13,7 @@
 				{!! Form::model($gerencia, ['method' => 'PATCH', 'action' => ['GerenciaController@update',$gerencia->id_gerencia],'id'=>'formGerencia']) !!}
 				<div class='form-group'>
 					{!! Form::label('', 'Nombre:') !!}
-					{!! Form::text('nombre_gerencia', null, ['class' => 'form-control','id'=>'nombre_gerencia']) !!}
+					{!! Form::text('nombre_gerencia', null, ['class' => 'form-control','id'=>'nombre_gerencia','maxlength'=>'100']) !!}
 					{!! Form::label('', '',['id' => 'errNombreGerencia']) !!}
 				</div>
 				<div class='form-group'>

@@ -13,7 +13,7 @@
 				{!! Form::model($perfilOcu, ['method' => 'PATCH', 'action' => ['PerfilOcupacionalController@update',$perfilOcu->id_perfilocu],'id'=>'formPerfilOcupacional']) !!}
 				<div class='form-group'>
 					{!! Form::label('nombre_perfilocu', 'Nombre:') !!}
-					{!! Form::text('nombre_perfilocu', null, ['class' => 'form-control']) !!}
+					{!! Form::text('nombre_perfilocu', null, ['class' => 'form-control','maxlength'=>'100']) !!}
 				</div>
 				<div class='form-group'>
 					{!! Form::label('nombre_comp', 'Competencias:') !!}
@@ -22,10 +22,10 @@
 				<div class='form-group'>
 					{!! Form::submit("Editar Perfil Ocuácional", ['class' => 'form-control btn btn-success ']) !!}
 				</div>
+				{!! Form::close() !!}
 				<div class='form-group'>
-					<a href='{{ url()->previous() }}' class="form-control btn btn-success " > Volver </a>
+					<div id="btnVolver" class="form-control btn btn-success " > Volver </div>
 				</div>
-  				{!! Form::close() !!}
 				</div>
 			</div>
 		</div>
@@ -50,4 +50,8 @@ $('#formPerfilOcupacional').submit(function (e) {
 		refrescarPerfil({{$perfilOcu->id_area}});
 		})
 })
+
+$(document).on('click', '#btnVolver', function () {
+	$('#modal').modal('hide');
+});
 </script>

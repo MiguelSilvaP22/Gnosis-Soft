@@ -12,7 +12,7 @@
 					{!! Form::open(['action' => 'AreaController@store','id'=>'formArea']) !!}
 				<div class='form-group'>
 					{!! Form::label('', 'Nombre:') !!}
-					{!! Form::text('nombre_area', null, ['class' => 'form-control','id'=>'nombre_area']) !!}
+					{!! Form::text('nombre_area', null, ['class' => 'form-control','id'=>'nombre_area','maxlength'=>'199']) !!}
 					{!! Form::label('', '',['id' => 'errNombreArea']) !!}
 				</div>
 				<div class='form-group'>

@@ -13,7 +13,7 @@
 				{!! Form::model($area, ['method' => 'PATCH', 'action' => ['AreaController@update',$area->id_area],'id'=>'formArea']) !!}
 				<div class='form-group'>
 					{!! Form::label('nombre_area', 'Nombre:') !!}
-					{!! Form::text('nombre_area', null, ['class' => 'form-control','id'=>'nombre_area']) !!}
+					{!! Form::text('nombre_area', null, ['class' => 'form-control','id'=>'nombre_area','maxlength'=>'199']) !!}
 					{!! Form::label('', '',['id' => 'errNombreArea']) !!}
 				</div>
 				<div class='form-group'>

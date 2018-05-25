@@ -94,12 +94,12 @@ $(document).ready(function() {
 	var empresasHolding={{$empresasHolding}};
 	
 	if(empresasHolding.length >0)
-	{	
+	{	$('#holding').prop("checked", true);
 		$('#id_empresa').select2().val(empresasHolding).trigger("change");
 		$("#empresas").show();
 	}else
 	{
-		$('#holding').prop("checked", false);
+		$('#empresa').prop("checked", true);
 		
 		
 	}

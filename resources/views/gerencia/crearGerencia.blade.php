@@ -30,7 +30,6 @@
 	</div>
 
 </body>
-
 <script>
 $('#formGerencia').submit(function (e) {
 e.preventDefault();
@@ -39,8 +38,8 @@ var formData = $(this).serialize() // get form data
 if(validarGerencia())	
 {
 	$.post(url, formData, function (response) { // send; response.data will be what is returned
-	$('#modal').modal('hide');
-	refrescarGerencia({{$idEmpresa}});
+		$('#modal').modal('hide');
+		refrescarGerencia({{$idEmpresa}});
 	});
 }
 });

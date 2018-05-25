@@ -41,7 +41,7 @@ $('#formGerencia').submit(function (e) {
 		$.post(url, formData, function (response) { // send; response.data will be what is returned
 		$('#modal').modal('hide');
 		refrescarGerencia({{$gerencia->id_empresa}});
-		})
+		});
 	}
-})
+});
 </script>

@@ -13,7 +13,8 @@
 				{!! Form::model($area, ['method' => 'PATCH', 'action' => ['AreaController@update',$area->id_area],'id'=>'formArea']) !!}
 				<div class='form-group'>
 					{!! Form::label('nombre_area', 'Nombre:') !!}
-					{!! Form::text('nombre_area', null, ['class' => 'form-control']) !!}
+					{!! Form::text('nombre_area', null, ['class' => 'form-control','id'=>'nombre_area']) !!}
+					{!! Form::label('', '',['id' => 'errNombreArea']) !!}
 				</div>
 				<div class='form-group'>
 					{!! Form::submit("Editar Area", ['class' => 'form-control btn btn-success ']) !!}
@@ -30,14 +31,16 @@
 </body>
 
 <script>
-
 $('#formArea').submit(function (e) {
-	e.preventDefault();  // prevent the form from 'submitting'
-	var url = e.target.action  // get the target
-	var formData = $(this).serialize() // get form data
+e.preventDefault();
+var url = e.target.action  // get the target
+var formData = $(this).serialize() // get form data
+if(validarArea())	
+{
 	$.post(url, formData, function (response) { // send; response.data will be what is returned
 		$('#modal').modal('hide');
 		refrescarArea({{$area->id_gerencia}});
-		})
-})
+	});
+}
+});
 </script>

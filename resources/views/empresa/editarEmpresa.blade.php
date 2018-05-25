@@ -91,16 +91,16 @@ $(document).ready(function() {
 	
 	var idGiro = {{$girosEmpresa}};
 	var idRegion = {{$idRegion}};
-	var empresasHolding={{$empresasHolding}};
+	var empresasHolding = {{$empresasHolding}};
 	
 	if(empresasHolding.length >0)
 	{	$('#CheckHolding').prop("checked", true);
 		$('#id_empresa').select2().val(empresasHolding).trigger("change");
 		$("#empresas").show();
-	}else
+	}
+	else
 	{		
 		$('#CheckEmpresa').prop("checked", true);		
-		
 	}
 	$('#id_giro').select2().val(idGiro).trigger("change");
 	$('#id_region').select2().val(idRegion);

@@ -21,10 +21,10 @@
 				<div class='form-group'>
 					{!! Form::submit("Agregar Area", ['class' => 'form-control btn btn-success ']) !!}
 				</div>
+				{!! Form::close() !!}
 				<div class='form-group'>
-					<a href='{{ url()->previous() }}' class="form-control btn btn-success " > Volver </a>
+					<div id="btnVolver" class="form-control btn btn-success " > Volver </div>
 				</div>
-  				{!! Form::close() !!}
 				</div>
 			</div>
 		</div>
@@ -44,5 +44,8 @@ if(validarArea())
 		refrescarArea({{$idGerencia}});
 	});
 }
+});
+$(document).on('click', '#btnVolver', function () {
+		$('#modal').modal('hide');
 });
 </script>

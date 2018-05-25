@@ -12,17 +12,17 @@
 				<div class="box-body">
 				{!! Form::model($gerencia, ['method' => 'PATCH', 'action' => ['GerenciaController@update',$gerencia->id_gerencia],'id'=>'formGerencia']) !!}
 				<div class='form-group'>
-					{!! Form::label('nombre_gerencia', 'Nombre:') !!}
+					{!! Form::label('', 'Nombre:') !!}
 					{!! Form::text('nombre_gerencia', null, ['class' => 'form-control','id'=>'nombre_gerencia']) !!}
 					{!! Form::label('', '',['id' => 'errNombreGerencia']) !!}
 				</div>
 				<div class='form-group'>
 					{!! Form::submit("Editar gerencia", ['class' => 'form-control btn btn-success ']) !!}
 				</div>
+				{!! Form::close() !!}
 				<div class='form-group'>
-					<a href='{{ url()->previous() }}' class="form-control btn btn-success " > Volver </a>
+					<div id="btnVolver" class="form-control btn btn-success " > Volver </div>
 				</div>
-  				{!! Form::close() !!}
 				</div>
 			</div>
 		</div>
@@ -43,5 +43,8 @@ $('#formGerencia').submit(function (e) {
 		refrescarGerencia({{$gerencia->id_empresa}});
 		});
 	}
+});
+$(document).on('click', '#btnVolver', function () {
+		$('#modal').modal('hide');
 });
 </script>

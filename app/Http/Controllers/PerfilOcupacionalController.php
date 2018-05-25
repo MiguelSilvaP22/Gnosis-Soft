@@ -105,7 +105,7 @@ class PerfilOcupacionalController extends Controller
 
         //$competenciasPerfil = CompetenciaPerfil::select('id_comp','estado_comperfil')->where('id_perfilocu',$perfilOcu->id_perfilocu)->get();
         $perfilOcu->nombre_perfilocu = $request->nombre_perfilocu;    
-        
+        $perfilOcu->save();
         
         foreach($competencias as $competencia)
         {
@@ -116,8 +116,9 @@ class PerfilOcupacionalController extends Controller
            
             $competenciaPerfil->save();
         }
-    \Debugbar::info($perfilOcu);
-      return redirect()->back();
+    
+    //\Debugbar::info($perfilOcu);
+      //return redirect()->back();
 
         
 

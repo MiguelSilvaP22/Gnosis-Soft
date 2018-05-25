@@ -120,7 +120,11 @@ $(document).on('click', '#editGerencia', function () {
 		type: "GET",
 		success: function (datos) {
 			$("#formModal").html(datos);
-			$('#modal').modal('show');
+			$('#modal').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                }); 
 		}
 
 		});
@@ -134,12 +138,16 @@ $(document).on('click', '#deleteGerencia', function () {
 		type: "GET",
 		success: function (datos) {
 			$("#formModal").html(datos);
-			$('#modal').modal('show');
+			$('#modal').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                }); 
 		}
 
 		});
 		//alert("asda");
-});	
+});
 function refrescarArea(id)
 {
 	$.ajax({

@@ -52,7 +52,7 @@
 					</tbody>
 				</table>
 				@else
-				<h1>No Hay colaboradores registradas</h1>
+				<h1>No Hay colaboradores registrados</h1>
 				@endif
 				</div>
 			</div>
@@ -67,7 +67,7 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="box box-primary">
-						<div id="datoscolaborador" class="box-body">
+						<div id="datos" class="box-body">
 
 						</div>
 					</div>
@@ -84,14 +84,18 @@
 
 @section('script-js')
 <script>
-<script>
+$(document).ready(function() {
+	$('#tablaEmpresa').DataTable({
+			
+		});
+} );
 
 $(document).on('click', '#btnVer', function () {
 		$.ajax({
 		url: "/verEmpresa/"+this.value,
 		type: "GET",
 		success: function (datos) {
-			$("#datosEmpresa").html(datos);
+			$("#datos").html(datos);
 			$('#modal').modal('show');
 		}
 
@@ -101,10 +105,10 @@ $(document).on('click', '#btnVer', function () {
 
 $(document).on('click', '#btnAgregar', function () {
 		$.ajax({
-		url: "/crearEmpresa/",
+		url: "/crearColaborador/",
 		type: "GET",
 		success: function (datos) {
-			$("#datosEmpresa").html(datos);
+			$("#datos").html(datos);
 			$('#modal').modal('show');
 		}
 
@@ -119,7 +123,7 @@ $(document).on('click', '#btnEditar', function () {
 		type: "GET",
 		success: function (datos) {
 			
-			$("#datosEmpresa").html(datos);
+			$("#datos").html(datos);
 			$('#modal').modal('show');
 			
 		}
@@ -128,26 +132,14 @@ $(document).on('click', '#btnEditar', function () {
 		//alert("asda");
 });	
 
-/*$("#btnAgregar").click(function(){
-	location.href = '{{route("empresa.crear")}}';
-	});*/
-$("#btnVerTrash").click(function(){
-	location.href = '/empresa/0';
-	});	
-$(document).ready(function() {
 
-    $('#tablaEmpresa').DataTable({
-			
-		});
-} );
-
-$(document).on('click', '#deleteEmpresa', function () {
+$(document).on('click', '#deleteColaborador', function () {
 		
 		$.ajax({
 		url: "/desactivarEmpresa/"+this.value,
 		type: "GET",
 		success: function (datos) {
-			$("#datosEmpresa").html(datos);
+			$("#datos").html(datos);
 			$('#modal').modal({
                         backdrop: 'static',
                         keyboard: true, 

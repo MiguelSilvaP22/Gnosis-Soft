@@ -295,7 +295,7 @@ desired effect
               <li><a href="/perfil"><i class="fa fa-user-secret"></i> <span>Perfiles</span></a></li>
             </ul>
           </li>
-          <li><a href="#"><i class="fa fa-user"></i> <span>Colaboradores</span></a></li>
+          <li><a href="/colaborador"><i class="fa fa-user"></i> <span>Colaboradores</span></a></li>
           <li><a href="/empresa"><i class="fa fa-building"></i> <span>Empresas</span></a></li>
           <li><a href="#"><i class="fa fa-graduation-cap"></i> <span>Cursos</span></a></li>
           <li><a href="#"><i class="fa fa-book"></i> <span>Actividad</span></a></li>

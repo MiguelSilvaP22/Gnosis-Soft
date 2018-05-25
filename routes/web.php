@@ -208,3 +208,29 @@ Route::get('/desactivarPerfilOcupacional/{id}', 'PerfilOcupacionalController@con
         ->name('perfilOcupacional.destroy');  
 
 Route::resource('perfilOcupacional', 'PerfilOcupacionalController');
+
+//-------------------------------------------------------------------------------------------------------------------------
+//Colaboradores
+
+Route::get('/empresa', 'ColaboradorController@index');
+
+Route::get('/crearColaborador', 'ColaboradorController@create')
+->name('colaborador.crear');
+
+Route::get('/editarColaborador/{id}', 'ColaboradorController@edit',function($id) {
+    return  $id;
+  })
+  ->name('colaborador.edit');
+
+Route::get('/desactivarColaborador/{id}', 'ColaboradorController@confirmDestroy',function($id) {
+    return  $id;
+    })
+->name('colaborador.delete');  
+
+Route::get('/eliminarColaborador/{id}', 'ColaboradorController@destroy',function($id) {
+    return  $id;
+    })
+->name('colaborador.destroy');  
+    
+
+Route::resource('colaborador', 'ColaboradorController');

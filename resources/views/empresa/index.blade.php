@@ -71,7 +71,7 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="box box-primary">
-						<div id="datosEmpresa" class="box-body">
+						<div id="datos" class="box-body">
 
 						</div>
 					</div>
@@ -94,7 +94,7 @@ $(document).on('click', '#btnVer', function () {
 		url: "/verEmpresa/"+this.value,
 		type: "GET",
 		success: function (datos) {
-			$("#datosEmpresa").html(datos);
+			$("#datos").html(datos);
 			$('#modal').modal('show');
 		}
 
@@ -107,7 +107,7 @@ $(document).on('click', '#btnAgregar', function () {
 		url: "/crearEmpresa/",
 		type: "GET",
 		success: function (datos) {
-			$("#datosEmpresa").html(datos);
+			$("#datos").html(datos);
 			$('#modal').modal('show');
 		}
 
@@ -122,7 +122,7 @@ $(document).on('click', '#btnEditar', function () {
 		type: "GET",
 		success: function (datos) {
 			
-			$("#datosEmpresa").html(datos);
+			$("#datos").html(datos);
 			$('#modal').modal('show');
 			
 		}
@@ -150,7 +150,7 @@ $(document).on('click', '#deleteEmpresa', function () {
 		url: "/desactivarEmpresa/"+this.value,
 		type: "GET",
 		success: function (datos) {
-			$("#datosEmpresa").html(datos);
+			$("#datos").html(datos);
 			$('#modal').modal({
                         backdrop: 'static',
                         keyboard: true, 

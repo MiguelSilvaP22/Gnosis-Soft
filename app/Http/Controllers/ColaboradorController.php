@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Usuario;
+use App\Nacionalidad;
+use App\Empresa;
+use App\PerfilOcupacional;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -26,7 +29,11 @@ class ColaboradorController extends Controller
      */
     public function create()
     {
-        //
+        $nacionalidades = Nacionalidad::all()->where('estado_nacionalidad',1)->sortBy('nombre_nacionalidad')->pluck('nombre_nacionalidad','id_nacionalidad');
+
+        $empresas = Empresa::all()->where('estado_empresa',1)->sortBy('nombre_empresa')->pluck('nombre_empresa','id_empresa');
+        
+        return view('colaborador.crearColaborador', compact('nacionalidades','empresas'));
         
     }
 

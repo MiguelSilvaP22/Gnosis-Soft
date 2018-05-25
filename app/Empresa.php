@@ -23,7 +23,7 @@ class Empresa extends Model
         {
             foreach($this->gerencias as $gerencia)
             {
-                $area->eliminar();
+                $gerencia->eliminar();
             }
         }
     }

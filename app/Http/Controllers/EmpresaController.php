@@ -127,6 +127,7 @@ class EmpresaController extends Controller
         $idRegion = $comuna->id_region;
         $empresasHolding =HoldingEmpresa::All()->where('emp_id_empresa',$empresa->id_empresa)->where('estado_holdingempresa',1)->pluck('id_empresa');
         
+
         return view('empresa.editarEmpresa',compact('empresa','giros','regiones','empresas','comunas','girosEmpresa','idRegion','empresasHolding'));
     }
 

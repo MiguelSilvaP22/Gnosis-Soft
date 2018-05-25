@@ -91,6 +91,17 @@ Route::get('/editarEmpresa/{id}', 'EmpresaController@edit',function($id) {
   })
   ->name('empresa.edit');
 
+Route::get('/desactivarEmpresa/{id}', 'EmpresaController@confirmDestroy',function($id) {
+    return  $id;
+    })
+->name('empresa.delete');  
+
+Route::get('/eliminarEmpresa/{id}', 'EmpresaController@destroy',function($id) {
+    return  $id;
+    })
+->name('empresa.destroy');  
+    
+
 Route::resource('empresa', 'EmpresaController');
 
 // Organigrama Empresa

@@ -202,7 +202,11 @@ class EmpresaController extends Controller
     
         return redirect('empresa');
     }
-
+    public function confirmDestroy($id)
+    {
+        $empresa = Empresa::findOrFail($id);
+        return view('empresa.desactivarEmpresa', compact('empresa'));
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -211,7 +215,9 @@ class EmpresaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $empresa = Empresa::findOrFail($id);
+        $empresa->eliminar();
+        return redirect('empresa');
     }
 
     

@@ -47,7 +47,7 @@
 
 								<button id="btnEditar" value="{{ $empresa->id_empresa}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>
 
-								<button class="btn btn btn-info" onclick="eliminarEmpresa({{ $empresa->id_empresa}});"><i class="fa fa-eraser"></i> Eliminar</button>
+								<button id="deleteEmpresa" class="btn btn btn-info" value="{{ $empresa->id_empresa}}"><i class="fa fa-eraser"></i> Eliminar</button>
 							</td>
 						</tr>
 						@endforeach
@@ -143,14 +143,24 @@ $(document).ready(function() {
 			
 		});
 } );
-function eliminarEmpresa (id)
-{
-	var eliminar = confirm("¿Esta seguro de eliminar el perfil?");
-	if(eliminar)
-	{
-		location.href = '/eliminarEmpresa/'+id;
-	}
-}
+
+$(document).on('click', '#deleteEmpresa', function () {
+		
+		$.ajax({
+		url: "/desactivarEmpresa/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#datosEmpresa").html(datos);
+			$('#modal').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                }); 
+		}
+
+		});
+		//alert("asda");
+});
 
 
 </script>

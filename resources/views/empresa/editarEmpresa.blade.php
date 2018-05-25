@@ -34,6 +34,7 @@
 					{!! Form::label('region_empresa', 'Region:') !!}
 					{!! Form::select('id_region', $regiones,null ,['class' => 'select2','data-placeholder'=>'Seleccione una región','id'=>'id_region', 'style'=>'width:100%']) !!}
 				</div>	
+	
 
 				<div class='form-group' id="comuna">
 					{!! Form::label('comuna_empresa', 'Comuna:') !!}
@@ -103,7 +104,7 @@ $(document).ready(function() {
 		$('#CheckEmpresa').prop("checked", true);		
 	}
 	$('#id_giro').select2().val(idGiro).trigger("change");
-	$('#id_region').select2().val(idRegion);
+	$('#id_region').select2().val({{$idRegion}}).trigger('change');
 
 });
 

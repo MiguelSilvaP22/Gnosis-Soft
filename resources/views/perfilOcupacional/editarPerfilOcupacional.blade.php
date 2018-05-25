@@ -41,13 +41,13 @@ $(document).ready(function() {
 
 });
 
-/*$('#formPerfilOcupacional').submit(function (e) {
+$('#formPerfilOcupacional').submit(function (e) {
 	e.preventDefault();  // prevent the form from 'submitting'
 	var url = e.target.action  // get the target
 	var formData = $(this).serialize() // get form data
 	$.post(url, formData, function (response) { // send; response.data will be what is returned
 		$('#modal').modal('hide');
-		refrescarPerfil({{$perfilOcu->id_perfilocu}});
+		refrescarPerfil({{$perfilOcu->id_area}});
 		})
-})*/
+})
 </script>

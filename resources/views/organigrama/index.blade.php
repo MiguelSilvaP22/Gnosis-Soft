@@ -251,7 +251,7 @@ $(document).on('click', '#deleteArea', function () {
 function refrescarPerfil(id)
 {
 	$.ajax({
-		url: "/indexPerfilOcupacional/"+id,
+		url: "/perfilOcupacional/"+id,
 		type: "GET",
 		success: function (datos) {
 			$("#datosTabla").html(datos);
@@ -274,10 +274,10 @@ $(document).on('click', '#btnPerfil', function () {
 
 		
 	});
-	$(document).on('change', '#select_area', function () {
-		
-		refrescarPerfil(this.value);
-	});	     
+$(document).on('change', '#select_area', function () {
+	
+	refrescarPerfil(this.value);
+});	     
 
 	
 $(document).on('click', '#addPerfil', function () {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\CategoriaCompetencia;
 use App\Http\Controllers\Controller;
 
 class CategoriaCompetenciaController extends Controller
@@ -14,8 +15,8 @@ class CategoriaCompetenciaController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $categoriaComps = CategoriaCOmpetencia::all()->where('estado_categoriacomp',1);
+        return view('categoriaComp.index', compact('categoriaComps'));    }
 
     /**
      * Show the form for creating a new resource.

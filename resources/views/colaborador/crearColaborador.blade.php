@@ -84,7 +84,10 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('.select2').select2();
+		$('#id_empresa').select2({
+		});
+		$('#id_nacionalidad').select2({
+		});
 		$('#fechaUsuario').datepicker("option", "dateFormat", 'dd/mm/yy');
 	});
 	$(document).on('change', '#id_empresa', function () {

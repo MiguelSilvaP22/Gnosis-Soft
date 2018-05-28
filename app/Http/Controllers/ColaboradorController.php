@@ -33,6 +33,7 @@ class ColaboradorController extends Controller
 
         $empresas = Empresa::all()->where('estado_empresa',1)->sortBy('nombre_empresa')->pluck('nombre_empresa','id_empresa');
         
+        
         return view('colaborador.crearColaborador', compact('nacionalidades','empresas'));
         
     }

@@ -18,6 +18,9 @@
 					</div>
 				</div>
 				<div class="box-body">
+
+					<input type="text" id="fechaUsuario">
+
 				@if (count($colaboradores)>0)
 				<table id="tablaPerfil" class="table">
 					<thead>
@@ -60,8 +63,8 @@
 	</div>
 
 </body>
-<div class="modal fade" id="modal">
-	<div class="modal-dialog">
+<div class="modal fade bs-example-modal-lg" id="modal">
+	<div class="modal-dialog modal-lg">
 	<div class="modal-content">
 		<div class="modal-body">	
 			<div class="row">
@@ -88,6 +91,9 @@ $(document).ready(function() {
 	$('#tablaEmpresa').DataTable({
 			
 		});
+	$('#fechaUsuario').datepicker({
+		dateFormat: 'DD, d MM, yy',
+	});
 } );
 
 $(document).on('click', '#btnVer', function () {

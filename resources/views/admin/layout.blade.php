@@ -16,6 +16,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="/adminlte/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="/adminlte/bower_components/Ionicons/css/ionicons.min.css">
+  <!--Date Picker-->
+  <link rel="stylesheet" href="/adminlte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <!--Select2-->
   <link rel="stylesheet" href="/adminlte/bower_components/select2/dist/css/select2.min.css">
   <!--FullCalendar-->
@@ -480,13 +482,15 @@ desired effect
 <script src="/adminlte/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
+<!--Date Picker-->
+<script src="/adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- FullCalendar-->
 <script src="/adminlte/bower_components/moment/moment.js"></script>
 <script src="/adminlte/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 
 <!--Select2-->
 <script src="/adminlte/bower_components/select2/dist/js/select2.full.min.js"></script>
+
 <!--iCheck-->
 <script src="/adminlte/plugins/iCheck/icheck.min.js"></script>
 <!-- AdminLTE App -->

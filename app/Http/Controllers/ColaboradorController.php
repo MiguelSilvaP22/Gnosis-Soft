@@ -45,7 +45,21 @@ class ColaboradorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $colaborador = new Usuario;
+        $colaborador->id_perfil = 2; //Por defecto el id 2 sera colaborador;
+        $colaborador->id_perfilocu = $request->id_perfilocu;
+        $colaborador->run_usuario = $request->run_usuario;
+        $colaborador->nombre_usuario = $request->nombre_usuario; 
+        $colaborador->fechana_usuario = $request->fechana_usuario;
+        $colaborador->apellidopat_usuario = $request->apellidopat_usuario;
+        $colaborador->apellidomat_usuario = $request->apellidomat_usuario;
+        $colaborador->sexo_usuario = $request->sexo_usuario;
+        $colaborador->email_usuario = $request->email_usuario;
+        $colaborador->estado_usuario = 1;
+        $colaborador->clave_usuario = mb_substr($request->run_usuario, 0, 4);
+        $colaborador->save();
+        return redirect('empresa');
+
     }
 
     /**

@@ -156,4 +156,10 @@ class PerfilOcupacionalController extends Controller
 
         $perfilOcu->save();*/
     }
+    public function selectPerfilOcupacional($id)
+    {
+        $perfiles = PerfilOcupacional::all()->where('id_area',$id)->where('estado_perfilocu',1);
+        return view('perfilOcupacional.selectPerfilOcupacional', compact('perfiles'));
+    }
+
 }

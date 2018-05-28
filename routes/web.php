@@ -105,10 +105,20 @@ Route::get('/eliminarEmpresa/{id}', 'EmpresaController@destroy',function($id) {
 Route::resource('empresa', 'EmpresaController');
 
 // Organigrama Empresa
+
+
 Route::get('/organigrama/{id}', 'OrganigramaController@index',function($id)
 {
     return $id;
 })->name('organigrama.index');
+
+//---------------------------------------------------------------------------------------------------------
+//Gerencia
+
+Route::get('/selectGerencia/{id}', 'GerenciaController@selectGerencia',function($id) {
+    return  $id;
+    })
+    ->name('gerencia.select');  
 
 Route::get('/gerencia/{id}', 'GerenciaController@index',function($id)
 {
@@ -137,12 +147,14 @@ Route::get('/eliminarGerencia/{id}', 'GerenciaController@destroy',function($id) 
 
 Route::resource('gerencia', 'GerenciaController');
 
+//---------------------------------------------------------------------------------------------------------
 //Areas
 
-Route::get('/selectGerencia/{id}', 'GerenciaController@selectGerencia',function($id) {
+
+Route::get('/selectArea/{id}', 'AreaController@selectArea',function($id) {
     return  $id;
     })
-    ->name('gerencia.select');  
+    ->name('area.select');
 
 Route::get('/area/{id}', 'AreaController@index',function($id)
 {
@@ -175,10 +187,10 @@ Route::resource('area', 'AreaController');
 //-----------------------------------------------------------------------------------------------------------
 //Perfil Ocupacional
 
-Route::get('/selectArea/{id}', 'AreaController@selectArea',function($id) {
+Route::get('/selectPerfilOcupacional/{id}', 'PerfilOcupacionalController@selectPerfilOcupacional',function($id) {
     return  $id;
     })
-    ->name('area.select');  
+    ->name('perfilOcupacional.select');  
 
 Route::get('/perfilOcupacional/{id}', 'PerfilOcupacionalController@index',function($id)
 {
@@ -212,7 +224,7 @@ Route::resource('perfilOcupacional', 'PerfilOcupacionalController');
 //-------------------------------------------------------------------------------------------------------------------------
 //Colaboradores
 
-Route::get('/empresa', 'ColaboradorController@index');
+Route::get('/colaborador', 'ColaboradorController@index');
 
 Route::get('/crearColaborador', 'ColaboradorController@create')
 ->name('colaborador.crear');

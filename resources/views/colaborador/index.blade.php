@@ -18,9 +18,6 @@
 					</div>
 				</div>
 				<div class="box-body">
-
-					<input type="text" id="fechaUsuario">
-
 				@if (count($colaboradores)>0)
 				<table id="tablaPerfil" class="table">
 					<thead>
@@ -91,9 +88,6 @@ $(document).ready(function() {
 	$('#tablaEmpresa').DataTable({
 			
 		});
-	$('#fechaUsuario').datepicker({
-		dateFormat: 'DD, d MM, yy',
-	});
 } );
 
 $(document).on('click', '#btnVer', function () {

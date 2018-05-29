@@ -26,7 +26,7 @@
 				<div class='form-group'>
 					{!! Form::submit("Agregar Perfil Ocupacional", ['class' => 'form-control btn btn-success ']) !!}
 				</div>
-				{!! Form::close() !!}
+					{!! Form::close() !!}
 				<div class='form-group'>
 					<div id="btnVolver" class="form-control btn btn-success " > Volver </div>
 				</div>

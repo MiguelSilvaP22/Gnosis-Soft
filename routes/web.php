@@ -73,6 +73,26 @@ Route::get('/editarCompetencia/{id}', 'CompetenciaController@edit',function($id)
 Route::get('/crearCompetencia', 'CompetenciaController@create')->name('competencia.crear');
 
 
+//categoriaComp
+
+Route::resource('categoriacompetencia', 'CategoriaCompetenciaController');
+
+/*Route::get('/editarCompetencia/{id}', 'CompetenciaController@edit',function($id) {
+    return  $id;
+  })->name('competencia.edit');
+
+  Route::get('/verCompetencia/{id}', 'CompetenciaController@show',function($id) {
+    return  $id;
+  })->name('competencia.ver');
+
+  Route::get('/eliminarCompetencia/{id}', 'CompetenciaController@destroy',function($id) {
+    return  $id;
+  })->name('competencia.eliminar');
+
+Route::get('/crearCompetencia', 'CompetenciaController@create')->name('competencia.crear');
+
+*/
+
 //Empresas
 
 Route::get('empresa/{estado?}', 'EmpresaController@index',function($estado = null)

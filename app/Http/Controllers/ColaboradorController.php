@@ -33,7 +33,7 @@ class ColaboradorController extends Controller
 
         $empresas = Empresa::all()->where('estado_empresa',1)->sortBy('nombre_empresa')->pluck('nombre_empresa','id_empresa');
         
-        
+
         return view('colaborador.crearColaborador', compact('nacionalidades','empresas'));
         
     }
@@ -59,7 +59,7 @@ class ColaboradorController extends Controller
         $colaborador->estado_usuario = 1;
         $colaborador->clave_usuario = mb_substr($request->run_usuario, 0, 4);
         $colaborador->save();
-        return redirect('empresa');
+        return redirect('colaborador');
 
     }
 
@@ -82,7 +82,10 @@ class ColaboradorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $colaborador = Usuario::findOrFail($id);
+        $nacionalidades = Nacionalidad::all()->where('estado_nacionalidad',1)->sortBy('nombre_nacionalidad')->pluck('nombre_nacionalidad','id_nacionalidad');
+        $empresas = Empresa::all()->where('estado_empresa',1)->sortBy('nombre_empresa')->pluck('nombre_empresa','id_empresa');
+        return view('colaborador.editarColaborador', compact('colaborador','nacionalidades','empresas'));
     }
 
     /**
@@ -94,9 +97,25 @@ class ColaboradorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $colaborador = Usuario::findOrFail($id);
+        $colaborador->id_perfilocu = $request->id_perfilocu;
+        $colaborador->run_usuario = $request->run_usuario;
+        $colaborador->nombre_usuario = $request->nombre_usuario; 
+        //$colaborador->fechana_usuario = $request->fechana_usuario;
+        $colaborador->apellidopat_usuario = $request->apellidopat_usuario;
+        $colaborador->apellidomat_usuario = $request->apellidomat_usuario;
+        $colaborador->sexo_usuario = $request->sexo_usuario;
+        $colaborador->email_usuario = $request->email_usuario;
+        $colaborador->save();
+        return redirect('colaborador');
+
     }
 
+     public function confirmDestroy($id)
+    {
+        $colaborador = Usuario::findOrFail($id);
+        return view('colaborador.desactivarColaborador', compact('colaborador'));
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -105,6 +124,8 @@ class ColaboradorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $colaborador = Usuario::findOrFail($id);
+        $colaborador->eliminar();
+        return redirect('colaborador');
     }
 }

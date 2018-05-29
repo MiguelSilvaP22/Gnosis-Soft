@@ -6,12 +6,12 @@
 			<div class="box">
 			
 				<div class="box-header">
-					<h3 class="box-title">Crear Colaborador</h3>
+					<h3 class="box-title">Crear Usuario</h3>
 				</div>
 
 				<div class="box-body">
 					<div class="row">
-					{!! Form::open(['action' => 'ColaboradorController@store','id'=>'formColaborador']) !!}
+					{!! Form::open(['action' => 'UsuarioController@store','id'=>'formUsuario']) !!}
 						<div class="col-md-6">
 							<div class='form-group'>
 								{!! Form::label('', 'RUN:') !!}
@@ -21,7 +21,6 @@
 								{!! Form::label('', 'Nombre:') !!}
 								{!! Form::text('nombre_usuario', null, ['class' => 'form-control']) !!}
 							</div>
-							
 							<div class='form-group'>
 								{!! Form::label('', 'Apellido Paterno:') !!}
 								{!! Form::text('apellidopat_usuario', null, ['class' => 'form-control']) !!}
@@ -57,20 +56,24 @@
 							</div>	
 						</div>
 						<div class="col-md-6">
-							<div class='form-group'>
-								{!! Form::label('', 'Empresas:') !!}
-								{!! Form::select('id_empresa', $empresas,null ,['class' => 'select2','data-placeholder'=>'Seleccione una empresa','id'=>'id_empresa', 'style'=>'width:100%']) !!}
-							</div>	
-							<div class='form-group' style="display:none;" id="gerencia">
-							</div>	
-							<div class='form-group' style="display:none;" id="area">
-							</div>	
-							<div class='form-group' style="display:none;" id="perfilOcupacional">
-							</div>	
+							{!! Form::label('', 'Perfil:') !!}
+							{!! Form::select('id_perfil', $perfiles,null ,['class' => 'select2','data-placeholder'=>'Seleccione un Perfil','id'=>'id_perfil', 'style'=>'width:100%']) !!}
+							<div id="empresas" style="display:none;">
+								<div class='form-group'>
+									{!! Form::label('', 'Empresas:') !!}
+									{!! Form::select('id_empresa', $empresas,null ,['class' => 'select2','data-placeholder'=>'Seleccione una empresa','id'=>'id_empresa', 'style'=>'width:100%']) !!}
+								</div>	
+								<div class='form-group' style="display:none;" id="gerencia">
+								</div>	
+								<div class='form-group' style="display:none;" id="area">
+								</div>	
+								<div class='form-group' style="display:none;" id="perfilOcupacional">
+								</div>	
+							</div>
 						</div>
 						
 						<div class='form-group'>
-							{!! Form::submit("Agregar Colaborador", ['class' => 'form-control btn btn-success ']) !!}
+							{!! Form::submit("Agregar Usuario", ['class' => 'form-control btn btn-success ']) !!}
 						</div>
 						<div class='form-group'>
 							<a href='{{ url()->previous() }}' class="form-control btn btn-success " > Volver </a>
@@ -89,8 +92,23 @@
 		});
 		$('#id_nacionalidad').select2({
 		});
+		$('#id_perfil').select2({
+		});
 		$('#fechaUsuario').datepicker("option", "dateFormat", 'dd/mm/yy');
 	});
+
+	$(document).on('change', '#id_perfil', function () {
+	if(this.value == 2 || this.value == 3)
+	{
+		$("#empresas").show();
+	}
+	else
+	{
+		$("#empresas").hide();
+	}
+	
+	});	
+
 	$(document).on('change', '#id_empresa', function () {
 	
 	$.ajax({

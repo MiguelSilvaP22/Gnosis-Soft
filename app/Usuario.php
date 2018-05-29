@@ -12,4 +12,20 @@ class Usuario extends Model
     protected $primaryKey = 'id_usuario';
     const CREATED_AT = 'fecha_reg_usuario';
     const UPDATED_AT = 'fecha_mod_usuario';
+
+    public function perfilOcupacional()
+    {
+        return $this->belongsTo(PerfilOcupacional::class,'id_perfilocu');
+    }
+    public function perfil()
+    {
+        return $this->belongsTo(Perfil::class,'id_perfil');
+    }
+
+
+    public function eliminar()
+    {
+        $this->estado_usuario = 0;
+        $this->save();
+    }
 }

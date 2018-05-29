@@ -36,7 +36,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">Ingresa al sistema</p>
 
-    <form action="#" method="post">
+    <form action="login" method="post">
       <div class="form-group has-feedback">
         <input type="email" class="form-control" placeholder="Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -61,15 +61,6 @@
         <!-- /.col -->
       </div>
     </form>
-    {{--
-    <div class="social-auth-links text-center">
-      <p>- OR -</p>
-      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
-        Facebook</a>
-      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
-        Google+</a>
-    </div> 
-    --}}
     <!-- /.social-auth-links -->
 
     <a href="#">Olvide mi contraseña</a><br>

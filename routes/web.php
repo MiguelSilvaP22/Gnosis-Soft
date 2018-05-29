@@ -246,3 +246,35 @@ Route::get('/eliminarColaborador/{id}', 'ColaboradorController@destroy',function
     
 
 Route::resource('colaborador', 'ColaboradorController');
+
+//-------------------------------------------------------------------------------------------------------------------------
+//Usuarios
+
+Route::get('/usuario', 'UsuarioController@index');
+Route::get('/login', 'LoginController@login');
+
+Route::get('/crearUsuario', 'UsuarioController@create')
+->name('usuario.crear');
+
+Route::get('/editarUsuario/{id}', 'UsuarioController@edit',function($id) {
+    return  $id;
+  })
+  ->name('usuario.edit');
+
+Route::get('/desactivarUsuario/{id}', 'UsuarioController@confirmDestroy',function($id) {
+    return  $id;
+    })
+->name('usuario.delete');  
+
+Route::get('/eliminarUsuario/{id}', 'UsuarioController@destroy',function($id) {
+    return  $id;
+    })
+->name('usuario.destroy');  
+    
+
+Route::resource('usuario', 'UsuarioController');
+
+//-------------------------------------------------------------------------------------------------------------------------
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -9,7 +9,7 @@
 			<div class="box">
 			
 				<div class="box-header">
-					<h1 class="box-title">Tabla de Colaboradores</h1>
+					<h1 class="box-title">Tabla de Usuarios</h1>
 				</div>
 				<div style="widtn:100%;align:center;">
 					
@@ -18,37 +18,44 @@
 					</div>
 				</div>
 				<div class="box-body">
-				@if (count($colaboradores)>0)
+				@if (count($usuarios)>0)
 				<table id="tablaPerfil" class="table">
 					<thead>
 						<tr>
-							<th>Nombre Colaborador</th>
-							<th>Empresa Colaborador</th>
-							<th>Perfil Colaborador</th>
+							<th>Nombre Usuario</th>
+							<th>Perfil Usuario</th>
+							<th>Empresa Usuario</th>
+							<th>Perfil Ocupacional Usuario</th>
 							<th>Fecha de Modificación</th>
 							<th>Estado</th>
 							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
-						@foreach ($colaboradores as $colaborador) 
+						@foreach ($usuarios as $usuario) 
 						<tr>
 
-							<td style="width:25%;">{{ $colaborador->nombre_usuario. $colaborador->apellidopat_usuario.$colaborador->apellidomat_usuario}}</td>
-							<td style="width:25%;">{{ $colaborador->perfilOcupacional->area->gerencia->empresa->nombre_empresa}}</td>
-							<td style="width:25%;">{{ $colaborador->perfilOcupacional->nombre_perfilocu}}</td>
-							<td style="width:25%;">{{ $colaborador->fecha_mod_usuario}}</td>
-							@if($colaborador->estado_usuario == 1)
+							<td style="width:25%;">{{ $usuario->nombre_usuario. $usuario->apellidopat_usuario.$usuario->apellidomat_usuario}}</td>
+							<td style="width:25%;">{{ $usuario->perfil->nombre_perfil}}</td>
+							@if($usuario->perfilOcupacional != null)
+								<td style="width:25%;">{{ $usuario->perfilOcupacional->area->gerencia->empresa->nombre_empresa}}</td>
+								<td style="width:25%;">{{ $usuario->perfilOcupacional->nombre_perfilocu}}</td>
+							@else
+								<td style="width:25%;"></td>
+								<td style="width:25%;"></td>
+							@endif
+							<td style="width:25%;">{{ $usuario->fecha_mod_usuario}}</td>
+							@if($usuario->estado_usuario == 1)
 							<td style="width:25%;color:green;">Activo</td>
 							@else
 							<td style="width:25%;color:red">inactivo</td>
 							@endif
 							<td>
-							<button id="btnVer" value="{{ $colaborador->id_usuario}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
+							<button id="btnVer" value="{{ $usuario->id_usuario}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
 
-							<button id="btnEditar" value="{{ $colaborador->id_usuario}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>
+							<button id="btnEditar" value="{{ $usuario->id_usuario}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>
 
-							<button id="deleteColaborador" class="btn btn btn-info" value="{{ $colaborador->id_usuario}}"><i class="fa fa-eraser"></i> Eliminar</button>
+							<button id="deleteUsuario" class="btn btn btn-info" value="{{ $usuario->id_usuario}}"><i class="fa fa-eraser"></i> Eliminar</button>
 							</td>
 						</tr>
 						@endforeach
@@ -57,7 +64,7 @@
 					</tbody>
 				</table>
 				@else
-				<h1>No Hay colaboradores registrados</h1>
+				<h1>No Hay usuarios registrados</h1>
 				@endif
 				</div>
 			</div>
@@ -110,7 +117,7 @@ $(document).on('click', '#btnVer', function () {
 
 $(document).on('click', '#btnAgregar', function () {
 		$.ajax({
-		url: "/crearColaborador/",
+		url: "/crearUsuario/",
 		type: "GET",
 		success: function (datos) {
 			$("#datos").html(datos);
@@ -124,7 +131,7 @@ $(document).on('click', '#btnAgregar', function () {
 
 $(document).on('click', '#btnEditar', function () {
 		$.ajax({
-		url: "/editarColaborador/"+this.value,
+		url: "/editarUsuario/"+this.value,
 		type: "GET",
 		success: function (datos) {
 			
@@ -138,10 +145,10 @@ $(document).on('click', '#btnEditar', function () {
 });	
 
 
-$(document).on('click', '#deleteColaborador', function () {
+$(document).on('click', '#deleteUsuario', function () {
 		
 		$.ajax({
-		url: "/desactivarColaborador/"+this.value,
+		url: "/desactivarUsuario/"+this.value,
 		type: "GET",
 		success: function (datos) {
 			$("#datos").html(datos);

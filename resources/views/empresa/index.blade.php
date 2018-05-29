@@ -88,6 +88,13 @@
 
 @section('script-js')
 <script>
+$(document).ready(function() {
+
+    $('#tablaEmpresa').DataTable({
+			
+		});
+} );
+
 
 $(document).on('click', '#btnVer', function () {
 		$.ajax({
@@ -137,12 +144,7 @@ $(document).on('click', '#btnEditar', function () {
 $("#btnVerTrash").click(function(){
 	location.href = '/empresa/0';
 	});	
-$(document).ready(function() {
 
-    $('#tablaEmpresa').DataTable({
-			
-		});
-} );
 
 $(document).on('click', '#deleteEmpresa', function () {
 		

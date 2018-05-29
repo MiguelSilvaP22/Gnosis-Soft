@@ -11,6 +11,12 @@ class PerfilOcupacional extends Model
     const CREATED_AT = 'fecha_reg_perfilocu';
     const UPDATED_AT = 'fecha_mod_perfilocu';
 
+    public function area()
+    {
+        return $this->belongsTo(Area::class,'id_area');
+    }
+
+
     public function eliminar()
     {
         $this->estado_perfilocu = 0;

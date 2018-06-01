@@ -15,7 +15,7 @@ class CategoriaCompetenciaController extends Controller
      */
     public function index()
     {
-        $categoriaComps = CategoriaCOmpetencia::all()->where('estado_categoriacomp',1);
+
         return view('categoriaComp.index', compact('categoriaComps'));    }
 
     /**
@@ -28,6 +28,27 @@ class CategoriaCompetenciaController extends Controller
         //
     }
 
+    public function exportar(){
+        
+        
+        \Excel::create('Laravel Excel', function($excel){
+
+            $excel->sheet('Excel shhet', function($sheet) {
+               
+                $categoriaComps = CategoriaCOmpetencia::all()->where('estado_categoriacomp',1);
+                $sheet->row(1,['Nombre de Categoria', 'Descripcion de la categoria']);
+
+
+                foreach ($categoriaComps as $categoriacomp){
+                    $row = [];
+                    $row[0] = $categoriacomp->nombre_categoriacomp;
+                    $row[1] = $categoriacomp->desc_categoriacomp;
+                    $sheet->appendRow($row);                    
+                }
+
+            });
+        })->export('xls');
+    }
     /**
      * Store a newly created resource in storage.
      *

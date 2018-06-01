@@ -32,6 +32,33 @@ class CompetenciaController extends Controller
         return view('competencia.crearCompetencia',compact('categoriascompetencias'));
     }
 
+
+    public function exportar(){
+        
+        
+        \Excel::create('Laravel Excel', function($excel){
+
+            $excel->sheet('Excel shhet', function($sheet) {
+               
+                $competencias = Competencia::all()->where('estado_comp',1);
+                $categoriascompetencias = categoriacompetencia::All()->where('estado_categoriacomp',1)->sortBy('nombre_caterogiacomp')->pluck('nombre_categoriacomp','id_categoriacomp');
+                //$sheet->row(1,['Nombre de Categoria', 'Descripcion de la categoria']);
+                
+                $sheet->fromArray($competencias);
+
+              /*  foreach ($categoriaComps as $categoriacomp){
+                    $row = [];
+                    $row[0] = $categoriacomp->nombre_categoriacomp;
+                    $row[1] = $categoriacomp->desc_categoriacomp;
+                    $sheet->appendRow($row);      
+
+                }
+                */
+
+            });
+        })->export('xls');
+    }
+
     /**
      * Store a newly created resource in storage.
      *

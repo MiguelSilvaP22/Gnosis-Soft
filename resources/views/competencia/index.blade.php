@@ -19,6 +19,10 @@
 					<div id="btnVerTrash" class="btn btn-block btn-success" style="float: right;margin-top: 0px;margin-bottom: 10px;margin-right: 10px;width:200px;">
 						<i class="fa fa-trash"></i>	Ver Eliminados
 					</div>
+
+					<div id="btnExportar" class="btn btn-block btn-success" style="float: right;margin-top: 0px;margin-bottom: 10px;margin-right: 10px;width:200px;">
+						<i class="fa fa-trash"></i> Exportar Competencias
+					</div>
 				</div>
 				<div class="box-body">
 				
@@ -138,6 +142,12 @@ $(document).on('click', '#verCompetencia', function () {
 $("#btnVerTrash").click(function(){
 	location.href = '/perfil/0';
 	});	
+
+$("#btnExportar").click(function(){
+	location.href = '/exportar';
+	});	
+
+
 $(document).ready(function() {
 
     $('#tablaPerfil').DataTable({

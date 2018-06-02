@@ -91,15 +91,6 @@ EOF
         ];
     }
 
-    public function testIterableTypeIsSupported(): void
-    {
-        $constraint = Assert::isType('iterable');
-
-        $this->assertFalse($constraint->evaluate('', '', true));
-        $this->assertTrue($constraint->evaluate([], '', true));
-        $this->assertEquals('is of type "iterable"', $constraint->toString());
-    }
-
     /**
      * Removes spaces in front of newlines
      *
@@ -109,6 +100,6 @@ EOF
      */
     private function trimnl($string)
     {
-        return \preg_replace('/[ ]*\n/', PHP_EOL, $string);
+        return \preg_replace('/[ ]*\n/', "\n", $string);
     }
 }

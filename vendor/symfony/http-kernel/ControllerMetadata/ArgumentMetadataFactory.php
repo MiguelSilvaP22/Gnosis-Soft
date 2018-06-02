@@ -34,7 +34,7 @@ final class ArgumentMetadataFactory implements ArgumentMetadataFactoryInterface
         }
 
         foreach ($reflection->getParameters() as $param) {
-            $arguments[] = new ArgumentMetadata($param->getName(), $this->getType($param, $reflection), $param->isVariadic(), $param->isDefaultValueAvailable(), $param->isDefaultValueAvailable() ? $param->getDefaultValue() : null, $param->allowsNull());
+            $arguments[] = new ArgumentMetadata($param->getName(), $this->getType($param), $param->isVariadic(), $param->isDefaultValueAvailable(), $param->isDefaultValueAvailable() ? $param->getDefaultValue() : null, $param->allowsNull());
         }
 
         return $arguments;
@@ -47,25 +47,12 @@ final class ArgumentMetadataFactory implements ArgumentMetadataFactoryInterface
      *
      * @return null|string
      */
-    private function getType(\ReflectionParameter $parameter, \ReflectionFunctionAbstract $function)
+    private function getType(\ReflectionParameter $parameter)
     {
         if (!$type = $parameter->getType()) {
             return;
         }
-        $name = $type->getName();
-        $lcName = strtolower($name);
 
-        if ('self' !== $lcName && 'parent' !== $lcName) {
-            return $name;
-        }
-        if (!$function instanceof \ReflectionMethod) {
-            return;
-        }
-        if ('self' === $lcName) {
-            return $function->getDeclaringClass()->name;
-        }
-        if ($parent = $function->getDeclaringClass()->getParentClass()) {
-            return $parent->name;
-        }
+        return $type->getName();
     }
 }

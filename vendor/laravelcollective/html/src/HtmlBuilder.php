@@ -455,10 +455,6 @@ class HtmlBuilder
             return $value ? $key : '';
         }
 
-        if (is_array($value) && $key === 'class') {
-            return 'class="' . implode(' ', $value) . '"';
-        }
-
         if (! is_null($value)) {
             return $key . '="' . e($value, false) . '"';
         }

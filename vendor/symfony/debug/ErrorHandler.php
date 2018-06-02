@@ -380,16 +380,14 @@ class ErrorHandler
     public function handleError($type, $message, $file, $line)
     {
         // Level is the current error reporting level to manage silent error.
-        $level = error_reporting();
-        $silenced = 0 === ($level & $type);
         // Strong errors are not authorized to be silenced.
-        $level |= E_RECOVERABLE_ERROR | E_USER_ERROR | E_DEPRECATED | E_USER_DEPRECATED;
+        $level = error_reporting() | E_RECOVERABLE_ERROR | E_USER_ERROR | E_DEPRECATED | E_USER_DEPRECATED;
         $log = $this->loggedErrors & $type;
         $throw = $this->thrownErrors & $type & $level;
         $type &= $level | $this->screamedErrors;
 
         if (!$type || (!$log && !$throw)) {
-            return !$silenced && $type && $log;
+            return $type && $log;
         }
         $scope = $this->scopedErrors & $type;
 
@@ -495,7 +493,7 @@ class ErrorHandler
             }
         }
 
-        return !$silenced && $type && $log;
+        return $type && $log;
     }
 
     /**
@@ -549,15 +547,14 @@ class ErrorHandler
                 }
             }
         }
-        $exceptionHandler = $this->exceptionHandler;
-        $this->exceptionHandler = null;
         try {
-            if (null !== $exceptionHandler) {
-                return \call_user_func($exceptionHandler, $exception);
+            if (null !== $this->exceptionHandler) {
+                return \call_user_func($this->exceptionHandler, $exception);
             }
             $handlerException = $handlerException ?: $exception;
         } catch (\Throwable $handlerException) {
         }
+        $this->exceptionHandler = null;
         if ($exception === $handlerException) {
             self::$reservedMemory = null; // Disable the fatal error handler
             throw $exception; // Give back $exception to the native handler

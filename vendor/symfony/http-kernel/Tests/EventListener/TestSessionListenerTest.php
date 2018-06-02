@@ -13,6 +13,7 @@ namespace Symfony\Component\HttpKernel\Tests\EventListener;
 
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ServiceSubscriberInterface;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -45,9 +46,6 @@ class TestSessionListenerTest extends TestCase
     {
         $this->listener = $this->getMockForAbstractClass('Symfony\Component\HttpKernel\EventListener\AbstractTestSessionListener');
         $this->session = $this->getSession();
-        $this->listener->expects($this->any())
-             ->method('getSession')
-             ->will($this->returnValue($this->session));
     }
 
     public function testShouldSaveMasterRequestSession()
@@ -97,7 +95,7 @@ class TestSessionListenerTest extends TestCase
         $this->fixSessionId('456');
 
         $kernel = $this->getMockBuilder('Symfony\Component\HttpKernel\HttpKernelInterface')->getMock();
-        $request = Request::create('/', 'GET', array(), array('MOCKSESSID' => '123'));
+        $request = Request::create('/', 'GET', array(), array(new Cookie('MOCKSESSID', '123')));
         $event = new GetResponseEvent($kernel, $request, HttpKernelInterface::MASTER_REQUEST);
         $this->listener->onKernelRequest($event);
 
@@ -121,16 +119,6 @@ class TestSessionListenerTest extends TestCase
         $this->assertTrue(class_exists(TestSessionListener::class));
         $this->assertFalse(is_subclass_of(SessionListener::class, ServiceSubscriberInterface::class), 'Implementing ServiceSubscriberInterface would create a dep on the DI component, which eg Silex cannot afford');
         $this->assertFalse(is_subclass_of(TestSessionListener::class, ServiceSubscriberInterface::class, 'Implementing ServiceSubscriberInterface would create a dep on the DI component, which eg Silex cannot afford'));
-    }
-
-    public function testDoesNotThrowIfRequestDoesNotHaveASession()
-    {
-        $kernel = $this->getMockBuilder('Symfony\Component\HttpKernel\HttpKernelInterface')->getMock();
-        $event = new FilterResponseEvent($kernel, new Request(), HttpKernelInterface::MASTER_REQUEST, new Response());
-
-        $this->listener->onKernelResponse($event);
-
-        $this->assertTrue(true);
     }
 
     private function filterResponse(Request $request, $type = HttpKernelInterface::MASTER_REQUEST)

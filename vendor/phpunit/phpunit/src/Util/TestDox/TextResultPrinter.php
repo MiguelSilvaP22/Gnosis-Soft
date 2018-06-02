@@ -17,16 +17,19 @@ class TextResultPrinter extends ResultPrinter
 {
     /**
      * Handler for 'start class' event.
+     *
+     * @param string $name
      */
     protected function startClass(string $name): void
     {
-        $this->write($this->currentTestClassPrettified . PHP_EOL);
+        $this->write($this->currentTestClassPrettified . "\n");
     }
 
     /**
      * Handler for 'on test' event.
      *
-     * @param mixed $name
+     * @param string $name
+     * @param bool   $success
      */
     protected function onTest($name, bool $success = true): void
     {
@@ -36,14 +39,16 @@ class TextResultPrinter extends ResultPrinter
             $this->write(' [ ] ');
         }
 
-        $this->write($name . PHP_EOL);
+        $this->write($name . "\n");
     }
 
     /**
      * Handler for 'end class' event.
+     *
+     * @param string $name
      */
     protected function endClass(string $name): void
     {
-        $this->write(PHP_EOL);
+        $this->write("\n");
     }
 }

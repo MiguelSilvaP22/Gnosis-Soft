@@ -140,13 +140,6 @@ class TextDescriptor extends Descriptor
         $command->getSynopsis(false);
         $command->mergeApplicationDefinition(false);
 
-        if ($description = $command->getDescription()) {
-            $this->writeText('<comment>Description:</comment>', $options);
-            $this->writeText("\n");
-            $this->writeText('  '.$description);
-            $this->writeText("\n\n");
-        }
-
         $this->writeText('<comment>Usage:</comment>', $options);
         foreach (array_merge(array($command->getSynopsis(true)), $command->getAliases(), $command->getUsages()) as $usage) {
             $this->writeText("\n");
@@ -161,8 +154,7 @@ class TextDescriptor extends Descriptor
             $this->writeText("\n");
         }
 
-        $help = $command->getProcessedHelp();
-        if ($help && $help !== $description) {
+        if ($help = $command->getProcessedHelp()) {
             $this->writeText("\n");
             $this->writeText('<comment>Help:</comment>', $options);
             $this->writeText("\n");
@@ -210,9 +202,9 @@ class TextDescriptor extends Descriptor
             }
 
             // calculate max. width based on available commands per namespace
-            $width = $this->getColumnWidth(array_merge(...array_values(array_map(function ($namespace) use ($commands) {
+            $width = $this->getColumnWidth(call_user_func_array('array_merge', array_map(function ($namespace) use ($commands) {
                 return array_intersect($namespace['commands'], array_keys($commands));
-            }, $namespaces))));
+            }, $namespaces)));
 
             if ($describedNamespace) {
                 $this->writeText(sprintf('<comment>Available commands for the "%s" namespace:</comment>', $describedNamespace), $options);

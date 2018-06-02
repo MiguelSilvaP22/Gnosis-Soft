@@ -36,7 +36,7 @@ class AddAnnotatedClassesToCachePass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $annotatedClasses = $this->kernel->getAnnotatedClassesToCompile();
+        $annotatedClasses = array();
         foreach ($container->getExtensions() as $extension) {
             if ($extension instanceof Extension) {
                 $annotatedClasses = array_merge($annotatedClasses, $extension->getAnnotatedClassesToCompile());

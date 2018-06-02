@@ -13,7 +13,6 @@ namespace Symfony\Component\Console;
 
 use Symfony\Component\Console\CommandLoader\CommandLoaderInterface;
 use Symfony\Component\Console\Exception\ExceptionInterface;
-use Symfony\Component\Console\Exception\NamespaceNotFoundException;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Helper\DebugFormatterHelper;
 use Symfony\Component\Console\Helper\Helper;
@@ -40,7 +39,6 @@ use Symfony\Component\Console\Event\ConsoleErrorEvent;
 use Symfony\Component\Console\Event\ConsoleTerminateEvent;
 use Symfony\Component\Console\Exception\CommandNotFoundException;
 use Symfony\Component\Console\Exception\LogicException;
-use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Debug\ErrorHandler;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -225,37 +223,18 @@ class Application
             // the command name MUST be the first element of the input
             $command = $this->find($name);
         } catch (\Throwable $e) {
-            if (!($e instanceof CommandNotFoundException && !$e instanceof NamespaceNotFoundException) || 1 !== count($alternatives = $e->getAlternatives()) || !$input->isInteractive()) {
-                if (null !== $this->dispatcher) {
-                    $event = new ConsoleErrorEvent($input, $output, $e);
-                    $this->dispatcher->dispatch(ConsoleEvents::ERROR, $event);
+            if (null !== $this->dispatcher) {
+                $event = new ConsoleErrorEvent($input, $output, $e);
+                $this->dispatcher->dispatch(ConsoleEvents::ERROR, $event);
 
-                    if (0 === $event->getExitCode()) {
-                        return 0;
-                    }
-
-                    $e = $event->getError();
+                if (0 === $event->getExitCode()) {
+                    return 0;
                 }
 
-                throw $e;
+                $e = $event->getError();
             }
 
-            $alternative = $alternatives[0];
-
-            $style = new SymfonyStyle($input, $output);
-            $style->block(sprintf("\nCommand \"%s\" is not defined.\n", $name), null, 'error');
-            if (!$style->confirm(sprintf('Do you want to run "%s" instead? ', $alternative), false)) {
-                if (null !== $this->dispatcher) {
-                    $event = new ConsoleErrorEvent($input, $output, $e);
-                    $this->dispatcher->dispatch(ConsoleEvents::ERROR, $event);
-
-                    return $event->getExitCode();
-                }
-
-                return 1;
-            }
-
-            $command = $this->find($alternative);
+            throw $e;
         }
 
         $this->runningCommand = $command;
@@ -554,7 +533,7 @@ class Application
      *
      * @return string A registered namespace
      *
-     * @throws NamespaceNotFoundException When namespace is incorrect or ambiguous
+     * @throws CommandNotFoundException When namespace is incorrect or ambiguous
      */
     public function findNamespace($namespace)
     {
@@ -575,12 +554,12 @@ class Application
                 $message .= implode("\n    ", $alternatives);
             }
 
-            throw new NamespaceNotFoundException($message, $alternatives);
+            throw new CommandNotFoundException($message, $alternatives);
         }
 
         $exact = in_array($namespace, $namespaces, true);
         if (count($namespaces) > 1 && !$exact) {
-            throw new NamespaceNotFoundException(sprintf("The namespace \"%s\" is ambiguous.\nDid you mean one of these?\n%s", $namespace, $this->getAbbreviationSuggestions(array_values($namespaces))), array_values($namespaces));
+            throw new CommandNotFoundException(sprintf("The namespace \"%s\" is ambiguous.\nDid you mean one of these?\n%s", $namespace, $this->getAbbreviationSuggestions(array_values($namespaces))), array_values($namespaces));
         }
 
         return $exact ? $namespace : reset($namespaces);

@@ -28,12 +28,11 @@ class IsType extends Constraint
     public const TYPE_STRING   = 'string';
     public const TYPE_SCALAR   = 'scalar';
     public const TYPE_CALLABLE = 'callable';
-    public const TYPE_ITERABLE = 'iterable';
 
     /**
      * @var array
      */
-    private const KNOWN_TYPES = [
+    private $types = [
         'array'    => true,
         'boolean'  => true,
         'bool'     => true,
@@ -48,8 +47,7 @@ class IsType extends Constraint
         'resource' => true,
         'string'   => true,
         'scalar'   => true,
-        'callable' => true,
-        'iterable' => true
+        'callable' => true
     ];
 
     /**
@@ -58,13 +56,15 @@ class IsType extends Constraint
     private $type;
 
     /**
+     * @param string $type
+     *
      * @throws \PHPUnit\Framework\Exception
      */
-    public function __construct(string $type)
+    public function __construct($type)
     {
         parent::__construct();
 
-        if (!isset(self::KNOWN_TYPES[$type])) {
+        if (!isset($this->types[$type])) {
             throw new \PHPUnit\Framework\Exception(
                 \sprintf(
                     'Type specified for PHPUnit\Framework\Constraint\IsType <%s> ' .
@@ -79,6 +79,8 @@ class IsType extends Constraint
 
     /**
      * Returns a string representation of the constraint.
+     *
+     * @return string
      */
     public function toString(): string
     {
@@ -93,6 +95,8 @@ class IsType extends Constraint
      * constraint is met, false otherwise.
      *
      * @param mixed $other value or object to evaluate
+     *
+     * @return bool
      */
     protected function matches($other): bool
     {
@@ -133,9 +137,6 @@ class IsType extends Constraint
 
             case 'callable':
                 return \is_callable($other);
-
-            case 'iterable':
-                return \is_iterable($other);
         }
     }
 }

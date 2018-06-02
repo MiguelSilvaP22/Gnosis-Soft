@@ -620,8 +620,8 @@ class Router implements RegistrarContract, BindingRegistrar
     /**
      * Return the response for the given route.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Routing\Route  $route
+     * @param  Route  $route
+     * @param  Request  $request
      * @return mixed
      */
     protected function runRoute(Request $request, Route $route)

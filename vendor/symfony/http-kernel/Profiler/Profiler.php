@@ -156,10 +156,6 @@ class Profiler
             $profile->setIp('Unknown');
         }
 
-        if ($prevToken = $response->headers->get('X-Debug-Token')) {
-            $response->headers->set('X-Previous-Debug-Token', $prevToken);
-        }
-
         $response->headers->set('X-Debug-Token', $profile->getToken());
 
         foreach ($this->collectors as $collector) {

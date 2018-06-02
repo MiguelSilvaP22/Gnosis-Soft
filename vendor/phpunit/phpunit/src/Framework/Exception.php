@@ -51,13 +51,15 @@ class Exception extends \RuntimeException implements \PHPUnit\Exception
 
     /**
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
     public function __toString(): string
     {
         $string = TestFailure::exceptionToString($this);
 
         if ($trace = Filter::getFilteredStacktrace($this)) {
-            $string .= PHP_EOL . $trace;
+            $string .= "\n" . $trace;
         }
 
         return $string;
@@ -70,6 +72,8 @@ class Exception extends \RuntimeException implements \PHPUnit\Exception
 
     /**
      * Returns the serializable trace (without 'args').
+     *
+     * @return array
      */
     public function getSerializableTrace(): array
     {

@@ -6,15 +6,12 @@ use Illuminate\Support\HtmlString;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Contracts\Auth\Access\Gate;
-use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Foundation\Bus\PendingDispatch;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
 use Illuminate\Contracts\View\Factory as ViewFactory;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Cookie\Factory as CookieFactory;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
 use Illuminate\Database\Eloquent\Factory as EloquentFactory;
@@ -25,7 +22,7 @@ if (! function_exists('abort')) {
     /**
      * Throw an HttpException with the given data.
      *
-     * @param  \Symfony\Component\HttpFoundation\Response|int     $code
+     * @param  int     $code
      * @param  string  $message
      * @param  array   $headers
      * @return void
@@ -35,12 +32,6 @@ if (! function_exists('abort')) {
      */
     function abort($code, $message = '', array $headers = [])
     {
-        if ($code instanceof Response) {
-            throw new HttpResponseException($code);
-        } elseif ($code instanceof Responsable) {
-            throw new HttpResponseException($code->toResponse(request()));
-        }
-
         app()->abort($code, $message, $headers);
     }
 }
@@ -92,7 +83,7 @@ if (! function_exists('action')) {
      * Generate the URL to a controller action.
      *
      * @param  string  $name
-     * @param  mixed   $parameters
+     * @param  array   $parameters
      * @param  bool    $absolute
      * @return string
      */
@@ -562,7 +553,7 @@ if (! function_exists('mix')) {
      *
      * @param  string  $path
      * @param  string  $manifestDirectory
-     * @return \Illuminate\Support\HtmlString|string
+     * @return \Illuminate\Support\HtmlString
      *
      * @throws \Exception
      */
@@ -801,7 +792,7 @@ if (! function_exists('route')) {
      * Generate the URL to a named route.
      *
      * @param  array|string  $name
-     * @param  mixed  $parameters
+     * @param  array  $parameters
      * @param  bool  $absolute
      * @return string
      */

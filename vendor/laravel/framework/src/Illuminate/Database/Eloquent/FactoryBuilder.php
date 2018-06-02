@@ -406,7 +406,7 @@ class FactoryBuilder
      * Call after callbacks for each model and state.
      *
      * @param  array  $afterCallbacks
-     * @param  \Illuminate\Database\Eloquent\Model  $model
+     * @param  Model  $model
      * @param  string  $state
      * @return void
      */

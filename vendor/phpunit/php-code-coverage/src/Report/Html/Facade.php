@@ -94,7 +94,7 @@ final class Facade
             $id = $node->getId();
 
             if ($node instanceof DirectoryNode) {
-                if (!$this->createDirectory($target . $id)) {
+                if (!@\mkdir($target . $id, 0777, true) && !\is_dir($target . $id)) {
                     throw new \RuntimeException(\sprintf('Directory "%s" was not created', $target . $id));
                 }
 
@@ -103,7 +103,7 @@ final class Facade
             } else {
                 $dir = \dirname($target . $id);
 
-                if (!$this->createDirectory($dir)) {
+                if (!@\mkdir($dir, 0777, true) && !\is_dir($dir)) {
                     throw new \RuntimeException(\sprintf('Directory "%s" was not created', $dir));
                 }
 
@@ -133,7 +133,6 @@ final class Facade
 
         \copy($this->templatePath . 'css/nv.d3.min.css', $dir . 'nv.d3.min.css');
         \copy($this->templatePath . 'css/style.css', $dir . 'style.css');
-        \copy($this->templatePath . 'css/custom.css', $dir . 'custom.css');
 
         $dir = $this->getDirectory($target . '.fonts');
         \copy($this->templatePath . 'fonts/glyphicons-halflings-regular.eot', $dir . 'glyphicons-halflings-regular.eot');
@@ -162,7 +161,7 @@ final class Facade
             $directory .= DIRECTORY_SEPARATOR;
         }
 
-        if (!$this->createDirectory($directory)) {
+        if (!@\mkdir($directory, 0777, true) && !\is_dir($directory)) {
             throw new RuntimeException(
                 \sprintf(
                     'Directory "%s" does not exist.',
@@ -172,10 +171,5 @@ final class Facade
         }
 
         return $directory;
-    }
-
-    private function createDirectory(string $directory): bool
-    {
-        return !(!\is_dir($directory) && !@\mkdir($directory, 0777, true) && !\is_dir($directory));
     }
 }

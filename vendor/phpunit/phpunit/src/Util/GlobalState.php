@@ -33,6 +33,8 @@ final class GlobalState
 
     /**
      * @param string[] $files
+     *
+     * @return string
      */
     public static function processIncludedFilesAsString(array $files): string
     {
@@ -76,7 +78,7 @@ final class GlobalState
 
         foreach ($iniSettings as $key => $value) {
             $result .= \sprintf(
-                '@ini_set(%s, %s);' . PHP_EOL,
+                '@ini_set(%s, %s);' . "\n",
                 self::exportVariable($key),
                 self::exportVariable($value)
             );
@@ -93,7 +95,7 @@ final class GlobalState
         if (isset($constants['user'])) {
             foreach ($constants['user'] as $name => $value) {
                 $result .= \sprintf(
-                    'if (!defined(\'%s\')) define(\'%s\', %s);' . PHP_EOL,
+                    'if (!defined(\'%s\')) define(\'%s\', %s);' . "\n",
                     $name,
                     $name,
                     self::exportVariable($value)
@@ -116,7 +118,7 @@ final class GlobalState
                     }
 
                     $result .= \sprintf(
-                        '$GLOBALS[\'%s\'][\'%s\'] = %s;' . PHP_EOL,
+                        '$GLOBALS[\'%s\'][\'%s\'] = %s;' . "\n",
                         $superGlobalArray,
                         $key,
                         self::exportVariable($GLOBALS[$superGlobalArray][$key])
@@ -129,9 +131,9 @@ final class GlobalState
         $blacklist[] = 'GLOBALS';
 
         foreach (\array_keys($GLOBALS) as $key) {
-            if (!$GLOBALS[$key] instanceof Closure && !\in_array($key, $blacklist, true)) {
+            if (!$GLOBALS[$key] instanceof Closure && !\in_array($key, $blacklist)) {
                 $result .= \sprintf(
-                    '$GLOBALS[\'%s\'] = %s;' . PHP_EOL,
+                    '$GLOBALS[\'%s\'] = %s;' . "\n",
                     $key,
                     self::exportVariable($GLOBALS[$key])
                 );
@@ -151,6 +153,11 @@ final class GlobalState
         return 'unserialize(' . \var_export(\serialize($variable), true) . ')';
     }
 
+    /**
+     * @param array $array
+     *
+     * @return bool
+     */
     private static function arrayOnlyContainsScalars(array $array): bool
     {
         $result = true;

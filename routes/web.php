@@ -344,3 +344,8 @@ Route::get('/vercompetencias/{id}', 'vistaCompetenciaController@vistacompetencia
     return  $id;
   });
 
+  Route::get('/infocompetencia/{id}', 'vistaCompetenciaController@infocompetencia',function($id) {
+    return  $id;
+  });
+
+

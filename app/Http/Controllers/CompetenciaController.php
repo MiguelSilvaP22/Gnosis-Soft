@@ -175,6 +175,7 @@ class CompetenciaController extends Controller
     {
         $competencia = Competencia::findOrFail($id);
         $categoriascompetencias = categoriacompetencia::All()->where('estado_categoriacomp',1)->sortBy('nombre_caterogiacomp')->pluck('nombre_categoriacomp','id_categoriacomp');
+        $roldesempenos = RolDesempeno::All()->where('estado_roldesempeno',1)->where('id_comp', $id);
         return view('Competencia.editarCompetencia', compact('competencia','categoriascompetencias'));
     }
 

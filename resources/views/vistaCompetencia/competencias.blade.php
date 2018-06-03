@@ -8,10 +8,11 @@
 				<tbody>
 				@foreach ($competencias as $competencia)
 					<tr>
-					<td>{{ $competencia->nombre_comp }}</td>	
+					<td id='{{ $competencia->id_comp }}' class="competenciaTd">{{ $competencia->nombre_comp }}</td>	
 					</tr>
 				@endforeach
 				</tbody>
 	</table>
 </box>
+
 

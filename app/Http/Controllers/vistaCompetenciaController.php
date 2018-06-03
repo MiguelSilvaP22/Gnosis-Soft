@@ -6,6 +6,8 @@ use App\Competencia;
 use App\CategoriaCompetencia;
 use App\RolDesempeno;
 use App\NivelCompetencia;
+use App\TipoNivel;
+
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -34,8 +36,20 @@ class vistaCompetenciaController extends Controller
     {
         $competencias = Competencia::All()->where('estado_comp',1)->where('id_categoriacomp',$idCategoria);
         \Debugbar::info($competencias);
-
         return view('vistacompetencia.competencias', compact('competencias'));
+    }
+
+    public function infocompetencia($idCompetencia)
+    {
+        $competencia = Competencia::findOrFail($idCompetencia);
+        $roldesempenos = RolDesempeno::All()->where('estado_roldesempeno',1)->where('id_comp', $idCompetencia);
+        $niveles = NivelCompetencia::All()->where('estado_nivelcompetencia',1)->where('id_comp', $idCompetencia)->values();
+        //$tiponivel = TipoNivel::All()->where('estado_tiponivel',1)->pluck('nombre_tiponivel');;
+
+        //$nivelesnombre = array_merge($niveles, $tiponivel);
+        \Debugbar::info($niveles);
+
+        return view('vistacompetencia.infocompetencia', compact('competencia','roldesempenos','niveles'));
     }
 
     /**

@@ -23,10 +23,14 @@
 				</div>
 		</div>
 
-		<div class="col-xs-5 competenciasTabla"></div>
+		
+	<div class="col-xs-3 competenciasTabla"></div>
 	</div>
 
 
+</div>
+
+<div class="col-xs-8 infoDeCompetencia"></div>
 </div>
 </body>
 
@@ -36,16 +40,30 @@
 <script>
 
 	$(".categoriaCompTd").click(function(e) {
-
-
 		$.ajax({
 		url: "/vercompetencias/"+e.target.id,
 		type: "GET",
 		success: function (datos) {
 			$(".competenciasTabla").html(datos);
+
+			$(".competenciaTd").click(function(e) {
+				$.ajax({
+				url: "/infocompetencia/"+e.target.id,
+				type: "GET",
+				success: function (datos) {
+					$(".infoDeCompetencia").html(datos);
+
+					
+				}
+				});
+			});
+
 		}
 		});
 	});
 
+	
+
 </script>
+
 @stop

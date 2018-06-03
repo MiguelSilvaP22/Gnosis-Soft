@@ -328,7 +328,7 @@ desired effect
               <li><a href="#"><i class="fa fa-exclamation"></i> <span>Información Curso</span></a></li>
             </ul>
           </li>
-          <li><a href="#"><i class="fa fa-street-view"></i> <span>Competencias</span></a></li>
+          <li><a href="/vistacompetencia"><i class="fa fa-street-view"></i> <span>Competencias</span></a></li>
           </ul>
         </li>
 

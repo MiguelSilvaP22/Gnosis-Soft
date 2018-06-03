@@ -340,4 +340,7 @@ VISTA DE LA EMPRESA
 */
 
 Route::resource('vistacompetencia', 'vistaCompetenciaController');
+Route::get('/vercompetencias/{id}', 'vistaCompetenciaController@vistacompetencias',function($id) {
+    return  $id;
+  });
 

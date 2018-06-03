@@ -20,14 +20,22 @@ class vistaCompetenciaController extends Controller
     public function index()
     {
         $competencias = Competencia::All()->where('estado_comp',1);
+        $categoriascompetencias = categoriacompetencia::All()->where('estado_categoriacomp',1);
         \Debugbar::info($competencias);
-        /*
-        $categoriascompetencias = categoriacompetencia::All()->where('estado_categoriacomp',1)->sortBy('nombre_caterogiacomp')->pluck('nombre_categoriacomp','id_categoriacomp');
-        $roldesempenos = RolDesempeno::All()->where('estado_roldesempeno',1)->where('id_comp', $id);
-        $niveles = NivelCompetencia::All()->where('estado_nivelcompetencia',1)->where('id_comp', $id)->pluck('desc_nivelcompetencia');
-        \Debugbar::info($niveles);
-        //return view('Competencia.verCompetencia', compact('competencia','categoriascompetencias', 'roldesempenos', 'niveles'));*/
-        return view('vistacompetencia.index', compact('competencias'));
+        return view('vistacompetencia.index', compact('competencias','categoriascompetencias'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function vistacompetencias($idCategoria)
+    {
+        $competencias = Competencia::All()->where('estado_comp',1)->where('id_categoriacomp',$idCategoria);
+        \Debugbar::info($competencias);
+
+        return view('vistacompetencia.competencias', compact('competencias'));
     }
 
     /**

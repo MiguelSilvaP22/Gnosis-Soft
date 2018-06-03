@@ -23,6 +23,11 @@
 					<div id="btnExportar" class="btn btn-block btn-success" style="float: right;margin-top: 0px;margin-bottom: 10px;margin-right: 10px;width:200px;">
 						<i class="fa fa-trash"></i> Exportar Competencias
 					</div>
+
+					<div id="btnImportar" class="btn btn-block btn-success" style="float: right;margin-top: 0px;margin-bottom: 10px;margin-right: 10px;width:200px;">
+						<i class="fa fa-trash"></i> Importar Competencias
+					</div>
+
 				</div>
 				<div class="box-body">
 				
@@ -144,8 +149,27 @@ $("#btnVerTrash").click(function(){
 	});	
 
 $("#btnExportar").click(function(){
-	location.href = '/exportar';
+	location.href = '/exportarcompetencias';
 	});	
+
+
+$(document).on('click', '#btnImportar', function () {
+		
+		
+		$.ajax({
+		url: "/importarcompetencias",
+		type: "GET",
+		success: function (datos) {
+			$("#datosCompetencia").html(datos);
+			$('#modal').modal('show');
+		}
+
+		});
+		//alert("asda");
+});	
+
+
+
 
 
 $(document).ready(function() {

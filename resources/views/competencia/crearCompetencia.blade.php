@@ -12,6 +12,7 @@
 				<div class="box-body">
 					{!! Form::open(['action' => 'CompetenciaController@store','id'=>'formCompetencia']) !!}
 				
+					{!! Form::hidden('tipo', '0', ['class' => 'form-control']) !!}
 
 				<div class='form-group'>
 					{!! Form::label('nombre_comp', 'Nombre:') !!}

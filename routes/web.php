@@ -71,7 +71,9 @@ Route::get('/editarCompetencia/{id}', 'CompetenciaController@edit',function($id)
   })->name('competencia.eliminar');
 
 Route::get('/crearCompetencia', 'CompetenciaController@create')->name('competencia.crear');
-Route::get('/exportar', 'CompetenciaController@exportar')->name('competencia.exportar');
+Route::get('/exportarcompetencias', 'CompetenciaController@exportar')->name('competencia.exportar');
+Route::get('/importarcompetencias', 'CompetenciaController@importar')->name('competencia.importar');
+
 
 
 

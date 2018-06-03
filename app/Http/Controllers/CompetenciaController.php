@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Competencia;
 use App\CategoriaCompetencia;
+use App\RolDesempeno;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -41,32 +42,45 @@ class CompetenciaController extends Controller
             $excel->sheet('Excel shhet', function($sheet) {
                
                 $competencias = Competencia::all()->where('estado_comp',1);
-                $categoriascompetencias = categoriacompetencia::All()->where('estado_categoriacomp',1)->sortBy('nombre_caterogiacomp')->pluck('nombre_categoriacomp','id_categoriacomp');
-                //$sheet->row(1,['Nombre de Categoria', 'Descripcion de la categoria']);
+             //   $categoriascompetencias = categoriacompetencia::All()->where('estado_categoriacomp',1)->sortBy('nombre_caterogiacomp')->pluck('nombre_categoriacomp','id_categoriacomp');
+                $sheet->row(1,['Nombre de Categoria de Competencia', 'Nombre de Competencia', 'Descripcion de Competencia']);
                 
-                $sheet->fromArray($competencias);
 
-              /*  foreach ($categoriaComps as $categoriacomp){
+              foreach ($competencias as $competencia){
                     $row = [];
-                    $row[0] = $categoriacomp->nombre_categoriacomp;
-                    $row[1] = $categoriacomp->desc_categoriacomp;
+                    $categoriascompetencia = categoriacompetencia::where('estado_categoriacomp',1)->where('id_categoriacomp', $competencia->id_categoriacomp)->firstOrFail();
+                   \Debugbar::info($categoriascompetencia);
+                    $row[0] = $categoriascompetencia->nombre_categoriacomp;
+                    $row[1] = $competencia->nombre_comp;
+                    $row[2] = $competencia->desc_comp;
+                    \Debugbar::info($competencia->dedesc_comp);
                     $sheet->appendRow($row);      
-
                 }
-                */
+                
 
             });
         })->export('xls');
     }
 
+    public function importar(){
+
+        //dd($categoriascompetencias);
+        return view('competencia.importarCompetencia');
+    }
+
+
+
+
     /**
-     * Store a newly created resource in storage.
+     * importarguardar a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+
+     
+    public function importarguardar(Request $request){
+
         $competencia = new competencia;
         $competencia->nombre_comp = $request->nombre_comp;
         $competencia->desc_comp = $request->desc_comp;
@@ -80,6 +94,42 @@ class CompetenciaController extends Controller
     }
 
 
+       /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+
+
+        if($request->tipo==0)
+        {
+            $competencia = new competencia;
+            $competencia->nombre_comp = $request->nombre_comp;
+            $competencia->desc_comp = $request->desc_comp;
+            $competencia->id_categoriacomp = $request->id_categoriacomp;
+            $competencia->estado_comp = 1;
+            
+            if($competencia->save())
+            {
+                return redirect('competencia');
+            }
+        }
+
+        if($request->tipo==1)
+        {
+            $file =  $request->file('Archivo'); 
+            
+            \Excel::load();
+        }
+
+
+
+    }
+
+
     /**
      * Display the specified resource.
      *
@@ -90,7 +140,10 @@ class CompetenciaController extends Controller
     {
         $competencia = Competencia::findOrFail($id);
         $categoriascompetencias = categoriacompetencia::All()->where('estado_categoriacomp',1)->sortBy('nombre_caterogiacomp')->pluck('nombre_categoriacomp','id_categoriacomp');
-        return view('Competencia.verCompetencia', compact('competencia','categoriascompetencias'));
+        $roldesempenos = RolDesempeno::All()->where('estado_roldesempeno',1)->where('id_comp', $id);
+        
+        \Debugbar::info($roldesempenos);
+        return view('Competencia.verCompetencia', compact('competencia','categoriascompetencias', 'roldesempenos'));
     }
 
     /**

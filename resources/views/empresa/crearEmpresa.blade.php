@@ -10,7 +10,7 @@
 				</div>
 
 				<div class="box-body">
-					{!! Form::open(['action' => 'EmpresaController@store']) !!}
+					{!! Form::open(['action' => 'EmpresaController@store', 'id'=>'formEmpresa']) !!}
 				
 
 				<div class='form-group'>
@@ -78,8 +78,14 @@
 					{!! Form::select('id_empresa[]', $empresas,null ,['class' => 'select2','multiple', 'data-placeholder'=>'Seleccione una o varias empresas','id'=>'id_empresa', 'style'=>'width:100%']) !!}
 					{!! Form::label('', '',['id' => 'errSelectEmpresaHolding']) !!}
 				</div>
+<<<<<<< HEAD
 				
 				<div class="form-control btn btn-success" id="valiGiro"> Validar</div>
+=======
+				<div class='form-group' >
+					{!! Form::submit("Agregar empresa", ['class' => 'form-control btn btn-success ']) !!}
+				</div>
+>>>>>>> 941304c67787b62b64644e2928d8bde413d2adcf
 				{!! Form::close() !!}
 				<div class='form-group'>
 					<div id="btnVolver" class="form-control btn btn-success " > Volver </div>
@@ -98,8 +104,22 @@ $(document).ready(function() {
 	
 });
 
+<<<<<<< HEAD
 $(document).on('click', '#valiGiro', function () {
 	alert($("#id_giro")[0].val());
+=======
+$('#formEmpresa').submit(function (e) {
+	e.preventDefault();
+	var url = e.target.action  // get the target
+	var formData = $(this).serialize() // get form data
+	if(validarEmpresa())	
+	{
+		$.post(url, formData, function (response) { // send; response.data will be what is returned
+			$('#modal').modal('hide');
+		});
+	}
+
+>>>>>>> 941304c67787b62b64644e2928d8bde413d2adcf
 });
 $(document).on('change', '#id_region', function () {
 

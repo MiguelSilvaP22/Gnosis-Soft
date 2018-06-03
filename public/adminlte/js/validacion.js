@@ -183,7 +183,7 @@ function validarEmpresa()
 	}
 
 	//Validar Select Giro Empresa.
-	if($("#id_giro").val() == "")
+	if($("#id_giro").val().length == 0)
 	{verificar = false; marcarErrorSelect('errSelectGiro');}
 	else{desmarcarErrorSelect('errSelectGiro');}
 

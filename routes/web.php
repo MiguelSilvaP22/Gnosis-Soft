@@ -329,3 +329,15 @@ Route::resource('curso', 'CursoController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+/*
+
+================================
+VISTA DE LA EMPRESA
+================================
+
+*/
+
+Route::resource('vistacompetencia', 'vistaCompetenciaController');
+

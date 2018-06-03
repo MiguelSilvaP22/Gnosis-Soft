@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Curso;
+use App\Modalidad;
+use App\AreaCurso;
+use App\Competencia;
+use App\CompetenciaCurso;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Route;
 
 class CursoController extends Controller
 {
@@ -14,7 +21,8 @@ class CursoController extends Controller
      */
     public function index()
     {
-        //
+        $cursos = Curso::all()->where('estado_curso',1);
+        return view('curso.index', compact('cursos'));
     }
 
     /**
@@ -23,8 +31,12 @@ class CursoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {   
+        $modalidades = Modalidad::all()->where('estado_modalidad',1)->sortBy('nombre_modalidad')->pluck('nombre_modalidad','id_modalidad');
+        $areasCurso = AreaCurso::all()->where('estado_areacurso',1)->sortBy('nombre_areacurso')->pluck('nombre_areacurso','id_areacurso');
+        $competencias = Competencia::all()->where('estado_comp',1)->sortBy('nombre_comp')->pluck('nombre_comp','id_comp');
+        return view('curso.crearCurso', compact('modalidades','competencias','areasCurso'));
+        
     }
 
     /**
@@ -35,7 +47,45 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       // echo 
+
+       
+        
+        $competencias = $request->id_competencia;;
+        $curso = new Curso;
+        $curso->cod_interno_curso = $request->cod_interno_curso;
+        $curso->cod_sence_curso = $request->cod_sence_curso;
+        $curso->nombre_curso = $request->nombre_curso;
+        $curso->objetivo_curso = $request->objetivo_curso;
+        $curso->desc_curso = $request->desc_curso;
+        $curso->cant_hora_curso = $request->cant_hora_curso;
+        $curso->id_areacurso = $request->id_areacurso;
+        $curso->id_modalidad = $request->id_modalidad;
+        $curso->estado_curso = 1;
+        if($curso->save())
+        {
+            foreach($competencias as $competencia)
+            {
+                $competenciaCurso = new CompetenciaCurso;
+                $competenciaCurso->id_comp = $competencia;
+                $competenciaCurso->id_curso = $curso->id_curso;
+                $competenciaCurso->estado_compcurso = 1;
+                $competenciaCurso->save();
+
+            }
+
+            $dir_subida = public_path()."/temario/";
+            $ext = pathinfo($_FILES['temario_curso']['name'], PATHINFO_EXTENSION);
+            $nombreTemario = $curso->id_curso."_".$curso->cod_interno_curso.".".$ext;
+            $fichero_subido = $dir_subida .$nombreTemario;
+            
+            if (move_uploaded_file($_FILES['temario_curso']['tmp_name'], $fichero_subido)) {
+                $curso->link_temario_curso = $nombreTemario ;
+                $curso->save();
+            } 
+        }
+        return redirect('curso');
+
     }
 
     /**
@@ -57,7 +107,10 @@ class CursoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $curso = Curso::findOrFail($id);
+        $nacionalidades = Nacionalidad::all()->where('estado_nacionalidad',1)->sortBy('nombre_nacionalidad')->pluck('nombre_nacionalidad','id_nacionalidad');
+        $empresas = Empresa::all()->where('estado_empresa',1)->sortBy('nombre_empresa')->pluck('nombre_empresa','id_empresa');
+        return view('curso.editarCurso', compact('curso','nacionalidades','empresas'));
     }
 
     /**
@@ -69,9 +122,25 @@ class CursoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $curso = Curso::findOrFail($id);
+        $curso->id_perfilocu = $request->id_perfilocu;
+        $curso->run_curso = $request->run_curso;
+        $curso->nombre_curso = $request->nombre_curso; 
+        //$curso->fechana_curso = $request->fechana_curso;
+        $curso->apellidopat_curso = $request->apellidopat_curso;
+        $curso->apellidomat_curso = $request->apellidomat_curso;
+        $curso->sexo_curso = $request->sexo_curso;
+        $curso->email_curso = $request->email_curso;
+        $curso->save();
+        return redirect('curso');
+
     }
 
+     public function confirmDestroy($id)
+    {
+        $curso = Curso::findOrFail($id);
+        return view('curso.desactivarCurso', compact('curso'));
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -80,6 +149,8 @@ class CursoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $curso = Curso::findOrFail($id);
+        $curso->eliminar();
+        return redirect('curso');
     }
 }

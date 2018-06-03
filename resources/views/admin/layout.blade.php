@@ -299,7 +299,7 @@ desired effect
           </li>
           <li><a href="/colaborador"><i class="fa fa-user"></i> <span>Colaboradores</span></a></li>
           <li><a href="/empresa"><i class="fa fa-building"></i> <span>Empresas</span></a></li>
-          <li><a href="#"><i class="fa fa-graduation-cap"></i> <span>Cursos</span></a></li>
+          <li><a href="/curso"><i class="fa fa-graduation-cap"></i> <span>Cursos</span></a></li>
           <li><a href="#"><i class="fa fa-book"></i> <span>Actividad</span></a></li>
           <li><a href="#"><i class="fa fa-pencil-square-o"></i> <span>Evaluación</span></a></li>
           <li><a href="/competencia"><i class="fa fa-th-list"></i> <span>Competencias</span></a></li>

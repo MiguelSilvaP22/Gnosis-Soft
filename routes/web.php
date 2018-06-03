@@ -299,6 +299,33 @@ Route::get('/eliminarUsuario/{id}', 'UsuarioController@destroy',function($id) {
 Route::resource('usuario', 'UsuarioController');
 
 //-------------------------------------------------------------------------------------------------------------------------
+//Curso
+
+Route::get('/curso', 'CursoController@index');
+
+Route::get('/crearCurso', 'CursoController@create')
+->name('curso.crear');
+
+Route::get('/editarCurso/{id}', 'CursoController@edit',function($id) {
+    return  $id;
+  })
+  ->name('curso.edit');
+
+Route::get('/desactivarCurso/{id}', 'CursoController@confirmDestroy',function($id) {
+    return  $id;
+    })
+->name('curso.delete');  
+
+Route::get('/eliminarCurso/{id}', 'CursoController@destroy',function($id) {
+    return  $id;
+    })
+->name('curso.destroy');  
+    
+
+Route::resource('curso', 'CursoController');
+
+//-------------------------------------------------------------------------------------------------------------------------
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

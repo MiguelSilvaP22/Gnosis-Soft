@@ -302,3 +302,15 @@ Route::resource('usuario', 'UsuarioController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+/*
+
+================================
+VISTA DE LA EMPRESA
+================================
+
+*/
+
+Route::resource('vistacompetencia', 'vistaCompetenciaController');
+

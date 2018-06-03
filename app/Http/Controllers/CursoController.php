@@ -7,6 +7,7 @@ use App\Modalidad;
 use App\AreaCurso;
 use App\Competencia;
 use App\CompetenciaCurso;
+use App\ContenidoGeneral;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -50,8 +51,9 @@ class CursoController extends Controller
        // echo 
 
        
-        
-        $competencias = $request->id_competencia;;
+        $contenidosGenerales = $request->contenidoGeneral;
+        $competencias = $request->id_competencia;
+
         $curso = new Curso;
         $curso->cod_interno_curso = $request->cod_interno_curso;
         $curso->cod_sence_curso = $request->cod_sence_curso;
@@ -72,6 +74,14 @@ class CursoController extends Controller
                 $competenciaCurso->estado_compcurso = 1;
                 $competenciaCurso->save();
 
+            }
+            foreach($contenidosGenerales as $contenido)
+            {
+                $contenidoGeneral = new ContenidoGeneral;
+                $contenidoGeneral->id_curso = $curso->id_curso;
+                $contenidoGeneral->nombre_contenidog = $contenido;
+                $contenidoGeneral->estado_contenidog = 1;
+                $contenidoGeneral->save();
             }
 
             $dir_subida = public_path()."/temario/";

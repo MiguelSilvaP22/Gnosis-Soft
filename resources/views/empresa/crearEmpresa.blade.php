@@ -78,9 +78,8 @@
 					{!! Form::select('id_empresa[]', $empresas,null ,['class' => 'select2','multiple', 'data-placeholder'=>'Seleccione una o varias empresas','id'=>'id_empresa', 'style'=>'width:100%']) !!}
 					{!! Form::label('', '',['id' => 'errSelectEmpresaHolding']) !!}
 				</div>
-				<div class='form-group' onclick="validarEmpresa()">
-					{!! Form::submit("Agregar empresa", ['class' => 'form-control btn btn-success ']) !!}
-				</div>
+				
+				<div class="form-control btn btn-success" id="valiGiro"> Validar</div>
 				{!! Form::close() !!}
 				<div class='form-group'>
 					<div id="btnVolver" class="form-control btn btn-success " > Volver </div>
@@ -99,6 +98,9 @@ $(document).ready(function() {
 	
 });
 
+$(document).on('click', '#valiGiro', function () {
+	alert($("#id_giro")[0].val());
+});
 $(document).on('change', '#id_region', function () {
 
 	$.ajax({

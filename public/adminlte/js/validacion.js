@@ -27,12 +27,19 @@ function desmarcarError(id,idErr){
 
 //Desmarcar error select.
 function desmarcarErrorSelect(idErr){
-	document.getElementById(idErr).innerHTML='';
+document.getElementById(idErr).innerHTML='';
 }
 
 //Validación de caracteres.
 function validarChr(TCode){
 	if( /^[a-zA-Z0-9- ]*$/.test( TCode ) ) 
+	{return false;}
+    return true;     
+}
+
+//Validación de caracteres con punto.
+function validarChrPunto(TCode){
+	if( /^[a-zA-Z0-9- -.]*$/.test( TCode ) ) 
 	{return false;}
     return true;     
 }
@@ -156,7 +163,7 @@ function validarEmpresa()
 	else
 	{
 		desmarcarError('razon_social_empresa','errRazonSocial');	
-		if(validarChr($("#razon_social_empresa").val()))
+		if(validarChrPunto($("#razon_social_empresa").val()))
 		{
 			verificar = false; marcarErrorChar('razon_social_empresa','errRazonSocial');			
 		}else
@@ -187,15 +194,20 @@ function validarEmpresa()
 	{verificar = false; marcarErrorSelect('errSelectGiro');}
 	else{desmarcarErrorSelect('errSelectGiro');}
 
-	//Validar Región Empresa.
+	//Validar Región Empresa y Comuna.
 	if($("#id_region").val() == "")
-	{verificar = false; marcarErrorSelect('errSelectRegion');}
-	else{desmarcarErrorSelect('errSelectRegion');}
+	{
+		verificar = false; marcarErrorSelect('errSelectRegion');
+	}
+	else
+	{
+		desmarcarErrorSelect('errSelectRegion');		
+	}
 
-	//Validar Comuna Empresa.
 	if($("#id_comuna").val() == "")
 	{verificar = false; marcarErrorSelect('errSelectComuna');}
-	else{desmarcarErrorSelect('errSelectComuna');}
+	else
+	{desmarcarErrorSelect('errSelectComuna');} 
 
 	//Validar Dirrección Empresa.
 	if($.trim( $("#direccion_empresa").val()) == "" )
@@ -205,9 +217,9 @@ function validarEmpresa()
 	else
 	{
 		desmarcarError('direccion_empresa','errDirrecionEmpresa');	
-		if(validarRut($("#direccion_empresa").val()))
+		if(validarChrPunto($("#direccion_empresa").val()))
 		{
-			verificar = false; marcarErrorRut('direccion_empresa','errDirrecionEmpresa');			
+			verificar = false; marcarErrorChar('direccion_empresa','errDirrecionEmpresa');			
 		}else
 		{
 			desmarcarError('direccion_empresa','errDirrecionEmpresa');
@@ -225,11 +237,14 @@ function validarEmpresa()
 	}
 
 	//Validar Select Empresas Holding.
-	if($("#id_empresa").val() == "")
-	{verificar = false; marcarErrorSelect('errSelectEmpresaHolding');}
+	var check = $('input[name=tipo_empresa]:checked').val();
+	if(check == 1)
+	{
+		if($("#id_empresa").val() == "")
+		{verificar = false; marcarErrorSelect('errSelectEmpresaHolding');}
+		else{desmarcarErrorSelect('errSelectEmpresaHolding');}
+	}
 	else{desmarcarErrorSelect('errSelectEmpresaHolding');}
-
-
 
 	return verificar;
 	

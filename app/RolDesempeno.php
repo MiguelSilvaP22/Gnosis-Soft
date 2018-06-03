@@ -13,6 +13,6 @@ class RolDesempeno extends Model
 
     public function comunas()
     {
-        return $this->belongsTo(Competencia::Class,'id_competencia');
+        return $this->belongsTo(Competencia::Class,'id_comp');
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Competencia;
 use App\CategoriaCompetencia;
 use App\RolDesempeno;
+use App\NivelCompetencia;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -80,17 +82,14 @@ class CompetenciaController extends Controller
 
      
     public function importarguardar(Request $request){
-
++
         $competencia = new competencia;
         $competencia->nombre_comp = $request->nombre_comp;
         $competencia->desc_comp = $request->desc_comp;
         $competencia->id_categoriacomp = $request->id_categoriacomp;
         $competencia->estado_comp = 1;
-        
-        if($competencia->save())
-        {
-            return redirect('competencia');
-        }
+    
+
     }
 
 
@@ -102,8 +101,7 @@ class CompetenciaController extends Controller
      */
     public function store(Request $request)
     {
-
-
+        
         if($request->tipo==0)
         {
             $competencia = new competencia;
@@ -111,9 +109,30 @@ class CompetenciaController extends Controller
             $competencia->desc_comp = $request->desc_comp;
             $competencia->id_categoriacomp = $request->id_categoriacomp;
             $competencia->estado_comp = 1;
-            
+
             if($competencia->save())
             {
+                        
+                foreach($request->RolDesempenos as $roldesem)
+                {
+                    $roldesempeno = new RolDesempeno;
+                    $roldesempeno->id_comp = $competencia->id_comp;
+                    $roldesempeno->nombre_roldesempeno = $roldesem;
+                    $roldesempeno->estado_roldesempeno = 1;
+                    $roldesempeno->save();
+                }
+
+                foreach($request->niveles as $key => $nivel)
+                {
+                    $nivelcompetencia = new NivelCompetencia;
+                    $nivelcompetencia->id_comp=$competencia->id_comp;
+                    $nivelcompetencia->desc_nivelcompetencia=$nivel;
+                    $nivelcompetencia->id_tiponivel = $key+1;
+                    $nivelcompetencia->estado_nivelcompetencia = 1;
+
+                    $nivelcompetencia->save();
+                }
+
                 return redirect('competencia');
             }
         }
@@ -123,7 +142,7 @@ class CompetenciaController extends Controller
             $file =  $request->file('Archivo'); 
             
             \Excel::load();
-        }
+    }
 
 
 
@@ -141,9 +160,9 @@ class CompetenciaController extends Controller
         $competencia = Competencia::findOrFail($id);
         $categoriascompetencias = categoriacompetencia::All()->where('estado_categoriacomp',1)->sortBy('nombre_caterogiacomp')->pluck('nombre_categoriacomp','id_categoriacomp');
         $roldesempenos = RolDesempeno::All()->where('estado_roldesempeno',1)->where('id_comp', $id);
-        
-        \Debugbar::info($roldesempenos);
-        return view('Competencia.verCompetencia', compact('competencia','categoriascompetencias', 'roldesempenos'));
+        $niveles = NivelCompetencia::All()->where('estado_nivelcompetencia',1)->where('id_comp', $id)->pluck('desc_nivelcompetencia');
+        \Debugbar::info($niveles);
+        return view('Competencia.verCompetencia', compact('competencia','categoriascompetencias', 'roldesempenos', 'niveles'));
     }
 
     /**

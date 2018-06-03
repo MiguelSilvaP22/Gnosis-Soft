@@ -25,6 +25,16 @@
 					  {!! Form::label('nombre_categoriacomp', 'Categoria:') !!}
 					  {!! Form::select('id_categoriacomp', $categoriascompetencias,null ,['class' => 'form-control', 'readonly' => true, 'data-placeholder'=>'Seleccione uno o varios giros','id'=>'id_categoriacomp', 'style'=>'width:100%']) !!}
 				  </div>	
+
+	 			 <div class='form-group'>
+					  {!! Form::label('nombre_categoriacomp', 'Roles de Desempeño:') !!}
+	
+				  </div>
+				  @foreach ($roldesempenos as $roldesempeno)
+				 
+				  {!! Form::text('rolDesempeno', $roldesempeno->nombre_roldesempeno, ['class' => 'form-control', 'readonly' => true]) !!}
+
+				  @endforeach
   
 				  <div class='form-group'>
 					  <a href='{{ url()->previous() }}' class="form-control btn btn-success " > Volver </a>

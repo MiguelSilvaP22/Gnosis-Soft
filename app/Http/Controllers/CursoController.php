@@ -7,6 +7,7 @@ use App\Modalidad;
 use App\AreaCurso;
 use App\Competencia;
 use App\CompetenciaCurso;
+use App\ContenidoGeneral;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -50,8 +51,9 @@ class CursoController extends Controller
        // echo 
 
        
-        
-        $competencias = $request->id_competencia;;
+        $contenidosGenerales = $request->contenidoGeneral;
+        $competencias = $request->id_competencia;
+
         $curso = new Curso;
         $curso->cod_interno_curso = $request->cod_interno_curso;
         $curso->cod_sence_curso = $request->cod_sence_curso;
@@ -72,6 +74,14 @@ class CursoController extends Controller
                 $competenciaCurso->estado_compcurso = 1;
                 $competenciaCurso->save();
 
+            }
+            foreach($contenidosGenerales as $contenido)
+            {
+                $contenidoGeneral = new ContenidoGeneral;
+                $contenidoGeneral->id_curso = $curso->id_curso;
+                $contenidoGeneral->nombre_contenidog = $contenido;
+                $contenidoGeneral->estado_contenidog = 1;
+                $contenidoGeneral->save();
             }
 
             $dir_subida = public_path()."/temario/";
@@ -108,9 +118,14 @@ class CursoController extends Controller
     public function edit($id)
     {
         $curso = Curso::findOrFail($id);
-        $nacionalidades = Nacionalidad::all()->where('estado_nacionalidad',1)->sortBy('nombre_nacionalidad')->pluck('nombre_nacionalidad','id_nacionalidad');
-        $empresas = Empresa::all()->where('estado_empresa',1)->sortBy('nombre_empresa')->pluck('nombre_empresa','id_empresa');
-        return view('curso.editarCurso', compact('curso','nacionalidades','empresas'));
+        $modalidades = Modalidad::all()->where('estado_modalidad',1)->sortBy('nombre_modalidad')->pluck('nombre_modalidad','id_modalidad');
+        $areasCurso = AreaCurso::all()->where('estado_areacurso',1)->sortBy('nombre_areacurso')->pluck('nombre_areacurso','id_areacurso');
+        $competencias = Competencia::all()->where('estado_comp',1)->sortBy('nombre_comp')->pluck('nombre_comp','id_comp');
+        
+        $competenciasCurso = CompetenciaCurso::all()->where('id_curso',$curso->id_curso)->where('estado_compcurso',1)->pluck('id_comp');
+        $contenidosGenerales = ContenidoGeneral::all()->where('id_curso',$curso->id_curso)->where('estado_contenidog',1);
+        
+        return view('curso.editarCurso', compact('curso','modalidades','areasCurso','contenidosGenerales','competencias','competenciasCurso'));
     }
 
     /**

@@ -10,7 +10,7 @@
 				</div>
 
 				<div class="box-body">
-					{!! Form::open(['action' => 'EmpresaController@store']) !!}
+					{!! Form::open(['action' => 'EmpresaController@store', 'id'=>'formEmpresa']) !!}
 				
 
 				<div class='form-group'>
@@ -78,7 +78,7 @@
 					{!! Form::select('id_empresa[]', $empresas,null ,['class' => 'select2','multiple', 'data-placeholder'=>'Seleccione una o varias empresas','id'=>'id_empresa', 'style'=>'width:100%']) !!}
 					{!! Form::label('', '',['id' => 'errSelectEmpresaHolding']) !!}
 				</div>
-				<div class='form-group' onclick="validarEmpresa()">
+				<div class='form-group' >
 					{!! Form::submit("Agregar empresa", ['class' => 'form-control btn btn-success ']) !!}
 				</div>
 				{!! Form::close() !!}
@@ -99,6 +99,18 @@ $(document).ready(function() {
 	
 });
 
+$('#formEmpresa').submit(function (e) {
+	e.preventDefault();
+	var url = e.target.action  // get the target
+	var formData = $(this).serialize() // get form data
+	if(validarEmpresa())	
+	{
+		$.post(url, formData, function (response) { // send; response.data will be what is returned
+			$('#modal').modal('hide');
+		});
+	}
+
+});
 $(document).on('change', '#id_region', function () {
 
 	$.ajax({

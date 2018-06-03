@@ -6,71 +6,66 @@
 			<div class="box">
 			
 				<div class="box-header">
-					<h3 class="box-title">Editar Colaborador </h3>
+					<h3 class="box-title">Editar Curso </h3>
 				</div>
 
 				<div class="box-body">
 					<div class="row">
 						
-					{!! Form::model($colaborador, ['method' => 'PATCH', 'action' => ['ColaboradorController@update',$colaborador->id_usuario]]) !!}
+					{!! Form::model($curso, [ 'enctype'=>"multipart/form-data",'method' => 'PATCH', 'action' => ['CursoController@update',$curso->id_usuario]]) !!}
 						<div class="col-md-6">
+							<div class='form-group'>
+								{!! Form::label('', 'Codigo:') !!}
+								{!! Form::text('cod_interno_curso', null, ['class' => 'form-control']) !!}
+							</div>
+							<div class='form-group'>
+								{!! Form::label('', 'Codigo Sence:') !!}
+								{!! Form::text('cod_sence_curso', null, ['class' => 'form-control']) !!}
+							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Nombre:') !!}
-								{!! Form::text('nombre_usuario', null, ['class' => 'form-control']) !!}
+								{!! Form::text('nombre_curso', null, ['class' => 'form-control']) !!}
 							</div>
 							<div class='form-group'>
-								{!! Form::label('', 'run_usuario:') !!}
-								{!! Form::text('run_usuario', null, ['class' => 'form-control']) !!}
+								{!! Form::label('', 'Objetivo:') !!}
+								{!! Form::text('objetivo_curso', null, ['class' => 'form-control']) !!}
 							</div>
 							<div class='form-group'>
-								{!! Form::label('', 'apellidopat_usuario:') !!}
-								{!! Form::text('apellidopat_usuario', null, ['class' => 'form-control']) !!}
+								{!! Form::label('', 'Descripción:') !!}
+								{!! Form::text('desc_curso', null, ['class' => 'form-control']) !!}
 							</div>
 							<div class='form-group'>
-								{!! Form::label('', 'apellidomat_usuario:') !!}
-								{!! Form::text('apellidomat_usuario', null, ['class' => 'form-control']) !!}
+								{!! Form::label('', 'Cantidad de Horas:') !!}
+								{!! Form::text('cant_hora_curso', null, ['class' => 'form-control']) !!}
 							</div>
 							<div class='form-group'>
-								{!! Form::label('', 'Fecha de Nacimiento:') !!}
-								{!! Form::text('fechana_usuario', null, ['class' => 'form-control','id'=>'fechaUsuario']) !!}
+								{!! Form::label('', 'Modalidad:') !!}
+								{!! Form::select('id_modalidad', $modalidades,null ,['class' => 'select2','data-placeholder'=>'Seleccione una modalidad','id'=>'id_modalidad', 'style'=>'width:100%']) !!}
 							</div>
 							<div class='form-group'>
-								{!! Form::label('', 'Sexo') !!}
-								<div class='radio'>
-									<label>
-									{!! Form::radio('sexo_usuario', 'F',true); !!} F
-									</label>
-								</div>
-								<div class='radio'>
-									<label>
-									{!! Form::radio('sexo_usuario', 'M'); !!} M
-									</label>
-								</div>
+								{!! Form::label('', 'Area Curso:') !!}
+								{!! Form::select('id_areacurso', $areasCurso,null ,['class' => 'select2','data-placeholder'=>'Seleccione una area','id'=>'id_areacurso', 'style'=>'width:100%']) !!}
 							</div>
 							<div class='form-group'>
-								{!! Form::label('', 'email_usuario:') !!}
-								{!! Form::text('email_usuario', null, ['class' => 'form-control']) !!}
+								{!! Form::label('', 'Competencias:') !!}
+								{!! Form::select('id_competencia[]', $competencias,null ,['class' => 'select2','multiple','data-placeholder'=>'Seleccione una modalidad','id'=>'id_competencia', 'style'=>'width:100%']) !!}
 							</div>
 							<div class='form-group'>
-								{!! Form::label('', 'Nacionalidad:') !!}
-								{!! Form::select('id_nacionalidad', $nacionalidades,null ,['class' => 'select2','data-placeholder'=>'Seleccione una nacionalidad','id'=>'id_nacionalidad', 'style'=>'width:100%']) !!}
+								{!! Form::label('', 'Contenido General') !!}	
+								{!! Form::button('Agregar nuevo contenido', ['class' => 'form-control btn btn-success ', 'id'=> 'addContenido']) !!}	
 							</div>	
-						</div>
-						<div class="col-md-6">
+							@foreach ($contenidosGenerales as $key => $contenidoGeneral)
+				 
+								{!! Form::text('contenidoGeneral[]', $contenidoGeneral->nombre_contenidog, ['class' => 'form-control' , 'id'=>'contenidoGeneral'.$key.'']) !!}
+								<button type="button" class="btn btn-default" aria-label="Left Align" onclick="eliminarContenido({{$key}})" id="btnEliminarContenido{{$key}}">   <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> </button>
+		  
+							@endforeach
 							<div class='form-group'>
-								{!! Form::label('', 'Empresas:') !!}
-								{!! Form::select('id_empresa', $empresas,null ,['class' => 'select2','data-placeholder'=>'Seleccione una empresa','id'=>'id_empresa', 'style'=>'width:100%']) !!}
+								{!! Form::label('', 'Temario:') !!}
+								{!! Form::file('temario_curso', null, ['class' => 'form-control']) !!}
 							</div>	
-							<div class='form-group' style="display:none;" id="gerencia">
-							</div>	
-							<div class='form-group' style="display:none;" id="area">
-							</div>	
-							<div class='form-group' style="display:none;" id="perfilOcupacional">
-							</div>	
-						</div>
-						{!! Form::hidden('cargarSelects','1',['id'=>'cargarSelects']) !!}
 						<div class='form-group'>
-							{!! Form::submit("Editar Colaborador", ['class' => 'form-control btn btn-success ']) !!}
+							{!! Form::submit("Editar Curso", ['class' => 'form-control btn btn-success ']) !!}
 						</div>
 						<div class='form-group'>
 							<a href='{{ url()->previous() }}' class="form-control btn btn-success " > Volver </a>
@@ -86,80 +81,21 @@
 <script>
 
 $(document).ready(function() {
-
-	var idEmpresa = {{$colaborador->perfilOcupacional->area->gerencia->empresa->id_empresa}};
     $('.select2').select2();
-    $('#id_empresa').select2().val(idEmpresa).trigger("change");
-
-
+	var idCompetencias = {{$competenciasCurso}};
+	$('#id_competencia').select2().val(idCompetencias).trigger("change");
 });
-	$(document).on('change', '#id_empresa', function () {
-	var idGerencia = {{$colaborador->perfilOcupacional->area->gerencia->id_gerencia}};
-	$.ajax({
-		url: "/selectGerencia/"+this.value,
-		type: "GET",
-		success: function (datos) {
-			$("#gerencia").show();
-			$("#gerencia").html(datos);
-			if($("#cargarSelects").val() == 1)
-			{
-				$('#select_gerencia').select2().val(idGerencia).trigger("change");
-			}
-			else
-			{
-				$('#select_gerencia').select2();
-				$("#area").hide();
-				$("#perfilOcupacional").hide();
-			}
-			
-		}
-		});
-	});	
-	$(document).on('change', '#select_gerencia', function () {
-		var idArea = {{$colaborador->perfilOcupacional->area->id_area}};
-		$.ajax({
-		url: "/selectArea/"+this.value,
-		type: "GET",
-		success: function (datos) {
-			$("#area").show();
-			$("#area").html(datos);
-			if($("#cargarSelects").val() == 1)
-			{
-				$('#select_area').select2().val(idArea).trigger("change");	
-			}
-			else
-			{
-				$('#select_area').select2();
-				$("#perfilOcupacional").hide();
-			}
-					
-		}
+var count =0;
+$('#addContenido').click(function() {
+	count++;
 
-		});
-	});	
-	$(document).on('change', '#select_area', function () {
-		var idPerfilOcupacional = {{$colaborador->id_perfilocu}};
-		$.ajax({
-		url: "/selectPerfilOcupacional/"+this.value,
-		type: "GET",
-		success: function (datos) {
-			$("#perfilOcupacional").show();
-			$("#perfilOcupacional").html(datos);
-			if($("#cargarSelects").val() == 1)
-			{
-				$('#select_perfilOcupacional').select2().val(idPerfilOcupacional).trigger("change");
-				$("#cargarSelects").val('0');
-			}
-			else
-			{
-				$('#select_perfilOcupacional').select2();
-			}
-				
-		}
-
-		});
-	});	
-
+	$('#addContenido').parent().append('<input class="form-control" name="contenidoGeneral[]" id="contenidoGeneral'+count+'" type="text" ">');
+	$('#addContenido').parent().append('<button type="button" class="btn btn-default" aria-label="Left Align" onclick="eliminarContenido('+count+')" id="btnEliminarContenido'+count+'">   <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> </button>');
+});
+function eliminarContenido(id){
+	$("#contenidoGeneral"+id).remove();
+	$("#btnEliminarContenido"+id).remove();
+}
 
 
 </script>

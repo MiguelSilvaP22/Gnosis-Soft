@@ -15,4 +15,9 @@ class Competencia extends Model
     {
         return $this->belongsTo(CategoriaCompetencia::Class,'id_categoriacomp');
     }
+
+    public function cursos()
+    {
+        return $this->belongsToMany(Curso::Class, 'competenciacurso', 'id_comp', 'id_curso');
+    }
 }

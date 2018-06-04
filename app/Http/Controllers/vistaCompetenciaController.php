@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Competencia;
 use App\CategoriaCompetencia;
+use App\Curso;
+
 use App\RolDesempeno;
 use App\NivelCompetencia;
 use App\TipoNivel;
@@ -22,9 +24,10 @@ class vistaCompetenciaController extends Controller
     public function index()
     {
         $competencias = Competencia::All()->where('estado_comp',1);
+        $listaCompetencias =  Competencia::all()->where('estado_comp',1)->sortBy('nombre_comp')->pluck('nombre_comp','id_comp');
         $categoriascompetencias = categoriacompetencia::All()->where('estado_categoriacomp',1);
         \Debugbar::info($competencias);
-        return view('vistacompetencia.index', compact('competencias','categoriascompetencias'));
+        return view('vistacompetencia.index', compact('competencias','categoriascompetencias', 'listaCompetencias'));
     }
 
     /**
@@ -44,10 +47,11 @@ class vistaCompetenciaController extends Controller
         $competencia = Competencia::findOrFail($idCompetencia);
         $roldesempenos = RolDesempeno::All()->where('estado_roldesempeno',1)->where('id_comp', $idCompetencia);
         $niveles = NivelCompetencia::All()->where('estado_nivelcompetencia',1)->where('id_comp', $idCompetencia)->values();
+       // $cursos = Curso::All()->where('estado_curso')->where
         //$tiponivel = TipoNivel::All()->where('estado_tiponivel',1)->pluck('nombre_tiponivel');;
 
         //$nivelesnombre = array_merge($niveles, $tiponivel);
-        \Debugbar::info($niveles);
+        \Debugbar::info($competencia->cursos);
 
         return view('vistacompetencia.infocompetencia', compact('competencia','roldesempenos','niveles'));
     }

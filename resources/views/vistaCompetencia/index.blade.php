@@ -5,6 +5,11 @@
 <div class="row">
 	<div class="box">
 		<div class="col-xs-5">
+		<div class="div">
+			<h3>cursos</h3>
+			{!! Form::select('id_competencia', $listaCompetencias,null ,['class' => 'select2','data-placeholder'=>'Seleccione una modalidad','id'=>'id_competencia', 'style'=>'width:100%']) !!}
+
+		</div>
 		<div class="box">
 				<table class="table table-hover">
 					<thead>
@@ -30,7 +35,7 @@
 
 </div>
 
-<div class="col-xs-8 infoDeCompetencia"></div>
+<div class="infoDeCompetencia"></div>
 </div>
 </body>
 
@@ -38,6 +43,12 @@
 
 @section('script-js')
 <script>
+
+	$(document).ready(function() {
+
+		$('#id_competencia').select2({
+		});
+	});
 
 	$(".categoriaCompTd").click(function(e) {
 		$.ajax({

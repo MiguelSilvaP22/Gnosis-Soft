@@ -44,8 +44,7 @@
 
 				<div class='form-group' id="comuna" style="display:none">
 					{!! Form::label('comuna_empresa', 'Comuna:') !!}
-					{!! Form::select('id_comuna', $comunas,null ,['class' => 'form-control select2','placeholder'=>'Seleccione una comuna', 'style'=>'width:100%','id'=>'id_comuna']) !!}
-					{!! Form::label('', '',['id' => 'errSelectComuna']) !!}
+					{!! Form::select('id_comuna', $comunas,null ,['class' => 'form-control select2','placeholder'=>'Seleccione una comuna', 'style'=>'width:100%','id'=>'id_comuna']) !!}					
 				</div>				
 
 				<div class='form-group'>
@@ -75,14 +74,10 @@
 
 				<div id='empresas' class='form-group' style="display:none;">
 					{!! Form::label('giro_empresa', 'Empresas del Holding:') !!}
-					{!! Form::select('id_empresa[]', $empresas,null ,['class' => 'select2','multiple', 'data-placeholder'=>'Seleccione una o varias empresas','id'=>'id_empresa', 'style'=>'width:100%']) !!}
+					{!! Form::select('id_empresa[]', $empresas,null ,['class' => 'select2','multiple', 'id'=>'id_empresa', 'style'=>'width:100%']) !!}
 					{!! Form::label('', '',['id' => 'errSelectEmpresaHolding']) !!}
 				</div>
-
-				
-				<div class="form-control btn btn-success" id="valiGiro"> Validar</div>
-
-				<div class='form-group' >
+				<div class='form-group' onclick='validarEmpresa()' >
 					{!! Form::submit("Agregar empresa", ['class' => 'form-control btn btn-success ']) !!}
 				</div>
 

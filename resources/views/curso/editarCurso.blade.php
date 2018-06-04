@@ -12,8 +12,8 @@
 				<div class="box-body">
 					<div class="row">
 						
-					{!! Form::model($curso, [ 'enctype'=>"multipart/form-data",'method' => 'PATCH', 'action' => ['CursoController@update',$curso->id_usuario]]) !!}
-						<div class="col-md-6">
+					{!! Form::model($curso, [ 'enctype'=>"multipart/form-data",'method' => 'PATCH', 'action' => ['CursoController@update',$curso->id_curso]]) !!}
+						<div class="col-md-12">
 							<div class='form-group'>
 								{!! Form::label('', 'Codigo:') !!}
 								{!! Form::text('cod_interno_curso', null, ['class' => 'form-control']) !!}
@@ -32,7 +32,7 @@
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Descripción:') !!}
-								{!! Form::text('desc_curso', null, ['class' => 'form-control']) !!}
+								{!! Form::textArea('desc_curso', null, ['class' => 'form-control']) !!}
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Cantidad de Horas:') !!}
@@ -61,8 +61,9 @@
 		  
 							@endforeach
 							<div class='form-group'>
-								{!! Form::label('', 'Temario:') !!}
+								{!! Form::label('', 'Temario: ') !!} <a href="{{asset('temario/'.$curso->link_temario_curso)}}" target="_blank">{{$curso->link_temario_curso}}</a>
 								{!! Form::file('temario_curso', null, ['class' => 'form-control']) !!}
+								
 							</div>	
 						<div class='form-group'>
 							{!! Form::submit("Editar Curso", ['class' => 'form-control btn btn-success ']) !!}
@@ -85,7 +86,7 @@ $(document).ready(function() {
 	var idCompetencias = {{$competenciasCurso}};
 	$('#id_competencia').select2().val(idCompetencias).trigger("change");
 });
-var count =0;
+var count ={{Count($contenidosGenerales)}}-1;
 $('#addContenido').click(function() {
 	count++;
 

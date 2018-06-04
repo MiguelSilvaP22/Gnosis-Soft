@@ -39,6 +39,30 @@
 @section('script-js')
 <script>
 
+	$( document ).ready(function() {
+
+			var getUrlParameter = function getUrlParameter(sParam) {
+		var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+			sURLVariables = sPageURL.split('&'),
+			sParameterName,
+			i;
+
+		for (i = 0; i < sURLVariables.length; i++) {
+			sParameterName = sURLVariables[i].split('=');
+
+			if (sParameterName[0] === sParam) {
+				return sParameterName[1] === undefined ? true : sParameterName[1];
+			}
+		}
+	};
+
+	if(getUrlParameter('categoria')!=null && getUrlParameter('competencia')!=null)
+	{
+		cargar(getUrlParameter('categoria'), getUrlParameter('competencia'))
+	}
+	});
+
+
 	$(".categoriaCompTd").click(function(e) {
 		$.ajax({
 		url: "/vercompetencias/"+e.target.id,
@@ -61,6 +85,30 @@
 		}
 		});
 	});
+
+
+	function cargar(idCat, idComp){
+	
+		alert(idComp);
+		$.ajax({
+		url: "/vercompetencias/"+idCat,
+		type: "GET",
+		success: function (datos) {
+			$(".competenciasTabla").html(datos);
+
+			$.ajax({
+			url: "/infocompetencia/"+idComp,
+			type: "GET",
+			success: function (datos2) {
+				$(".infoDeCompetencia").html(datos2);
+
+				
+			}
+			});
+
+		}
+		});
+	}
 
 	
 

@@ -44,14 +44,12 @@
 @section('script-js')
 <script>
 
-<<<<<<< HEAD
 	$(document).ready(function() {
 
 		$('#id_competencia').select2({
 		});
 	});
 
-=======
 	$( document ).ready(function() {
 
 			var getUrlParameter = function getUrlParameter(sParam) {
@@ -76,7 +74,6 @@
 	});
 
 
->>>>>>> b22268f421ba564753cb44b07ec4a1e866be79da
 	$(".categoriaCompTd").click(function(e) {
 		$.ajax({
 		url: "/vercompetencias/"+e.target.id,

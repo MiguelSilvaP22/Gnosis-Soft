@@ -43,7 +43,7 @@
 							@endif
 							<td>
 							<button id="btnVer" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
-
+							<button id="btnHorario" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Horario</button>
 							<button id="btnEditar" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>
 
 							<button id="deleteActividad" class="btn btn btn-info" value="{{ $actividad->id_actividad}}"><i class="fa fa-eraser"></i> Eliminar</button>
@@ -96,6 +96,19 @@ $(document).ready(function() {
 $(document).on('click', '#btnVer', function () {
 		$.ajax({
 		url: "/verActividad/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#datos").html(datos);
+			$('#modal').modal('show');
+		}
+
+		});
+		//alert("asda");
+});	
+
+$(document).on('click', '#btnHorario', function () {
+		$.ajax({
+		url: "/crearHorario/"+this.value,
 		type: "GET",
 		success: function (datos) {
 			$("#datos").html(datos);

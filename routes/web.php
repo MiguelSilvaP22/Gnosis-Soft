@@ -346,8 +346,16 @@ Route::get('/eliminarActividad/{id}', 'ActividadController@destroy',function($id
     return  $id;
     })
 ->name('actividad.destroy');  
-    
 
+
+Route::get('/crearHorario/{id}', 'ActividadController@createHorario',function($id)
+{
+    return $id;
+})->name('actividad.createHorario'); 
+
+Route::post('actividad_storeHorario', [
+    'uses' => 'ActividadController@storeHorario'
+  ]);
 Route::resource('actividad', 'ActividadController');
 
 //-------------------------------------------------------------------------------------------------------------------------

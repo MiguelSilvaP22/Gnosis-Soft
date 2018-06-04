@@ -10,7 +10,7 @@
 				</div>
 
 				<div class="box-body">
-				{!! Form::model($empresa, ['method' => 'PATCH', 'action' => ['EmpresaController@update',$empresa->id_empresa,'id'=>'formEmpresa']]) !!}
+				{!! Form::model($empresa, ['method' => 'PATCH', 'action' => ['EmpresaController@update',$empresa->id_empresa],'id'=>'formEmpresa']) !!}
 				<div class='form-group'>
 					{!! Form::label('nombre_empresa', 'Nombre:') !!}
 					{!! Form::text('nombre_empresa', null, ['class' => 'form-control','id'=>'nombre_empresa','maxlength'=>'100']) !!}
@@ -97,18 +97,6 @@ $(document).ready(function() {
     $('.select2').select2();
 
 
-$('#formEmpresa').submit(function (e) {
-	e.preventDefault();
-	var url = e.target.action  // get the target
-	var formData = $(this).serialize() // get form data
-	if(validarEmpresa())	
-	{
-		$.post(url, formData, function (response) { // send; response.data will be what is returned
-			$('#modal').modal('hide');
-		});
-	}
-
-});
 
 	//mostrar giros
 	
@@ -126,6 +114,20 @@ $('#formEmpresa').submit(function (e) {
 		$('#CheckEmpresa').prop("checked", true);		
 	}
 	$('#id_giro').select2().val(idGiro).trigger("change");
+
+});
+
+$('#formEmpresa').submit(function (e) {
+	console.log('asd');
+	e.preventDefault();
+	var url = e.target.action  // get the target
+	var formData = $(this).serialize() // get form data
+	if(validarEmpresa())	
+	{
+		$.post(url, formData, function (response) { // send; response.data will be what is returned
+			$('#modal').modal('hide');
+		});
+	}
 
 });
 

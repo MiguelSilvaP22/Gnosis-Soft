@@ -11,8 +11,6 @@
 
 				<div class="box-body">
 					{!! Form::open(['action' => 'EmpresaController@store', 'id'=>'formEmpresa']) !!}
-				
-
 				<div class='form-group'>
 					{!! Form::label('nombre_empresa', 'Nombre:') !!}
 					{!! Form::text('nombre_empresa', null, ['class' => 'form-control','id'=>'nombre_empresa','maxlength'=>'100']) !!}
@@ -44,7 +42,8 @@
 
 				<div class='form-group' id="comuna" style="display:none">
 					{!! Form::label('comuna_empresa', 'Comuna:') !!}
-					{!! Form::select('id_comuna', $comunas,null ,['class' => 'form-control select2','placeholder'=>'Seleccione una comuna', 'style'=>'width:100%','id'=>'id_comuna']) !!}					
+					{!! Form::select('id_comuna', $comunas,null ,['class' => 'form-control select2','placeholder'=>'Seleccione una comuna', 'style'=>'width:100%', 'id'=>'idComuna']) !!}	
+					{!! Form::label('', '',['id' => 'errSelectComuna']) !!}				
 				</div>				
 
 				<div class='form-group'>
@@ -77,7 +76,7 @@
 					{!! Form::select('id_empresa[]', $empresas,null ,['class' => 'select2','multiple', 'id'=>'id_empresa', 'style'=>'width:100%']) !!}
 					{!! Form::label('', '',['id' => 'errSelectEmpresaHolding']) !!}
 				</div>
-				<div class='form-group' onclick='validarEmpresa()' >
+				<div class='form-group'>
 					{!! Form::submit("Agregar empresa", ['class' => 'form-control btn btn-success ']) !!}
 				</div>
 

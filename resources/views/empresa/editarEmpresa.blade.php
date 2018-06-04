@@ -43,7 +43,8 @@
 
 				<div class='form-group' id="comuna">
 					{!! Form::label('comuna_empresa', 'Comuna:') !!}
-					{!! Form::select('id_comuna', $comunas,null ,['class' => 'form-control select2', 'style'=>'width:100%']) !!}
+					{!! Form::select('id_comuna', $comunas,null ,['class' => 'form-control select2', 'style'=>'width:100%', 'id'=>'idComuna']) !!}
+					{!! Form::label('', '',['id' => 'errSelectComuna']) !!}
 				</div>					
 
 				<div class='form-group'>
@@ -76,7 +77,7 @@
 					{!! Form::select('id_empresa[]', $empresas,null ,['class' => 'select2','multiple','id'=>'id_empresa', 'style'=>'width:100%']) !!}
 					{!! Form::label('', '',['id' => 'errSelectEmpresaHolding']) !!}
 				</div>
-				<div class='form-group' onclick="validarEmpresa()">
+				<div class='form-group'>
 					{!! Form::submit("Editar empresa", ['class' => 'form-control btn btn-success ']) !!}
 				</div>
 				{!! Form::close() !!}
@@ -92,9 +93,22 @@
 
 
 <script>
-
 $(document).ready(function() {
     $('.select2').select2();
+
+
+$('#formEmpresa').submit(function (e) {
+	e.preventDefault();
+	var url = e.target.action  // get the target
+	var formData = $(this).serialize() // get form data
+	if(validarEmpresa())	
+	{
+		$.post(url, formData, function (response) { // send; response.data will be what is returned
+			$('#modal').modal('hide');
+		});
+	}
+
+});
 
 	//mostrar giros
 	
@@ -114,8 +128,6 @@ $(document).ready(function() {
 	$('#id_giro').select2().val(idGiro).trigger("change");
 
 });
-
-
 
 $(document).on('change', '#id_region', function () {
 		

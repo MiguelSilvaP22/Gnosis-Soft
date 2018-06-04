@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Actividad;
+use App\Curso;
+use App\Horario;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +18,9 @@ class ActividadController extends Controller
      */
     public function index()
     {
-        //
+        $actividades = Actividad::all()->where('estado_actividad',1);
+
+        return view('actividad.index', compact('actividades'));
     }
 
     /**
@@ -24,7 +30,8 @@ class ActividadController extends Controller
      */
     public function create()
     {
-        //
+        $cursos = Curso::all()->where('estado_curso',1)->sortBy('nombre_curso')->pluck('nombre_curso','id_curso');
+        return view('actividad.crearActividad', compact('cursos'));
     }
 
     /**
@@ -35,7 +42,37 @@ class ActividadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $actividad = new Actividad;
+        $actividad->id_curso = $request->id_curso;
+        $actividad->cod_interno_actividad = $request->cod_interno_actividad;
+        $actividad->cod_sence_actividad  = $request->cod_sence_actividad;
+        $actividad->lugar_realizacion_actividad  = $request->lugar_realizacion_actividad;
+        $actividad->observacion_actividad  = $request->observacion_actividad;
+        $actividad->fecha_inicio_actividad  = $request->fecha_inicio_actividad;
+        $actividad->fecha_termino_actividad  = $request->fecha_termino_actividad;
+        $actividad->estado_actividad  = 1;
+        $actividad->save();
+        return redirect('actividad');
+
+    }
+
+    public function createHorario($id)
+    {
+        $actividad = Actividad::findOrFail($id);
+        return view('actividad.crearHorario', compact('actividad'));
+
+    }
+
+    public function storeHorario(Request $request)
+    {
+        $horario = new Horario;
+        $horario->id_actividad = $request->id_actividad;
+        $horario->hora_inicio_horario = $request->hora_inicio_horario;
+        $horario->hora_termino_horario = $request->hora_termino_horario;
+        $horario->fecha_horario = $request->fecha_horario;
+        $horario->estado_horario = 1;
+        $horario->save();
+        return redirect('actividad');
     }
 
     /**

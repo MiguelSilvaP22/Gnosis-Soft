@@ -51,6 +51,56 @@ function validarRut(TCode){
     return true;     
 }
 
+function validarDV(rut)
+{
+	// Despejar Puntos
+    var valor = rut;
+    // Despejar Guión
+    valor = valor.replace('-','');
+    
+    // Aislar Cuerpo y Dígito Verificador
+    cuerpo = valor.slice(0,-1);
+    dv = valor.slice(-1).toUpperCase();
+    
+    // Formatear RUN
+    rut.value = cuerpo + '-'+ dv
+    
+    // Si no cumple con el mínimo ej. (n.nnn.nnn)
+    if(cuerpo.length < 7) {return true;}
+    
+    // Calcular Dígito Verificador
+    suma = 0;
+    multiplo = 2;
+    
+    // Para cada dígito del Cuerpo
+    for(i=1;i<=cuerpo.length;i++) {
+    
+        // Obtener su Producto con el Múltiplo Correspondiente
+        index = multiplo * valor.charAt(cuerpo.length - i);
+        
+        // Sumar al Contador General
+        suma = suma + index;
+        
+        // Consolidar Múltiplo dentro del rango [2,7]
+        if(multiplo < 7) { multiplo = multiplo + 1; } else { multiplo = 2; }
+  
+    }
+    
+    // Calcular Dígito Verificador en base al Módulo 11
+    dvEsperado = 11 - (suma % 11);
+    
+    // Casos Especiales (0 y K)
+    dv = (dv == 'K')?10:dv;
+    dv = (dv == 0)?11:dv;
+    
+    // Validar que el Cuerpo coincide con su Dígito Verificador
+    if(dvEsperado != dv) { return true; }
+    
+    // Si todo sale bien, eliminar errores (decretar que es válido)
+    return false;
+}
+
+
 //Validación Gerencia.
 function validarGerencia (){
 	var verificar = true;
@@ -172,7 +222,7 @@ function validarEmpresa()
 		}	
 	}
 
-	//Validar Rut Matriz. *****
+	//Validar Rut Matriz.
 	if($.trim( $("#rut_matriz_empresa").val()) == "" )
 	{
 		verificar = false; marcarErrorGeneral('rut_matriz_empresa','errRutMatriz');
@@ -186,6 +236,11 @@ function validarEmpresa()
 		}else
 		{
 			desmarcarError('rut_matriz_empresa','errRutMatriz');
+			if(validarDV($("#rut_matriz_empresa").val()))
+			{
+				verificar = false; marcarErrorRut('rut_matriz_empresa','errRutMatriz');	
+			}
+			else{desmarcarError('rut_matriz_empresa','errRutMatriz');}
 		}	
 	}
 
@@ -203,8 +258,7 @@ function validarEmpresa()
 	{
 		desmarcarErrorSelect('errSelectRegion');		
 	}
-
-	if($("#id_comuna").val() == "")
+	if($("#idComuna").val() == "")
 	{verificar = false; marcarErrorSelect('errSelectComuna');}
 	else
 	{desmarcarErrorSelect('errSelectComuna');} 

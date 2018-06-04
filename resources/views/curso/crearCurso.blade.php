@@ -27,7 +27,7 @@
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Objetivo:') !!}
-								{!! Form::text('objetivo_curso', null, ['class' => 'form-control']) !!}
+								{!! Form::textArea('objetivo_curso', null, ['class' => 'form-control']) !!}
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Descripción:') !!}

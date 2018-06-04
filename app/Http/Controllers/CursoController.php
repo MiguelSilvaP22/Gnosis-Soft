@@ -137,16 +137,77 @@ class CursoController extends Controller
      */
     public function update(Request $request, $id)
     {
+       
+        $contenidosGenerales = $request->contenidoGeneral;
+        $competencias = $request->id_competencia;
         $curso = Curso::findOrFail($id);
-        $curso->id_perfilocu = $request->id_perfilocu;
-        $curso->run_curso = $request->run_curso;
-        $curso->nombre_curso = $request->nombre_curso; 
-        //$curso->fechana_curso = $request->fechana_curso;
-        $curso->apellidopat_curso = $request->apellidopat_curso;
-        $curso->apellidomat_curso = $request->apellidomat_curso;
-        $curso->sexo_curso = $request->sexo_curso;
-        $curso->email_curso = $request->email_curso;
-        $curso->save();
+        $curso->cod_interno_curso = $request->cod_interno_curso;
+        $curso->cod_sence_curso = $request->cod_sence_curso;
+        $curso->nombre_curso = $request->nombre_curso;
+        $curso->objetivo_curso = $request->objetivo_curso;
+        $curso->desc_curso = $request->desc_curso;
+        $curso->cant_hora_curso = $request->cant_hora_curso;
+        $curso->id_areacurso = $request->id_areacurso;
+        $curso->id_modalidad = $request->id_modalidad;
+        $curso->estado_curso = 1;
+        if($curso->save())
+        {
+            CompetenciaCurso::where('id_curso',$curso->id_curso)->update( ['estado_compcurso' => 0]);
+            foreach($competencias as $competencia)
+            {
+                $compCurso = CompetenciaCurso::All()->where('id_curso',$curso->id_curso)->where('id_comp',$competencia)->first();          
+                if($compCurso != null)
+                {
+                    $compCurso->estado_compcurso = 1;
+                    $compCurso->save();
+
+                }
+                else
+                {
+                    $competenciaCurso = new CompetenciaCurso;
+                    $competenciaCurso->id_comp = $competencia;
+                    $competenciaCurso->id_curso = $curso->id_curso;
+                    $competenciaCurso->estado_compcurso = 1;
+
+                    $competenciaCurso->save();
+                }
+            }
+
+            ContenidoGeneral::where('id_curso',$curso->id_curso)->update( ['estado_contenidog' => 0]);
+            foreach($contenidosGenerales as $contenido)
+            {
+                $contenidoGeneralCurso = ContenidoGeneral::all()->where('id_curso',$curso->id_curso)->where('nombre_contenidog',$contenido)->first();   
+                if($contenidoGeneralCurso != null)
+                {
+                    $contenidoGeneralCurso->estado_contenidog = 1;
+                    $contenidoGeneralCurso->save();
+
+                }
+                else
+                {
+                    $contenidoGeneral = new ContenidoGeneral;
+                    $contenidoGeneral->id_curso = $curso->id_curso;
+                    $contenidoGeneral->nombre_contenidog = $contenido;
+                    $contenidoGeneral->estado_contenidog = 1;
+                    $contenidoGeneral->save();
+                }
+                
+                
+            }
+            if($_FILES['temario_curso']!= null)
+            {
+                $dir_subida = public_path()."/temario/";
+                $ext = pathinfo($_FILES['temario_curso']['name'], PATHINFO_EXTENSION);
+                $nombreTemario = "temario_curso_".$curso->id_curso.".".$ext;
+                $fichero_subido = $dir_subida .$nombreTemario;
+                
+                if (move_uploaded_file($_FILES['temario_curso']['tmp_name'], $fichero_subido)) {
+                    $curso->link_temario_curso = $nombreTemario ;
+                    $curso->save();
+                } 
+            }
+            
+        }
         return redirect('curso');
 
     }

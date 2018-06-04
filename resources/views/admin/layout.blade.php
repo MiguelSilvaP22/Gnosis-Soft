@@ -18,6 +18,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="/adminlte/bower_components/Ionicons/css/ionicons.min.css">
   <!--Date Picker-->
   <link rel="stylesheet" href="/adminlte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+  <!--Time Picker-->
+  <link rel="stylesheet" href="/adminlte/plugins/timepicker/bootstrap-timepicker.min.css">
   <!--Select2-->
   <link rel="stylesheet" href="/adminlte/bower_components/select2/dist/css/select2.min.css">
   <!--FullCalendar-->
@@ -300,7 +302,7 @@ desired effect
           <li><a href="/colaborador"><i class="fa fa-user"></i> <span>Colaboradores</span></a></li>
           <li><a href="/empresa"><i class="fa fa-building"></i> <span>Empresas</span></a></li>
           <li><a href="/curso"><i class="fa fa-graduation-cap"></i> <span>Cursos</span></a></li>
-          <li><a href="#"><i class="fa fa-book"></i> <span>Actividad</span></a></li>
+          <li><a href="/actividad"><i class="fa fa-book"></i> <span>Actividad</span></a></li>
           <li><a href="#"><i class="fa fa-pencil-square-o"></i> <span>Evaluación</span></a></li>
           <li><a href="/competencia"><i class="fa fa-th-list"></i> <span>Competencias</span></a></li>
           <li><a href="#"><i class="fa fa-paper-plane"></i> <span>Encuesta</span></a></li>
@@ -484,6 +486,8 @@ desired effect
 <script src="/adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!--Date Picker-->
 <script src="/adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<!--Time Picker-->
+<script src="/adminlte/plugins/timepicker/bootstrap-timepicker.min.js"></script>
 <!-- FullCalendar-->
 <script src="/adminlte/bower_components/moment/moment.js"></script>
 <script src="/adminlte/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>

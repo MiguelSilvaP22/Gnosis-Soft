@@ -11,8 +11,6 @@
 
 				<div class="box-body">
 					{!! Form::open(['action' => 'EmpresaController@store', 'id'=>'formEmpresa']) !!}
-				
-
 				<div class='form-group'>
 					{!! Form::label('nombre_empresa', 'Nombre:') !!}
 					{!! Form::text('nombre_empresa', null, ['class' => 'form-control','id'=>'nombre_empresa','maxlength'=>'100']) !!}
@@ -44,8 +42,8 @@
 
 				<div class='form-group' id="comuna" style="display:none">
 					{!! Form::label('comuna_empresa', 'Comuna:') !!}
-					{!! Form::select('id_comuna', $comunas,null ,['class' => 'form-control select2','placeholder'=>'Seleccione una comuna', 'style'=>'width:100%','id'=>'id_comuna']) !!}
-					{!! Form::label('', '',['id' => 'errSelectComuna']) !!}
+					{!! Form::select('id_comuna', $comunas,null ,['class' => 'form-control select2','placeholder'=>'Seleccione una comuna', 'style'=>'width:100%', 'id'=>'idComuna']) !!}	
+					{!! Form::label('', '',['id' => 'errSelectComuna']) !!}				
 				</div>				
 
 				<div class='form-group'>
@@ -75,17 +73,13 @@
 
 				<div id='empresas' class='form-group' style="display:none;">
 					{!! Form::label('giro_empresa', 'Empresas del Holding:') !!}
-					{!! Form::select('id_empresa[]', $empresas,null ,['class' => 'select2','multiple', 'data-placeholder'=>'Seleccione una o varias empresas','id'=>'id_empresa', 'style'=>'width:100%']) !!}
+					{!! Form::select('id_empresa[]', $empresas,null ,['class' => 'select2','multiple', 'id'=>'id_empresa', 'style'=>'width:100%']) !!}
 					{!! Form::label('', '',['id' => 'errSelectEmpresaHolding']) !!}
 				</div>
-<<<<<<< HEAD
-				
-				<div class="form-control btn btn-success" id="valiGiro"> Validar</div>
-=======
-				<div class='form-group' >
+				<div class='form-group'>
 					{!! Form::submit("Agregar empresa", ['class' => 'form-control btn btn-success ']) !!}
 				</div>
->>>>>>> 941304c67787b62b64644e2928d8bde413d2adcf
+
 				{!! Form::close() !!}
 				<div class='form-group'>
 					<div id="btnVolver" class="form-control btn btn-success " > Volver </div>
@@ -104,10 +98,6 @@ $(document).ready(function() {
 	
 });
 
-<<<<<<< HEAD
-$(document).on('click', '#valiGiro', function () {
-	alert($("#id_giro")[0].val());
-=======
 $('#formEmpresa').submit(function (e) {
 	e.preventDefault();
 	var url = e.target.action  // get the target
@@ -119,7 +109,6 @@ $('#formEmpresa').submit(function (e) {
 		});
 	}
 
->>>>>>> 941304c67787b62b64644e2928d8bde413d2adcf
 });
 $(document).on('change', '#id_region', function () {
 

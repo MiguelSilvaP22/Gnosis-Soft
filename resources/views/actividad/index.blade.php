@@ -9,7 +9,7 @@
 			<div class="box">
 			
 				<div class="box-header">
-					<h1 class="box-title">Tabla de Cursos</h1>
+					<h1 class="box-title">Tabla de Actividades</h1>
 				</div>
 				<div style="widtn:100%;align:center;">
 					
@@ -18,33 +18,35 @@
 					</div>
 				</div>
 				<div class="box-body">
-				@if (count($cursos)>0)
-				<table id="tablaCurso" class="table">
+				@if (count($actividades)>0)
+				<table id="tablaActividad" class="table">
 					<thead>
 						<tr>
-							<th>Nombre Curso</th>
+							<th>Codigo Actividad</th>
+							<th>Codigo Sence Actividad</th>
 							<th>Fecha de Modificación</th>
 							<th>Estado</th>
 							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
-						@foreach ($cursos as $curso) 
+						@foreach ($actividades as $actividad) 
 						<tr>
 
-							<td style="width:25%;">{{ $curso->nombre_curso}}</td>
-							<td style="width:25%;">{{ $curso->fecha_mod_curso}}</td>
-							@if($curso->estado_curso == 1)
+							<td style="width:25%;">{{ $actividad->cod_interno_actividad}}</td>
+							<td style="width:25%;">{{ $actividad->cod_sence_actividad}}</td>
+							<td style="width:25%;">{{ $actividad->fecha_mod_actividad}}</td>
+							@if($actividad->estado_actividad == 1)
 							<td style="width:25%;color:green;">Activo</td>
 							@else
 							<td style="width:25%;color:red">inactivo</td>
 							@endif
 							<td>
-							<button id="btnVer" value="{{ $curso->id_curso}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
+							<button id="btnVer" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
+							<button id="btnHorario" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Horario</button>
+							<button id="btnEditar" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>
 
-							<button id="btnEditar" value="{{ $curso->id_curso}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>
-
-							<button id="deleteCurso" class="btn btn btn-info" value="{{ $curso->id_curso}}"><i class="fa fa-eraser"></i> Eliminar</button>
+							<button id="deleteActividad" class="btn btn btn-info" value="{{ $actividad->id_actividad}}"><i class="fa fa-eraser"></i> Eliminar</button>
 							</td>
 						</tr>
 						@endforeach
@@ -53,7 +55,7 @@
 					</tbody>
 				</table>
 				@else
-				<h1>No Hay cursos registrados</h1>
+				<h1>No Hay actividades registrados</h1>
 				@endif
 				</div>
 			</div>
@@ -86,14 +88,27 @@
 @section('script-js')
 <script>
 $(document).ready(function() {
-	$('#tablaCurso').DataTable({
+	$('#tablaActividad').DataTable({
 			
 		});
 } );
 
 $(document).on('click', '#btnVer', function () {
 		$.ajax({
-		url: "/verCurso/"+this.value,
+		url: "/verActividad/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#datos").html(datos);
+			$('#modal').modal('show');
+		}
+
+		});
+		//alert("asda");
+});	
+
+$(document).on('click', '#btnHorario', function () {
+		$.ajax({
+		url: "/crearHorario/"+this.value,
 		type: "GET",
 		success: function (datos) {
 			$("#datos").html(datos);
@@ -106,7 +121,7 @@ $(document).on('click', '#btnVer', function () {
 
 $(document).on('click', '#btnAgregar', function () {
 		$.ajax({
-		url: "/crearCurso/",
+		url: "/crearActividad/",
 		type: "GET",
 		success: function (datos) {
 			$("#datos").html(datos);
@@ -120,7 +135,7 @@ $(document).on('click', '#btnAgregar', function () {
 
 $(document).on('click', '#btnEditar', function () {
 		$.ajax({
-		url: "/editarCurso/"+this.value,
+		url: "/editarActividad/"+this.value,
 		type: "GET",
 		success: function (datos) {
 			
@@ -134,10 +149,10 @@ $(document).on('click', '#btnEditar', function () {
 });	
 
 
-$(document).on('click', '#deleteCurso', function () {
+$(document).on('click', '#deleteActividad', function () {
 		
 		$.ajax({
-		url: "/desactivarCurso/"+this.value,
+		url: "/desactivarActividad/"+this.value,
 		type: "GET",
 		success: function (datos) {
 			$("#datos").html(datos);

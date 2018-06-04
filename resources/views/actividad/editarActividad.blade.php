@@ -82,10 +82,6 @@
 <script>
 
 $(document).ready(function() {
-
-	alert("ok");
-
-	
     $('.select2').select2();
 	var idCompetencias = {{$competenciasCurso}};
 	$('#id_competencia').select2().val(idCompetencias).trigger("change");

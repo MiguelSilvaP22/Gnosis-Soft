@@ -30,13 +30,13 @@
 
 				<div class='form-group'>
 					{!! Form::label('giro_empresa', 'Giro:') !!}
-					{!! Form::select('id_giro[]', $giros,null ,['class' => 'select2','multiple', 'data-placeholder'=>'Seleccione uno o varios giros','id'=>'id_giro', 'style'=>'width:100%']) !!}
+					{!! Form::select('id_giro[]', $giros,null ,['class' => 'select2','multiple','id'=>'id_giro', 'style'=>'width:100%']) !!}
 					{!! Form::label('', '',['id' => 'errSelectGiro']) !!}
 				</div>
 
 				<div class='form-group'>
 					{!! Form::label('region_empresa', 'Region:') !!}
-					{!! Form::select('id_region', $regiones,null ,['class' => 'select2','data-placeholder'=>'Seleccione una región','id'=>'id_region', 'style'=>'width:100%']) !!}
+					{!! Form::select('id_region', $regiones,null ,['class' => 'select2','placeholder'=>'Seleccione una región','id'=>'id_region', 'style'=>'width:100%']) !!}
 					{!! Form::label('', '',['id' => 'errSelectRegion']) !!}
 				</div>	
 	
@@ -44,7 +44,6 @@
 				<div class='form-group' id="comuna">
 					{!! Form::label('comuna_empresa', 'Comuna:') !!}
 					{!! Form::select('id_comuna', $comunas,null ,['class' => 'form-control select2', 'style'=>'width:100%']) !!}
-					{!! Form::label('', '',['id' => 'errSelectComuna']) !!}
 				</div>					
 
 				<div class='form-group'>
@@ -74,7 +73,7 @@
 
 				<div id='empresas' class='form-group' style="display:none;">
 					{!! Form::label('giro_empresa', 'Empresas del Holding:') !!}
-					{!! Form::select('id_empresa[]', $empresas,null ,['class' => 'select2','multiple', 'data-placeholder'=>'Seleccione una o varias empresas','id'=>'id_empresa', 'style'=>'width:100%']) !!}
+					{!! Form::select('id_empresa[]', $empresas,null ,['class' => 'select2','multiple','id'=>'id_empresa', 'style'=>'width:100%']) !!}
 					{!! Form::label('', '',['id' => 'errSelectEmpresaHolding']) !!}
 				</div>
 				<div class='form-group' onclick="validarEmpresa()">

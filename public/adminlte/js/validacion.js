@@ -204,7 +204,7 @@ function validarEmpresa()
 		desmarcarErrorSelect('errSelectRegion');		
 	}
 
-	if($("#id_comuna").val() == "")
+	if($("#idComuna").val() == "")
 	{verificar = false; marcarErrorSelect('errSelectComuna');}
 	else
 	{desmarcarErrorSelect('errSelectComuna');} 

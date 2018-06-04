@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Actividad;
 use App\Curso;
+use App\Horario;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -53,6 +54,25 @@ class ActividadController extends Controller
         $actividad->save();
         return redirect('actividad');
 
+    }
+
+    public function createHorario($id)
+    {
+        $actividad = Actividad::findOrFail($id);
+        return view('actividad.crearHorario', compact('actividad'));
+
+    }
+
+    public function storeHorario(Request $request)
+    {
+        $horario = new Horario;
+        $horario->id_actividad = $request->id_actividad;
+        $horario->hora_inicio_horario = $request->hora_inicio_horario;
+        $horario->hora_termino_horario = $request->hora_termino_horario;
+        $horario->fecha_horario = $request->fecha_horario;
+        $horario->estado_horario = 1;
+        $horario->save();
+        return redirect('actividad');
     }
 
     /**

@@ -59,19 +59,29 @@ class ActividadController extends Controller
     public function createHorario($id)
     {
         $actividad = Actividad::findOrFail($id);
-        return view('actividad.crearHorario', compact('actividad'));
+        $horarios = Horario::all()->where('id_actividad',$id)->where('estado_horario',1);
+        return view('actividad.crearHorario', compact('actividad','horarios'));
+
+    }
+    public function formHorario($id)
+    {
+        $idForm = $id;
+        return view('actividad.formHorario', compact('idForm'));
 
     }
 
     public function storeHorario(Request $request)
     {
-        $horario = new Horario;
-        $horario->id_actividad = $request->id_actividad;
-        $horario->hora_inicio_horario = $request->hora_inicio_horario;
-        $horario->hora_termino_horario = $request->hora_termino_horario;
-        $horario->fecha_horario = $request->fecha_horario;
-        $horario->estado_horario = 1;
-        $horario->save();
+        for($x=0; $x<Count($request->fecha_horario);$x++)
+        {   
+            $horario = new Horario;
+            $horario->id_actividad = $request->id_actividad;
+            $horario->hora_inicio_horario = $request->hora_inicio_horario[$x];
+            $horario->hora_termino_horario = $request->hora_termino_horario[$x];
+            $horario->fecha_horario = $request->fecha_horario[$x];
+            $horario->estado_horario = 1;
+            $horario->save();
+        }
         return redirect('actividad');
     }
 

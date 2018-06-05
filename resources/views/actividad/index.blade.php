@@ -107,12 +107,18 @@ $(document).on('click', '#btnVer', function () {
 });	
 
 $(document).on('click', '#btnHorario', function () {
+
 		$.ajax({
 		url: "/crearHorario/"+this.value,
 		type: "GET",
 		success: function (datos) {
 			$("#datos").html(datos);
-			$('#modal').modal('show');
+			$('#modal').modal({
+				backdrop: 'static',
+                keyboard: true, 
+                show: true
+            });
+
 		}
 
 		});

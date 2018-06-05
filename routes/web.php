@@ -353,7 +353,12 @@ Route::get('/crearHorario/{id}', 'ActividadController@createHorario',function($i
     return $id;
 })->name('actividad.createHorario'); 
 
-Route::post('actividad_storeHorario', [
+Route::get('/formHorario/{id}', 'ActividadController@formHorario',function($id)
+{
+    return $id;
+})->name('actividad.formHorario'); 
+
+Route::post('storeHorario', [
     'uses' => 'ActividadController@storeHorario'
   ]);
 Route::resource('actividad', 'ActividadController');

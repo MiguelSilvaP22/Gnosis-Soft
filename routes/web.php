@@ -374,12 +374,28 @@ VISTA DE LA EMPRESA
 
 */
 
+//-------------------------------------------------------------------------------------------------------------------------
+//Competencia
+
 Route::resource('vistacompetencia', 'vistaCompetenciaController');
 Route::get('/vercompetencias/{id}', 'vistaCompetenciaController@vistacompetencias',function($id) {
     return  $id;
   });
 
   Route::get('/infocompetencia/{id}', 'vistaCompetenciaController@infocompetencia',function($id) {
+    return  $id;
+  });
+
+//-------------------------------------------------------------------------------------------------------------------------
+//Curso
+
+  Route::resource('vistacurso', 'vistaCursoController');
+
+Route::get('/vercursos/{id}', 'vistaCursoController@vistacursos',function($id) {
+    return  $id;
+  });
+
+  Route::get('/infocurso/{id}', 'vistaCursoController@infocurso',function($id) {
     return  $id;
   });
 

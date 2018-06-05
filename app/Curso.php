@@ -10,4 +10,9 @@ class Curso extends Model
     protected $primaryKey = 'id_curso';
     const CREATED_AT = 'fecha_reg_curso';
     const UPDATED_AT = 'fecha_mod_curso';
+
+    public function competencias()
+    {
+        return $this->belongsToMany(Competencia::Class, 'competenciacurso', 'id_curso', 'id_comp');
+    }
 }

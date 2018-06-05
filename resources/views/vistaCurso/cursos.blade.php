@@ -3,7 +3,7 @@
 	<table class="table table-hover">
 				<thead>
 					<tr>
-						<th>Categorias de Competencias</th>
+						<th>Lista de Cursos</th>
 					</tr>
 				</thead>
 				<tbody>

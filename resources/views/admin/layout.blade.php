@@ -327,7 +327,7 @@ desired effect
             </a>
             <ul class="treeview-menu">
               <li><a href="#"><i class="fa fa-sticky-note-o"></i> <span>Estado Curso</span></a></li>
-              <li><a href="#"><i class="fa fa-exclamation"></i> <span>Información Curso</span></a></li>
+              <li><a href="/vistacurso"><i class="fa fa-exclamation"></i> <span>Información Curso</span></a></li>
             </ul>
           </li>
           <li><a href="/vistacompetencia"><i class="fa fa-street-view"></i> <span>Competencias</span></a></li>

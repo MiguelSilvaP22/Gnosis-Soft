@@ -6,7 +6,7 @@
 <div class="row buscador">
 	<div class="col-xs-3">
 		<h4>cursos</h4>
-		{!! Form::select('id_competencia', $listaCompetencias,null ,['class' => 'select2','data-placeholder'=>'Seleccione una modalidad','id'=>'id_competencia', 'style'=>'width:100%']) !!}
+		{!! Form::select('competencias', $listaCompetencias,null,['class'=>'form-control', 'id'=>'id_competencia', 'style'=>'width:100%']) !!}
 
 	</div>
 </div>
@@ -51,11 +51,14 @@
 	$(document).ready(function() {
 
 		$('#id_competencia').select2({
-		});
+			placeholder: "Buscar Competencia"
+		}).val('').trigger('change');;
+
 	});
 
 	$( document ).ready(function() {
 
+		
 			var getUrlParameter = function getUrlParameter(sParam) {
 		var sPageURL = decodeURIComponent(window.location.search.substring(1)),
 			sURLVariables = sPageURL.split('&'),
@@ -73,7 +76,8 @@
 
 	if(getUrlParameter('categoria')!=null && getUrlParameter('competencia')!=null)
 	{
-		cargar(getUrlParameter('categoria'), getUrlParameter('competencia'))
+		$('.infoDeCompetencia').addClass('loader');
+		cargar(getUrlParameter('categoria'), getUrlParameter('competencia'));
 	}
 	});
 
@@ -104,11 +108,11 @@
 
 	function cargar(idCat, idComp){
 		
-		alert(idComp);
 		$.ajax({
 		url: "/vercompetencias/"+idCat,
 		type: "GET",
 		success: function (datos) {
+			$('.infoDeCompetencia').removeClass('loader');
 			$(".competenciasTabla").html(datos);
 
 			$.ajax({
@@ -125,6 +129,20 @@
 		});
 	}
 
+
+
+
+
+	$('#id_competencia').on('select2:select', function (e) {
+		$.ajax({
+			url: "/infocompetencia/"+e.params.data.id,
+			type: "GET",
+			success: function (datos2) {
+				$(".infoDeCompetencia").html(datos2);			
+			}
+			});
+	});
+
 	
 
 </script>
@@ -132,6 +150,28 @@
 <style>
 .buscador{
 	margin-bottom: 20px;
+}
+
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 </style>
 

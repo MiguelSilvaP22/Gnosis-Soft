@@ -6,7 +6,7 @@
 <div class="row buscador">
 	<div class="col-xs-3">
 		<h4>cursos</h4>
-		{!! Form::select('id_competencia', $listaCompetencias,null ,['class' => 'select2','data-placeholder'=>'Seleccione una modalidad','id'=>'id_competencia', 'style'=>'width:100%']) !!}
+		{!! Form::select('cursos', $listaCursos,null,['class'=>'form-control', 'id'=>'id_curso', 'style'=>'width:100%']) !!}
 
 	</div>
 </div>
@@ -50,8 +50,9 @@
 
 	$(document).ready(function() {
 
-		$('#id_competencia').select2({
-		});
+		$('#id_curso').select2({
+			placeholder: "Buscar Curso"
+		}).val('').trigger('change');;
 	});
 
 	$( document ).ready(function() {
@@ -71,9 +72,9 @@
 		}
 	};
 
-	if(getUrlParameter('categoria')!=null && getUrlParameter('competencia')!=null)
+	if(getUrlParameter('area')!=null && getUrlParameter('curso')!=null)
 	{
-		cargar(getUrlParameter('categoria'), getUrlParameter('competencia'))
+		cargar(getUrlParameter('area'), getUrlParameter('curso'))
 	}
 	});
 
@@ -103,16 +104,16 @@
 	});
 
 
-	function cargar(idCat, idComp){
+	function cargar(idArea, idCurso){
 	
 		$.ajax({
-		url: "/vercompetencias/"+idCat,
+		url: "/vercursos/"+idArea,
 		type: "GET",
 		success: function (datos) {
 			$(".competenciasTabla").html(datos);
 
 			$.ajax({
-			url: "/infocompetencia/"+idComp,
+			url: "/infocurso/"+idCurso,
 			type: "GET",
 			success: function (datos2) {
 				$(".infoDeCompetencia").html(datos2);
@@ -124,6 +125,20 @@
 		}
 		});
 	}
+
+
+	
+
+	$('#id_curso').on('select2:select', function (e) {
+		$.ajax({
+			url: "/infocurso/"+e.params.data.id,
+			type: "GET",
+			success: function (datos2) {
+				$(".infoDeCompetencia").html(datos2);			
+			}
+			});
+	});
+
 
 	
 

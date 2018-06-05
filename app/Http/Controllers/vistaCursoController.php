@@ -31,10 +31,10 @@ class vistaCursoController extends Controller
     {
         $areaCursos = AreaCurso::All()->where('estado_areacurso',1);
         $competencias = Competencia::All()->where('estado_comp',1);
-        $listaCompetencias =  Competencia::all()->where('estado_comp',1)->sortBy('nombre_comp')->pluck('nombre_comp','id_comp');
+        $listaCursos =  Curso::all()->where('estado_curso',1)->sortBy('nombre_curso')->pluck('nombre_curso','id_curso');
         $categoriascompetencias = categoriacompetencia::All()->where('estado_categoriacomp',1);
         \Debugbar::info($areaCursos);
-        return view('vistacurso.index', compact('competencias','areaCursos', 'listaCompetencias'));
+        return view('vistacurso.index', compact('competencias','areaCursos', 'listaCursos'));
     }
 
     /**

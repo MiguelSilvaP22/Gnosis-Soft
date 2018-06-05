@@ -40,7 +40,7 @@
 					@foreach ($competencia->cursos as $curso)
 						<tr>
 						<td >{{ $curso->nombre_curso }}</td>	
-						<td><a href=""> mas información </a></td>
+						<td><a href="../vistacurso?area={{ $curso->id_areacurso }}&curso={{ $curso->id_curso }}"> mas información </a></td>
 						</tr>
 					@endforeach
 					</tbody>

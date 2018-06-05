@@ -10,7 +10,7 @@
 
 			<div class="box-body">
 				<div class="row">
-					<div class="col-md-12   ">
+					<div class="col-md-12">
 						<table class="table">
 							<thead>
 								<tr>
@@ -39,7 +39,7 @@
 								</tr>
 							</tbody>
 						</table>
-					   <span id="btnAgregarHorario" value="{{$actividad->id_actividad}}" class="btn btn-block btn-success" style="float: right;margin-bottom: 10px;margin-right: 10px;width:200px;">
+					   <span onclick="cargarForm()" id="btnAgregarFormulario" value="{{$actividad->id_actividad}}" class="btn btn-block btn-success" style="float: right;margin-bottom: 10px;margin-right: 10px;width:200px;">
 							<i class="fa fa-plus"></i>	Agregar
 						</span>
 						{!! Form::open(['action' => 'ActividadController@storeHorario','id'=>'formularioHorario']) !!}
@@ -82,8 +82,7 @@
 										</td>
 									</tr>						
 								@endforeach
-									<div id="agregarVainas"></div>
-								</tbody>
+									</tbody>
 							</table>
 							@else
 							<table class="table" id="myTable" >
@@ -128,38 +127,34 @@
 
 </body>
 
-<style>
-
-</style>
-
 <script type="text/javascript">
 	var count =0;
 	$(document).ready(function() {
 		$('.date').datepicker({});
+			alert('asas');
 		
 	});
 
 function eliminarForm(id){
-		$("#form"+id).remove();
-		
+		$("#form"+id).remove();		
 	}
 	
-$(document).on('click', '#btnAgregarHorario', function () {
-		alert(count);
-		count++;
+function cargarForm() {
+	
+	count++;
 		$.ajax({
 		url: "/formHorario/"+count,
 		type: "GET",
 		success: function (datos) {
 			$('#myTable tr:last').after(datos);
 			$('.date').datepicker({});
-			}	
-		
-
+			}
 		});
-});
+}
 $(document).on('click', '#btnVolver', function () {
+		$("#datos").html('');
 		$('#modal').modal('hide');
+		
 		
 });
 

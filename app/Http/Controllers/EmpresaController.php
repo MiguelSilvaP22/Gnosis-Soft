@@ -221,5 +221,18 @@ class EmpresaController extends Controller
         return redirect('empresa');
     }
 
-    
+    public function validarNombre($nombre)
+    {
+        $empresa = Empresa::All()->where('nombre_empresa',$nombre)->first();
+        
+        if($empresa != null)
+        {
+            return 'false';
+        }
+        else
+        {
+            return 'true';
+        }
+      
+    }
 }

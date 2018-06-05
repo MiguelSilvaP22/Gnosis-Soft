@@ -125,7 +125,10 @@ Route::get('/eliminarEmpresa/{id}', 'EmpresaController@destroy',function($id) {
     })
 ->name('empresa.destroy');  
     
-
+Route::get('/validarNombre/{id}', 'EmpresaController@validarNombre',function($nombre) {
+    return  $nombre;
+  })
+  ->name('empresa.validarNombre');
 Route::resource('empresa', 'EmpresaController');
 
 // Organigrama Empresa

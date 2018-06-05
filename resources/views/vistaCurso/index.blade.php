@@ -18,13 +18,13 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>Categorias de Competencias</th>
+							<th>Area de Curso</th>
 						</tr>
 					</thead>
 					<tbody>
-					@foreach ($categoriascompetencias as $categoriascompetencia)
+					@foreach ($areaCursos as $areaCurso)
 						<tr>
-						<td id='{{ $categoriascompetencia->id_categoriacomp  }}' class='categoriaCompTd'> {{ $categoriascompetencia->nombre_categoriacomp }}</td>
+						<td id='{{ $areaCurso->id_areacurso  }}' class='areaCursoTd'> {{ $areaCurso->nombre_areacurso }}</td>
 						</tr>
 					@endforeach
 					</tbody>
@@ -78,16 +78,17 @@
 	});
 
 
-	$(".categoriaCompTd").click(function(e) {
+	$(".areaCursoTd").click(function(e) {
+
 		$.ajax({
-		url: "/vercompetencias/"+e.target.id,
+		url: "/vercursos/"+e.target.id,
 		type: "GET",
 		success: function (datos) {
 			$(".competenciasTabla").html(datos);
 
-			$(".competenciaTd").click(function(e) {
+			$(".cursoTd").click(function(e) {
 				$.ajax({
-				url: "/infocompetencia/"+e.target.id,
+				url: "/infocurso/"+e.target.id,
 				type: "GET",
 				success: function (datos) {
 					$(".infoDeCompetencia").html(datos);
@@ -103,8 +104,7 @@
 
 
 	function cargar(idCat, idComp){
-		
-		alert(idComp);
+	
 		$.ajax({
 		url: "/vercompetencias/"+idCat,
 		type: "GET",

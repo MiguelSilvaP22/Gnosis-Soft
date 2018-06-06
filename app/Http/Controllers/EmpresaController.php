@@ -225,7 +225,7 @@ class EmpresaController extends Controller
     {
         $empresa = Empresa::All()->where('nombre_empresa',$nombre)->first();
         
-        if($empresa != null)
+        if($empresa == null)
         {
             return 'false';
         }

@@ -206,8 +206,7 @@ function validarEmpresa()
 		}else
 		{
 			desmarcarError('nombre_empresa','errNombreEmpresa');
-			alert(validarNombreEmpresa());
-			if(validarNombreEmpresa())
+			if(validarNombreEmpresa()!= "false")
 			{
 				verificar = false; marcarErrorDuplicado('nombre_empresa','errNombreEmpresa');
 			}
@@ -316,13 +315,17 @@ function validarEmpresa()
 
 function validarNombreEmpresa()
 {
+	var verificar;
 	$.ajax({
-		url: "/validarNombre/"+$('#nombre_empresa').val(),
+		url: "/validarNombre/"+$("#nombre_empresa").val(),
 		type: "GET",
+		async: false,
 		success: function (datos) {
-			return datos+"";
-			alert("asdsa");
+			verificar = datos;
+
 		}
 
 		});
+	return verificar;
+	
 }

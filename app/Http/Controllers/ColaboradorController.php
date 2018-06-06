@@ -8,6 +8,9 @@ use App\Empresa;
 use App\Gerencia;
 use App\Area;
 use App\PerfilOcupacional;
+
+use DB;
+use App\Quotation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -133,5 +136,21 @@ class ColaboradorController extends Controller
         $colaborador = Usuario::findOrFail($id);
         $colaborador->eliminar();
         return redirect('colaborador');
+    }
+    public function selectColaboradores($id)
+    {
+        $colaboradores = DB::table('usuario')
+            ->join('perfilocupacional', 'usuario.id_perfilocu', '=', 'perfilocupacional.id_perfilocu')
+            ->join('area', 'perfilocupacional.id_area', '=', 'area.id_area')
+            ->join('gerencia', 'area.id_gerencia', '=', 'gerencia.id_gerencia')
+            ->join('empresa', 'gerencia.id_empresa', '=', 'empresa.id_empresa')
+            ->where('empresa.id_empresa',$id)
+            ->where('usuario.id_perfil',2)
+            ->where('usuario.estado_usuario',1)
+            ->select('usuario.*')
+            ->get()
+            ->sortBy('nombre_usuario')
+            ->pluck('run_usuario','id_usuario');
+        return view('colaborador.selectColaboradores', compact('colaboradores'));
     }
 }

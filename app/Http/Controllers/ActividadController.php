@@ -84,6 +84,10 @@ class ActividadController extends Controller
         }
         return redirect('actividad');
     }
+    public function updateHorario(Request $request)
+    {
+        return redirect('actividad');
+    }
 
     /**
      * Display the specified resource.

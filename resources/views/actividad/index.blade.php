@@ -106,10 +106,10 @@ $(document).on('click', '#btnVer', function () {
 		//alert("asda");
 });	
 
-$(document).on('click', '#btnHorario', function () {
-
-		$.ajax({
-		url: "/crearHorario/"+this.value,
+function cargarCrearHorario(id)
+{
+	$.ajax({
+		url: "/crearHorario/"+id,
 		type: "GET",
 		success: function (datos) {
 			$("#datos").html(datos);
@@ -122,6 +122,9 @@ $(document).on('click', '#btnHorario', function () {
 		}
 
 		});
+}
+$(document).on('click', '#btnHorario', function () {
+		cargarCrearHorario(this.value)
 		//alert("asda");
 });	
 

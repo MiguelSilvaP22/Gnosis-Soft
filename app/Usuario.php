@@ -21,10 +21,21 @@ class Usuario extends Model
     {
         return $this->belongsTo(Perfil::class,'id_perfil');
     }
+     public function horariosColaborador()
+    {
+        return $this->hasMany(HorarioColaborador::class,'id_usuario');
+    }
 
 
     public function eliminar()
     {
+        if($this->id_perfil == 2)
+        {
+            foreach($this->horariosColaborador as  $horColab)
+            {
+                $horColab->eliminar();
+            }
+        }
         $this->estado_usuario = 0;
         $this->save();
     }

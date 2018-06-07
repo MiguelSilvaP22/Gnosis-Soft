@@ -122,7 +122,6 @@
 						<div class='form-group'>
 							<div id="btnVolver" class="form-control btn btn-success " > Volver </div>
 						</div>
-					
 					</div>
   				</div>
 			</div>
@@ -164,10 +163,7 @@ function asignarHorario(id) {
 		});
 }
 $(document).on('click', '#btnVolver', function () {
-		$("#datos").html('');
-		$('#modal').modal('hide');
-		
-		
+	$('#modal').removeData();
 });
 
 </script>

@@ -53,25 +53,25 @@
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Nacionalidad:') !!}
-								{!! Form::select('id_nacionalidad', $nacionalidades,null ,['class' => 'select2','data-placeholder'=>'Seleccione una nacionalidad','id'=>'id_nacionalidad', 'style'=>'width:100%']) !!}
+								{!! Form::select('id_nacionalidad', $nacionalidades,null ,['class' => 'select2','placeholder'=>'Seleccione una nacionalidad','id'=>'id_nacionalidad', 'style'=>'width:100%']) !!}
 							</div>	
 						</div>
 						<div class="col-md-6">
 							<div class='form-group'>
 								{!! Form::label('', 'Empresas:') !!}
-								{!! Form::select('id_empresa', $empresas,$colaborador->perfilOcupacional->area->gerencia->empresa->id_empresa ,['class' => 'select2','data-placeholder'=>'Seleccione una empresa','id'=>'id_empresa', 'style'=>'width:100%']) !!}
+								{!! Form::select('id_empresa', $empresas,$colaborador->perfilOcupacional->area->gerencia->empresa->id_empresa ,['class' => 'select2','id'=>'id_empresa', 'style'=>'width:100%']) !!}
 							</div>	
 							<div class='form-group' id="gerencia">
 								{!! Form::label('', 'Gerencia:') !!}
-								{!! Form::select('id_gerencia', $gerencias,$colaborador->perfilOcupacional->area->gerencia->id_gerencia ,['class' => 'select2','data-placeholder'=>'Seleccione una empresa','id'=>'select_gerencia', 'style'=>'width:100%']) !!}
+								{!! Form::select('id_gerencia', $gerencias,$colaborador->perfilOcupacional->area->gerencia->id_gerencia ,['class' => 'select2','id'=>'select_gerencia', 'style'=>'width:100%']) !!}
 							</div>
 							<div class='form-group' id="area">
 								{!! Form::label('', 'Area:') !!}
-								{!! Form::select('id_area', $areas,$colaborador->perfilOcupacional->area->id_area ,['class' => 'select2','data-placeholder'=>'Seleccione una empresa','id'=>'select_area', 'style'=>'width:100%']) !!}
+								{!! Form::select('id_area', $areas,$colaborador->perfilOcupacional->area->id_area ,['class' => 'select2','id'=>'select_area', 'style'=>'width:100%']) !!}
 							</div>
 							<div class='form-group' id="perfilOcupacional">
 								{!! Form::label('', 'Perfil Ocupacional:') !!}
-								{!! Form::select('id_perfilocu', $perfilesOcu,$colaborador->perfilOcupacional->id_perfilocu ,['class' => 'select2','data-placeholder'=>'Seleccione una empresa','id'=>'select_perfilOcupacional', 'style'=>'width:100%']) !!}
+								{!! Form::select('id_perfilocu', $perfilesOcu,$colaborador->perfilOcupacional->id_perfilocu ,['class' => 'select2','id'=>'select_perfilOcupacional', 'style'=>'width:100%']) !!}
 							</div>
 						</div>
 						{!! Form::hidden('cargarSelects','1',['id'=>'cargarSelects']) !!}

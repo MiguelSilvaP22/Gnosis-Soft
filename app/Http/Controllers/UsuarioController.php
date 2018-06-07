@@ -6,7 +6,11 @@ use App\Usuario;
 use App\Perfil;
 use App\Nacionalidad;
 use App\Empresa;
+use App\Gerencia;
+use App\Area;
 use App\PerfilOcupacional;  
+use DB;
+use App\Quotation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -82,10 +86,26 @@ class UsuarioController extends Controller
     public function edit($id)
     {
         $usuario = Usuario::findOrFail($id);
+        if($usuario->id_perfilocu != null)
+        {
+             $usuColabEmpre = DB::table('usuario')
+            ->join('perfilocupacional', 'usuario.id_perfilocu', '=', 'perfilocupacional.id_perfilocu')
+            ->join('area', 'perfilocupacional.id_area', '=', 'area.id_area')
+            ->join('gerencia', 'area.id_gerencia', '=', 'gerencia.id_gerencia')
+            ->join('empresa', 'gerencia.id_empresa', '=', 'empresa.id_empresa')
+            ->where('usuario.id_usuario',$usuario->id_usuario)
+            ->select('usuario.nombre_usuario','empresa.id_empresa','area.id_area','gerencia.id_gerencia','perfilocupacional.id_perfilocu')
+            ->first(); 
+            
+            $gerencias = Gerencia::all()->where('estado_gerencia',1)->where('id_empresa',$usuColabEmpre->id_empresa)->sortBy('nombre_gerencia')->pluck('nombre_gerencia','id_gerencia');
+            $areas = Area::all()->where('estado_area',1)->where('id_gerencia',$usuColabEmpre->id_gerencia)->sortBy('nombre_area')->pluck('nombre_area','id_area');
+            $perfilesOcu = PerfilOcupacional::all()->where('estado_perfilocu',1)->where('id_area',$usuColabEmpre->id_area)->sortBy('nombre_perfilocu')->pluck('nombre_perfilocu','id_perfilocu');
+        }
+
         $nacionalidades = Nacionalidad::all()->where('estado_nacionalidad',1)->sortBy('nombre_nacionalidad')->pluck('nombre_nacionalidad','id_nacionalidad');
         $empresas = Empresa::all()->where('estado_empresa',1)->sortBy('nombre_empresa')->pluck('nombre_empresa','id_empresa');
         $perfiles = Perfil::all()->where('estado_perfil',1)->sortBy('nombre_perfil')->pluck('nombre_perfil','id_perfil');
-        return view('usuario.editarUsuario', compact('usuario','nacionalidades','empresas','perfiles'));
+        return view('usuario.editarUsuario', compact('usuario','nacionalidades','empresas','perfiles','gerencias','areas','usuColabEmpre','perfilesOcu'));
     }
 
     /**
@@ -111,6 +131,11 @@ class UsuarioController extends Controller
         return redirect('usuario');
     }
 
+    public function confirmDestroy($id)
+    {
+        $colaborador = Usuario::findOrFail($id);
+        return view('colaborador.desactivarColaborador', compact('colaborador'));
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -119,6 +144,7 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $colaborador = Usuario::findOrFail($id);
+        $colaborador->eliminar();
+        return redirect('colaborador');
     }
-}

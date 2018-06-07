@@ -21,9 +21,17 @@ class Usuario extends Model
     {
         return $this->belongsTo(Perfil::class,'id_perfil');
     }
-     public function horariosColaborador()
+    public function horariosColaborador()
     {
         return $this->hasMany(HorarioColaborador::class,'id_usuario');
+    }
+    public function horariosFacilitador()
+    {
+        return $this->hasMany(HorarioFacilitador::class,'id_usuario');
+    }
+    public function evaluacionDNC()
+    {
+        return $this->hasMany(EvaluacionDNC::class,'id_usuario');
     }
 
 
@@ -34,6 +42,17 @@ class Usuario extends Model
             foreach($this->horariosColaborador as  $horColab)
             {
                 $horColab->eliminar();
+            }
+            foreach($this->evaluacionDNC as  $evaluacion)
+            {
+                $evaluacion->eliminar();
+            }
+        }
+        if($this->id_perfil == 4)
+        {
+            foreach($this->horariosFacilitador as  $horFaci)
+            {
+                $horFaci->eliminar();
             }
         }
         $this->estado_usuario = 0;

@@ -133,8 +133,8 @@ class UsuarioController extends Controller
 
     public function confirmDestroy($id)
     {
-        $colaborador = Usuario::findOrFail($id);
-        return view('colaborador.desactivarColaborador', compact('colaborador'));
+        $usuario = Usuario::findOrFail($id);
+        return view('usuario.desactivarUsuario', compact('usuario'));
     }
     /**
      * Remove the specified resource from storage.
@@ -144,7 +144,8 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
-        $colaborador = Usuario::findOrFail($id);
-        $colaborador->eliminar();
-        return redirect('colaborador');
+        $usuario = Usuario::findOrFail($id);
+        $usuario->eliminar();
+        return redirect('usuario');
     }
+}

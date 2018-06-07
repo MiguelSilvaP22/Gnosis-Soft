@@ -45,12 +45,13 @@
 						</div>
 						
 						<div class='form-group'>
-							{!! Form::submit("Agregar Curso", ['class' => 'form-control btn btn-success ']) !!}
+							{!! Form::submit("Agregar Actividad", ['class' => 'form-control btn btn-success ']) !!}
 						</div>
+									
+						{!! Form::close() !!}
 						<div class='form-group'>
-							<a href='{{ url()->previous() }}' class="form-control btn btn-success " > Volver </a>
-						</div>
-	  				{!! Form::close() !!}
+							<div id="btnVolver" class="form-control btn btn-success " > Volver </div>
+						</div>	  	
 	  				</div>
 				</div>
 			</div>
@@ -78,6 +79,6 @@
 	//}
 });*/
 $(document).on('click', '#btnVolver', function () {
-		$('#modal').modal('hide');
+	$('#modal').removeData();
 });
 </script>

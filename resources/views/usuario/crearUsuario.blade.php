@@ -52,12 +52,12 @@
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Nacionalidad:') !!}
-								{!! Form::select('id_nacionalidad', $nacionalidades,null ,['class' => 'select2','data-placeholder'=>'Seleccione una nacionalidad','id'=>'id_nacionalidad', 'style'=>'width:100%']) !!}
+								{!! Form::select('id_nacionalidad', $nacionalidades,null ,['class' => 'select2','placeholder'=>'Seleccione una nacionalidad','id'=>'id_nacionalidad', 'style'=>'width:100%']) !!}
 							</div>	
 						</div>
 						<div class="col-md-6">
 							{!! Form::label('', 'Perfil:') !!}
-							{!! Form::select('id_perfil', $perfiles,null ,['class' => 'select2','data-placeholder'=>'Seleccione un Perfil','id'=>'id_perfil', 'style'=>'width:100%']) !!}
+							{!! Form::select('id_perfil', $perfiles,null ,['class' => 'select2','placeholder'=>'Seleccione un Perfil','id'=>'id_perfil', 'style'=>'width:100%']) !!}
 							<div id="empresas" style="display:none;">
 								<div class='form-group'>
 									{!! Form::label('', 'Empresas:') !!}
@@ -158,6 +158,6 @@
 	//}
 });*/
 $(document).on('click', '#btnVolver', function () {
-		$('#modal').modal('hide');
+	$('#modal').removeData();
 });
 </script>

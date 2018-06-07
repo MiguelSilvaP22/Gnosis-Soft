@@ -281,6 +281,45 @@ Route::get('/eliminarColaborador/{id}', 'ColaboradorController@destroy',function
 Route::resource('colaborador', 'ColaboradorController');
 
 //-------------------------------------------------------------------------------------------------------------------------
+//Evaluacion
+
+Route::get('/evaluacion', 'EvaluacionController@index');
+
+Route::get('/crearEvaluacionDNC', 'EvaluacionController@create')
+->name('evaluacion.crear');
+
+
+Route::get('/infoColaborador/{id}', 'EvaluacionController@infocolaborador',function($id) {
+    return  $id;
+  })
+  ->name('evaluacion.infoColaborador');
+
+Route::get('/datosEvaluacion/{id}', 'EvaluacionController@datosEvaluacion',function($id) {
+    return  $id;
+    })
+    ->name('evaluacion.datosEvaluacion');
+
+Route::resource('evaluaciondnc', 'EvaluacionController');
+/*
+Route::get('/editarColaborador/{id}', 'ColaboradorController@edit',function($id) {
+    return  $id;
+  })
+  ->name('colaborador.edit');
+
+Route::get('/desactivarColaborador/{id}', 'ColaboradorController@confirmDestroy',function($id) {
+    return  $id;
+    })
+->name('colaborador.delete');  
+
+Route::get('/eliminarColaborador/{id}', 'ColaboradorController@destroy',function($id) {
+    return  $id;
+    })
+->name('colaborador.destroy');  
+    
+
+Route::resource('colaborador', 'ColaboradorController');*/
+
+//-------------------------------------------------------------------------------------------------------------------------
 //Usuarios
 
 Route::get('/usuario', 'UsuarioController@index');

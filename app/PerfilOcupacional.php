@@ -16,10 +16,9 @@ class PerfilOcupacional extends Model
         return $this->belongsTo(Area::class,'id_area');
     }
 
-
-    public function eliminar()
+    public function competencias()
     {
-        $this->estado_perfilocu = 0;
-        $this->save();
+        return $this->belongsToMany(Competencia::Class, 'competenciaperfil', 'id_perfilocu', 'id_comp');
+
     }
 }

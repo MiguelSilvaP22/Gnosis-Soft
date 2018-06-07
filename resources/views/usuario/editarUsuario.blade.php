@@ -32,7 +32,7 @@
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Fecha de Nacimiento:') !!}
-								{!! Form::text('fechana_usuario', null, ['class' => 'form-control','id'=>'fechaUsuario']) !!}
+								{!! Form::text('fechana_usuario', date('d/m/Y',strtotime($usuario->fechana_usuario)), ['class' => 'form-control','id'=>'fechaUsuario']) !!}
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Sexo') !!}
@@ -53,24 +53,34 @@
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Nacionalidad:') !!}
-								{!! Form::select('id_nacionalidad', $nacionalidades,null ,['class' => 'select2','data-placeholder'=>'Seleccione una nacionalidad','id'=>'id_nacionalidad', 'style'=>'width:100%']) !!}
+								{!! Form::select('id_nacionalidad', $nacionalidades,null ,['class' => 'select2','placeholder'=>'Seleccione una nacionalidad','id'=>'id_nacionalidad', 'style'=>'width:100%']) !!}
 							</div>	
 						</div>
 						<div class="col-md-6">
 							{!! Form::label('', 'Perfil:') !!}
-							{!! Form::select('id_perfil', $perfiles,null ,['class' => 'select2','data-placeholder'=>'Seleccione un Perfil','id'=>'id_perfil', 'style'=>'width:100%']) !!}
-							<div id="empresas" style="display:none;">
+							{!! Form::select('id_perfil', $perfiles,null ,['class' => 'select2','placeholder'=>'Seleccione un Perfil','id'=>'id_perfil', 'style'=>'width:100%']) !!}
+
+							@if($usuario->id_perfil == 2 || $usuario->id_perfil == 3)
+							<div id="empresas">
 								<div class='form-group'>
 									{!! Form::label('', 'Empresas:') !!}
-									{!! Form::select('id_empresa', $empresas,null ,['class' => 'select2','data-placeholder'=>'Seleccione una empresa','id'=>'id_empresa', 'style'=>'width:100%']) !!}
+									{!! Form::select('id_empresa', $empresas,$usuColabEmpre->id_empresa ,['class' => 'select2','placeholder'=>'Seleccione una Empresa','id'=>'id_empresa', 'style'=>'width:100%']) !!}
 								</div>	
-								<div class='form-group' style="display:none;" id="gerencia">
-								</div>	
-								<div class='form-group' style="display:none;" id="area">
-								</div>	
-								<div class='form-group' style="display:none;" id="perfilOcupacional">
-								</div>	
+								<div class='form-group' id="gerencia">
+									{!! Form::label('', 'Gerencia:') !!}
+									{!! Form::select('id_gerencia', $gerencias,$usuColabEmpre->id_gerencia ,['class' => 'select2','placeholder'=>'Seleccione una Gerencia','id'=>'select_gerencia', 'style'=>'width:100%']) !!}
+								</div>
+								<div class='form-group' id="area">
+									{!! Form::label('', 'Area:') !!}
+									{!! Form::select('id_area', $areas,$usuColabEmpre->id_area ,['class' => 'select2','id'=>'select_area','placeholder'=>'Seleccione un Area', 'style'=>'width:100%']) !!}
+								</div>
+								<div class='form-group' id="perfilOcupacional">
+									{!! Form::label('', 'Perfil Ocupacional:') !!}
+									{!! Form::select('id_perfilocu', $perfilesOcu,$usuColabEmpre->id_perfilocu ,['class' => 'select2','placeholder'=>'Seleccione Perfil Ocupacional','id'=>'select_perfilOcupacional', 'style'=>'width:100%']) !!}
+								</div>
 							</div>
+							@endif
+							
 						</div>
 						{!! Form::hidden('cargarSelects','1',['id'=>'cargarSelects']) !!}
 						<div class='form-group'>
@@ -90,23 +100,12 @@
 <script>
 
 $(document).ready(function() {
-	if($("#id_perfil").val() == 2 || $("#id_perfil").val() == 3)
-	{
-		var idEmpresa = {{$usuario->perfilOcupacional->area->gerencia->empresa->id_empresa}};
-	}
-	else
-	{
-		var idEmpresa = null;
-	}
-	
     $('.select2').select2();
-    if(idEmpresa != null)
-    {
-    	$('#id_empresa').select2().val(idEmpresa).trigger("change");
-    	$("#empresas").show();
-    }
 });
 $(document).on('change', '#id_perfil', function () {
+	$("#gerencia").hide();
+	$("#area").hide();
+	$("#perfilOcupacional").hide();
 	if(this.value == 2 || this.value == 3)
 	{
 		$("#empresas").show();
@@ -123,70 +122,55 @@ $(document).on('change', '#id_perfil', function () {
 	
 });		
 	$(document).on('change', '#id_empresa', function () {
-	var idGerencia = {{$usuario->perfilOcupacional->area->gerencia->id_gerencia}};
-	$.ajax({
+	if(this.value!= "")
+	{
+		$.ajax({
 		url: "/selectGerencia/"+this.value,
 		type: "GET",
 		success: function (datos) {
 			$("#gerencia").show();
 			$("#gerencia").html(datos);
-			if($("#cargarSelects").val() == 1 && idGerencia != null)
-			{
-				$('#select_gerencia').select2().val(idGerencia).trigger("change");
-			}
-			else
-			{
-				$('#select_gerencia').select2();
-				$("#area").hide();
-				$("#perfilOcupacional").hide();
-			}
-			
+
+			$('#select_gerencia').select2();
+			$("#area").hide();
+			$("#perfilOcupacional").hide();				
 		}
 		});
+	}
+	
 	});	
 	$(document).on('change', '#select_gerencia', function () {
-		var idArea = {{$usuario->perfilOcupacional->area->id_area}};
+	if(this.value!= "")
+	{
 		$.ajax({
 		url: "/selectArea/"+this.value,
 		type: "GET",
 		success: function (datos) {
 			$("#area").show();
-			$("#area").html(datos);
-			if($("#cargarSelects").val() == 1 && idArea != null)
-			{
-				$('#select_area').select2().val(idArea).trigger("change");	
-			}
-			else
-			{
-				$('#select_area').select2();
-				$("#perfilOcupacional").hide();
-			}
+			$("#area").html(datos);		
+			$('#select_area').select2();
+			$("#perfilOcupacional").hide();
+		
 					
 		}
 
 		});
+	}
 	});	
 	$(document).on('change', '#select_area', function () {
-		var idPerfilOcupacional = {{$usuario->id_perfilocu}};
+	if(this.value!= "")
+	{
 		$.ajax({
 		url: "/selectPerfilOcupacional/"+this.value,
 		type: "GET",
 		success: function (datos) {
 			$("#perfilOcupacional").show();
 			$("#perfilOcupacional").html(datos);
-			if($("#cargarSelects").val() == 1 && idPerfilOcupacional != null)
-			{
-				$('#select_perfilOcupacional').select2().val(idPerfilOcupacional).trigger("change");
-				$("#cargarSelects").val('0');
-			}
-			else
-			{
-				$('#select_perfilOcupacional').select2();
-			}
-				
+			$('#select_perfilOcupacional').select2();					
 		}
 
 		});
+	}
 	});	
 
 

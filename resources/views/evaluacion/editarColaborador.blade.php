@@ -32,7 +32,7 @@
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Fecha de Nacimiento:') !!}
-								{!! Form::text('fechana_usuario', date('d/m/Y',strtotime($colaborador->fechana_usuario)), ['class' => 'form-control','id'=>'fechaUsuario']) !!}
+								{!! Form::text('fechana_usuario', null, ['class' => 'form-control','id'=>'fechaUsuario']) !!}
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Sexo') !!}
@@ -53,26 +53,20 @@
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Nacionalidad:') !!}
-								{!! Form::select('id_nacionalidad', $nacionalidades,null ,['class' => 'select2','placeholder'=>'Seleccione una nacionalidad','id'=>'id_nacionalidad', 'style'=>'width:100%']) !!}
+								{!! Form::select('id_nacionalidad', $nacionalidades,null ,['class' => 'select2','data-placeholder'=>'Seleccione una nacionalidad','id'=>'id_nacionalidad', 'style'=>'width:100%']) !!}
 							</div>	
 						</div>
 						<div class="col-md-6">
 							<div class='form-group'>
 								{!! Form::label('', 'Empresas:') !!}
-								{!! Form::select('id_empresa', $empresas,$colaborador->perfilOcupacional->area->gerencia->empresa->id_empresa ,['class' => 'select2','id'=>'id_empresa', 'style'=>'width:100%']) !!}
+								{!! Form::select('id_empresa', $empresas,null ,['class' => 'select2','data-placeholder'=>'Seleccione una empresa','id'=>'id_empresa', 'style'=>'width:100%']) !!}
 							</div>	
-							<div class='form-group' id="gerencia">
-								{!! Form::label('', 'Gerencia:') !!}
-								{!! Form::select('id_gerencia', $gerencias,$colaborador->perfilOcupacional->area->gerencia->id_gerencia ,['class' => 'select2','id'=>'select_gerencia', 'style'=>'width:100%']) !!}
-							</div>
-							<div class='form-group' id="area">
-								{!! Form::label('', 'Area:') !!}
-								{!! Form::select('id_area', $areas,$colaborador->perfilOcupacional->area->id_area ,['class' => 'select2','id'=>'select_area', 'style'=>'width:100%']) !!}
-							</div>
-							<div class='form-group' id="perfilOcupacional">
-								{!! Form::label('', 'Perfil Ocupacional:') !!}
-								{!! Form::select('id_perfilocu', $perfilesOcu,$colaborador->perfilOcupacional->id_perfilocu ,['class' => 'select2','id'=>'select_perfilOcupacional', 'style'=>'width:100%']) !!}
-							</div>
+							<div class='form-group' style="display:none;" id="gerencia">
+							</div>	
+							<div class='form-group' style="display:none;" id="area">
+							</div>	
+							<div class='form-group' style="display:none;" id="perfilOcupacional">
+							</div>	
 						</div>
 						{!! Form::hidden('cargarSelects','1',['id'=>'cargarSelects']) !!}
 						<div class='form-group'>
@@ -92,49 +86,74 @@
 <script>
 
 $(document).ready(function() {
+
+	var idEmpresa = {{$colaborador->perfilOcupacional->area->gerencia->empresa->id_empresa}};
     $('.select2').select2();
+    $('#id_empresa').select2().val(idEmpresa).trigger("change");
+
+
 });
 	$(document).on('change', '#id_empresa', function () {
+	var idGerencia = {{$colaborador->perfilOcupacional->area->gerencia->id_gerencia}};
 	$.ajax({
 		url: "/selectGerencia/"+this.value,
 		type: "GET",
 		success: function (datos) {
 			$("#gerencia").show();
 			$("#gerencia").html(datos);
-			$('#select_gerencia').select2();
-			$("#area").hide();
-			$("#perfilOcupacional").hide();
-			
+			if($("#cargarSelects").val() == 1)
+			{
+				$('#select_gerencia').select2().val(idGerencia).trigger("change");
+			}
+			else
+			{
+				$('#select_gerencia').select2();
+				$("#area").hide();
+				$("#perfilOcupacional").hide();
+			}
 			
 		}
 		});
 	});	
 	$(document).on('change', '#select_gerencia', function () {
+		var idArea = {{$colaborador->perfilOcupacional->area->id_area}};
 		$.ajax({
 		url: "/selectArea/"+this.value,
 		type: "GET",
 		success: function (datos) {
 			$("#area").show();
 			$("#area").html(datos);
-
-			$('#select_area').select2();
-			$("#perfilOcupacional").hide();
-			
+			if($("#cargarSelects").val() == 1)
+			{
+				$('#select_area').select2().val(idArea).trigger("change");	
+			}
+			else
+			{
+				$('#select_area').select2();
+				$("#perfilOcupacional").hide();
+			}
 					
 		}
 
 		});
 	});	
 	$(document).on('change', '#select_area', function () {
+		var idPerfilOcupacional = {{$colaborador->id_perfilocu}};
 		$.ajax({
 		url: "/selectPerfilOcupacional/"+this.value,
 		type: "GET",
 		success: function (datos) {
 			$("#perfilOcupacional").show();
 			$("#perfilOcupacional").html(datos);
-
-			$('#select_perfilOcupacional').select2();
-			
+			if($("#cargarSelects").val() == 1)
+			{
+				$('#select_perfilOcupacional').select2().val(idPerfilOcupacional).trigger("change");
+				$("#cargarSelects").val('0');
+			}
+			else
+			{
+				$('#select_perfilOcupacional').select2();
+			}
 				
 		}
 

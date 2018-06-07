@@ -125,7 +125,10 @@ Route::get('/eliminarEmpresa/{id}', 'EmpresaController@destroy',function($id) {
     })
 ->name('empresa.destroy');  
     
-
+Route::get('/validarNombre/{id}', 'EmpresaController@validarNombre',function($nombre) {
+    return  $nombre;
+  })
+  ->name('empresa.validarNombre');
 Route::resource('empresa', 'EmpresaController');
 
 // Organigrama Empresa
@@ -400,10 +403,32 @@ Route::get('/formHorario/{id}', 'ActividadController@formHorario',function($id)
 Route::post('storeHorario', [
     'uses' => 'ActividadController@storeHorario'
   ]);
+Route::post('updateHorario', [
+    'uses' => 'ActividadController@updateHorario'
+  ]);
 Route::resource('actividad', 'ActividadController');
 
 //-------------------------------------------------------------------------------------------------------------------------
+//Horario
 
+Route::get('/asignarHorario/{id}', 'HorarioController@create',function($id) {
+    return  $id;
+  })
+  ->name('horario.create');
+
+ Route::get('/selectColaboradores/{id}', 'ColaboradorController@selectColaboradores',function($id) {
+    return  $id;
+  })
+  ->name('colaborador.selectColaboradores'); 
+
+
+Route::post('storeAsignarHorario', [
+    'uses' => 'HorarioController@store'
+  ]);
+
+Route::resource('horario', 'HorarioController');
+
+//-------------------------------------------------------------------------------------------------------------------------
 
 Auth::routes();
 

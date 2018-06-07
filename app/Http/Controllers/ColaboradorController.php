@@ -5,7 +5,12 @@ namespace App\Http\Controllers;
 use App\Usuario;
 use App\Nacionalidad;
 use App\Empresa;
+use App\Gerencia;
+use App\Area;
 use App\PerfilOcupacional;
+
+use DB;
+use App\Quotation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -85,7 +90,11 @@ class ColaboradorController extends Controller
         $colaborador = Usuario::findOrFail($id);
         $nacionalidades = Nacionalidad::all()->where('estado_nacionalidad',1)->sortBy('nombre_nacionalidad')->pluck('nombre_nacionalidad','id_nacionalidad');
         $empresas = Empresa::all()->where('estado_empresa',1)->sortBy('nombre_empresa')->pluck('nombre_empresa','id_empresa');
-        return view('colaborador.editarColaborador', compact('colaborador','nacionalidades','empresas'));
+        $gerencias = Gerencia::all()->where('estado_gerencia',1)->where('id_empresa',$colaborador->perfilOcupacional->area->gerencia->empresa->id_empresa)->sortBy('nombre_gerencia')->pluck('nombre_gerencia','id_gerencia');
+        $areas = Area::all()->where('estado_area',1)->where('id_gerencia',$colaborador->perfilOcupacional->area->gerencia->id_gerencia)->sortBy('nombre_area')->pluck('nombre_area','id_area');
+        $perfilesOcu = PerfilOcupacional::all()->where('estado_perfilocu',1)->where('id_area',$colaborador->perfilOcupacional->area->id_area)->sortBy('nombre_perfilocu')->pluck('nombre_perfilocu','id_perfilocu');
+
+        return view('colaborador.editarColaborador', compact('colaborador','nacionalidades','empresas','gerencias','areas','perfilesOcu'));
     }
 
     /**
@@ -127,5 +136,21 @@ class ColaboradorController extends Controller
         $colaborador = Usuario::findOrFail($id);
         $colaborador->eliminar();
         return redirect('colaborador');
+    }
+    public function selectColaboradores($id)
+    {
+        $colaboradores = DB::table('usuario')
+            ->join('perfilocupacional', 'usuario.id_perfilocu', '=', 'perfilocupacional.id_perfilocu')
+            ->join('area', 'perfilocupacional.id_area', '=', 'area.id_area')
+            ->join('gerencia', 'area.id_gerencia', '=', 'gerencia.id_gerencia')
+            ->join('empresa', 'gerencia.id_empresa', '=', 'empresa.id_empresa')
+            ->where('empresa.id_empresa',$id)
+            ->where('usuario.id_perfil',2)
+            ->where('usuario.estado_usuario',1)
+            ->select('usuario.*')
+            ->get()
+            ->sortBy('nombre_usuario')
+            ->pluck('run_usuario','id_usuario');
+        return view('colaborador.selectColaboradores', compact('colaboradores'));
     }
 }

@@ -10,7 +10,7 @@
 
 			<div class="box-body">
 				<div class="row">
-					<div class="col-md-12   ">
+					<div class="col-md-12">
 						<table class="table">
 							<thead>
 								<tr>
@@ -39,13 +39,12 @@
 								</tr>
 							</tbody>
 						</table>
-					   <span id="btnAgregarHorario" value="{{$actividad->id_actividad}}" class="btn btn-block btn-success" style="float: right;margin-bottom: 10px;margin-right: 10px;width:200px;">
+					   <span onclick="cargarForm()" id="btnAgregarFormulario" value="{{$actividad->id_actividad}}" class="btn btn-block btn-success" style="float: right;margin-bottom: 10px;margin-right: 10px;width:200px;">
 							<i class="fa fa-plus"></i>	Agregar
 						</span>
-						{!! Form::open(['action' => 'ActividadController@storeHorario','id'=>'formularioHorario']) !!}
-						<div>
+						
 							@if(Count($horarios)>0)
-							<table class="table" id="myTable">
+							<table class="table" id="tableUpdateHorario">
 								<thead>
 									<tr>
 										<th>
@@ -60,61 +59,65 @@
 										<th></th>
 									</tr>
 								</thead>
-								<tbody id="myTable" >
+								<tbody >
 								@foreach($horarios as $key => $horario)
-									<tr id="form{{$key}}">
+									<tr>
 										<td>
-											{!! Form::text('fecha_horario[]', date('d/m/Y',strtotime($horario->fecha_horario)), ['class' => 'form-control date','id'=>'fechaIniHora']) !!}
+											{{date('d/m/Y',strtotime($horario->fecha_horario))}}										
+										</td>
+										<td>
+											{{$horario->hora_inicio_horario}}
+											
+										</td>
+										<td>
+											{{$horario->hora_termino_horario}}
 
 										</td>
 										<td>
-											{!! Form::text('hora_inicio_horario[]', $horario->hora_inicio_horario, ['class' => 'form-control timepicker', 'id'=>'horaIniHora']) !!}
-
-										</td>
-										<td>
-											{!! Form::text('hora_termino_horario[]', $horario->hora_termino_horario, ['class' => 'form-control timepicker','id'=>'horaTermHora']) !!}
-
-										</td>
-										<td>
-											<button type="button" class="btn btn-default" aria-label="Left Align" onclick="eliminarForm({{$key}})" id="btnEliminarForm{{$key}}">  
-											 	<span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> 
+											<button type="button" class="btn btn-default" aria-label="Left Align" onclick="asignarHorario({{$horario->id_horario}})" id="btnAssignHorario">  
+											 	<i class="fa fa-user-plus"></i>
+											</button>
+											<button type="button" class="btn btn-default" aria-label="Left Align" onclick="eliminarForm({{$horario->id_horario}})" id="btnUpdateHorario">  
+											 	<i class="fa fa-pencil-square-o"></i>
+											</button>
+											<button type="button" class="btn btn-default" aria-label="Left Align" onclick="eliminarForm({{$horario->id_horario}})" id="btnDeleteHorario">  
+											 	<i class="fa fa-close"></i>
 											</button>
 										</td>
 									</tr>						
 								@endforeach
-									<div id="agregarVainas"></div>
-								</tbody>
+									</tbody>
 							</table>
-							@else
-							<table class="table" id="myTable" >
-								<thead>
-									<tr>
-										<th>
-											Fecha:
-										</th>
-										<th>
-											Hora de Inicio
-										</th>
-										<th>
-											Hora de Termino:
-										</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-									</tr>
-								</tbody>
-							</table>	
 							@endif
-							<div class='form-group'>
-								{!! Form::hidden('id_actividad',$actividad->id_actividad) !!}
-							</div>
+							<div id="tablaAdd" style="display:none";>
+								{!! Form::open(['action' => 'ActividadController@storeHorario','id'=>'formularioHorario']) !!}
+								<table class="table" id="tableAddHorario" >
+									<thead>
+										<tr>
+											<th>
+												Fecha:
+											</th>
+											<th>
+												Hora de Inicio
+											</th>
+											<th>
+												Hora de Termino:
+											</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+										</tr>
+									</tbody>
+								</table>	
+								<div class='form-group'>
+									{!! Form::hidden('id_actividad',$actividad->id_actividad) !!}
+								</div>
+								<div class='form-group'>
+									{!! Form::submit("Agregar Horario", ['class' => 'form-control btn btn-success ']) !!}
+								</div>
 						</div>	
-
-						<div class='form-group'>
-							{!! Form::submit("Agregar Horario", ['class' => 'form-control btn btn-success ']) !!}
-						</div>
 						{!! Form::close() !!}							
 						<div class='form-group'>
 							<div id="btnVolver" class="form-control btn btn-success " > Volver </div>
@@ -128,38 +131,42 @@
 
 </body>
 
-<style>
-
-</style>
-
 <script type="text/javascript">
 	var count =0;
 	$(document).ready(function() {
-		$('.date').datepicker({});
-		
+		$('.date').datepicker({});		
 	});
 
 function eliminarForm(id){
-		$("#form"+id).remove();
-		
+		$("#form"+id).remove();		
 	}
 	
-$(document).on('click', '#btnAgregarHorario', function () {
-		alert(count);
-		count++;
+function cargarForm() {
+	$('#tablaAdd').show('true');
+	count++;
 		$.ajax({
 		url: "/formHorario/"+count,
 		type: "GET",
 		success: function (datos) {
-			$('#myTable tr:last').after(datos);
+			$('#tableAddHorario tr:last').after(datos);
 			$('.date').datepicker({});
-			}	
-		
-
+			}
 		});
-});
+}
+
+function asignarHorario(id) {
+		$.ajax({
+		url: "/asignarHorario/"+id,
+		type: "GET",
+		success: function (datos) {
+			$("#datos").html(datos);
+			}
+		});
+}
 $(document).on('click', '#btnVolver', function () {
+		$("#datos").html('');
 		$('#modal').modal('hide');
+		
 		
 });
 

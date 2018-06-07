@@ -110,6 +110,7 @@ $('#formEmpresa').submit(function (e) {
 	}
 
 });
+
 $(document).on('change', '#id_region', function () {
 
 	$.ajax({

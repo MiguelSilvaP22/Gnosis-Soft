@@ -12,6 +12,10 @@ function marcarErrorRut(id,idErr){
 	document.getElementById(idErr).innerHTML='Rut ingresado no es valido.';
 	$('#'+id).parent().addClass('has-error');
 }
+function marcarErrorDuplicado(id,idErr){
+	document.getElementById(idErr).innerHTML='El dato ingresado ya existe.';
+	$('#'+id).parent().addClass('has-error');
+}
 
 //Marcar error select
 function marcarErrorSelect(idErr){
@@ -32,14 +36,14 @@ document.getElementById(idErr).innerHTML='';
 
 //Validación de caracteres.
 function validarChr(TCode){
-	if( /^[a-zA-Z0-9- ]*$/.test( TCode ) ) 
+	if( /^[a-zA-Z0-9- -ñ]*$/.test( TCode ) ) 
 	{return false;}
     return true;     
 }
 
 //Validación de caracteres con punto.
 function validarChrPunto(TCode){
-	if( /^[a-zA-Z0-9- -.]*$/.test( TCode ) ) 
+	if( /^[a-zA-Z0-9- -.-ñ]*$/.test( TCode ) ) 
 	{return false;}
     return true;     
 }
@@ -202,6 +206,11 @@ function validarEmpresa()
 		}else
 		{
 			desmarcarError('nombre_empresa','errNombreEmpresa');
+			if(validarNombreEmpresa()!= "false")
+			{
+				verificar = false; marcarErrorDuplicado('nombre_empresa','errNombreEmpresa');
+			}
+			else{desmarcarError('nombre_empresa','errNombreEmpresa');}
 		}	
 	}
 
@@ -300,6 +309,23 @@ function validarEmpresa()
 	}
 	else{desmarcarErrorSelect('errSelectEmpresaHolding');}
 
+	return verificar;
+	
+}
+
+function validarNombreEmpresa()
+{
+	var verificar;
+	$.ajax({
+		url: "/validarNombre/"+$("#nombre_empresa").val(),
+		type: "GET",
+		async: false,
+		success: function (datos) {
+			verificar = datos;
+
+		}
+
+		});
 	return verificar;
 	
 }

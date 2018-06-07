@@ -221,9 +221,9 @@ class EmpresaController extends Controller
         return redirect('empresa');
     }
 
-    public function validarNombre($nombre)
+    public function validarRutAdd($rut_matriz_empresa)
     {
-        $empresa = Empresa::All()->where('nombre_empresa',$nombre)->first();
+        $empresa = Empresa::All()->where('rut_matriz_empresa',$rut_matriz_empresa)->first();
         
         if($empresa == null)
         {
@@ -234,5 +234,22 @@ class EmpresaController extends Controller
             return 'true';
         }
       
+    }
+
+    public function validarRutEdit($rut_matriz_empresa)
+    {
+        $empresa = Empresa::All()->where('rut_matriz_empresa',$rut_matriz_empresa)->first();
+        
+        if($empresa == null)
+        { 
+            if($empresa == $rut_matriz_empresa)
+            {
+                return 'true';
+            }
+        }
+        else 
+        {
+            return 'false';
+        }
     }
 }

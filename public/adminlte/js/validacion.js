@@ -188,7 +188,7 @@ function validarPerfilOcupacional()
 
 
 //Validación empresa.
-function validarEmpresa()
+function validarEmpresa(tipo)
 {
 	var verificar = true;
 
@@ -206,11 +206,6 @@ function validarEmpresa()
 		}else
 		{
 			desmarcarError('nombre_empresa','errNombreEmpresa');
-			if(validarNombreEmpresa()!= "false")
-			{
-				verificar = false; marcarErrorDuplicado('nombre_empresa','errNombreEmpresa');
-			}
-			else{desmarcarError('nombre_empresa','errNombreEmpresa');}
 		}	
 	}
 
@@ -249,7 +244,26 @@ function validarEmpresa()
 			{
 				verificar = false; marcarErrorRut('rut_matriz_empresa','errRutMatriz');	
 			}
-			else{desmarcarError('rut_matriz_empresa','errRutMatriz');}
+			else
+			{
+				desmarcarError('rut_matriz_empresa','errRutMatriz');
+				if(tipo == 1)
+				{
+					if(validarRutAdd()!= "false")
+					{
+						verificar = false; marcarErrorDuplicado('rut_matriz_empresa','errRutMatriz');
+					}
+					else{desmarcarError('rut_matriz_empresa','errRutMatriz');}					
+				}
+				if(tipo == 2)
+				{
+					if(validarRutEdit()!= "false")
+					{
+						verificar = false; marcarErrorDuplicado('rut_matriz_empresa','errRutMatriz');
+					}
+					else{desmarcarError('rut_matriz_empresa','errRutMatriz');}					
+				}			
+			}
 		}	
 	}
 
@@ -313,19 +327,31 @@ function validarEmpresa()
 	
 }
 
-function validarNombreEmpresa()
+function validarRutAdd()
 {
 	var verificar;
 	$.ajax({
-		url: "/validarNombre/"+$("#nombre_empresa").val(),
+		url: "/validarRutAdd/"+$("#rut_matriz_empresa").val(),
 		type: "GET",
 		async: false,
 		success: function (datos) {
 			verificar = datos;
-
-		}
-
+			}
 		});
-	return verificar;
-	
+	return verificar;	
 }
+
+function validarRutEdit()
+{
+	var verificar;
+	$.ajax({
+		url: "/validarRutEdit/"+$("#rut_matriz_empresa").val(),
+		type: "GET",
+		async: false,
+		success: function (datos) {
+			verificar = datos;
+			}
+		});
+	return verificar;	
+}
+

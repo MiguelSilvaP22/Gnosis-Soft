@@ -125,10 +125,16 @@ Route::get('/eliminarEmpresa/{id}', 'EmpresaController@destroy',function($id) {
     })
 ->name('empresa.destroy');  
     
-Route::get('/validarNombre/{id}', 'EmpresaController@validarNombre',function($nombre) {
-    return  $nombre;
+Route::get('/validarRutAdd/{id}', 'EmpresaController@validarRutAdd',function($rut_matriz_empresa) {
+    return  $rut_matriz_empresa;
   })
-  ->name('empresa.validarNombre');
+  ->name('empresa.validarRutAdd');
+Route::resource('empresa', 'EmpresaController');
+
+Route::get('/validarRutEdit/{id}', 'EmpresaController@validarRutEdit',function($rut_matriz_empresa) {
+    return  $rut_matriz_empresa;
+  })
+  ->name('empresa.validarRutEdit');
 Route::resource('empresa', 'EmpresaController');
 
 // Organigrama Empresa

@@ -12,27 +12,32 @@
 				<div class="box-body">
 					<div class="row">
 						
-					{!! Form::model($usuario, ['method' => 'PATCH', 'action' => ['UsuarioController@update',$usuario->id_usuario]]) !!}
+					{!! Form::model($usuario, ['method' => 'PATCH', 'action' => ['UsuarioController@update',$usuario->id_usuario],'id'=>'formUsuario']) !!}
 						<div class="col-md-6">
 							<div class='form-group'>
 								{!! Form::label('', 'Nombre:') !!}
-								{!! Form::text('nombre_usuario', null, ['class' => 'form-control']) !!}
+								{!! Form::text('nombre_usuario', null, ['class' => 'form-control','id'=>'nombre_usuario','maxlength'=>'500']) !!}
+								{!! Form::label('', '',['id' => 'errNombreUsuario']) !!}
 							</div>
 							<div class='form-group'>
-								{!! Form::label('', 'run_usuario:') !!}
-								{!! Form::text('run_usuario', null, ['class' => 'form-control']) !!}
+								{!! Form::label('', 'Run Usuario:') !!}
+								{!! Form::text('run_usuario', null, ['class' => 'form-control','id'=>'run_usuario','maxlength'=>'10']) !!}
+								{!! Form::label('', '',['id' => 'errRunUsuario']) !!}
 							</div>
 							<div class='form-group'>
-								{!! Form::label('', 'apellidopat_usuario:') !!}
-								{!! Form::text('apellidopat_usuario', null, ['class' => 'form-control']) !!}
+								{!! Form::label('', 'Apellido Paterno:') !!}
+								{!! Form::text('apellidopat_usuario', null, ['class' => 'form-control','id'=>'apellidopat_usuario','maxlength'=>'500']) !!}
+								{!! Form::label('', '',['id' => 'errApellidoP']) !!}
 							</div>
 							<div class='form-group'>
-								{!! Form::label('', 'apellidomat_usuario:') !!}
-								{!! Form::text('apellidomat_usuario', null, ['class' => 'form-control']) !!}
+								{!! Form::label('', 'Apellido Materno:') !!}
+								{!! Form::text('apellidomat_usuario', null, ['class' => 'form-control','id'=>'apellidomat_usuario','maxlength'=>'500']) !!}
+								{!! Form::label('', '',['id' => 'errApellidoM']) !!}
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Fecha de Nacimiento:') !!}
 								{!! Form::text('fechana_usuario', date('d/m/Y',strtotime($usuario->fechana_usuario)), ['class' => 'form-control','id'=>'fechaUsuario']) !!}
+								{!! Form::label('', '',['id' => 'errFechaUsuario']) !!}
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Sexo') !!}
@@ -46,14 +51,17 @@
 									{!! Form::radio('sexo_usuario', 'M'); !!} M
 									</label>
 								</div>
+								{!! Form::label('', '',['id' => 'errSexo']) !!}
 							</div>
 							<div class='form-group'>
-								{!! Form::label('', 'email_usuario:') !!}
-								{!! Form::text('email_usuario', null, ['class' => 'form-control']) !!}
+								{!! Form::label('', 'Email:') !!}
+								{!! Form::text('email_usuario', null, ['class' => 'form-control','id'=>'email_usuario','maxlength'=>'500']) !!}
+								{!! Form::label('', '',['id' => 'errEmail']) !!}
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Nacionalidad:') !!}
 								{!! Form::select('id_nacionalidad', $nacionalidades,null ,['class' => 'select2','placeholder'=>'Seleccione una nacionalidad','id'=>'id_nacionalidad', 'style'=>'width:100%']) !!}
+								{!! Form::label('', '',['id' => 'errNacionalidad']) !!}
 							</div>	
 						</div>
 						<div class="col-md-6">
@@ -86,10 +94,10 @@
 						<div class='form-group'>
 							{!! Form::submit("Editar Usuario", ['class' => 'form-control btn btn-success ']) !!}
 						</div>
+						{!! Form::close() !!}
 						<div class='form-group'>
-							<a href='{{ url()->previous() }}' class="form-control btn btn-success " > Volver </a>
+						<div id="btnVolver" class="form-control btn btn-success " > Volver </div>
 						</div>
-					{!! Form::close() !!}
 				</div>
 			</div>
 		</div>
@@ -173,6 +181,21 @@ $(document).on('change', '#id_perfil', function () {
 	}
 	});	
 
+$('#formUsuario').submit(function (e) {
+	e.preventDefault();
+	var url = e.target.action  // get the target
+	var formData = $(this).serialize() // get form data
+	if(validarUsuario())	
+	{
+		/*$.post(url, formData, function (response) { // send; response.data will be what is returned
+			$('#modal').modal('hide');
+		});*/
+		
+	}alert("Validado");
+});
 
+$(document).on('click', '#btnVolver', function () {
+	$('#modal').modal('hide');
+});
 
 </script>

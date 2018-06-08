@@ -1,4 +1,3 @@
-
 //Marcar error de inputs.
 function marcarErrorGeneral(id,idErr){
 	document.getElementById(idErr).innerHTML='Campo Obligatorio';
@@ -9,7 +8,7 @@ function marcarErrorChar(id,idErr){
 	$('#'+id).parent().addClass('has-error');
 }
 function marcarErrorRut(id,idErr){
-	document.getElementById(idErr).innerHTML='Rut ingresado no es valido.';
+	document.getElementById(idErr).innerHTML='El dato ingresado no es valido.';
 	$('#'+id).parent().addClass('has-error');
 }
 function marcarErrorDuplicado(id,idErr){
@@ -19,7 +18,7 @@ function marcarErrorDuplicado(id,idErr){
 
 //Marcar error select
 function marcarErrorSelect(idErr){
-	document.getElementById(idErr).innerHTML='Campo Obligatorio';
+	document.getElementById(idErr).innerHTML='Seleccione una opción.';
 	document.getElementById(idErr).style.color = '#FF3333';
 }
 
@@ -55,6 +54,7 @@ function validarRut(TCode){
     return true;     
 }
 
+//Validación del DV.
 function validarDV(rut)
 {
 	// Despejar Puntos
@@ -105,6 +105,7 @@ function validarDV(rut)
 }
 
 
+//=====================================================================VALIDACION ORGANIGRAMA=====================================================================
 //Validación Gerencia.
 function validarGerencia (){
 	var verificar = true;
@@ -186,8 +187,7 @@ function validarPerfilOcupacional()
 
 }
 
-
-//Validación empresa.
+//=====================================================================VALIDACION EMPRESA=====================================================================
 function validarEmpresa(tipo)
 {
 	var verificar = true;
@@ -309,9 +309,7 @@ function validarEmpresa(tipo)
 		verificar = false; marcarErrorGeneral('email_empresa','errEmailEmpresa');
 	}
 	else
-	{
-		desmarcarError('email_empresa','errEmailEmpresa');	
-	}
+	{desmarcarError('email_empresa','errEmailEmpresa');}
 
 	//Validar Select Empresas Holding.
 	var check = $('input[name=tipo_empresa]:checked').val();
@@ -355,3 +353,117 @@ function validarRutEdit()
 	return verificar;	
 }
 
+//=====================================================================VALIDACION USUARIO=====================================================================
+function validarUsuario()
+{
+	var verificar = true;
+
+	//Validar run usuario
+	if($.trim( $("#run_usuario").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('run_usuario','errRunUsuario');
+	}
+	else
+	{
+		desmarcarError('run_usuario','errRunUsuario');	
+		if(validarRut($("#run_usuario").val()))
+		{
+			verificar = false; marcarErrorRut('run_usuario','errRunUsuario');			
+		}else
+		{
+			desmarcarError('run_usuario','errRunUsuario');
+			if(validarDV($("#run_usuario").val()))
+			{
+				verificar = false; marcarErrorRut('run_usuario','errRunUsuario');	
+			}
+			else
+			{
+				desmarcarError('run_usuario','errRunUsuario');		
+			}
+		}	
+	}
+
+	//Validar Nombre
+	if($.trim( $("#nombre_usuario").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('nombre_usuario','errNombreUsuario');
+	}
+	else
+	{
+		desmarcarError('nombre_usuario','errNombreUsuario');	
+		if(validarChr($("#nombre_usuario").val()))
+		{
+			verificar = false; marcarErrorChar('nombre_usuario','errNombreUsuario');			
+		}else
+		{
+			desmarcarError('nombre_usuario','errNombreUsuario');
+		}	
+	}
+
+	//Validar Apellido Paterno
+	if($.trim( $("#apellidopat_usuario").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('apellidopat_usuario','errApellidoP');
+	}
+	else
+	{
+		desmarcarError('apellidopat_usuario','errApellidoP');	
+		if(validarChr($("#apellidopat_usuario").val()))
+		{
+			verificar = false; marcarErrorChar('apellidopat_usuario','errApellidoP');			
+		}else
+		{
+			desmarcarError('apellidopat_usuario','errApellidoP');
+		}	
+	}
+
+	//Validar Apellido Materno
+	if($.trim( $("#apellidomat_usuario").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('apellidomat_usuario','errApellidoM');
+	}
+	else
+	{
+		desmarcarError('apellidomat_usuario','errApellidoM');	
+		if(validarChr($("#apellidomat_usuario").val()))
+		{
+			verificar = false; marcarErrorChar('apellidomat_usuario','errApellidoM');			
+		}else
+		{
+			desmarcarError('apellidomat_usuario','errApellidoM');
+		}	
+	}
+
+	//Validar Fecha Nac
+	if($.trim( $("#fechaUsuario").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('fechaUsuario','errFechaUsuario');
+	}
+	else
+	{desmarcarError('fechaUsuario','errFechaUsuario');}
+
+	//Validar Sexo
+	var check = $('input[name=sexo_usuario]:checked').val();
+	if(check == null)
+	{
+		verificar = false; marcarErrorSelect('errSexo');
+	}
+	else
+	{desmarcarErrorSelect('errSexo');}
+
+	//Validar e-mail
+	if($.trim( $("#email_usuario").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('email_usuario','errEmail');
+	}
+	else
+	{desmarcarError('email_usuario','errEmail');}
+
+	//Validar nacionalidad
+	if($("#id_nacionalidad").val() == "")
+	{verificar = false; marcarErrorSelect('errNacionalidad');}
+	else{desmarcarErrorSelect('errNacionalidad');}
+
+
+	return verificar;
+}

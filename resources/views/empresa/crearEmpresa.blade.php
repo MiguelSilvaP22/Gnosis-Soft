@@ -24,7 +24,7 @@
 
 				<div class='form-group'>
 					{!! Form::label('rut_matriz_empresa', 'Rut Matriz:') !!}
-					{!! Form::text('rut_matriz_empresa', null, ['class' => 'form-control','id'=>'rut_matriz_empresa','maxlength'=>'11']) !!}
+					{!! Form::text('rut_matriz_empresa', null, ['class' => 'form-control','id'=>'rut_matriz_empresa','maxlength'=>'10']) !!}
 					{!! Form::label('', '',['id' => 'errRutMatriz']) !!}
 				</div>
 

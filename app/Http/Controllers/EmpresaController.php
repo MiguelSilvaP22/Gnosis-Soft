@@ -242,14 +242,11 @@ class EmpresaController extends Controller
         
         if($empresa == null)
         { 
-            if($empresa == $rut_matriz_empresa)
-            {
-                return 'true';
-            }
+            return 'false';
         }
         else 
         {
-            return 'false';
+            return 'true';
         }
     }
 }

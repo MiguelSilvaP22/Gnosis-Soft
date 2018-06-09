@@ -17,8 +17,7 @@
 					<thead>
 						<tr>
 							<th>Codigo Actividad</th>
-							<th>Fecha de inicio</th>
-							<th>Fecha de termino</th>
+							<th>Fecha</th>
 							<th>Horarios</th>
 							<th>Acciones</th>
 						</tr>
@@ -27,23 +26,41 @@
 						@foreach ($actividades as $actividad) 
 						<tr>
 							<td style="width:25%;">{{ $actividad->cod_interno_actividad}}</td>
-							<td style="width:25%;">{{ date('d/m/Y',strtotime($actividad->fecha_inicio_actividad))}}</td>
-							<td style="width:25%;">{{ date('d/m/Y',strtotime($actividad->fecha_termino_actividad))}}</td>
-							<td style="width:25%;">
+							<td style="width:25%;"rowspan="{{Count($actividad->horarios)}}">{{ date('d/m/Y',strtotime($actividad->fecha_inicio_actividad))."-".date('d/m/Y',strtotime($actividad->fecha_termino_actividad))}}</td>
+							<td style="width:25%;" >
 							@foreach ($actividad->horarios as $horario) 
-								{{ $horario->fecha_horario}} <br/>
+								{{ "Dia: ". date('d/m/Y',strtotime($horario->fecha_horario))}} <br/>
 								@foreach ($horario->horariosFacilitador as $horarioFacilitador) 
-									{{ $horarioFacilitador->usuario->nombre_usuario}}<br/>
+									{{ "Facilitador: ".$horarioFacilitador->usuario->nombre_usuario}}<br/><br/>
 								@endforeach	
 							@endforeach
-						</td>		
-							<td>
+							</td>		
+							<td >
 								<button id="btnVer" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
 							</td>
 						</tr>
 						@endforeach
 					</tbody>
 				</table>
+				<table>
+    <tr>
+        <td rowspan="2">Column 1 Heading</td>
+        <td colspan="3">Call Standard</td>
+        <td rowspan="2">Column 3 Heading</td>
+    </tr>
+    <tr>
+        <td>Flagged</td>
+        <td>Percent</td>
+        <td>Days</td>
+    </tr>
+    <tr>
+        <td>Column 1 Value</td>
+        <td>4</td>
+        <td>1%</td>
+        <td>6</td>
+        <td>Column 3 Value</td>
+    </tr>
+</table>
 				@else
 					<h1>No Hay actividades registrados</h1>
 				@endif

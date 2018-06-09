@@ -484,10 +484,7 @@ Route::get('/vercursos/{id}', 'vistaCursoController@vistacursos',function($id) {
   });
 //-------------------------------------------------------------------------------------------------------------------------
 //Facilitador
-
-<<<<<<< HEAD
 Route::get('/facilitador', 'FacilitadorController@index');
-=======
 
   //-------------------------------------------------------------------------------------------------------------------------
 //Colaborador
@@ -501,4 +498,3 @@ Route::get('/vistaColaborador/detalle/{id}', 'ColaboradorController@showVista',f
     return  $id;
   });
 
->>>>>>> 53ce426d8d3ecc4368642818d7d5bc59b19218f4

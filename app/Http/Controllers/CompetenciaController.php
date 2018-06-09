@@ -142,7 +142,7 @@ class CompetenciaController extends Controller
             $file =  $request->file('Archivo'); 
             
             \Excel::load();
-    }
+        }
 
 
 
@@ -176,7 +176,8 @@ class CompetenciaController extends Controller
         $competencia = Competencia::findOrFail($id);
         $categoriascompetencias = categoriacompetencia::All()->where('estado_categoriacomp',1)->sortBy('nombre_caterogiacomp')->pluck('nombre_categoriacomp','id_categoriacomp');
         $roldesempenos = RolDesempeno::All()->where('estado_roldesempeno',1)->where('id_comp', $id);
-        return view('Competencia.editarCompetencia', compact('competencia','categoriascompetencias'));
+        $niveles = NivelCompetencia::All()->where('estado_nivelcompetencia',1)->where('id_comp', $id)->pluck('desc_nivelcompetencia');
+        return view('Competencia.editarCompetencia', compact('competencia','categoriascompetencias','roldesempenos','niveles'));
     }
 
     /**
@@ -194,9 +195,49 @@ class CompetenciaController extends Controller
         $competencia->id_categoriacomp = $request->id_categoriacomp;
 
         if($competencia->save())
-        {
-            return redirect('competencia');
-        }
+            {  
+                RolDesempeno::where('id_comp',$competencia->id_comp)->update( ['estado_roldesempeno' => 0]);
+                foreach($request->RolDesempenos as $roldesem)
+                {
+                    $rolComp = RolDesempeno::All()->where('id_comp',$competencia->id_comp)->where('nombre_roldesempeno',$roldesem)->first();          
+                    if($rolComp != null)
+                    {
+                        $rolComp->estado_roldesempeno = 1;
+                        $rolComp->save();
+                    }
+                    else
+                    {
+                        $roldesempeno = new RolDesempeno;
+                        $roldesempeno->id_comp = $competencia->id_comp;
+                        $roldesempeno->nombre_roldesempeno = $roldesem;
+                        $roldesempeno->estado_roldesempeno = 1;
+                        $roldesempeno->save();
+                    }
+                    
+                }
+                NivelCompetencia::where('id_comp',$competencia->id_comp)->update( ['estado_nivelcompetencia' => 0]);
+                foreach($request->niveles as $key => $nivel)
+                {
+                    $nivelComp = NivelCompetencia::All()->where('id_comp',$competencia->id_comp)->where('id_tiponivel',$key+1)->first();          
+                    if($nivelComp != null)
+                    {
+                        $nivelComp->desc_nivelcompetencia=$nivel;
+                        $nivelComp->estado_nivelcompetencia = 1;
+                        $nivelComp->save();
+                    }
+                    else
+                    {
+                        $nivelcompetencia = new NivelCompetencia;
+                        $nivelcompetencia->id_comp=$competencia->id_comp;
+                        $nivelcompetencia->desc_nivelcompetencia=$nivel;
+                        $nivelcompetencia->id_tiponivel = $key+1;
+                        $nivelcompetencia->estado_nivelcompetencia = 1;
+                        $nivelcompetencia->save();
+                    }
+                   
+                }
+                return redirect('competencia');
+            }
     }
 
     /**

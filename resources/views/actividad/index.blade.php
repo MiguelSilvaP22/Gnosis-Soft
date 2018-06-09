@@ -83,6 +83,27 @@
 	<!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+<div class="modal fade bs-example-modal-xs" id="modalBorrar">
+		<div class="modal-dialog modal-xs">
+		<div class="modal-content">
+			<div class="modal-body">	
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="box box-primary">
+							<div id="datosModalBorrar" class="box-body">
+	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
 @stop
 
 @section('script-js')
@@ -91,6 +112,12 @@ $(document).ready(function() {
 	$('#tablaActividad').DataTable({
 			
 		});
+	$("#modal").on("hidden.bs.modal", function(){
+   		$("#datos").html("");
+	});
+	$("#modalBorrar").on("hidden.bs.modal", function(){
+   		$("#datosModalBorrar").html("");
+	});
 } );
 
 $(document).on('click', '#btnVer', function () {

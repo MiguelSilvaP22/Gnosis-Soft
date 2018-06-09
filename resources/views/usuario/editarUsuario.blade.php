@@ -67,24 +67,28 @@
 						<div class="col-md-6">
 							{!! Form::label('', 'Perfil:') !!}
 							{!! Form::select('id_perfil', $perfiles,null ,['class' => 'select2','placeholder'=>'Seleccione un Perfil','id'=>'id_perfil', 'style'=>'width:100%']) !!}
-
+							{!! Form::label('', '',['id' => 'errPerfilUsuario']) !!}
 							@if($usuario->id_perfil == 2 || $usuario->id_perfil == 3)
 							<div id="empresas">
 								<div class='form-group'>
 									{!! Form::label('', 'Empresas:') !!}
 									{!! Form::select('id_empresa', $empresas,$usuColabEmpre->id_empresa ,['class' => 'select2','placeholder'=>'Seleccione una Empresa','id'=>'id_empresa', 'style'=>'width:100%']) !!}
+									{!! Form::label('', '',['id' => 'errEmpresaUsuario']) !!}
 								</div>	
 								<div class='form-group' id="gerencia">
 									{!! Form::label('', 'Gerencia:') !!}
 									{!! Form::select('id_gerencia', $gerencias,$usuColabEmpre->id_gerencia ,['class' => 'select2','placeholder'=>'Seleccione una Gerencia','id'=>'select_gerencia', 'style'=>'width:100%']) !!}
+									{!! Form::label('', '',['id' => 'errGerenciaUsuario']) !!}
 								</div>
 								<div class='form-group' id="area">
 									{!! Form::label('', 'Area:') !!}
 									{!! Form::select('id_area', $areas,$usuColabEmpre->id_area ,['class' => 'select2','id'=>'select_area','placeholder'=>'Seleccione un Area', 'style'=>'width:100%']) !!}
+									{!! Form::label('', '',['id' => 'errAreaUsuario']) !!}
 								</div>
 								<div class='form-group' id="perfilOcupacional">
 									{!! Form::label('', 'Perfil Ocupacional:') !!}
 									{!! Form::select('id_perfilocu', $perfilesOcu,$usuColabEmpre->id_perfilocu ,['class' => 'select2','placeholder'=>'Seleccione Perfil Ocupacional','id'=>'select_perfilOcupacional', 'style'=>'width:100%']) !!}
+									{!! Form::label('', '',['id' => 'errPerfilOcupacionalUsuario']) !!}
 								</div>
 							</div>
 							@endif

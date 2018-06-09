@@ -35,7 +35,7 @@
 
 				<div class='form-group'>
 					{!! Form::label('nombre_categoriacomp', 'SUPERLATIVO:') !!}
-					{!! Form::text('niveles[]->desc_nivelcompetencia', null, ['class' => 'form-control']) !!}
+					{!! Form::text('niveles[]', null, ['class' => 'form-control']) !!}
 				</div>	
 				<div class='form-group'>
 					{!! Form::label('nombre_categoriacomp', 'EFICIENTE:') !!}

@@ -66,17 +66,22 @@
 						<div class="col-md-6">
 							{!! Form::label('', 'Perfil:') !!}
 							{!! Form::select('id_perfil', $perfiles,null ,['class' => 'select2','placeholder'=>'Seleccione un Perfil','id'=>'id_perfil', 'style'=>'width:100%']) !!}
+							{!! Form::label('', '',['id' => 'errPerfilUsuario']) !!}
 							<div id="empresas" style="display:none;">
 								<div class='form-group'>
 									{!! Form::label('', 'Empresas:') !!}
-									{!! Form::select('id_empresa', $empresas,null ,['class' => 'select2','data-placeholder'=>'Seleccione una empresa','id'=>'id_empresa', 'style'=>'width:100%']) !!}
+									{!! Form::select('id_empresa', $empresas,null ,['class' => 'select2','placeholder'=>'Seleccione una empresa','id'=>'id_empresa', 'style'=>'width:100%']) !!}
+									{!! Form::label('', '',['id' => 'errEmpresaUsuario']) !!}
 								</div>	
 								<div class='form-group' style="display:none;" id="gerencia">
+								{!! Form::label('', '',['id' => 'errGerenciaUsuario']) !!}								
 								</div>	
 								<div class='form-group' style="display:none;" id="area">
-								</div>	
+								{!! Form::label('', '',['id' => 'errAreaUsuario']) !!}									
+								</div>								
 								<div class='form-group' style="display:none;" id="perfilOcupacional">
-								</div>	
+								{!! Form::label('', '',['id' => 'errPerfilOcupacionalUsuario']) !!}
+								</div>									
 							</div>
 						</div>
 						

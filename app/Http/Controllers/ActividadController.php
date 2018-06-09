@@ -108,7 +108,9 @@ class ActividadController extends Controller
      */
     public function edit($id)
     {
-        //
+        $actividad = Actividad::findOrFail($id);
+        $cursos = Curso::all()->where('estado_curso',1)->sortBy('nombre_curso')->pluck('nombre_curso','id_curso');
+        return view('actividad.editarActividad', compact('actividad','cursos'));
     }
 
     /**
@@ -120,9 +122,25 @@ class ActividadController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $actividad = Actividad::findOrFail($id);
+        $actividad->id_curso = $request->id_curso;
+        $actividad->cod_interno_actividad = $request->cod_interno_actividad;
+        $actividad->cod_sence_actividad  = $request->cod_sence_actividad;
+        $actividad->lugar_realizacion_actividad  = $request->lugar_realizacion_actividad;
+        $actividad->observacion_actividad  = $request->observacion_actividad;
+        $actividad->fecha_inicio_actividad  = $request->fecha_inicio_actividad;
+        $actividad->fecha_termino_actividad  = $request->fecha_termino_actividad;
+        $actividad->estado_actividad  = 1;
+        $actividad->save();
+        return redirect('actividad');
     }
 
+    public function confirmDestroy($id)
+    {
+        
+        $actividad = Actividad::findOrFail($id);
+        return view('actividad.desactivarActividad', compact('actividad'));
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -131,6 +149,8 @@ class ActividadController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $actividad = Actividad::findOrFail($id);
+        $actividad->eliminar();
+        return redirect('actividad');
     }
 }

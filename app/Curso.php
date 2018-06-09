@@ -13,6 +13,6 @@ class Curso extends Model
 
     public function competencias()
     {
-        return $this->belongsToMany(Competencia::Class, 'competenciacurso', 'id_curso', 'id_comp');
+        return $this->hasMany(Competencia::Class, 'competenciacurso', 'id_curso');
     }
 }

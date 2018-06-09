@@ -475,3 +475,15 @@ Route::get('/vercursos/{id}', 'vistaCursoController@vistacursos',function($id) {
   });
 
 
+  //-------------------------------------------------------------------------------------------------------------------------
+//Colaborador
+
+
+Route::get('/vistaColaborador', 'ColaboradorController@indexVista');
+
+
+
+Route::get('/vistaColaborador/detalle/{id}', 'ColaboradorController@showVista',function($id) {
+    return  $id;
+  });
+

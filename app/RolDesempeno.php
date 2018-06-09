@@ -11,8 +11,10 @@ class RolDesempeno extends Model
     const CREATED_AT = 'fecha_reg_roldesempeno';
     const UPDATED_AT = 'fecha_mod_roldesempeno';
 
-    public function comunas()
+    public function rolEvaluaciones()
     {
-        return $this->belongsTo(Competencia::Class,'id_comp');
+        return $this->hasMany(RolEvaluacion::Class, 'id_roldesempeno');
     }
+
+
 }

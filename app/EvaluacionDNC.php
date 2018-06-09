@@ -16,6 +16,11 @@ class EvaluacionDNC extends Model
         return $this->belongsTo(Usuario::class,'id_usuario');
     }
 
+    public function rolEvaluacion()
+    {
+        return $this->hasMany(RolEvaluacion::class,'id_evaluacion');
+    }
+
     public function eliminar()
     {
         $this->estado_evaluacion = 0;

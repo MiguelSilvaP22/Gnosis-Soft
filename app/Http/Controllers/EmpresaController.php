@@ -240,13 +240,21 @@ class EmpresaController extends Controller
     {
         $empresa = Empresa::All()->where('rut_matriz_empresa',$rut_matriz_empresa)->first();
         
-        if($empresa == null)
-        { 
-            return 'false';
-        }
-        else 
+        if($empresa == $rut_matriz_empresa)
         {
             return 'true';
         }
+        else
+        {
+            if($empresa == null)
+            {
+                return 'false';
+            }
+            else
+            {
+                return 'true';
+            }
+        }
+        
     }
 }

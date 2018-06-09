@@ -118,11 +118,10 @@ $(document).ready(function() {
 });
 
 $('#formEmpresa').submit(function (e) {
-	console.log('asd');
 	e.preventDefault();
 	var url = e.target.action  // get the target
 	var formData = $(this).serialize() // get form data
-	var tipo = 2;
+	var tipo = '2';
 	if(validarEmpresa(tipo))	
 	{
 		$.post(url, formData, function (response) { // send; response.data will be what is returned

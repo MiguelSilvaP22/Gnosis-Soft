@@ -57,8 +57,7 @@ function validarRut(TCode){
 //Validación del DV.
 function validarDV(rut)
 {
-	// Despejar Puntos
-    var valor = rut;
+	var valor = rut;
     // Despejar Guión
     valor = valor.replace('-','');
     
@@ -247,22 +246,22 @@ function validarEmpresa(tipo)
 			else
 			{
 				desmarcarError('rut_matriz_empresa','errRutMatriz');
-				if(tipo == 1)
+				if(tipo == '1')
 				{
 					if(validarRutAdd()!= "false")
 					{
 						verificar = false; marcarErrorDuplicado('rut_matriz_empresa','errRutMatriz');
 					}
-					else{desmarcarError('rut_matriz_empresa','errRutMatriz');}					
+					else{desmarcarError('rut_matriz_empresa','errRutMatriz');}
 				}
-				if(tipo == 2)
+				if(tipo == '2')
 				{
 					if(validarRutEdit()!= "false")
 					{
 						verificar = false; marcarErrorDuplicado('rut_matriz_empresa','errRutMatriz');
 					}
-					else{desmarcarError('rut_matriz_empresa','errRutMatriz');}					
-				}			
+					else{desmarcarError('rut_matriz_empresa','errRutMatriz');}
+				}						
 			}
 		}	
 	}
@@ -434,7 +433,7 @@ function validarUsuario()
 		}	
 	}
 
-	//Validar Fecha Nac
+	//Validar Fecha Nacimiento.
 	if($.trim( $("#fechaUsuario").val()) == "" )
 	{
 		verificar = false; marcarErrorGeneral('fechaUsuario','errFechaUsuario');
@@ -442,7 +441,7 @@ function validarUsuario()
 	else
 	{desmarcarError('fechaUsuario','errFechaUsuario');}
 
-	//Validar Sexo
+	//Validar Sexo.
 	var check = $('input[name=sexo_usuario]:checked').val();
 	if(check == null)
 	{
@@ -451,7 +450,7 @@ function validarUsuario()
 	else
 	{desmarcarErrorSelect('errSexo');}
 
-	//Validar e-mail
+	//Validar e-mail.
 	if($.trim( $("#email_usuario").val()) == "" )
 	{
 		verificar = false; marcarErrorGeneral('email_usuario','errEmail');
@@ -459,11 +458,64 @@ function validarUsuario()
 	else
 	{desmarcarError('email_usuario','errEmail');}
 
-	//Validar nacionalidad
+	//Validar Select nacionalidad.
 	if($("#id_nacionalidad").val() == "")
 	{verificar = false; marcarErrorSelect('errNacionalidad');}
 	else{desmarcarErrorSelect('errNacionalidad');}
 
+	//Validar Select Gerencia, Area, Perfil Ocupacional Usuario.
+	//Validar Select Perfil
+	if($("#id_perfil").val() == "")
+	{verificar = false; marcarErrorSelect('errPerfilUsuario');}
+	else{desmarcarErrorSelect('errPerfilUsuario');}
+
+	//Validar Select Perfil -> Empresa 
+	if($("#id_perfil").val() == 3)
+	{	
+		//Validar Select Empresa
+		if($("#id_empresa").val() == "")
+		{
+			verificar = false; marcarErrorSelect('errEmpresaUsuario');			
+		}
+		else
+		{
+			desmarcarErrorSelect('errEmpresaUsuario');
+			//Validar Select Gerencia
+			/*
+			if($("#select_gerencia").val() == "")
+			{
+			verificar = false; marcarErrorSelect('errGerenciaUsuario');			
+			}	
+			else
+			{
+				desmarcarErrorSelect('errGerenciaUsuario');
+				//Validar Select Area
+				if($("#select_area").val() == "")
+				{
+				verificar = false; marcarErrorSelect('errAreaUsuario');			
+				}	
+				else
+				{
+					desmarcarErrorSelect('errAreaUsuario');
+					//Validar Select Perfil Ocupacional
+					if($("#id_perfilocu").val() == "")
+					{
+					verificar = false; marcarErrorSelect('errPerfilOcupacionalUsuario');			
+					}	
+					else
+					{
+						desmarcarErrorSelect('errPerfilOcupacionalUsuario');						
+					}
+				}
+			}*/
+		}
+	}
 
 	return verificar;
+}
+
+//=====================================================================VALIDACION COLABORADOR=====================================================================
+function validarColaborador()
+{
+	
 }

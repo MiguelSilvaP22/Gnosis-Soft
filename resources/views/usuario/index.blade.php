@@ -35,7 +35,7 @@
 						@foreach ($usuarios as $usuario) 
 						<tr>
 
-							<td style="width:25%;">{{ $usuario->nombre_usuario. $usuario->apellidopat_usuario.$usuario->apellidomat_usuario}}</td>
+							<td style="width:25%;">{{ $usuario->nombre_usuario. $usuario->apellidopat_usuario. $usuario->apellidomat_usuario}}</td>
 							<td style="width:25%;">{{ $usuario->perfil->nombre_perfil}}</td>
 							@if($usuario->perfilOcupacional != null)
 								<td style="width:25%;">{{ $usuario->perfilOcupacional->area->gerencia->empresa->nombre_empresa}}</td>
@@ -108,7 +108,11 @@ $(document).on('click', '#btnVer', function () {
 		type: "GET",
 		success: function (datos) {
 			$("#datos").html(datos);
-			$('#modal').modal('show');
+			$('#modal').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                });
 		}
 
 		});
@@ -121,7 +125,11 @@ $(document).on('click', '#btnAgregar', function () {
 		type: "GET",
 		success: function (datos) {
 			$("#datos").html(datos);
-			$('#modal').modal('show');
+			$('#modal').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                }); 
 		}
 
 		});
@@ -136,7 +144,11 @@ $(document).on('click', '#btnEditar', function () {
 		success: function (datos) {
 			
 			$("#datos").html(datos);
-			$('#modal').modal('show');
+			$('#modal').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                });
 			
 		}
 

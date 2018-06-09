@@ -342,7 +342,7 @@ desired effect
           </a>
         <ul class="treeview-menu">  
           <li class="treeview">
-            <li><a href="#"><i class="fa fa-edit"></i> <span>Actividades</span></a></li>
+            <li><a href="/facilitador"><i class="fa fa-edit"></i> <span>Actividades</span></a></li>
           </ul>
         </li>
 

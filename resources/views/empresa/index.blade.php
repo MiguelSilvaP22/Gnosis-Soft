@@ -22,7 +22,7 @@
 				</div>
 				<div class="box-body">
 				@if (count($empresas)>0)
-				<table id="tablaPerfil" class="table">
+				<table id="tablaEmpresa" class="table">
 					<thead>
 						<tr>
 							<th>Nombre Empresa</th>

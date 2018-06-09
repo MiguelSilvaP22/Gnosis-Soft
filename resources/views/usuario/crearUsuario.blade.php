@@ -165,11 +165,11 @@ $('#formUsuario').submit(function (e) {
 	var formData = $(this).serialize() // get form data
 	if(validarUsuario())	
 	{
-		/*$.post(url, formData, function (response) { // send; response.data will be what is returned
+		$.post(url, formData, function (response) { // send; response.data will be what is returned
 			$('#modal').modal('hide');
-		});*/
+		});
 		
-	}alert("Validado");
+	}
 });
 
 $(document).on('click', '#btnVolver', function () {

@@ -19,7 +19,7 @@
 				</div>
 				<div class="box-body">
 				@if (count($usuarios)>0)
-				<table id="tablaPerfil" class="table">
+				<table id="tablaUsuario" class="table">
 					<thead>
 						<tr>
 							<th>Nombre Usuario</th>
@@ -35,7 +35,7 @@
 						@foreach ($usuarios as $usuario) 
 						<tr>
 
-							<td style="width:25%;">{{ $usuario->nombre_usuario. $usuario->apellidopat_usuario. $usuario->apellidomat_usuario}}</td>
+							<td style="width:25%;">{{ $usuario->nombre_usuario." ". $usuario->apellidopat_usuario." ". $usuario->apellidomat_usuario}}</td>
 							<td style="width:25%;">{{ $usuario->perfil->nombre_perfil}}</td>
 							@if($usuario->perfilOcupacional != null)
 								<td style="width:25%;">{{ $usuario->perfilOcupacional->area->gerencia->empresa->nombre_empresa}}</td>
@@ -97,7 +97,7 @@
 @section('script-js')
 <script>
 $(document).ready(function() {
-	$('#tablaEmpresa').DataTable({
+	$('#tablaUsuario').DataTable({
 			
 		});
 } );

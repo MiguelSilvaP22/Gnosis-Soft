@@ -19,7 +19,7 @@
 				</div>
 				<div class="box-body">
 				@if (count($colaboradores)>0)
-				<table id="tablaPerfil" class="table">
+				<table id="tablaColaborador" class="table">
 					<thead>
 						<tr>
 							<th>Nombre Colaborador</th>
@@ -90,7 +90,7 @@
 @section('script-js')
 <script>
 $(document).ready(function() {
-	$('#tablaEmpresa').DataTable({
+	$('#tablaColaborador').DataTable({
 			
 		});
 } );

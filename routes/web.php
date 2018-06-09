@@ -482,5 +482,7 @@ Route::get('/vercursos/{id}', 'vistaCursoController@vistacursos',function($id) {
   Route::get('/infocurso/{id}', 'vistaCursoController@infocurso',function($id) {
     return  $id;
   });
+//-------------------------------------------------------------------------------------------------------------------------
+//Facilitador
 
-
+Route::get('/facilitador', 'FacilitadorController@index');

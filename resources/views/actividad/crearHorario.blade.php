@@ -77,10 +77,7 @@
 											<button type="button" class="btn btn-default" aria-label="Left Align" onclick="asignarHorario({{$horario->id_horario}})" id="btnAssignHorario">  
 											 	<i class="fa fa-user-plus"></i>
 											</button>
-											<button type="button" class="btn btn-default" aria-label="Left Align" onclick="eliminarForm({{$horario->id_horario}})" id="btnUpdateHorario">  
-											 	<i class="fa fa-pencil-square-o"></i>
-											</button>
-											<button type="button" class="btn btn-default" aria-label="Left Align" onclick="eliminarForm({{$horario->id_horario}})" id="btnDeleteHorario">  
+											<button type="button" class="btn btn-default" aria-label="Left Align" onclick="eliminarHorario({{$horario->id_horario}})" id="btnDeleteHorario">  
 											 	<i class="fa fa-close"></i>
 											</button>
 										</td>
@@ -162,8 +159,22 @@ function asignarHorario(id) {
 			}
 		});
 }
+
+function eliminarHorario(id) {
+		
+		$.ajax({
+		url: "/desactivarHorario/"+id,
+		type: "GET",
+		success: function (datos) {
+			$("#datosModalBorrar").html(datos);
+			$('#modalBorrar').modal('show'); 
+		}
+
+		});
+		//alert("asda");
+};
 $(document).on('click', '#btnVolver', function () {
-	$('#modal').removeData();
+	$('#modal').modal('hide');
 });
 
 </script>

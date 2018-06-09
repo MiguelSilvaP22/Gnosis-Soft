@@ -6,7 +6,7 @@
 			<div class="box">
 			
 				<div class="box-header">
-					<h3 class="box-title">Crear Curso</h3>
+					<h3 class="box-title">Crear Actividad</h3>
 				</div>
 
 				<div class="box-body">
@@ -79,6 +79,6 @@
 	//}
 });*/
 $(document).on('click', '#btnVolver', function () {
-	$('#modal').removeData();
+	$('#modal').modal('hide');
 });
 </script>

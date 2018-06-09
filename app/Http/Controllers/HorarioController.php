@@ -29,6 +29,7 @@ class HorarioController extends Controller
     public function create($id)
     {
         $horarioActividad = Horario::findOrFail($id);
+
         $queryColabEmpresa = DB::table('usuario')
             ->join('perfilocupacional', 'usuario.id_perfilocu', '=', 'perfilocupacional.id_perfilocu')
             ->join('area', 'perfilocupacional.id_area', '=', 'area.id_area')
@@ -38,10 +39,15 @@ class HorarioController extends Controller
             ->where('horariocolaborador.id_horario',$id)
             ->where('horariocolaborador.estado_horacolab',1)
             ->where('usuario.estado_usuario',1)
+            ->whereIn('usuario.id_perfil',['2','3'])
             ->select('usuario.id_usuario','empresa.id_empresa')
             ->get();
-        $idEmpresa = $queryColabEmpresa[0]->id_empresa;
-        $colaboradores = DB::table('usuario')
+       // dd($queryColabEmpresa);
+
+        if(Count($queryColabEmpresa)>0)
+        {
+            $idEmpresa = $queryColabEmpresa[0]->id_empresa;
+            $colaboradores = DB::table('usuario')
             ->join('perfilocupacional', 'usuario.id_perfilocu', '=', 'perfilocupacional.id_perfilocu')
             ->join('area', 'perfilocupacional.id_area', '=', 'area.id_area')
             ->join('gerencia', 'area.id_gerencia', '=', 'gerencia.id_gerencia')
@@ -53,6 +59,7 @@ class HorarioController extends Controller
             ->get()
             ->sortBy('nombre_usuario')
             ->pluck('run_usuario','id_usuario'); 
+        }
         $colaboradoresHorario = $queryColabEmpresa->pluck('id_usuario');
        
     	$facilitadores = Usuario::all()->where('id_perfil',4)->where('estado_usuario',1)->sortBy('nombre_usuario')->pluck('nombre_usuario','id_usuario');
@@ -151,6 +158,11 @@ class HorarioController extends Controller
         //
     }
 
+    public function confirmDestroy($id)
+    {
+        $horarioActividad = Horario::findOrFail($id);
+        return view('horario.desactivarHorario', compact('horarioActividad'));
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -159,6 +171,8 @@ class HorarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $horarioActividad = Horario::findOrFail($id);
+        $horarioActividad->eliminar();
+        return redirect('actividad');
     }
 }

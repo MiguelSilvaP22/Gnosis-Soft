@@ -37,9 +37,10 @@ class Usuario extends Model
 
     public function eliminar()
     {
+       
         if($this->id_perfil == 2)
         {
-            foreach($this->horariosColaborador as  $horColab)
+            foreach($this->horariosColaborador as $horColab)
             {
                 $horColab->eliminar();
             }

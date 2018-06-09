@@ -427,6 +427,15 @@ Route::get('/asignarHorario/{id}', 'HorarioController@create',function($id) {
   })
   ->name('colaborador.selectColaboradores'); 
 
+  Route::get('/desactivarHorario/{id}', 'HorarioController@confirmDestroy',function($id) {
+    return  $id;
+    })
+->name('horario.delete');  
+
+Route::get('/eliminarHorario/{id}', 'HorarioController@destroy',function($id) {
+    return  $id;
+    })
+->name('horario.destroy'); 
 
 Route::post('storeAsignarHorario', [
     'uses' => 'HorarioController@store'

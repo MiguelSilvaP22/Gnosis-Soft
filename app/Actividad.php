@@ -15,4 +15,18 @@ class Actividad extends Model
     {
         return $this->belongsTo(Curso::class,'id_curso');
     }
+    public function horarios()
+    {
+        return $this->hasMany(Horario::class,'id_actividad');
+    }
+
+    public function eliminar()
+    {
+        foreach($this->horarios as $horario)
+        {
+            $horario->eliminar();
+        }
+        $this->estado_actividad = 0;
+        $this->save();
+    }
 }

@@ -36,7 +36,7 @@ class UsuarioController extends Controller
     {
         $nacionalidades = Nacionalidad::all()->where('estado_nacionalidad',1)->sortBy('nombre_nacionalidad')->pluck('nombre_nacionalidad','id_nacionalidad');
         $empresas = Empresa::all()->where('estado_empresa',1)->sortBy('nombre_empresa')->pluck('nombre_empresa','id_empresa');
-        $perfiles = Perfil::all()->where('estado_perfil',1)->sortBy('nombre_perfil')->pluck('nombre_perfil','id_perfil');
+        $perfiles = Perfil::all()->where('estado_perfil',1)->where('id_perfil','!=',2)->sortBy('nombre_perfil')->pluck('nombre_perfil','id_perfil');
 
         return view('usuario.crearUsuario', compact('nacionalidades','empresas','perfiles'));
         

@@ -48,7 +48,7 @@
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Competencias:') !!}
-								{!! Form::select('id_competencia[]', $competencias,null ,['class' => 'select2','multiple','placeholder'=>'Seleccione una modalidad','id'=>'id_competencia', 'style'=>'width:100%']) !!}
+								{!! Form::select('id_competencia[]', $competencias,$competenciasCurso ,['class' => 'select2','multiple','placeholder'=>'Seleccione una modalidad','id'=>'id_competencia', 'style'=>'width:100%']) !!}
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Contenido General') !!}	
@@ -82,13 +82,7 @@
 <script>
 
 $(document).ready(function() {
-
-	alert("ok");
-
-	
     $('.select2').select2();
-	var idCompetencias = {{$competenciasCurso}};
-	$('#id_competencia').select2().val(idCompetencias).trigger("change");
 });
 var count ={{Count($contenidosGenerales)}}-1;
 $('#addContenido').click(function() {

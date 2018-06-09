@@ -43,8 +43,8 @@
   				</div>
 			</div>	
 		</div>
-		@if(Count($facilitadoresHorario)>0)
 		{!! Form::open(['action' => 'HorarioController@store','id'=>'formularioAsignarHorario']) !!}
+		@if(Count($facilitadoresHorario)>0)
 		<div class="box">
 			<div class="box-header">
 				<h3 class="box-title">Asignar Facilitador</h3>
@@ -70,11 +70,38 @@
   				</div>
 			</div>		
 		</div>
+		@else
+		<div class="box">
+				<div class="box-header">
+					<h3 class="box-title">Asignar Facilitador</h3>
+				</div>
+	
+				<div class="box-body">
+					<div class="row">
+						<div class="col-md-12">
+							
+							<table class="table">
+								<tbody>
+									<tr>
+										<td style="width: 25%;">
+											<span> Facilitador: </span>
+										</td>
+										<td style="width: 75%;">
+											{!! Form::select('id_facilitador[]', $facilitadores ,null ,['class' => 'select2','multiple','id'=>'id_facilitador', 'style'=>'width:100%']) !!}
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					  </div>
+				</div>		
+			</div>
+		@endif
+		@if(Count($colaboradoresHorario)>0)
 		<div class="box">
 			<div class="box-header">
 				<h3 class="box-title">Asignar Colaboradores</h3>
 			</div>
-
 			<div class="box-body">
 				<div class="row">
 					<div class="col-md-12">
@@ -103,40 +130,7 @@
   				</div>
 			</div>		
 		</div>
-		<div class='form-group'>
-			{!! Form::hidden('id_horario',$horarioActividad->id_horario) !!}
-		</div>
-		<div class='form-group'>
-			{!! Form::submit("Agregar Asignacion", ['class' => 'form-control btn btn-success ']) !!}
-		</div>
-		{!! Form::close() !!}
 		@else
-		{!! Form::open(['action' => 'HorarioController@store','id'=>'formularioAsignarHorario']) !!}
-		<div class="box">
-			<div class="box-header">
-				<h3 class="box-title">Asignar Facilitador</h3>
-			</div>
-
-			<div class="box-body">
-				<div class="row">
-					<div class="col-md-12">
-						
-						<table class="table">
-							<tbody>
-								<tr>
-									<td style="width: 25%;">
-										<span> Facilitador: </span>
-									</td>
-									<td style="width: 75%;">
-										{!! Form::select('id_facilitador[]', $facilitadores ,null ,['class' => 'select2','multiple','id'=>'id_facilitador', 'style'=>'width:100%']) !!}
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-  				</div>
-			</div>		
-		</div>
 		<div class="box">
 			<div class="box-header">
 				<h3 class="box-title">Asignar Colaboradores</h3>
@@ -166,6 +160,7 @@
   				</div>
 			</div>		
 		</div>
+		@endif
 		<div class='form-group'>
 			{!! Form::hidden('id_horario',$horarioActividad->id_horario) !!}
 		</div>
@@ -173,13 +168,12 @@
 			{!! Form::submit("Agregar Asignacion", ['class' => 'form-control btn btn-success ']) !!}
 		</div>
 		{!! Form::close() !!}
-		@endif
 		<div class='form-group'>
 			<div id="btnVolver" class="form-control btn btn-success " > Volver </div>
 		</div>
-		<div class='form-group'>
+		{{--<div class='form-group'>
 			<div id="btnAtras" class="form-control btn btn-success " > Atras </div>
-		</div>
+		</div> --}}
 	</div>
 </body>
 
@@ -199,10 +193,7 @@ function cargarColaboradores(id) {
 	});
 }
 $(document).on('click', '#btnVolver', function () {
-		$("#datos").html('');
-		$('#modal').modal('hide');
-		
-		
+	$('#modal').modal('hide');		
 });
 $(document).on('click', '#btnAtras', function () {
 		({{$horarioActividad->actividad->id_actividad}})

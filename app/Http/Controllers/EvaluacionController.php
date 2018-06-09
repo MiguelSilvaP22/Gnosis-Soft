@@ -9,6 +9,10 @@ use App\NivelCompetencia;
 use App\TipoNivel;
 use App\RolDesempeno;
 use App\Competencia;
+
+use App\RolEvaluacion;
+use App\EvaluacionDNC;
+
 use App\PerfilOcupacional;
 
 use Illuminate\Http\Request;
@@ -41,27 +45,29 @@ class EvaluacionController extends Controller
 
     public function store(Request $request)
     {
-        //dd($request);
-        foreach($request->prueba as $idValue)
-        {   
-            $valores = explode("-",$idValue);
-            echo "idVaina ".$valores[0]."</br>";
-            echo "valueVaina ".$valores[1]."</br>";
+
+        $evaluaciondnc = new EvaluacionDNC;
+        $evaluaciondnc->id_usuario = $request->id_usuario;
+        $evaluaciondnc->observacion = $request->observacion;
+        $evaluaciondnc->estado_evaluacion=1;
+
+        if($evaluaciondnc->save())
+        {
+            foreach($request->prueba as $idValue)
+            {   
+                $valores = explode("-",$idValue);
+                //$valores[0] id rol de desempeño
+                //$valores[1] id nivel de competencia 1.uperlativo 2.Eficiente 3. promedio   
+                $rolevaluacion = new RolEvaluacion;
+                $rolevaluacion->id_roldesempeno = $valores[0];
+                $rolevaluacion->id_evaluacion = $evaluaciondnc->id_evaluacion;
+                $rolevaluacion->nivel_rolevaluacion= $valores[1];
+                $rolevaluacion->estado_rolevaluacion=1;
+                $rolevaluacion->save();
+            }
+
         }
-        /*$colaborador = new Usuario;
-        $colaborador->id_perfil = 2; //Por defecto el id 2 sera colaborador;
-        $colaborador->id_perfilocu = $request->id_perfilocu;
-        $colaborador->run_usuario = $request->run_usuario;
-        $colaborador->nombre_usuario = $request->nombre_usuario; 
-        $colaborador->fechana_usuario = $request->fechana_usuario;
-        $colaborador->apellidopat_usuario = $request->apellidopat_usuario;
-        $colaborador->apellidomat_usuario = $request->apellidomat_usuario;
-        $colaborador->sexo_usuario = $request->sexo_usuario;
-        $colaborador->email_usuario = $request->email_usuario;
-        $colaborador->estado_usuario = 1;
-        $colaborador->clave_usuario = mb_substr($request->run_usuario, 0, 4);
-        $colaborador->save();
-        return redirect('colaborador');*/
+        return redirect('evaluacion');
 
     }
     
@@ -70,11 +76,16 @@ class EvaluacionController extends Controller
        $colaborador = Usuario::findOrFail($id);
        $perfilOcupacional = PerfilOcupacional::findOrFail($colaborador->id_perfilocu);
        $competencias = Competencia::All()->where('estado_comp',1)->where('id_perfilocu',$colaborador->id_perfilocu);
-       $listaCompetencias = $perfilOcupacional->competencias->pluck('nombre_comp','id_comp');;
+       $listaCompetencias = $perfilOcupacional->competencias->pluck('nombre_comp','id_comp');
        //$colaboradores = Usuario::all()->where('id_perfil',2)->where('estado_usuario',1);
-       \Debugbar::info($listaCompetencias);
+       $tiponivel = TipoNivel::All()->where('estado_tiponivel',1);
+       \Debugbar::info($colaborador->perfilOcupacional->competencias->last()->rolDesempenos->last()->rolEvaluaciones->last()->evaluacionDnc);
 
-        return view('evaluacion.infoColaborador', compact('colaborador','perfilOcupacional', 'listaCompetencias'));
+      /* \Debugbar::info($colaborador->evaluacionDNC->where('estado_evaluacion',1)->last()->rolEvaluacion);
+
+*/
+
+        return view('evaluacion.infoColaborador', compact('colaborador','perfilOcupacional', 'listaCompetencias', 'tiponivel'));
         
     }
 
@@ -84,10 +95,20 @@ class EvaluacionController extends Controller
         $roldesempenos = RolDesempeno::All()->where('estado_roldesempeno',1)->where('id_comp', $idCompetencia);
         $niveles = NivelCompetencia::All()->where('estado_nivelcompetencia',1)->where('id_comp', $idCompetencia)->values();
         $tiponivel = TipoNivel::All()->where('estado_tiponivel',1);
+        $evaluacionDNC = EvaluacionDNC::All()->where('estado_evaluacion',1);
 
+
+
+        $rolevaluacion=[] ;
+        foreach($roldesempenos as $key => $roldesem  )
+        {
+            $rol1 = RolEvaluacion::where('estado_rolevaluacion',1)->where('id_roldesempeno', $roldesem->id_roldesempeno)->first();
+            $rolevaluacion[] = $rol1->nivel_rolevaluacion;
+        }            
         \Debugbar::info($tiponivel);
 
-        return view('evaluacion.datosEvaluacion', compact('competencia', 'roldesempenos','tiponivel'));
+
+        return view('evaluacion.datosEvaluacion', compact('competencia', 'roldesempenos','tiponivel','rolevaluacion'));
         
     }
 

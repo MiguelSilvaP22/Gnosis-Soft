@@ -153,4 +153,20 @@ class ColaboradorController extends Controller
             ->pluck('run_usuario','id_usuario');
         return view('colaborador.selectColaboradores', compact('colaboradores'));
     }
+
+
+    public function indexVista()
+    {
+        $colaboradores = Usuario::all()->where('id_perfil',2)->where('estado_usuario',1);
+        return view('vistaColaborador.index', compact('colaboradores'));
+    }
+
+    public function showVista($id)
+    {
+        
+        $colaborador = Usuario::findOrFail($id);
+        \Debugbar::info($colaborador->perfilOcupacional->area->gerencia);
+
+        return view('vistaColaborador.detalle', compact('colaborador'));
+    }
 }

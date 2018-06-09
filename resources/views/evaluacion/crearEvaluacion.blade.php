@@ -23,8 +23,7 @@
 					<div class='form-group'  id="datosColaborador"></div>
 					<div class='form-group'  id="datosEvaluacion"></div>
 
-
-	<div class='form-group'>
+				<div class='form-group'>
 					{!! Form::submit("Agregar Evaluacion", ['class' => 'form-control btn btn-success ']) !!}
 				</div>
 
@@ -71,9 +70,7 @@
 	$(document).on('change', '#listaCompetencias', function () {
 		
 		if(this.value!='')
-		{
-
-		
+		{	
 
 			$.ajax({
 			url: "/datosEvaluacion/"+this.value,

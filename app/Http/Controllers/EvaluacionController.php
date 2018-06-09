@@ -41,8 +41,13 @@ class EvaluacionController extends Controller
 
     public function store(Request $request)
     {
-        dd($request);
-
+        //dd($request);
+        foreach($request->prueba as $idValue)
+        {   
+            $valores = explode("-",$idValue);
+            echo "idVaina ".$valores[0]."</br>";
+            echo "valueVaina ".$valores[1]."</br>";
+        }
         /*$colaborador = new Usuario;
         $colaborador->id_perfil = 2; //Por defecto el id 2 sera colaborador;
         $colaborador->id_perfilocu = $request->id_perfilocu;

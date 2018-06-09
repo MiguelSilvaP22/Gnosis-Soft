@@ -17,7 +17,7 @@
 
 		{!! $nivel->nombre_tiponivel !!}	 
 		
-			{!! Form::radio("prueba[$roldesempeno->id_roldesempeno]", $nivel->id_tiponivel, null) !!} 
+			{!! Form::radio("prueba[$roldesempeno->id_roldesempeno]", $roldesempeno->id_roldesempeno."-".$nivel->id_tiponivel, null) !!} 
 
 		@endforeach
 		</p>

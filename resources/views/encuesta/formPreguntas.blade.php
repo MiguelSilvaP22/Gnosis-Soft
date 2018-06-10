@@ -3,7 +3,8 @@
 	<div class='form-group' >
 		{!! Form::label('', 'Pregunta '.($idForm+1)) !!}
 			<div class="input-group">	
-			{!! Form::text('nombre_pregunta[]', null, ['class' => 'form-control date','id'=>'nombre_pregunta']) !!}
+			{!! Form::text('nombre_pregunta['.$idForm.']', null, ['class' => 'form-control date','id'=>'nombre_pregunta'.$idForm.'']) !!}
+			<span type="button" class="input-group-addon" aria-label="Left Align"> <i class="fa fa-remove"></i> </span>
 			<span type="button" class="input-group-addon" aria-label="Left Align"> <i class="fa fa-remove"></i> </span>
 			</div>
 		</div>

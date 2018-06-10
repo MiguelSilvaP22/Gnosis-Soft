@@ -17,7 +17,8 @@ class EncuestaController extends Controller
     public function create()
     {   
         $tiposEncuesta = TipoEncuesta::all()->where('estado_tipoencuesta',1)->sortBy('nombre_tipoencuesta')->pluck('nombre_tipoencuesta','id_tipoencuesta');
-        return view('encuesta.crearEncuesta', compact('tiposEncuesta'));
+        $categoriasPreguntas = Categoria::all()->where('estado_categoria',1)->sortBy('nombre_categoria')->pluck('nombre_categoria','id_categoria');
+        return view('encuesta.crearEncuesta', compact('tiposEncuesta','categoriasPreguntas'));
     }
     public function store(Request $request)
     {   
@@ -43,7 +44,7 @@ class EncuestaController extends Controller
         
     }
 
-    public function storeCategoriaPreguntas($nombreCategoriaPreguntas)
+    public function storeCategoriaPreguntas($nombreCategoriaPreguntas,$id)
     {   
         $categoriaPreguntas = new Categoria();
         $categoriaPreguntas->nombre_categoria = $nombreCategoriaPreguntas;
@@ -51,13 +52,19 @@ class EncuestaController extends Controller
         if($categoriaPreguntas->save())
         {
             $categoriasPreguntas = Categoria::all()->where('estado_categoria',1)->sortBy('nombre_categoria')->pluck('nombre_categoria','id_categoria');
-            return view('encuesta.selectCategoriaPreguntas', compact('categoriasPreguntas'));
+            return view('encuesta.selectCategoriaPreguntas', compact('categoriasPreguntas','id'));
         }
     }
     public function formPreguntas($id)
     {
         $idForm = $id;
         return view('encuesta.formPreguntas', compact('idForm'));
+
+    }
+    public function formCategoriaPreguntas($id)
+    {
+        $categoriasPreguntas = Categoria::all()->where('estado_categoria',1)->sortBy('nombre_categoria')->pluck('nombre_categoria','id_categoria');
+        return view('encuesta.formCategoriaPreguntas',compact('categoriasPreguntas','id'));
 
     }
 

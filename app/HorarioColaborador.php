@@ -19,6 +19,10 @@ class HorarioColaborador extends Model
     {
         return $this->belongsTo(Usuario::class,'id_usuario');
     }
+    public function evaluacionesColab()
+    {
+        return $this->hasMany(EvaluacionColab::class,'id_horacolab');
+    }
 
     public function eliminar()
     {

@@ -99,10 +99,7 @@ Route::get('/crearCompetencia', 'CompetenciaController@create')->name('competenc
 
 //Empresas
 
-Route::get('empresa/{estado?}', 'EmpresaController@index',function($estado = null)
-{
-    return $estado;
-});
+Route::get('/empresa', 'EmpresaController@index');
 
 Route::get('/crearEmpresa', 'EmpresaController@create')->name('empresa.crear');
 
@@ -486,8 +483,48 @@ Route::get('/vercursos/{id}', 'vistaCursoController@vistacursos',function($id) {
 //Facilitador
 Route::get('/facilitador', 'FacilitadorController@index');
 
+Route::get('/verHorarioFacilitador/{id}', 'FacilitadorController@verHorarioFacilitador',function($id) {
+    return  $id;
+  });
+
+Route::get('/agregarAsistencia/{id}', 'FacilitadorController@agregarAsistencia',function($id) {
+return  $id;
+}); 
+
+Route::get('/evaluarColaborador/{id}', 'FacilitadorController@evaluarColaborador',function($id) {
+    return  $id;
+    }); 
+
+
+Route::get('/storeEvaluacionColaborador/valor_nota/{valor}/obervacion_evColab/{obs}/id_horacolab/{id}', [
+    'as' => 'storeEvaluacionColaborador', 'uses' => 'FacilitadorController@storeEvaluacionColaborador']);   
+Route::resource('facilitador', 'FacilitadorController');
+    
+  //-------------------------------------------------------------------------------------------------------------------------
+//Encuesta
+Route::get('/encuesta', 'EncuestaController@index');
+Route::get('/crearEncuesta', 'EncuestaController@create');
+Route::get('/crearTipoEncuesta/{nombre}', 'EncuestaController@storeTipoEncuesta',function($nombre) {
+    return  $nombre;
+  })
+  ->name('encuesta.storeTipoEncuesta');
+Route::get('/selectCategoriaPreguntas/{id}', 'EncuestaController@selectCategoriaPreguntas',function($id) {
+    return  $id;
+  })
+  ->name('encuesta.selectCategoriaPreguntas'); 
+Route::get('/crearCategoriaPreguntas/{nombre}', 'EncuestaController@storeCategoriaPreguntas',function($nombre) {
+    return  $nombre;
+  })
+  ->name('encuesta.storeCategoriaPreguntas'); 
+Route::get('/formPreguntas/{id}', 'EncuestaController@formPreguntas',function($id)
+  {
+    return $id;
+  })->name('encuesta.formPreguntas'); 
+  
+Route::resource('encuesta', 'EncuestaController');
   //-------------------------------------------------------------------------------------------------------------------------
 //Colaborador
+
 
 
 Route::get('/vistaColaborador', 'ColaboradorController@indexVista');

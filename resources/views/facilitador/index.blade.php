@@ -17,50 +17,40 @@
 					<thead>
 						<tr>
 							<th>Codigo Actividad</th>
+							<th>Curso</th>
 							<th>Fecha</th>
 							<th>Horarios</th>
-							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
+					
 						@foreach ($actividades as $actividad) 
+						@if(Count($actividad->horarios) > 0)
 						<tr>
-							<td style="width:25%;">{{ $actividad->cod_interno_actividad}}</td>
-							<td style="width:25%;"rowspan="{{Count($actividad->horarios)}}">{{ date('d/m/Y',strtotime($actividad->fecha_inicio_actividad))."-".date('d/m/Y',strtotime($actividad->fecha_termino_actividad))}}</td>
-							<td style="width:25%;" >
-							@foreach ($actividad->horarios as $horario) 
-								{{ "Dia: ". date('d/m/Y',strtotime($horario->fecha_horario))}} <br/>
-								@foreach ($horario->horariosFacilitador as $horarioFacilitador) 
-									{{ "Facilitador: ".$horarioFacilitador->usuario->nombre_usuario}}<br/><br/>
+							<td >{{ $actividad->cod_interno_actividad}}</td>	
+							<td >{{ $actividad->curso->nombre_curso}}</td>							
+							<td >{{ date('d/m/Y',strtotime($actividad->fecha_inicio_actividad))."-".date('d/m/Y',strtotime($actividad->fecha_termino_actividad))}}</td>
+							<td >
+							@foreach ($actividad->horarios->sortBy('fecha_horario') as $horario) 
+							<nav class="navbar navbar-light bg-light">
+								<a class="nav-link" href="javascript:verHorarioFacilitador({{$horario->id_horario}})">{{ "Dia: ". date('d/m/Y',strtotime($horario->fecha_horario))}}
+							
+								@if(Count($horario->horariosFacilitador)>0)
+								@foreach ($horario->horariosFacilitador as $horarioFacilitador) 							
+									<p>{{ "Facilitador: ".$horarioFacilitador->usuario->nombre_usuario}}</p>
 								@endforeach	
+								@else
+									<p>{{ "Facilitador: Sin Aisgnar"}}</p>
+								@endif
+								</a>
+							</nav>	
 							@endforeach
 							</td>		
-							<td >
-								<button id="btnVer" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
-							</td>
 						</tr>
+						@endif
 						@endforeach
 					</tbody>
 				</table>
-				<table>
-    <tr>
-        <td rowspan="2">Column 1 Heading</td>
-        <td colspan="3">Call Standard</td>
-        <td rowspan="2">Column 3 Heading</td>
-    </tr>
-    <tr>
-        <td>Flagged</td>
-        <td>Percent</td>
-        <td>Days</td>
-    </tr>
-    <tr>
-        <td>Column 1 Value</td>
-        <td>4</td>
-        <td>1%</td>
-        <td>6</td>
-        <td>Column 3 Value</td>
-    </tr>
-</table>
 				@else
 					<h1>No Hay actividades registrados</h1>
 				@endif
@@ -70,14 +60,40 @@
 	</div>
 
 </body>
+<style>
+	td {
+    width: 10%;
+    white-space: nowrap;
+}
+</style>
 <div class="modal fade bs-example-modal-lg" id="modal">
 	<div class="modal-dialog modal-lg">
 	<div class="modal-content">
 		<div class="modal-body">	
 			<div class="row">
-				<div class="col-xs-12">
+				<div class="col-lg-12">
 					<div class="box box-primary">
 						<div id="datos" class="box-body">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<div class="modal fade bs-example-modal-xs" id="modalEvaluacion">
+	<div class="modal-dialog modal-xs">
+	<div class="modal-content">
+		<div class="modal-body">	
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="box box-primary">
+						<div id="datosEvaluacion" class="box-body">
 
 						</div>
 					</div>
@@ -103,18 +119,26 @@ $(document).ready(function() {
 	});
 
 } );
-$(document).on('click', '#btnVer', function () {
+function verHorarioFacilitador(id){
 		$.ajax({
-		url: "/verActividad/"+this.value,
+		url: "/verHorarioFacilitador/"+id,
 		type: "GET",
 		success: function (datos) {
 			$("#datos").html(datos);
-			$('#modal').modal('show');
+			$('#modal').modal({
+				backdrop: 'static',
+                keyboard: true, 
+                show: true
+			});
 		}
 
 		});
 		//alert("asda");
-});	
+};	
+
+
+
+
 </script>
 
 @stop

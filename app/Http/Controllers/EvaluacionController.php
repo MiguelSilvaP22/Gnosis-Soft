@@ -79,7 +79,7 @@ class EvaluacionController extends Controller
        $listaCompetencias = $perfilOcupacional->competencias->pluck('nombre_comp','id_comp');
        //$colaboradores = Usuario::all()->where('id_perfil',2)->where('estado_usuario',1);
        $tiponivel = TipoNivel::All()->where('estado_tiponivel',1);
-       \Debugbar::info($colaborador->perfilOcupacional->competencias->last()->rolDesempenos->last()->rolEvaluaciones->last()->evaluacionDnc);
+       //\Debugbar::info($colaborador->perfilOcupacional->competencias->last()->rolDesempenos->last()->rolEvaluaciones->last()->evaluacionDnc);
 
       /* \Debugbar::info($colaborador->evaluacionDNC->where('estado_evaluacion',1)->last()->rolEvaluacion);
 

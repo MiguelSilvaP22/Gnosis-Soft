@@ -1,22 +1,49 @@
 
 <body> 
+	<div class="col-xs-12">
+		
+		<div class="box">
+		
+			<div class="box-header">
+				<h3 class="box-title">Evaluar Colaborador</h3>
+			</div>
 
-
-	<div class="box-header">
-		<h3 class="box-title">¿ Desea Desactivar El Horario del día : {{date('d/m/Y',strtotime($horarioActividad->fecha_horario))}} ?</h3>
+			<div class="box-body">
+				<div class="row">
+					<div class="col-md-12">
+						<table id="tableColab" class="table">
+							<thead>
+								<tr>
+									<th>
+										Nombre
+									</th>
+									<th>
+										Run
+									</th>
+									<th>
+										Asistencia
+									</th>
+									<th>
+										
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+									</td>
+								</tr>
+							</tbody>
+						</table>						
+						
+					</div>
+					<div class='form-group'>
+							<div id="btnVolver" class="form-control btn btn-success " > Volver </div>
+						</div>
+  				</div>
+			</div>
+		</div>
 	</div>
-
-	<div class="box-body">
-		<table class='table'>
-			<tbody>
-				<tr>
-					<td><button id="confirmDelete" value="{{ $horarioActividad->id_horario}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Si </button></td>
-					<td><button id="exit" class="btn btn btn-info"><i class="fa fa-eye"></i> No </button></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-
 
 </body>
 

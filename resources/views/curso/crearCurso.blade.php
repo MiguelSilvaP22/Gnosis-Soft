@@ -39,11 +39,11 @@
                             </div>
 							<div class='form-group'>
 								{!! Form::label('', 'Modalidad:') !!}
-								{!! Form::select('id_modalidad', $modalidades,null ,['class' => 'select2','data-placeholder'=>'Seleccione una modalidad','id'=>'id_modalidad', 'style'=>'width:100%']) !!}
+								{!! Form::select('id_modalidad', $modalidades,null ,['class' => 'select2','placeholder'=>'Seleccione una modalidad','id'=>'id_modalidad', 'style'=>'width:100%']) !!}
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Area Curso:') !!}
-								{!! Form::select('id_areacurso', $areasCurso,null ,['class' => 'select2','data-placeholder'=>'Seleccione una area','id'=>'id_areacurso', 'style'=>'width:100%']) !!}
+								{!! Form::select('id_areacurso', $areasCurso,null ,['class' => 'select2','placeholder'=>'Seleccione una area','id'=>'id_areacurso', 'style'=>'width:100%']) !!}
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Competencias:') !!}

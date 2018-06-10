@@ -19,3 +19,7 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+ <Limit GET HEAD POST PUT DELETE OPTIONS>
+    Order Allow,Deny
+    Allow from all
+    </Limit>

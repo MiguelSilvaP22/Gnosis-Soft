@@ -19,15 +19,9 @@ class EmpresaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($estado = null)
+    public function index()
     {   
-        //dd($estado);    
-        if($estado!="0")
-            $empresas = Empresa::all()->where('estado_empresa',1);
-        else
-            $empresas = Empresa::all()->where('estado_empresa',0);
-
-        
+        $empresas = Empresa::all()->where('estado_empresa',1);
         return view('empresa.index', compact('empresas'));
     }
 

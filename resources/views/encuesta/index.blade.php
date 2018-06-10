@@ -9,7 +9,7 @@
 			<div class="box">
 			
 				<div class="box-header">
-					<h1 class="box-title">Tabla de Actividades</h1>
+					<h1 class="box-title">Tabla de Encuestas</h1>
 				</div>
 				<div style="widtn:100%;align:center;">
 					
@@ -18,35 +18,32 @@
 					</div>
 				</div>
 				<div class="box-body">
-				@if (count($actividades)>0)
-				<table id="tablaActividad" class="table">
+				@if (count($encuestas)>0)
+				<table id="tablaEncuesta" class="table">
 					<thead>
 						<tr>
-							<th>Codigo Actividad</th>
-							<th>Codigo Sence Actividad</th>
+							<th>Nombre Encuesta</th>
 							<th>Fecha de Modificación</th>
 							<th>Estado</th>
 							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
-						@foreach ($actividades as $actividad) 
+						@foreach ($encuestas as $encuesta) 
 						<tr>
-
-							<td style="width:25%;">{{ $actividad->cod_interno_actividad}}</td>
-							<td style="width:25%;">{{ $actividad->cod_sence_actividad}}</td>
-							<td style="width:25%;">{{ $actividad->fecha_mod_actividad}}</td>
-							@if($actividad->estado_actividad == 1)
+							<td style="width:25%;">{{ $encuesta->nombre_encuesta}}</td>
+							<td style="width:25%;">{{ $encuesta->fecha_mod_encuesta}}</td>
+							@if($encuesta->estado_encuesta == 1)
 							<td style="width:25%;color:green;">Activo</td>
 							@else
 							<td style="width:25%;color:red">inactivo</td>
 							@endif
 							<td>
-							<button id="btnVer" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
-							<button id="btnHorario" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Horario</button>
-							<button id="btnEditar" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>
+								<button id="btnVer" value="{{ $encuesta->id_encuesta}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
 
-							<button id="deleteActividad" class="btn btn btn-info" value="{{ $actividad->id_actividad}}"><i class="fa fa-eraser"></i> Eliminar</button>
+								<button id="btnEditar" value="{{ $encuesta->id_encuesta}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>
+
+								<button id="deleteEncuesta" class="btn btn btn-info" value="{{ $encuesta->id_encuesta}}"><i class="fa fa-eraser"></i> Eliminar</button>
 							</td>
 						</tr>
 						@endforeach
@@ -55,7 +52,7 @@
 					</tbody>
 				</table>
 				@else
-				<h1>No Hay actividades registrados</h1>
+				<h1>No Hay encuestas registradas</h1>
 				@endif
 				</div>
 			</div>
@@ -88,77 +85,19 @@
 @section('script-js')
 <script>
 $(document).ready(function() {
-	$('#tablaActividad').DataTable({
+
+    $('#tablaEncuesta').DataTable({
 			
 		});
+	$("#modal").on("hidden.bs.modal", function(){
+   		$("#datos").html("");
+	});	
 } );
+
 
 $(document).on('click', '#btnVer', function () {
 		$.ajax({
-		url: "/verActividad/"+this.value,
-		type: "GET",
-		success: function (datos) {
-			$("#datos").html(datos);
-			$('#modal').modal('show');
-		}
-
-		});
-		//alert("asda");
-});	
-
-$(document).on('click', '#btnHorario', function () {
-
-		$.ajax({
-		url: "/crearHorario/"+this.value,
-		type: "GET",
-		success: function (datos) {
-			$("#datos").html(datos);
-			$('#modal').modal({
-				backdrop: 'static',
-                keyboard: true, 
-                show: true
-            });
-
-		}
-
-		});
-		//alert("asda");
-});	
-
-$(document).on('click', '#btnAgregar', function () {
-		$.ajax({
-		url: "/crearActividad/",
-		type: "GET",
-		success: function (datos) {
-			$("#datos").html(datos);
-			$('#modal').modal('show');
-		}
-
-		});
-		//alert("asda");
-});	
-
-
-$(document).on('click', '#btnEditar', function () {
-		$.ajax({
-		url: "/editarActividad/"+this.value,
-		type: "GET",
-		success: function (datos) {
-			
-			$("#datos").html(datos);
-			$('#modal').modal('show');
-			
-		}
-
-		});
-		//alert("asda");
-});	
-
-
-$(document).on('click', '#deleteActividad', function () {
-		
-		$.ajax({
-		url: "/desactivarActividad/"+this.value,
+		url: "/verEncuesta/"+this.value,
 		type: "GET",
 		success: function (datos) {
 			$("#datos").html(datos);
@@ -170,9 +109,62 @@ $(document).on('click', '#deleteActividad', function () {
 		}
 
 		});
-		//alert("asda");
-});
+		
+});	
 
+$(document).on('click', '#btnAgregar', function () {
+		$.ajax({
+		url: "/crearEncuesta/",
+		type: "GET",
+		success: function (datos) {
+			$("#datos").html(datos);
+			$('#modal').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                }); 
+		}
+
+		});
+		
+});	
+
+
+$(document).on('click', '#btnEditar', function () {
+		$.ajax({
+		url: "/editarEncuesta/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			
+			$("#datos").html(datos);
+			$('#modal').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                }); 
+		}
+
+		});
+		
+});	
+
+$(document).on('click', '#deleteEncuesta', function () {
+		
+		$.ajax({
+		url: "/desactivarEncuesta/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#datos").html(datos);
+			$('#modal').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                }); 
+		}
+
+		});
+		
+});
 
 
 </script>

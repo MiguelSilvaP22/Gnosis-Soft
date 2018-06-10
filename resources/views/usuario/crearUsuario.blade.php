@@ -73,15 +73,15 @@
 									{!! Form::select('id_empresa', $empresas,null ,['class' => 'select2','placeholder'=>'Seleccione una empresa','id'=>'id_empresa', 'style'=>'width:100%']) !!}
 									{!! Form::label('', '',['id' => 'errEmpresaUsuario']) !!}
 								</div>	
-								<div class='form-group' style="display:none;" id="gerencia">
-								{!! Form::label('', '',['id' => 'errGerenciaUsuario']) !!}								
-								</div>	
-								<div class='form-group' style="display:none;" id="area">
+								<div class='form-group' style="display:none;" id="gerencia">								
+								</div>
+								{!! Form::label('', '',['id' => 'errGerenciaUsuario']) !!}				
+								<div class='form-group' style="display:none;" id="area">						
+								</div>
 								{!! Form::label('', '',['id' => 'errAreaUsuario']) !!}									
-								</div>								
 								<div class='form-group' style="display:none;" id="perfilOcupacional">
-								{!! Form::label('', '',['id' => 'errPerfilOcupacionalUsuario']) !!}
 								</div>									
+								{!! Form::label('', '',['id' => 'errPerfilOcupacionalUsuario']) !!}
 							</div>
 						</div>
 						

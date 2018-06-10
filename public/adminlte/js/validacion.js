@@ -16,6 +16,12 @@ function marcarErrorDuplicado(id,idErr){
 	$('#'+id).parent().addClass('has-error');
 }
 
+//Marcar error Ext
+function marcarErrorExt(idErr){
+	document.getElementById(idErr).innerHTML='Formato no valido.';
+	document.getElementById(idErr).style.color = '#FF3333';
+}
+
 //Marcar error select
 function marcarErrorSelect(idErr){
 	document.getElementById(idErr).innerHTML='Seleccione una opción.';
@@ -32,6 +38,12 @@ function desmarcarError(id,idErr){
 function desmarcarErrorSelect(idErr){
 document.getElementById(idErr).innerHTML='';
 }
+
+//Desmarcar error Ext.
+function desmarcarErrorExt(idErr){
+	document.getElementById(idErr).innerHTML='';
+}
+
 
 //Validación de caracteres.
 function validarChr(TCode){
@@ -103,8 +115,10 @@ function validarDV(rut)
     return false;
 }
 
-
+//================================================================================================================================================================
 //=====================================================================VALIDACION ORGANIGRAMA=====================================================================
+//================================================================================================================================================================
+
 //Validación Gerencia.
 function validarGerencia (){
 	var verificar = true;
@@ -186,7 +200,11 @@ function validarPerfilOcupacional()
 
 }
 
+
+//============================================================================================================================================================
 //=====================================================================VALIDACION EMPRESA=====================================================================
+//============================================================================================================================================================
+
 function validarEmpresa(tipo)
 {
 	var verificar = true;
@@ -246,7 +264,7 @@ function validarEmpresa(tipo)
 			else
 			{
 				desmarcarError('rut_matriz_empresa','errRutMatriz');
-				if(tipo == '1')
+				/*if(tipo == '1')
 				{
 					if(validarRutAdd()!= "false")
 					{
@@ -261,7 +279,7 @@ function validarEmpresa(tipo)
 						verificar = false; marcarErrorDuplicado('rut_matriz_empresa','errRutMatriz');
 					}
 					else{desmarcarError('rut_matriz_empresa','errRutMatriz');}
-				}						
+				}*/						
 			}
 		}	
 	}
@@ -352,7 +370,10 @@ function validarRutEdit()
 	return verificar;	
 }
 
+//============================================================================================================================================================
 //=====================================================================VALIDACION USUARIO=====================================================================
+//============================================================================================================================================================
+
 function validarUsuario()
 {
 	var verificar = true;
@@ -514,8 +535,334 @@ function validarUsuario()
 	return verificar;
 }
 
+
+//================================================================================================================================================================
 //=====================================================================VALIDACION COLABORADOR=====================================================================
+//================================================================================================================================================================
+
 function validarColaborador()
 {
+	var verificar = true;
+
+	//Validar run usuario
+	if($.trim( $("#run_usuario").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('run_usuario','errRunUsuario');
+	}
+	else
+	{
+		desmarcarError('run_usuario','errRunUsuario');	
+		if(validarRut($("#run_usuario").val()))
+		{
+			verificar = false; marcarErrorRut('run_usuario','errRunUsuario');			
+		}else
+		{
+			desmarcarError('run_usuario','errRunUsuario');
+			if(validarDV($("#run_usuario").val()))
+			{
+				verificar = false; marcarErrorRut('run_usuario','errRunUsuario');	
+			}
+			else
+			{
+				desmarcarError('run_usuario','errRunUsuario');		
+			}
+		}	
+	}
+
+	//Validar Nombre
+	if($.trim( $("#nombre_usuario").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('nombre_usuario','errNombreUsuario');
+	}
+	else
+	{
+		desmarcarError('nombre_usuario','errNombreUsuario');	
+		if(validarChr($("#nombre_usuario").val()))
+		{
+			verificar = false; marcarErrorChar('nombre_usuario','errNombreUsuario');			
+		}else
+		{
+			desmarcarError('nombre_usuario','errNombreUsuario');
+		}	
+	}
+
+	//Validar Apellido Paterno
+	if($.trim( $("#apellidopat_usuario").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('apellidopat_usuario','errApellidoP');
+	}
+	else
+	{
+		desmarcarError('apellidopat_usuario','errApellidoP');	
+		if(validarChr($("#apellidopat_usuario").val()))
+		{
+			verificar = false; marcarErrorChar('apellidopat_usuario','errApellidoP');			
+		}else
+		{
+			desmarcarError('apellidopat_usuario','errApellidoP');
+		}	
+	}
+
+	//Validar Apellido Materno
+	if($.trim( $("#apellidomat_usuario").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('apellidomat_usuario','errApellidoM');
+	}
+	else
+	{
+		desmarcarError('apellidomat_usuario','errApellidoM');	
+		if(validarChr($("#apellidomat_usuario").val()))
+		{
+			verificar = false; marcarErrorChar('apellidomat_usuario','errApellidoM');			
+		}else
+		{
+			desmarcarError('apellidomat_usuario','errApellidoM');
+		}	
+	}
+
+	//Validar Fecha Nacimiento.
+	if($.trim( $("#fechaUsuario").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('fechaUsuario','errFechaUsuario');
+	}
+	else
+	{desmarcarError('fechaUsuario','errFechaUsuario');}
+
+	//Validar Sexo.
+	var check = $('input[name=sexo_usuario]:checked').val();
+	if(check == null)
+	{
+		verificar = false; marcarErrorSelect('errSexo');
+	}
+	else
+	{desmarcarErrorSelect('errSexo');}
+
+	//Validar e-mail.
+	if($.trim( $("#email_usuario").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('email_usuario','errEmail');
+	}
+	else
+	{desmarcarError('email_usuario','errEmail');}
+
+	//Validar Select nacionalidad.
+	if($("#id_nacionalidad").val() == "")
+	{verificar = false; marcarErrorSelect('errNacionalidad');}
+	else{desmarcarErrorSelect('errNacionalidad');}
+
+	//Validar Select Gerencia, Area, Perfil Ocupacional Usuario.
 	
+	//Validar Select Empresa
+	if($("#id_empresa").val() == "")
+	{
+		verificar = false; marcarErrorSelect('errEmpresaUsuario');			
+	}
+	else
+	{
+		desmarcarErrorSelect('errEmpresaUsuario');
+		//Validar Select Gerencia
+		
+		if($("#select_gerencia").val() == "")
+		{
+		verificar = false; marcarErrorSelect('errGerenciaUsuario');			
+		}	
+		else
+		{
+			desmarcarErrorSelect('errGerenciaUsuario');
+			//Validar Select Area
+			if($("#select_area").val() == "")
+			{
+			verificar = false; marcarErrorSelect('errAreaUsuario');			
+			}	
+			else
+			{
+				desmarcarErrorSelect('errAreaUsuario');
+				//Validar Select Perfil Ocupacional
+				if($("#select_perfilOcupacional").val() == "")
+				{
+				verificar = false; marcarErrorSelect('errPerfilOcupacionalUsuario');			
+				}	
+				else
+				{
+					desmarcarErrorSelect('errPerfilOcupacionalUsuario');						
+				}
+			}
+		}
+	}
+	
+
+	return verificar;
+}
+
+
+//==========================================================================================================================================================
+//=====================================================================VALIDACION CURSO=====================================================================
+//==========================================================================================================================================================
+
+function validarCurso()
+{
+	var verificar = true;
+
+	//Validar Codigo Curso Interno
+	if($.trim( $("#cod_interno_curso").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('cod_interno_curso','errCodigoCurso');
+	}
+	else
+	{
+		desmarcarError('cod_interno_curso','errCodigoCurso');	
+		if(validarChr($("#cod_interno_curso").val()))
+		{
+			verificar = false; marcarErrorChar('cod_interno_curso','errCodigoCurso');			
+		}else
+		{
+			desmarcarError('cod_interno_curso','errCodigoCurso');
+		}	
+	}
+
+	//Validar Codigo Curso SENCE
+	if($.trim( $("#cod_sence_curso").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('cod_sence_curso','errCodigoSenceCurso');
+	}
+	else
+	{
+		desmarcarError('cod_sence_curso','errCodigoSenceCurso');	
+		if(validarChr($("#cod_sence_curso").val()))
+		{
+			verificar = false; marcarErrorChar('cod_sence_curso','errCodigoSenceCurso');			
+		}else
+		{
+			desmarcarError('cod_sence_curso','errCodigoSenceCurso');
+		}	
+	}
+
+	//Validar Nombre Curso 
+	if($.trim( $("#nombre_curso").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('nombre_curso','errNombreCurso');
+	}
+	else
+	{
+		desmarcarError('nombre_curso','errNombreCurso');	
+		if(validarChr($("#nombre_curso").val()))
+		{
+			verificar = false; marcarErrorChar('nombre_curso','errNombreCurso');			
+		}else
+		{
+			desmarcarError('nombre_curso','errNombreCurso');
+		}	
+	}
+
+	//Validar Objetivo Curso 
+	if($.trim( $("#objetivo_curso").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('objetivo_curso','errObjetivoCurso');
+	}
+	else
+	{
+		desmarcarError('objetivo_curso','errObjetivoCurso');	
+		if(validarChr($("#objetivo_curso").val()))
+		{
+			verificar = false; marcarErrorChar('objetivo_curso','errObjetivoCurso');			
+		}else
+		{
+			desmarcarError('objetivo_curso','errObjetivoCurso');
+		}	
+	}
+
+	//Validar Descripción Curso 
+	if($.trim( $("#desc_curso").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('desc_curso','errDescripcionCurso');
+	}
+	else
+	{
+		desmarcarError('desc_curso','errDescripcionCurso');	
+		if(validarChr($("#desc_curso").val()))
+		{
+			verificar = false; marcarErrorChar('desc_curso','errDescripcionCurso');			
+		}else
+		{
+			desmarcarError('desc_curso','errDescripcionCurso');
+		}	
+	}
+
+	//Validar Horas Curso 
+	if($.trim( $("#cant_hora_curso").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('cant_hora_curso','errHorasCurso');
+	}
+	else
+	{
+		desmarcarError('cant_hora_curso','errHorasCurso');	
+		if(validarChr($("#cant_hora_curso").val()))
+		{
+			verificar = false; marcarErrorChar('cant_hora_curso','errHorasCurso');			
+		}else
+		{
+			desmarcarError('cant_hora_curso','errHorasCurso');
+		}	
+	}
+
+	//Validar Modalidad 
+	if($("#id_modalidad").val() == "")
+	{verificar = false; marcarErrorSelect('errModalidad');}
+	else{desmarcarErrorSelect('errModalidad');}
+
+	//Validar Area Curso 
+	if($("#id_areacurso").val() == "")
+	{verificar = false; marcarErrorSelect('errAreaCurso');}
+	else{desmarcarErrorSelect('errAreaCurso');}
+
+	//Validar Area Curso 
+	if($("#id_competencia").val().length == 0)
+	{verificar = false; marcarErrorSelect('errCompetencias');}
+	else{desmarcarErrorSelect('errCompetencias');}
+
+	//Validar Contenido Curso 
+
+	//Validar Temario 
+	
+
+	return verificar;
+}
+
+
+//==============================================================================================================================================================
+//=====================================================================VALIDACION ACTIVIDAD=====================================================================
+//==============================================================================================================================================================
+
+function validarActividad()
+{
+	var verificar = true;
+
+
+	return verificar;
+}
+
+
+//============================================================================================================================================================
+//=====================================================================VALIDACION HORARIO=====================================================================
+//============================================================================================================================================================
+
+function validarHorario()
+{
+	var verificar = true;
+
+
+	return verificar;
+}
+
+
+//========================================================================================================================================================================
+//=====================================================================VALIDACION ASIGNACIÓN RECURSOS=====================================================================
+//========================================================================================================================================================================
+
+function validarAsigRecursos()
+{
+	var verificar = true;
+
+
+	return verificar;
 }

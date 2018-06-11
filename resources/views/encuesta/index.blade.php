@@ -22,7 +22,7 @@
 				<table id="tablaEncuesta" class="table">
 					<thead>
 						<tr>
-							<th>Nombre Encuesta</th>
+							<th>Tipo Encuesta</th>
 							<th>Fecha de Modificación</th>
 							<th>Estado</th>
 							<th>Acciones</th>
@@ -31,7 +31,7 @@
 					<tbody>
 						@foreach ($encuestas as $encuesta) 
 						<tr>
-							<td style="width:25%;">{{ $encuesta->nombre_encuesta}}</td>
+							<td style="width:25%;">{{ $encuesta->tipoEncuesta->nombre_tipoencuesta}}</td>
 							<td style="width:25%;">{{ $encuesta->fecha_mod_encuesta}}</td>
 							@if($encuesta->estado_encuesta == 1)
 							<td style="width:25%;color:green;">Activo</td>

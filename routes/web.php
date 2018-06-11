@@ -508,18 +508,28 @@ Route::get('/crearTipoEncuesta/{nombre}', 'EncuestaController@storeTipoEncuesta'
     return  $nombre;
   })
   ->name('encuesta.storeTipoEncuesta');
+
+Route::get('/editarEncuesta/{id}', 'EncuestaController@edit',function($id) {
+    return  $id;
+  })
+  ->name('encuesta.edit');
+  
 Route::get('/selectCategoriaPreguntas/{id}', 'EncuestaController@selectCategoriaPreguntas',function($id) {
     return  $id;
   })
   ->name('encuesta.selectCategoriaPreguntas'); 
-Route::get('/crearCategoriaPreguntas/{nombre}', 'EncuestaController@storeCategoriaPreguntas',function($nombre) {
-    return  $nombre;
-  })
-  ->name('encuesta.storeCategoriaPreguntas'); 
+  Route::get('/crearCategoriaPreguntas/{nombre}/id/{id}', [
+    'as' => 'crearCategoriaPreguntas', 'uses' => 'EncuestaController@storeCategoriaPreguntas']);    
+
 Route::get('/formPreguntas/{id}', 'EncuestaController@formPreguntas',function($id)
   {
     return $id;
   })->name('encuesta.formPreguntas'); 
+
+Route::get('/formCategoriaPreguntas/{id}', 'EncuestaController@formCategoriaPreguntas',function($id)
+  {
+    return $id;
+  })->name('encuesta.formCategoriaPreguntas'); 
   
 Route::resource('encuesta', 'EncuestaController');
   //-------------------------------------------------------------------------------------------------------------------------

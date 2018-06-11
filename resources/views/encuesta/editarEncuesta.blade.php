@@ -1,7 +1,7 @@
 
 <body> 
 	<div class="row">
-	{!! Form::open(['action' => 'EncuestaController@store', 'id'=>'formEncuesta']) !!}
+	{!! Form::model($encuesta, ['method' => 'PATCH', 'action' => ['EncuestaController@update',$encuesta->id_encuesta],'id'=>'formEncuesta']) !!}
 		<div class="col-xs-12">	
 			<div class="box">
 				<div class="box-header">
@@ -15,7 +15,7 @@
 						<div id='tiposEncuesta1' class='form-group' >
 							{!! Form::label('', 'Tipo de Encuesta:') !!}
 							<div class="input-group">	
-								{!! Form::select('id_tipoEncuesta', $tiposEncuesta,null ,['class' => 'select2','placeholder'=>'Seleccione un Tipo', 'id'=>'id_tipoEncuesta', 'style'=>'width:100%']) !!}
+								{!! Form::select('id_tipoEncuesta', $tiposEncuesta,$encuesta->id_tipoencuesta ,['class' => 'select2','placeholder'=>'Seleccione un Tipo', 'id'=>'id_tipoEncuesta', 'style'=>'width:100%']) !!}
 								<span type="button" class="input-group-addon" aria-label="Left Align" onclick="addTipoEncuesta()" id="btnAddTipoEncuesta"> <i class="fa fa-plus"></i> </span>
 							</div>
 						</div>
@@ -43,7 +43,7 @@
 							<div id='categoriaPreguntas0' class='form-group' >								
 								{!! Form::label('', 'Categoria Preguntas:') !!}
 								<div class="input-group">	
-									{!! Form::select('id_categoriaPregunta[0]', $categoriasPreguntas,null ,['class' => 'select2','placeholder'=>'Seleccione una Categoria', 'id'=>'id_categoriaPregunta0', 'style'=>'width:100%']) !!}
+									{!! Form::select('id_categoriaPregunta[0]', $categoriasPreguntas,$idCategoria->id_categoria ,['class' => 'select2','placeholder'=>'Seleccione una Categoria', 'id'=>'id_categoriaPregunta0', 'style'=>'width:100%']) !!}
 									<span type="button" class="input-group-addon" aria-label="Left Align" onclick="addCategoriaPreguntas(0)" id="btnaddCategoriaPreguntas"> <i class="fa fa-plus"></i> </span>
 								</div>
 							</div>
@@ -52,14 +52,25 @@
 								<div> 
 									<table id="tableAddPreguntas0" style="width:100%;">
 										<tbody>
-										<tr id="form0">
+										@foreach($encuesta->preguntasEncuesta->where('estado_preguntaencuesta',1)->values() as $key => $preguntaEncuesta)
+												
+										<tr id="form{{$key}}">
 											<td>
 											<div  class='form-group' >
-												{!! Form::label('', ' Pregunta 1') !!}
+												@if($key !=0)
+													{!! Form::label('', ' Pregunta '.($key+1).'') !!}
 													<div class="input-group">	
-													{!! Form::text('nombre_pregunta[0]', null, ['class' => 'form-control','id'=>'nombre_pregunta0']) !!}
-													<span type="button" class="input-group-addon" onClick="cargarFormPreguntas(0);"aria-label="Left Align"> <i class="fa fa-plus"></i> </span>
+													{!! Form::text('nombre_pregunta['.$key.']', $preguntaEncuesta->pregunta->nombre_pregunta, ['class' => 'form-control','id'=>'nombre_pregunta'.$key.'']) !!}
+														<span type="button" class="input-group-addon" onClick="eliminarFormPreguntas({{$key}});"aria-label="Left Align"> <i class="fa fa-remove"></i> </span>
 													</div>
+												@else
+													{!! Form::label('', ' Pregunta '.($key+1).'') !!}
+													<div class="input-group">	
+													{!! Form::text('nombre_pregunta['.$key.']', $preguntaEncuesta->pregunta->nombre_pregunta, ['class' => 'form-control','id'=>'nombre_pregunta'.$key.'']) !!}
+														<span type="button" class="input-group-addon" onClick="cargarFormPreguntas({{$key}});"aria-label="Left Align"> <i class="fa fa-plus"></i> </span>
+													</div>
+												@endif	
+												
 												</div>
 												{{--<div class='form-group'>
 													@foreach($tiposAlternativa as $tipoAltv)
@@ -69,6 +80,7 @@
 											</div>	
 											</td>
 										</tr>	
+										@endforeach	
 										</tbody>
 									</table>	
 								</div>	
@@ -90,7 +102,7 @@
 </body>
 
 <script>
-var count =0;
+var count ={{Count($encuesta->preguntasEncuesta->where('estado_preguntaencuesta',1))-1 }};
 var countCategorias = 0;
 $(document).ready(function() {
 	$('.select2').select2();

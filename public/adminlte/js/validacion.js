@@ -41,14 +41,14 @@ document.getElementById(idErr).innerHTML='';
 
 //Validación de caracteres.
 function validarChr(TCode){
-	if( /^[a-zA-Z0-9- -ñ]*$/.test( TCode ) ) 
+	if( /^[a-zA-Z0-9-(ñÑáéíóúÁÉÍÓÚ)-\s]*$/.test( TCode ) ) 
 	{return false;}
     return true;     
 }
 
 //Validación de caracteres con punto.
 function validarChrPunto(TCode){
-	if( /^[a-zA-Z0-9- -.-ñ]*$/.test( TCode ) ) 
+	if( /^[a-zA-Z0-9-(ñÑáéíóúÁÉÍÓÚ)-\s-(\.\,)]*$/.test( TCode ) ) 
 	{return false;}
     return true;     
 }
@@ -973,7 +973,141 @@ function validarActividad()
 	return verificar;
 }
 
+//=================================================================================================================================================================
+//=====================================================================VALIDACION COMPETENCIAS=====================================================================
+//=================================================================================================================================================================
 
+function validarCompetencias()
+{
+	var verificar = true;
+
+	//Validar Nombre Competencia.
+	if($.trim( $("#nombre_comp").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('nombre_comp','errNombreCompetencia');
+	}
+	else
+	{
+		desmarcarError('nombre_comp','errNombreCompetencia');	
+		if(validarChr($("#nombre_comp").val()))
+		{
+			verificar = false; marcarErrorChar('nombre_comp','errNombreCompetencia');			
+		}else
+		{
+			desmarcarError('nombre_comp','errNombreCompetencia');
+		}	
+	}
+
+	//Validar Descripción Competencia.
+	if($.trim( $("#desc_comp").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('desc_comp','errDescripcionCompetencia');
+	}
+	else
+	{
+		desmarcarError('desc_comp','errDescripcionCompetencia');	
+		if(validarChrPunto($("#desc_comp").val()))
+		{
+			verificar = false; marcarErrorChar('desc_comp','errDescripcionCompetencia');			
+		}else
+		{
+			desmarcarError('desc_comp','errDescripcionCompetencia');
+		}	
+	}
+
+	//Validar Select Categoria Competencia
+	if($("#id_categoriacomp").val() == "")
+	{verificar = false; marcarErrorSelect('errCategoriaCompetencia');}
+	else{desmarcarErrorSelect('errCategoriaCompetencia');}
+
+	//Validar Nivel Competencia SUPERLATIVO.
+	if($.trim( $("#superlativo").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('superlativo','errSuperlativo');
+	}
+	else
+	{
+		desmarcarError('superlativo','errSuperlativo');	
+		if(validarChrPunto($("#superlativo").val()))
+		{
+			verificar = false; marcarErrorChar('superlativo','errSuperlativo');			
+		}else
+		{
+			desmarcarError('superlativo','errSuperlativo');
+		}	
+	}
+
+	//Validar Nivel Competencia EFICIENTE.
+	if($.trim( $("#eficiente").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('eficiente','errEficiente');
+	}
+	else
+	{
+		desmarcarError('eficiente','errEficiente');	
+		if(validarChrPunto($("#eficiente").val()))
+		{
+			verificar = false; marcarErrorChar('eficiente','errEficiente');			
+		}else
+		{
+			desmarcarError('eficiente','errEficiente');
+		}	
+	}
+
+	//Validar Nivel Competencia PROMEDIO SUFICIENTE.
+	if($.trim( $("#promedioSuficiente").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('promedioSuficiente','errPromedioSuficiente');
+	}
+	else
+	{
+		desmarcarError('promedioSuficiente','errPromedioSuficiente');	
+		if(validarChrPunto($("#promedioSuficiente").val()))
+		{
+			verificar = false; marcarErrorChar('promedioSuficiente','errPromedioSuficiente');			
+		}else
+		{
+			desmarcarError('promedioSuficiente','errPromedioSuficiente');
+		}	
+	}
+
+	//Validar Nivel Competencia POR DEBAJO DE LO ESPERADO.
+	if($.trim( $("#porDebajoEsperado").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('porDebajoEsperado','errDebajoEsperado');
+	}
+	else
+	{
+		desmarcarError('porDebajoEsperado','errDebajoEsperado');	
+		if(validarChrPunto($("#porDebajoEsperado").val()))
+		{
+			verificar = false; marcarErrorChar('porDebajoEsperado','errDebajoEsperado');			
+		}else
+		{
+			desmarcarError('porDebajoEsperado','errDebajoEsperado');
+		}	
+	}
+
+	//Validar Nivel Competencia INSUFICIENTE.
+	if($.trim( $("#insuficiente").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('insuficiente','errInsuficiente');
+	}
+	else
+	{
+		desmarcarError('insuficiente','errInsuficiente');	
+		if(validarChrPunto($("#insuficiente").val()))
+		{
+			verificar = false; marcarErrorChar('insuficiente','errInsuficiente');			
+		}else
+		{
+			desmarcarError('insuficiente','errInsuficiente');
+		}	
+	}
+
+
+	return verificar;
+}
 //============================================================================================================================================================
 //=====================================================================VALIDACION HORARIO=====================================================================
 //============================================================================================================================================================
@@ -998,3 +1132,5 @@ function validarAsigRecursos()
 
 	return verificar;
 }
+
+

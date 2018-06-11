@@ -19,9 +19,11 @@
 			<p>Competencias Asociadas al curso:</p>
 
 			<ul>
-				@foreach ($curso->competencias as $competencia)
+			@if($curso->Listacompetencias->count()>0)
+				@foreach ($curso->Listacompetencias as $competencia)
 				<li> <a href="../vistacompetencia?categoria={{$competencia->id_categoriacomp}}&competencia={{$competencia->id_comp}}">{{$competencia->nombre_comp}}</a> </li>
 				@endforeach
+			@endif
 			</ul>
 		</div>
 	</div>

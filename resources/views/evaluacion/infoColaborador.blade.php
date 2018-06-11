@@ -57,7 +57,8 @@
 							
 								{!! $nivel->nombre_tiponivel !!}	 
 								
-									@if($roldesempeno->rolEvaluaciones->last()->nivel_rolevaluacion == $key2+1 && $roldesempeno->rolEvaluaciones->last()->evaluacionDNC->id_usuario == $colaborador->id_usuario)
+
+									@if(($roldesempeno->rolEvaluaciones->count()>0) && ($roldesempeno->rolEvaluaciones->last()->nivel_rolevaluacion == $key2+1 && $roldesempeno->rolEvaluaciones->last()->evaluacionDNC->id_usuario == $colaborador->id_usuario))
 									{!! Form::radio("prueba[$roldesempeno->id_roldesempeno]", $roldesempeno->id_roldesempeno."-".$nivel->id_tiponivel, true) !!} 
 
 									@else

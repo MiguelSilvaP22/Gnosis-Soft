@@ -508,6 +508,12 @@ Route::get('/crearTipoEncuesta/{nombre}', 'EncuestaController@storeTipoEncuesta'
     return  $nombre;
   })
   ->name('encuesta.storeTipoEncuesta');
+
+Route::get('/editarEncuesta/{id}', 'EncuestaController@edit',function($id) {
+    return  $id;
+  })
+  ->name('encuesta.edit');
+  
 Route::get('/selectCategoriaPreguntas/{id}', 'EncuestaController@selectCategoriaPreguntas',function($id) {
     return  $id;
   })

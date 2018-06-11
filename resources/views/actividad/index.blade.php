@@ -42,11 +42,10 @@
 							<td style="width:25%;color:red">inactivo</td>
 							@endif
 							<td>
-							<button id="btnVer" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
-							<button id="btnHorario" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Horario</button>
-							<button id="btnEditar" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>
-
-							<button id="deleteActividad" class="btn btn btn-info" value="{{ $actividad->id_actividad}}"><i class="fa fa-eraser"></i> Eliminar</button>
+								<button id="btnHorario" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Horario</button>
+								<button id="btnVer" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>						
+								<button id="btnEditar" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>
+								<button id="deleteActividad" class="btn btn btn-info" value="{{ $actividad->id_actividad}}"><i class="fa fa-eraser"></i> Eliminar</button>
 							</td>
 						</tr>
 						@endforeach
@@ -150,8 +149,30 @@ function cargarCrearHorario(id)
 
 		});
 }
+function cargarAsignarEncuesta(id)
+{
+	$.ajax({
+		url: "/asignarEncuesta/"+id,
+		type: "GET",
+		success: function (datos) {
+			$("#datos").html(datos);
+			$('#modal').modal({
+				backdrop: 'static',
+                keyboard: true, 
+                show: true
+            });
+
+		}
+
+		});
+}
 $(document).on('click', '#btnHorario', function () {
 		cargarCrearHorario(this.value)
+		//alert("asda");
+});	
+
+$(document).on('click', '#btnEncuesta', function () {
+	cargarAsignarEncuesta(this.value)
 		//alert("asda");
 });	
 

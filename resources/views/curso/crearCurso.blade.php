@@ -45,20 +45,13 @@
                             </div>
 							<div class='form-group'>
 								{!! Form::label('', 'Modalidad:') !!}
-<<<<<<< HEAD
-								{!! Form::select('id_modalidad', $modalidades,null ,['class' => 'select2','placeholder'=>'Seleccione una modalidad','id'=>'id_modalidad', 'style'=>'width:100%']) !!}
-=======
 								{!! Form::select('id_modalidad', $modalidades, null ,['class' => 'select2','placeholder'=>'Seleccione una modalidad','id'=>'id_modalidad', 'style'=>'width:100%']) !!}
 								{!! Form::label('', '',['id' => 'errModalidad']) !!}
->>>>>>> 8c6e4d255a3647b6130b942788da26f22cf29376
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Area Curso:') !!}
 								{!! Form::select('id_areacurso', $areasCurso,null ,['class' => 'select2','placeholder'=>'Seleccione una area','id'=>'id_areacurso', 'style'=>'width:100%']) !!}
-<<<<<<< HEAD
-=======
 								{!! Form::label('', '',['id' => 'errAreaCurso']) !!}
->>>>>>> 8c6e4d255a3647b6130b942788da26f22cf29376
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Competencias:') !!}

@@ -22,7 +22,7 @@
 					{!! Form::label('', '',['id' => 'errSelectComp']) !!}
 				</div>	
 				<div class='form-group'>
-					{!! Form::submit("Editar Perfil Ocuácional", ['class' => 'form-control btn btn-success ']) !!}
+					{!! Form::submit("Editar Perfil Ocupacional", ['class' => 'form-control btn btn-success ']) !!}
 				</div>
 					{!! Form::close() !!}
 				<div class='form-group'>

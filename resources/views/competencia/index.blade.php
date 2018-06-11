@@ -103,7 +103,11 @@ $(document).on('click', '#btnAgregar', function () {
 		type: "GET",
 		success: function (datos) {
 			$("#datosCompetencia").html(datos);
-			$('#modal').modal('show');
+			$('#modal').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                });
 			$(document).ready(function() {
 				$('.select').select();
 			});
@@ -121,7 +125,11 @@ $(document).on('click', '#editCompetencia', function () {
 		type: "GET",
 		success: function (datos) {
 			$("#datosCompetencia").html(datos);
-			$('#modal').modal('show');
+			$('#modal').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                }); 
 		}
 
 		});
@@ -136,7 +144,11 @@ $(document).on('click', '#verCompetencia', function () {
 		type: "GET",
 		success: function (datos) {
 			$("#datosCompetencia").html(datos);
-			$('#modal').modal('show');
+			$('#modal').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                }); 
 		}
 
 		});
@@ -161,7 +173,11 @@ $(document).on('click', '#btnImportar', function () {
 		type: "GET",
 		success: function (datos) {
 			$("#datosCompetencia").html(datos);
-			$('#modal').modal('show');
+			$('#modal').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                }); 
 		}
 
 		});

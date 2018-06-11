@@ -125,7 +125,11 @@ $(document).on('click', '#btnVer', function () {
 		type: "GET",
 		success: function (datos) {
 			$("#datos").html(datos);
-			$('#modal').modal('show');
+			$('#modal').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                }); 
 		}
 
 		});
@@ -182,7 +186,11 @@ $(document).on('click', '#btnAgregar', function () {
 		type: "GET",
 		success: function (datos) {
 			$("#datos").html(datos);
-			$('#modal').modal('show');
+			$('#modal').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                }); 
 		}
 
 		});
@@ -197,7 +205,11 @@ $(document).on('click', '#btnEditar', function () {
 		success: function (datos) {
 			
 			$("#datos").html(datos);
-			$('#modal').modal('show');
+			$('#modal').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                }); 
 			
 		}
 

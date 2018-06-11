@@ -62,7 +62,6 @@ class vistaCursoController extends Controller
         //$tiponivel = TipoNivel::All()->where('estado_tiponivel',1)->pluck('nombre_tiponivel');;
 
         //$nivelesnombre = array_merge($niveles, $tiponivel);
-        \Debugbar::info($curso->competencias);
 
         return view('vistacurso.infocurso', compact('curso','area', 'modalidad'));
     }

@@ -16,10 +16,9 @@ function marcarErrorDuplicado(id,idErr){
 	$('#'+id).parent().addClass('has-error');
 }
 
-//Marcar error Ext
-function marcarErrorExt(idErr){
-	document.getElementById(idErr).innerHTML='Formato no valido.';
-	document.getElementById(idErr).style.color = '#FF3333';
+function marcarErrorFecha(id,idErr){
+	document.getElementById(idErr).innerHTML='La fecha de termino no puede ser anterior a la de inicio.';
+	$('#'+id).parent().addClass('has-error');
 }
 
 //Marcar error select
@@ -37,11 +36,6 @@ function desmarcarError(id,idErr){
 //Desmarcar error select.
 function desmarcarErrorSelect(idErr){
 document.getElementById(idErr).innerHTML='';
-}
-
-//Desmarcar error Ext.
-function desmarcarErrorExt(idErr){
-	document.getElementById(idErr).innerHTML='';
 }
 
 
@@ -113,6 +107,45 @@ function validarDV(rut)
     
     // Si todo sale bien, eliminar errores (decretar que es válido)
     return false;
+}
+
+
+function compararFechas(fecha, fecha2)  
+{  
+    var xMonth=fecha.substring(3, 5);  
+    var xDay=fecha.substring(0, 2);  
+    var xYear=fecha.substring(6,10);  
+    var yMonth=fecha2.substring(3, 5);  
+    var yDay=fecha2.substring(0, 2);  
+    var yYear=fecha2.substring(6,10);  
+    if (xYear> yYear)  
+    {  
+        return true  
+    }  
+    else  
+    {  
+      	if (xYear == yYear)  
+      	{   
+       		if (xMonth> yMonth)  
+        	{  
+            	return true  
+        	}  
+        	else  
+        	{   
+				if (xMonth == yMonth)  
+				{  
+					if (xDay> yDay)
+					{
+						return true;	
+					}              	  
+					else{return false;} 
+				}  
+				else{return false;} 
+        	}  
+      	}  
+      	else{return false;} 
+		  
+    }  
 }
 
 //================================================================================================================================================================
@@ -836,6 +869,105 @@ function validarCurso()
 function validarActividad()
 {
 	var verificar = true;
+
+	//Validar Select Curso 
+	if($("#id_curso").val() == "")
+	{verificar = false; marcarErrorSelect('errIdCurso');}
+	else{desmarcarErrorSelect('errIdCurso');}
+
+	//Validar Codigo interno Curso 
+	if($.trim( $("#cod_interno_actividad").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('cod_interno_actividad','errCodigoInternoActividad');
+	}
+	else
+	{
+		desmarcarError('cod_interno_actividad','errCodigoInternoActividad');	
+		if(validarChr($("#cod_interno_actividad").val()))
+		{
+			verificar = false; marcarErrorChar('cod_interno_actividad','errCodigoInternoActividad');			
+		}else
+		{
+			desmarcarError('cod_interno_actividad','errCodigoInternoActividad');
+		}	
+	}
+
+	//Validar Codigo Sence Curso 
+	if($.trim( $("#cod_sence_actividad").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('cod_sence_actividad','errCodigoSenceActividad');
+	}
+	else
+	{
+		desmarcarError('cod_sence_actividad','errCodigoSenceActividad');	
+		if(validarChr($("#cod_sence_actividad").val()))
+		{
+			verificar = false; marcarErrorChar('cod_sence_actividad','errCodigoSenceActividad');			
+		}else
+		{
+			desmarcarError('cod_sence_actividad','errCodigoSenceActividad');
+		}	
+	}
+
+	//Validar Lugar Curso 
+	if($.trim( $("#lugar_realizacion_actividad").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('lugar_realizacion_actividad','errLugarActividad');
+	}
+	else
+	{
+		desmarcarError('lugar_realizacion_actividad','errLugarActividad');	
+		if(validarChrPunto($("#lugar_realizacion_actividad").val()))
+		{
+			verificar = false; marcarErrorChar('lugar_realizacion_actividad','errLugarActividad');			
+		}else
+		{
+			desmarcarError('lugar_realizacion_actividad','errLugarActividad');
+		}	
+	}
+
+	//Validar Fecha Inicio Actividad
+	if($.trim( $("#fechaIniActv").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('fechaIniActv','errFechaInicioActividad');
+	}
+	else
+	{desmarcarError('fechaIniActv','errFechaInicioActividad');}
+
+	//Validar Fecha Termino Actividad
+	if($.trim( $("#fechaTermActv").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('fechaTermActv','errFechaTerminoActividad');
+	}
+	else
+	{
+		desmarcarError('fechaTermActv','errFechaTerminoActividad');
+		if(compararFechas( $("#fechaIniActv").val(),$("#fechaTermActv").val() ))
+		{
+			verificar = false; marcarErrorFecha('fechaTermActv','errFechaTerminoActividad');
+		}
+		else
+		{
+			desmarcarError('fechaTermActv','errFechaTerminoActividad');
+		}				
+	}
+
+	//Validar Observación
+	if($.trim( $("#observacion_actividad").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('observacion_actividad','errObservacionActividad');
+	}
+	else
+	{
+		desmarcarError('observacion_actividad','errObservacionActividad');	
+		if(validarChrPunto($("#observacion_actividad").val()))
+		{
+			verificar = false; marcarErrorChar('observacion_actividad','errObservacionActividad');			
+		}else
+		{
+			desmarcarError('observacion_actividad','errObservacionActividad');
+		}	
+	}
 
 
 	return verificar;

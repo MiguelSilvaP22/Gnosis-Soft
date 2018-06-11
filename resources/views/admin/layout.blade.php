@@ -318,7 +318,7 @@ desired effect
         <ul class="treeview-menu">  
           <li class="treeview">
           <li><a href="#"><i class="fa fa-pie-chart"></i> <span>Dashboard</span></a></li>
-          <li><a href="#"><i class="fa fa-user"></i> <span>Colaboradores</span></a></li>
+          <li><a href="/vistaColaborador"><i class="fa fa-user"></i> <span>Colaboradores</span></a></li>
           <li class="treeview">
             <a href="#"><i class="fa fa-mortar-board"></i> <span>Curso</span>
                 <span class="pull-right-container">

@@ -165,8 +165,33 @@ class ColaboradorController extends Controller
     {
         
         $colaborador = Usuario::findOrFail($id);
-        \Debugbar::info($colaborador->perfilOcupacional->area->gerencia);
 
-        return view('vistaColaborador.detalle', compact('colaborador'));
+        $nombreCompetencias = [];
+        foreach($colaborador->perfilOcupacional->competencias as $comp)
+        {
+            $nombreCompetencias []= $comp->nombre_comp;
+        }
+        
+        $count2=0;$promedioComp=[];$notasComp=0;
+        foreach ($colaborador->evaluacionDNC->last()->rolEvaluacion as $key => $nivelEva)
+        {
+            $notasComp += $nivelEva->nivel_rolevaluacion;
+            if(($key+1)%5 ==0)
+            {
+                $promedioComp[$count2]=$notasComp/5;
+                $count2++;
+                $notasComp=0;
+            }
+        }
+
+        $labelPromedio= implode(",",$promedioComp);
+        $labelCompetencias= "'".implode("','",$nombreCompetencias)."'";
+
+
+        \Debugbar::info($colaborador->horariosColaborador->last()->horario->actividad);
+
+
+
+        return view('vistaColaborador.detalle', compact('colaborador', 'labelCompetencias','labelPromedio'));
     }
 }

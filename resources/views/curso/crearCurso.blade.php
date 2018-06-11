@@ -111,9 +111,9 @@
 	var formData = $(this).serialize() // get form data
 	if(validarCurso())	
 	{
-		/*$.post(url, formData, function (response) { // send; response.data will be what is returned
+		$.post(url, formData, function (response) { // send; response.data will be what is returned
 			$('#modal').modal('hide');
-		});*/
+		});
 	}
 	});
 $(document).on('click', '#btnVolver', function () {

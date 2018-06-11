@@ -84,15 +84,18 @@ class CursoController extends Controller
                 $contenidoGeneral->save();
             }
 
-            $dir_subida = public_path()."/temario/";
-            $ext = pathinfo($_FILES['temario_curso']['name'], PATHINFO_EXTENSION);
-            $nombreTemario = $curso->id_curso."_".$curso->cod_interno_curso.".".$ext;
-            $fichero_subido = $dir_subida .$nombreTemario;
-            
-            if (move_uploaded_file($_FILES['temario_curso']['tmp_name'], $fichero_subido)) {
-                $curso->link_temario_curso = $nombreTemario ;
-                $curso->save();
-            } 
+            if(isset(["file"]['temario_curso']))
+            {
+                $dir_subida = public_path()."/temario/";
+                $ext = pathinfo($_FILES['temario_curso']['name'], PATHINFO_EXTENSION);
+                $nombreTemario = $curso->id_curso."_".$curso->cod_interno_curso.".".$ext;
+                $fichero_subido = $dir_subida .$nombreTemario;
+                
+                if (move_uploaded_file($_FILES['temario_curso']['tmp_name'], $fichero_subido)) {
+                    $curso->link_temario_curso = $nombreTemario ;
+                    $curso->save();
+                } 
+            }
         }
         return redirect('curso');
 

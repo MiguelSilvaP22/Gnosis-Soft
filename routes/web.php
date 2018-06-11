@@ -529,9 +529,12 @@ Route::resource('encuesta', 'EncuestaController');
 
 Route::get('/vistaColaborador', 'ColaboradorController@indexVista');
 
-
-
 Route::get('/vistaColaborador/detalle/{id}', 'ColaboradorController@showVista',function($id) {
     return  $id;
   });
+
+  Route::get('/vistaColaborador/reporte/{id}', 'ColaboradorController@downloadReporte',function($id) {
+    return  $id;
+  });
+
 

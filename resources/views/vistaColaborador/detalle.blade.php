@@ -96,6 +96,13 @@
 </div>
 
 
+<div class="row">
+    <div class="col-md-10">
+        <a href="../reporte/{{$colaborador->id_usuario}}" class="btn btn btn-info"> Expotar Informacion a pdf</a>
+    </div>
+</div>
+
+
 </body>
 
 @stop

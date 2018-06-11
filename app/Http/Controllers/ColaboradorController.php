@@ -9,6 +9,7 @@ use App\Gerencia;
 use App\Area;
 use App\PerfilOcupacional;
 
+use PDF;
 use DB;
 use App\Quotation;
 use Illuminate\Http\Request;
@@ -189,9 +190,42 @@ class ColaboradorController extends Controller
 
 
         \Debugbar::info($colaborador->horariosColaborador->last()->horario->actividad);
-
-
-
+       /* $pdf = \PDF::loadView('vistaColaborador.detalle', compact('colaborador', 'labelCompetencias','labelPromedio')); 
+        return $pdf->download('ReporteColaborador.pdf'); */
         return view('vistaColaborador.detalle', compact('colaborador', 'labelCompetencias','labelPromedio'));
+    }
+
+
+    public function downloadReporte($id)
+    {
+        
+        $colaborador = Usuario::findOrFail($id);
+
+        $nombreCompetencias = [];
+        foreach($colaborador->perfilOcupacional->competencias as $comp)
+        {
+            $nombreCompetencias []= $comp->nombre_comp;
+        }
+        
+        $count2=0;$promedioComp=[];$notasComp=0;
+        foreach ($colaborador->evaluacionDNC->last()->rolEvaluacion as $key => $nivelEva)
+        {
+            $notasComp += $nivelEva->nivel_rolevaluacion;
+            if(($key+1)%5 ==0)
+            {
+                $promedioComp[$count2]=$notasComp/5;
+                $count2++;
+                $notasComp=0;
+            }
+        }
+
+        $labelPromedio= implode(",",$promedioComp);
+        $labelCompetencias= "'".implode("','",$nombreCompetencias)."'";
+
+
+        \Debugbar::info($colaborador->horariosColaborador->last()->horario->actividad);
+       $pdf = \PDF::loadView('vistaColaborador.reportePDF', compact('colaborador', 'labelCompetencias','labelPromedio', 'promedioComp')); 
+        return $pdf->download('ReporteColaborador.pdf'); 
+       /* return view('vistaColaborador.reportePDF', compact('colaborador', 'labelCompetencias','labelPromedio', 'promedioComp'));*/
     }
 }

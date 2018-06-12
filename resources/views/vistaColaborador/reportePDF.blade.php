@@ -5,57 +5,106 @@ html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:1
     page-break-after: always;
 }
 
+.tablaColaborador{
+    max-width: 500px;
+    margin-left:3%;
+
+    }
+
+.tablaCompetencias{
+max-width: 1000px;
+margin-left:3%;
+}
+.titulo{
+    text-align: center;
+}
+.subtitulo{
+    margin-top:40px;
+}
+
+.superior{
+    position: relative;
+}
+
+img{
+    position: relative;
+  display: inline-block;
+}
+p{
+    position: absolute; right: 0px; top: 0px;
+}
+
 </style>
 
 <body> 
 
-    <div class="row">
-        <h2>Informacion Colaborador</h2>
-        <br>
-        <div class="col-md-5">
-            <h4>Nombre: {{ $colaborador->nombre_usuario }}</h4>
-        </div>
-    </div>
+<div class="superior">
+<img src="./imagenes/unknown.png" alt="">
 
-    <div class="row">
-        <div class="col-md-5">
-            <h4>Apellidos: {{ $colaborador->apellidopat_usuario }}  {{ $colaborador->apellidomat_usuario }}</h4>
-        </div>
-    </div>
+<p class="active"> Fecha: {{$now->format('d-m-Y')}} <br> 
+Hora: {{$now->format('H:i:s')}} 
+</p>
 
-    <div class="row">
-        <div class="col-md-5">
-            <h4>Empresa: {{     $colaborador->perfilOcupacional->area->gerencia->empresa->nombre_empresa }}</h4>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-5">
-            <h4>Gerencia:  {{     $colaborador->perfilOcupacional->area->gerencia->nombre_gerencia }}</h4>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-5">
-            <h4>Area: {{     $colaborador->perfilOcupacional->area->nombre_area }}</h4>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-5">
-            <h4>Perfil Ocupacional: {{     $colaborador->perfilOcupacional->nombre_perfilocu }}</h4>
-        </div>
-    </div>
-<br><br>
-<div class="row">
-    <div class="col-md-10">
-        <h3>Informacion de Competencias</h3>
-        <div class="box">
-            <table class="table table-responsive " >        
+
+</div>
+
+
+<h3 class="titulo">Reporte Colaborador</h3>
+
+<div class="tablaColaborador">
+<h4 class="subtitulo">Informacion Personal Colaborador</h4>
+
+            <table class="table table-bordered"> 
                 <tr>
-                    <td>Nombre Competencia</td>
-                    <td style="text-align:center">Nota Promedio</td>
-                    <td style="text-align:center">Evaluación</td>
+                <td class="active">RUN</td>
+                <td>{{ $colaborador->run_usuario }}</td>
+                </tr>
+
+                <tr>
+                <td class="active">Nombre</td>
+                <td>{{ $colaborador->nombre_usuario }}</td>
+                </tr>
+                
+
+                <tr>
+                    <td class="active">Apellidos</td>
+                    <td>{{ $colaborador->apellidopat_usuario }}  {{ $colaborador->apellidomat_usuario }}</td>
+                </tr>
+
+                <tr>
+                    <td class="active">Empresa</td>
+                    <td>{{ $colaborador->perfilOcupacional->area->gerencia->empresa->nombre_empresa }}</td>
+                </tr>
+
+                <tr>
+                    <td class="active">Gerencia</td>
+                    <td>{{  $colaborador->perfilOcupacional->area->gerencia->nombre_gerencia }}</td>
+                </tr>
+
+                <tr>
+                    <td class="active">Area</td>
+                    <td>{{$colaborador->perfilOcupacional->area->nombre_area }}</td>
+                </tr>
+
+                <tr>
+                    <td class="active">Perfil Ocupacional</td>
+                    <td>{{$colaborador->perfilOcupacional->nombre_perfilocu }}</td>
+                </tr>
+            </table>
+</div>
+
+<br>
+
+<div class="tablaCompetencias">
+<h4 class="subtitulo">Informacion de Competencias</h4>
+            <table class="table table-bordered" >        
+                <tr>
+                    <td class="active">Nombre Competencia</td>
+                    <td class="active" style="text-align:center">Nota Promedio</td>
+                    <td class="active" style="text-align:center">Evaluación</td>
 
                 </tr>
                 
@@ -70,19 +119,19 @@ html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:1
                         </td>
                         <td style="text-align:center">
                             @if($promedioComp[$key] > 4)
-                            <div style="background-color:green; text-align:center">
+                            <div style="background-color:#90EE90; text-align:center">
                             Alto
                             <div>
                             @endif
 
                              @if($promedioComp[$key] <= 4 && $promedioComp[$key] > 2)
-                            <div style="background-color:yellow; text-align:center">
+                            <div style="background-color: 	#FFD700; text-align:center">
                             Medio
                             <div>
                             @endif
 
                              @if($promedioComp[$key] <= 2)
-                            <div style="background-color:red; text-align:center">
+                            <div style="background-color:	#F08080; text-align:center">
                             Bajo
                             <div>
                             @endif
@@ -90,8 +139,7 @@ html{font-family:sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:1
                     </tr>
                 @endforeach
             </table>
-        </div>
-    </div>
+</div>
 </div>
 <br><br>
 <div class="page-break"></div>

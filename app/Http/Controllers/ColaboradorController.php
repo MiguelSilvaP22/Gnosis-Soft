@@ -188,7 +188,6 @@ class ColaboradorController extends Controller
         $labelPromedio= implode(",",$promedioComp);
         $labelCompetencias= "'".implode("','",$nombreCompetencias)."'";
 
-
         \Debugbar::info($colaborador->horariosColaborador->last()->horario->actividad);
        /* $pdf = \PDF::loadView('vistaColaborador.detalle', compact('colaborador', 'labelCompetencias','labelPromedio')); 
         return $pdf->download('ReporteColaborador.pdf'); */
@@ -223,9 +222,12 @@ class ColaboradorController extends Controller
         $labelCompetencias= "'".implode("','",$nombreCompetencias)."'";
 
 
+        $now = new \DateTime();
+      
+
         \Debugbar::info($colaborador->horariosColaborador->last()->horario->actividad);
-       $pdf = \PDF::loadView('vistaColaborador.reportePDF', compact('colaborador', 'labelCompetencias','labelPromedio', 'promedioComp')); 
-        return $pdf->download('ReporteColaborador.pdf'); 
-       /* return view('vistaColaborador.reportePDF', compact('colaborador', 'labelCompetencias','labelPromedio', 'promedioComp'));*/
+      $pdf = \PDF::loadView('vistaColaborador.reportePDF', compact('colaborador', 'labelCompetencias','labelPromedio', 'promedioComp', 'now')); 
+        return $pdf->download('ReporteColaborador.pdf');  
+     return view('vistaColaborador.reportePDF', compact('colaborador', 'labelCompetencias','labelPromedio', 'promedioComp'));
     }
 }

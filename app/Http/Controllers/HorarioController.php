@@ -7,7 +7,8 @@ use App\HorarioColaborador;
 use App\Horario;
 use App\Empresa;
 use App\Usuario;
-
+use App\Encuesta;
+use App\EvaluacionEncuesta;
 use DB;
 use App\Quotation;
 use Illuminate\Http\Request;
@@ -42,7 +43,6 @@ class HorarioController extends Controller
             ->whereIn('usuario.id_perfil',['2','3'])
             ->select('usuario.id_usuario','empresa.id_empresa')
             ->get();
-       // dd($queryColabEmpresa);
 
         if(Count($queryColabEmpresa)>0)
         {
@@ -61,7 +61,7 @@ class HorarioController extends Controller
             ->pluck('run_usuario','id_usuario'); 
         }
         $colaboradoresHorario = $queryColabEmpresa->pluck('id_usuario');
-       
+        
     	$facilitadores = Usuario::all()->where('id_perfil',4)->where('estado_usuario',1)->sortBy('nombre_usuario')->pluck('nombre_usuario','id_usuario');
     	$empresas = Empresa::all()->where('estado_empresa',1)->sortBy('nombre_empresa')->pluck('nombre_empresa','id_empresa');
     	$facilitadoresHorario = HorarioFacilitador::all()->where('id_horario',$id)->where('estado_horafaci',1)->pluck('id_usuario');
@@ -122,6 +122,34 @@ class HorarioController extends Controller
     	}
     	return redirect('actividad');
 
+    }
+    public function asignarEncuesta($id)
+    {
+        $horariosColaborador = HorarioColaborador::All()->where('id_horario',$id)->where('estado_horacolab',1);
+        $encuestas = Encuesta::All()->where('estado_encuesta',1)->sortBy('nombre_encuesta')->pluck('nombre_encuesta','id_encuesta');
+        
+        return view('horario.asignarEncuesta', compact('horariosColaborador','encuestas'));
+
+
+    }
+    public function storeAsignacionEncuesta(Request $request)
+    {
+        $id = $request->id_horario;
+        $encuestas =$request->id_encuesta;
+        $horariosColaborador = HorarioColaborador::All()->where('id_horario',$id)->where('estado_horacolab',1);
+        foreach($horariosColaborador as $horarioColab)
+        {
+            foreach($encuestas as $id_encuesta)
+            {
+                $horarioEncuesta = new EvaluacionEncuesta();
+                $horarioEncuesta->id_horacolab = $horarioColab->id_horacolab;
+                $horarioEncuesta->id_encuesta = $id_encuesta;
+                $horarioEncuesta->observacion_evencuesta = $request->observacion_evencuesta;
+                $horarioEncuesta->estado_evencuesta = 1;
+                $horarioEncuesta->save();
+            }          
+        }  
+        return redirect('actividad');
     }
 
     /**

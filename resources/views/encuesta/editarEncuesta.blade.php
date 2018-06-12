@@ -23,6 +23,10 @@
 
 							</div>
 							<div class='form-group' >
+								{!! Form::label('', 'Nombre Encuesta:') !!}
+								{!! Form::text('nombre_encuesta', null, ['class' => 'form-control','id'=>'nombre_encuesta']) !!}
+							</div>
+							<div class='form-group' >
 								{!! Form::label('', 'Observaciones Encuesta:') !!}
 								{!! Form::textArea('observacion_enc', null, ['class' => 'form-control','id'=>'observacion_enc']) !!}
 							</div>

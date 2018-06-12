@@ -153,7 +153,7 @@ function cargarCrearHorario(id)
 
 		});
 }
-function cargarAsignarEncuesta(id)
+function asignarEncuesta(id)
 {
 	$.ajax({
 		url: "/asignarEncuesta/"+id,
@@ -172,11 +172,6 @@ function cargarAsignarEncuesta(id)
 }
 $(document).on('click', '#btnHorario', function () {
 		cargarCrearHorario(this.value)
-		//alert("asda");
-});	
-
-$(document).on('click', '#btnEncuesta', function () {
-	cargarAsignarEncuesta(this.value)
 		//alert("asda");
 });	
 

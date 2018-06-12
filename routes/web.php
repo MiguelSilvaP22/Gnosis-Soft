@@ -433,10 +433,18 @@ Route::get('/eliminarHorario/{id}', 'HorarioController@destroy',function($id) {
     return  $id;
     })
 ->name('horario.destroy'); 
+Route::get('/asignarEncuesta/{id}', 'HorarioController@asignarEncuesta',function($id) {
+    return  $id;
+    })
+->name('horario.asignarEncuesta'); 
 
 Route::post('storeAsignarHorario', [
     'uses' => 'HorarioController@store'
   ]);
+Route::post('storeAsignacionEncuesta', [
+    'uses' => 'HorarioController@storeAsignacionEncuesta'
+  ]);
+ 
 
 Route::resource('horario', 'HorarioController');
 

@@ -37,6 +37,7 @@ class EncuestaController extends Controller
 
         $encuesta = new Encuesta();
         $encuesta->id_tipoencuesta = $request->id_tipoEncuesta;
+        $encuesta->nombre_encuesta = $request->nombre_encuesta;
         $encuesta->observacion_enc = $request->observacion_enc;
         $encuesta->estado_encuesta = 1;
         if($encuesta->save())
@@ -99,7 +100,9 @@ class EncuestaController extends Controller
         $id_categoriaPregunta = $request->id_categoriaPregunta[0];
         $nomPreguntas = $request->nombre_pregunta;
         $alternativas = Alternativa::all()->where('estado_alternativa',1)->where('id_tipoaltv',1);
+        
         $encuesta->id_tipoencuesta = $request->id_tipoEncuesta;
+        $encuesta->nombre_encuesta = $request->nombre_encuesta;
         $encuesta->observacion_enc = $request->observacion_enc;
         $encuesta->estado_encuesta = 1;
         if($encuesta->save())

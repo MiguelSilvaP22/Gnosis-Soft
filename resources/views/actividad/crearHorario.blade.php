@@ -74,6 +74,11 @@
 
 										</td>
 										<td>
+											@if(Count($horario->horariosColaborador->where('estado_horacolab',1))>0)
+											<button type="button" class="btn btn-default" aria-label="Left Align" onclick="asignarEncuesta({{$horario->id_horario}})" id="btnAssignEncuesta">  
+											 	<i class="fa fa-file-o"></i>
+											</button>
+											@endif
 											<button type="button" class="btn btn-default" aria-label="Left Align" onclick="asignarHorario({{$horario->id_horario}})" id="btnAssignHorario">  
 											 	<i class="fa fa-user-plus"></i>
 											</button>

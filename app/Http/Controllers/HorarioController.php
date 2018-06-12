@@ -127,8 +127,18 @@ class HorarioController extends Controller
     {
         $horariosColaborador = HorarioColaborador::All()->where('id_horario',$id)->where('estado_horacolab',1);
         $encuestas = Encuesta::All()->where('estado_encuesta',1)->sortBy('nombre_encuesta')->pluck('nombre_encuesta','id_encuesta');
+        $encuestasHorario = DB::table('evaluacionencuesta')
+        ->join('horariocolaborador', 'evaluacionencuesta.id_horacolab', '=', 'horariocolaborador.id_horacolab')
+        ->join('encuesta', 'evaluacionencuesta.id_encuesta', '=', 'encuesta.id_encuesta')
+        ->join('horario', 'horariocolaborador.id_horario', '=', 'horario.id_horario')
+        ->where('horario.id_horario',$id)
+        ->where('evaluacionencuesta.estado_evencuesta',1)
+        ->where('horariocolaborador.estado_horacolab',1)
+        ->where('encuesta.estado_encuesta',1)
+        ->select('encuesta.id_encuesta','evaluacionencuesta.observacion_evencuesta');
         
-        return view('horario.asignarEncuesta', compact('horariosColaborador','encuestas'));
+        
+        return view('horario.asignarEncuesta', compact('horariosColaborador','encuestas','encuestasHorario'));
 
 
     }
@@ -137,16 +147,32 @@ class HorarioController extends Controller
         $id = $request->id_horario;
         $encuestas =$request->id_encuesta;
         $horariosColaborador = HorarioColaborador::All()->where('id_horario',$id)->where('estado_horacolab',1);
+
+        
         foreach($horariosColaborador as $horarioColab)
         {
+            EvaluacionEncuesta::where('id_horacolab',$horarioColab->id_horacolab)->update( ['estado_evencuesta' => 0]);
             foreach($encuestas as $id_encuesta)
             {
-                $horarioEncuesta = new EvaluacionEncuesta();
-                $horarioEncuesta->id_horacolab = $horarioColab->id_horacolab;
-                $horarioEncuesta->id_encuesta = $id_encuesta;
-                $horarioEncuesta->observacion_evencuesta = $request->observacion_evencuesta;
-                $horarioEncuesta->estado_evencuesta = 1;
-                $horarioEncuesta->save();
+                $horarioEncuesta = EvaluacionEncuesta::all()->where('id_horacolab',$horarioColab->id_horacolab)->where('id_encuesta',$id_encuesta)->first();   
+                if($horarioEncuesta != null)
+                {
+                    $horarioEncuesta->observacion_evencuesta = $request->observacion_evencuesta;
+                    $horarioEncuesta->estado_evencuesta = 1;
+                    $horarioEncuesta->save();
+
+                }
+                else
+                {
+                    $horarEncuesta = new EvaluacionEncuesta();
+                    $horarEncuesta->id_horacolab = $horarioColab->id_horacolab;
+                    $horarEncuesta->id_encuesta = $id_encuesta;
+                    $horarEncuesta->observacion_evencuesta = $request->observacion_evencuesta;
+                    $horarEncuesta->estado_evencuesta = 1;
+                    $horarEncuesta->save();
+                }
+
+                
             }          
         }  
         return redirect('actividad');

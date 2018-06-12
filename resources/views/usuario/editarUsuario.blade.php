@@ -91,6 +91,21 @@
 									{!! Form::label('', '',['id' => 'errPerfilOcupacionalUsuario']) !!}
 								</div>
 							</div>
+							@else
+							<div id="empresas" style="display:none;">
+								<div class='form-group'>
+									{!! Form::label('', 'Empresas:') !!}
+									{!! Form::select('id_empresa', $empresas,null ,['class' => 'select2','placeholder'=>'Seleccione una empresa','id'=>'id_empresa', 'style'=>'width:100%']) !!}
+									{!! Form::label('', '',['id' => 'errEmpresaUsuario']) !!}
+								</div>	
+								<div class='form-group' style="display:none;" id="gerencia">								
+								</div>			
+								<div class='form-group' style="display:none;" id="area">						
+								</div>								
+								<div class='form-group' style="display:none;" id="perfilOcupacional">
+								</div>									
+							</div>
+						
 							@endif
 							
 						</div>

@@ -100,9 +100,9 @@ $('#formCompetencia').submit(function (e) {
 	var formData = $(this).serialize() // get form data
 	if(validarCompetencias())
 	{
-		/*$.post(url, formData, function (response) { // send; response.data will be what is returned
+		$.post(url, formData, function (response) { // send; response.data will be what is returned
 			$('#modal').modal('hide');
-		});*/
+		});
 	}
 });
 

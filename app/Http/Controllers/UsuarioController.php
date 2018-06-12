@@ -148,4 +148,19 @@ class UsuarioController extends Controller
         $usuario->eliminar();
         return redirect('usuario');
     }
+
+    public function validarRunUsuario($run_usuario)
+    {
+        $usuario = Usuario::All()->where('run_usuario',$run_usuario)->first();
+        
+        if($usuario == null)
+        {
+            return 'false';
+        }
+        else
+        {
+            return 'true';
+        }
+      
+    }
 }

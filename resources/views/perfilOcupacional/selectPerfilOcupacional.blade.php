@@ -5,3 +5,4 @@
 		<option value="{{ $perfil->id_perfilocu }}"> {{ $perfil->nombre_perfilocu }}</option>
 	@endforeach
 </select>
+<label id="errPerfilOcupacionalUsuario">

@@ -126,12 +126,7 @@ Route::get('/validarRutAdd/{id}', 'EmpresaController@validarRutAdd',function($ru
     return  $rut_matriz_empresa;
   })
   ->name('empresa.validarRutAdd');
-Route::resource('empresa', 'EmpresaController');
-
-Route::get('/validarRutEdit/{id}', 'EmpresaController@validarRutEdit',function($rut_matriz_empresa) {
-    return  $rut_matriz_empresa;
-  })
-  ->name('empresa.validarRutEdit');
+  
 Route::resource('empresa', 'EmpresaController');
 
 // Organigrama Empresa
@@ -339,7 +334,11 @@ Route::get('/eliminarUsuario/{id}', 'UsuarioController@destroy',function($id) {
     return  $id;
     })
 ->name('usuario.destroy');  
-    
+
+Route::get('/validarRunUsuario/{id}', 'UsuarioController@validarRunUsuario',function($run_usuario) {
+    return  $run_usuario;
+  })
+  ->name('usuario.validarRunUsuario');
 
 Route::resource('usuario', 'UsuarioController');
 

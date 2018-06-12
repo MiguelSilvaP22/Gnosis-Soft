@@ -6,4 +6,5 @@
 	@endforeach
 </select>
 <input type="hidden" id="llamadoGerencia" />
+<label id="errGerenciaUsuario">
 

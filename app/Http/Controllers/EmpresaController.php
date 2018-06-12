@@ -229,26 +229,4 @@ class EmpresaController extends Controller
         }
       
     }
-
-    public function validarRutEdit($rut_matriz_empresa)
-    {
-        $empresa = Empresa::All()->where('rut_matriz_empresa',$rut_matriz_empresa)->first();
-        
-        if($empresa == $rut_matriz_empresa)
-        {
-            return 'true';
-        }
-        else
-        {
-            if($empresa == null)
-            {
-                return 'false';
-            }
-            else
-            {
-                return 'true';
-            }
-        }
-        
-    }
 }

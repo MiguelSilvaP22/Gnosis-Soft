@@ -277,45 +277,39 @@ function validarEmpresa(tipo)
 	}
 
 	//Validar Rut Matriz.
-	if($.trim( $("#rut_matriz_empresa").val()) == "" )
+	if(tipo == '1')
 	{
-		verificar = false; marcarErrorGeneral('rut_matriz_empresa','errRutMatriz');
-	}
-	else
-	{
-		desmarcarError('rut_matriz_empresa','errRutMatriz');	
-		if(validarRut($("#rut_matriz_empresa").val()))
+		if($.trim( $("#rut_matriz_empresa").val()) == "" )
 		{
-			verificar = false; marcarErrorRut('rut_matriz_empresa','errRutMatriz');			
-		}else
+			verificar = false; marcarErrorGeneral('rut_matriz_empresa','errRutMatriz');
+		}
+		else
 		{
-			desmarcarError('rut_matriz_empresa','errRutMatriz');
-			if(validarDV($("#rut_matriz_empresa").val()))
+			desmarcarError('rut_matriz_empresa','errRutMatriz');	
+			if(validarRut($("#rut_matriz_empresa").val()))
 			{
-				verificar = false; marcarErrorRut('rut_matriz_empresa','errRutMatriz');	
-			}
-			else
+				verificar = false; marcarErrorRut('rut_matriz_empresa','errRutMatriz');			
+			}else
 			{
 				desmarcarError('rut_matriz_empresa','errRutMatriz');
-				/*if(tipo == '1')
+				if(validarDV($("#rut_matriz_empresa").val()))
 				{
+					verificar = false; marcarErrorRut('rut_matriz_empresa','errRutMatriz');	
+				}
+				else
+				{
+					desmarcarError('rut_matriz_empresa','errRutMatriz');
 					if(validarRutAdd()!= "false")
 					{
 						verificar = false; marcarErrorDuplicado('rut_matriz_empresa','errRutMatriz');
 					}
 					else{desmarcarError('rut_matriz_empresa','errRutMatriz');}
+													
 				}
-				if(tipo == '2')
-				{
-					if(validarRutEdit()!= "false")
-					{
-						verificar = false; marcarErrorDuplicado('rut_matriz_empresa','errRutMatriz');
-					}
-					else{desmarcarError('rut_matriz_empresa','errRutMatriz');}
-				}*/						
-			}
-		}	
+			}	
+		}
 	}
+	
 
 	//Validar Select Giro Empresa.
 	if($("#id_giro").val().length == 0)
@@ -389,52 +383,48 @@ function validarRutAdd()
 	return verificar;	
 }
 
-function validarRutEdit()
-{
-	var verificar;
-	$.ajax({
-		url: "/validarRutEdit/"+$("#rut_matriz_empresa").val(),
-		type: "GET",
-		async: false,
-		success: function (datos) {
-			verificar = datos;
-			}
-		});
-	return verificar;	
-}
 
 //============================================================================================================================================================
 //=====================================================================VALIDACION USUARIO=====================================================================
 //============================================================================================================================================================
 
-function validarUsuario()
+function validarUsuario(tipo)
 {
 	var verificar = true;
 
 	//Validar run usuario
-	if($.trim( $("#run_usuario").val()) == "" )
+	if(tipo == '1')
 	{
-		verificar = false; marcarErrorGeneral('run_usuario','errRunUsuario');
-	}
-	else
-	{
-		desmarcarError('run_usuario','errRunUsuario');	
-		if(validarRut($("#run_usuario").val()))
+		if($.trim( $("#run_usuario").val()) == "" )
 		{
-			verificar = false; marcarErrorRut('run_usuario','errRunUsuario');			
-		}else
+			verificar = false; marcarErrorGeneral('run_usuario','errRunUsuario');
+		}
+		else
 		{
-			desmarcarError('run_usuario','errRunUsuario');
-			if(validarDV($("#run_usuario").val()))
+			desmarcarError('run_usuario','errRunUsuario');	
+			if(validarRut($("#run_usuario").val()))
 			{
-				verificar = false; marcarErrorRut('run_usuario','errRunUsuario');	
-			}
-			else
+				verificar = false; marcarErrorRut('run_usuario','errRunUsuario');			
+			}else
 			{
-				desmarcarError('run_usuario','errRunUsuario');		
-			}
-		}	
+				desmarcarError('run_usuario','errRunUsuario');
+				if(validarDV($("#run_usuario").val()))
+				{
+					verificar = false; marcarErrorRut('run_usuario','errRunUsuario');	
+				}
+				else
+				{
+					desmarcarError('run_usuario','errRunUsuario');
+					if(validarRunUsuario()!= "false")
+					{
+						verificar = false; marcarErrorDuplicado('run_usuario','errRunUsuario');
+					}
+					else{desmarcarError('run_usuario','errRunUsuario');}	
+				}
+			}	
+		}
 	}
+	
 
 	//Validar Nombre
 	if($.trim( $("#nombre_usuario").val()) == "" )
@@ -535,8 +525,7 @@ function validarUsuario()
 		{
 			desmarcarErrorSelect('errEmpresaUsuario');
 			//Validar Select Gerencia
-			/*
-			if($("#select_gerencia").val() == "")
+			if($("#select_gerencia").val() == null)
 			{
 			verificar = false; marcarErrorSelect('errGerenciaUsuario');			
 			}	
@@ -544,7 +533,7 @@ function validarUsuario()
 			{
 				desmarcarErrorSelect('errGerenciaUsuario');
 				//Validar Select Area
-				if($("#select_area").val() == "")
+				if($("#select_area").val() == null)
 				{
 				verificar = false; marcarErrorSelect('errAreaUsuario');			
 				}	
@@ -552,7 +541,7 @@ function validarUsuario()
 				{
 					desmarcarErrorSelect('errAreaUsuario');
 					//Validar Select Perfil Ocupacional
-					if($("#id_perfilocu").val() == "")
+					if($("#select_perfilOcupacional").val() == null)
 					{
 					verificar = false; marcarErrorSelect('errPerfilOcupacionalUsuario');			
 					}	
@@ -561,11 +550,25 @@ function validarUsuario()
 						desmarcarErrorSelect('errPerfilOcupacionalUsuario');						
 					}
 				}
-			}*/
+			}
 		}
 	}
 
 	return verificar;
+
+	function validarRunUsuario()
+	{
+		var verificar;
+		$.ajax({
+			url: "/validarRunUsuario/"+$("#run_usuario").val(),
+			type: "GET",
+			async: false,
+			success: function (datos) {
+				verificar = datos;
+				}
+			});
+		return verificar;	
+	}
 }
 
 

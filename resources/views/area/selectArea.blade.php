@@ -5,3 +5,4 @@
 		<option value="{{ $area->id_area }}"> {{ $area->nombre_area }}</option>
 	@endforeach
 </select>
+<label id="errAreaUsuario">

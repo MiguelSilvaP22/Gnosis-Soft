@@ -21,7 +21,7 @@
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Run Usuario:') !!}
-								{!! Form::text('run_usuario', null, ['class' => 'form-control','id'=>'run_usuario','maxlength'=>'10']) !!}
+								{!! Form::text('run_usuario', null, ['class' => 'form-control','id'=>'run_usuario','maxlength'=>'10','readonly' => true]) !!}
 								{!! Form::label('', '',['id' => 'errRunUsuario']) !!}
 							</div>
 							<div class='form-group'>
@@ -36,7 +36,7 @@
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Fecha de Nacimiento:') !!}
-								{!! Form::text('fechana_usuario', date('d/m/Y',strtotime($colaborador->fechana_usuario)), ['class' => 'form-control','id'=>'fechaUsuario']) !!}
+								{!! Form::text('fechana_usuario', date('d/m/Y',strtotime($colaborador->fechana_usuario)), ['class' => 'form-control','id'=>'fechaUsuario','placeholder'=>'DD/MM/YY']) !!}
 								{!! Form::label('', '',['id' => 'errFechaUsuario']) !!}
 							</div>
 							<div class='form-group'>
@@ -55,7 +55,7 @@
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'email_usuario:') !!}
-								{!! Form::text('email_usuario', null, ['class' => 'form-control','id'=>'email_usuario','maxlength'=>'500']) !!}
+								{!! Form::email('email_usuario', null, ['class' => 'form-control','id'=>'email_usuario','maxlength'=>'500']) !!}
 								{!! Form::label('', '',['id' => 'errEmail']) !!}
 							</div>
 							<div class='form-group'>
@@ -157,11 +157,12 @@ $('#formColaborador').submit(function (e) {
 	e.preventDefault();
 	var url = e.target.action  // get the target
 	var formData = $(this).serialize() // get form data
-	if(validarColaborador())
+	var tipo = '2';
+	if(validarColaborador(tipo))
 	{
-		/*$.post(url, formData, function (response) { // send; response.data will be what is returned
+		$.post(url, formData, function (response) { // send; response.data will be what is returned
 			$('#modal').modal('hide');
-		});*/
+		});
 	}
 	});
 $(document).on('click', '#btnVolver', function () {

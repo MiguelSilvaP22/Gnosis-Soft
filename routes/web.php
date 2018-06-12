@@ -268,7 +268,12 @@ Route::get('/eliminarColaborador/{id}', 'ColaboradorController@destroy',function
     return  $id;
     })
 ->name('colaborador.destroy');  
-    
+
+Route::get('/validarRunColaborador/{id}', 'ColaboradorController@validarRunColaborador',function($run_usuario) {
+    return  $run_usuario;
+  })
+  ->name('colaborador.validarRunColaborador');
+
 
 Route::resource('colaborador', 'ColaboradorController');
 

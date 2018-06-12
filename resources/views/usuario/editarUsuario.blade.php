@@ -36,7 +36,7 @@
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Fecha de Nacimiento:') !!}
-								{!! Form::text('fechana_usuario', date('d/m/Y',strtotime($usuario->fechana_usuario)), ['class' => 'form-control','id'=>'fechaUsuario']) !!}
+								{!! Form::text('fechana_usuario', date('d/m/Y',strtotime($usuario->fechana_usuario)), ['class' => 'form-control','id'=>'fechaUsuario','placeholder'=>'DD/MM/YY']) !!}
 								{!! Form::label('', '',['id' => 'errFechaUsuario']) !!}
 							</div>
 							<div class='form-group'>
@@ -192,9 +192,9 @@ $('#formUsuario').submit(function (e) {
 	var tipo = '2';
 	if(validarUsuario(tipo))	
 	{
-		/*$.post(url, formData, function (response) { // send; response.data will be what is returned
+		$.post(url, formData, function (response) { // send; response.data will be what is returned
 			$('#modal').modal('hide');
-		});*/
+		});
 		
 	}
 });

@@ -36,7 +36,7 @@
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Fecha de Nacimiento:') !!}
-								{!! Form::text('fechana_usuario', null, ['class' => 'form-control','id'=>'fechaUsuario']) !!}
+								{!! Form::text('fechana_usuario', null, ['class' => 'form-control','id'=>'fechaUsuario','placeholder'=>'DD/MM/YY']) !!}
 								{!! Form::label('', '',['id' => 'errFechaUsuario']) !!}
 							</div>
 							<div class='form-group'>
@@ -55,7 +55,7 @@
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Email:') !!}
-								{!! Form::text('email_usuario', null, ['class' => 'form-control','id'=>'email_usuario','maxlength'=>'500']) !!}
+								{!! Form::email('email_usuario', null, ['class' => 'form-control','id'=>'email_usuario','maxlength'=>'500']) !!}
 								{!! Form::label('', '',['id' => 'errEmail']) !!}
 							</div>
 							<div class='form-group'>
@@ -72,13 +72,10 @@
 							</div>	
 							<div class='form-group' style="display:none;" id="gerencia">
 							</div>
-							{!! Form::label('', '',['id' => 'errGerenciaUsuario']) !!}	
 							<div class='form-group' style="display:none;" id="area">
-							</div>
-							{!! Form::label('', '',['id' => 'errAreaUsuario']) !!}		
+							</div>	
 							<div class='form-group' style="display:none;" id="perfilOcupacional">
 							</div>
-							{!! Form::label('', '',['id' => 'errPerfilOcupacionalUsuario']) !!}	
 						</div>
 						
 						<div class='form-group'>
@@ -112,6 +109,9 @@
 			$("#gerencia").show();
 			$("#gerencia").html(datos);
 			$('#select_gerencia').select2();
+
+			$("#area").hide();
+			$("#perfilOcupacional").hide();
 		}
 		});
 	});	
@@ -122,7 +122,9 @@
 		success: function (datos) {
 			$("#area").show();
 			$("#area").html(datos);
-			$('#select_area').select2();			
+			$('#select_area').select2();
+			
+			$("#perfilOcupacional").hide();
 		}
 
 		});
@@ -144,11 +146,12 @@
 	e.preventDefault();
 	var url = e.target.action  // get the target
 	var formData = $(this).serialize() // get form data
-	if(validarColaborador())
+	var tipo = '1';
+	if(validarColaborador(tipo))
 	{
-		/*$.post(url, formData, function (response) { // send; response.data will be what is returned
+		$.post(url, formData, function (response) { // send; response.data will be what is returned
 			$('#modal').modal('hide');
-		});*/
+		});
 	}
 	});
 $(document).on('click', '#btnVolver', function () {

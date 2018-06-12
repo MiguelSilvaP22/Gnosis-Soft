@@ -230,4 +230,19 @@ class ColaboradorController extends Controller
         return $pdf->download('ReporteColaborador.pdf');  
      return view('vistaColaborador.reportePDF', compact('colaborador', 'labelCompetencias','labelPromedio', 'promedioComp'));
     }
+
+    public function validarRunColaborador($run_usuario)
+    {
+        $colaborador = Usuario::All()->where('run_usuario',$run_usuario)->first();
+        
+        if($colaborador == null)
+        {
+            return 'false';
+        }
+        else
+        {
+            return 'true';
+        }
+      
+    }
 }

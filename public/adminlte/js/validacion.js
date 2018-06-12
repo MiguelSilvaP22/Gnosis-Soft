@@ -483,7 +483,9 @@ function validarUsuario(tipo)
 		verificar = false; marcarErrorGeneral('fechaUsuario','errFechaUsuario');
 	}
 	else
-	{desmarcarError('fechaUsuario','errFechaUsuario');}
+	{
+		desmarcarError('fechaUsuario','errFechaUsuario');		
+	}
 
 	//Validar Sexo.
 	var check = $('input[name=sexo_usuario]:checked').val();
@@ -556,53 +558,62 @@ function validarUsuario(tipo)
 
 	return verificar;
 
-	function validarRunUsuario()
-	{
-		var verificar;
-		$.ajax({
-			url: "/validarRunUsuario/"+$("#run_usuario").val(),
-			type: "GET",
-			async: false,
-			success: function (datos) {
-				verificar = datos;
-				}
-			});
-		return verificar;	
-	}
+	
 }
 
+function validarRunUsuario()
+{
+	var verificar;
+	$.ajax({
+		url: "/validarRunUsuario/"+$("#run_usuario").val(),
+		type: "GET",
+		async: false,
+		success: function (datos) {
+			verificar = datos;
+			}
+		});
+	return verificar;	
+}
 
 //================================================================================================================================================================
 //=====================================================================VALIDACION COLABORADOR=====================================================================
 //================================================================================================================================================================
 
-function validarColaborador()
+function validarColaborador(tipo)
 {
 	var verificar = true;
 
-	//Validar run usuario
-	if($.trim( $("#run_usuario").val()) == "" )
+	//Validar run Colaborador
+	if(tipo == '1')
 	{
-		verificar = false; marcarErrorGeneral('run_usuario','errRunUsuario');
-	}
-	else
-	{
-		desmarcarError('run_usuario','errRunUsuario');	
-		if(validarRut($("#run_usuario").val()))
+		if($.trim( $("#run_usuario").val()) == "" )
 		{
-			verificar = false; marcarErrorRut('run_usuario','errRunUsuario');			
-		}else
+			verificar = false; marcarErrorGeneral('run_usuario','errRunUsuario');
+		}
+		else
 		{
-			desmarcarError('run_usuario','errRunUsuario');
-			if(validarDV($("#run_usuario").val()))
+			desmarcarError('run_usuario','errRunUsuario');	
+			if(validarRut($("#run_usuario").val()))
 			{
-				verificar = false; marcarErrorRut('run_usuario','errRunUsuario');	
-			}
-			else
+				verificar = false; marcarErrorRut('run_usuario','errRunUsuario');			
+			}else
 			{
-				desmarcarError('run_usuario','errRunUsuario');		
-			}
-		}	
+				desmarcarError('run_usuario','errRunUsuario');
+				if(validarDV($("#run_usuario").val()))
+				{
+					verificar = false; marcarErrorRut('run_usuario','errRunUsuario');	
+				}
+				else
+				{
+					desmarcarError('run_usuario','errRunUsuario');
+					if(validarRunColaborador()!= "false")
+					{
+						verificar = false; marcarErrorDuplicado('run_usuario','errRunUsuario');
+					}
+					else{desmarcarError('run_usuario','errRunUsuario');}	
+				}
+			}	
+		}
 	}
 
 	//Validar Nombre
@@ -687,7 +698,6 @@ function validarColaborador()
 	else{desmarcarErrorSelect('errNacionalidad');}
 
 	//Validar Select Gerencia, Area, Perfil Ocupacional Usuario.
-	
 	//Validar Select Empresa
 	if($("#id_empresa").val() == "")
 	{
@@ -697,8 +707,7 @@ function validarColaborador()
 	{
 		desmarcarErrorSelect('errEmpresaUsuario');
 		//Validar Select Gerencia
-		
-		if($("#select_gerencia").val() == "")
+		if($("#select_gerencia").val() == null)
 		{
 		verificar = false; marcarErrorSelect('errGerenciaUsuario');			
 		}	
@@ -706,7 +715,7 @@ function validarColaborador()
 		{
 			desmarcarErrorSelect('errGerenciaUsuario');
 			//Validar Select Area
-			if($("#select_area").val() == "")
+			if($("#select_area").val() == null)
 			{
 			verificar = false; marcarErrorSelect('errAreaUsuario');			
 			}	
@@ -714,7 +723,7 @@ function validarColaborador()
 			{
 				desmarcarErrorSelect('errAreaUsuario');
 				//Validar Select Perfil Ocupacional
-				if($("#select_perfilOcupacional").val() == "")
+				if($("#select_perfilOcupacional").val() == null)
 				{
 				verificar = false; marcarErrorSelect('errPerfilOcupacionalUsuario');			
 				}	
@@ -726,10 +735,22 @@ function validarColaborador()
 		}
 	}
 	
-
 	return verificar;
 }
 
+function validarRunColaborador()
+{
+	var verificar;
+	$.ajax({
+		url: "/validarRunColaborador/"+$("#run_usuario").val(),
+		type: "GET",
+		async: false,
+		success: function (datos) {
+			verificar = datos;
+			}
+		});
+	return verificar;	
+}
 
 //==========================================================================================================================================================
 //=====================================================================VALIDACION CURSO=====================================================================

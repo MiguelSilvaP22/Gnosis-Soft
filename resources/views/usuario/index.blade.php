@@ -32,7 +32,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						@foreach ($usuarios as $usuario) 
+						@foreach ($usuarios  as $usuario) 
 						<tr>
 
 							<td style="width:25%;">{{ $usuario->nombre_usuario." ". $usuario->apellidopat_usuario." ". $usuario->apellidomat_usuario}}</td>

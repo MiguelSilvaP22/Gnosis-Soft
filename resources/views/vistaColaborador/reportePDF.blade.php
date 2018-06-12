@@ -32,7 +32,6 @@ img{
 }
 p{
     position: absolute; right: 0px; top: 0px;
-    color:#A9A9A9;
 }
 
 </style>

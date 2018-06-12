@@ -46,14 +46,25 @@
 				</div>
 
 					<div class="col-md-12   ">
+					@if(Count($encuestasHorario->get()) > 0)
 						<div class='form-group'>
 							{!! Form::label('', 'Encuestas:') !!}
-							{!! Form::select('id_encuesta[]', $encuestas,null ,['class' => 'select2','multiple','id'=>'id_encuesta', 'style'=>'width:100%']) !!}		
+							{!! Form::select('id_encuesta[]', $encuestas,$encuestasHorario->get()->pluck('id_encuesta'),['class' => 'select2','multiple','id'=>'id_encuesta', 'style'=>'width:100%']) !!}		
+						</div>
+						<div class='form-group' >
+							{!! Form::label('', 'Observaciones:') !!}
+							{!! Form::textArea('observacion_evencuesta', $encuestasHorario->first()->observacion_evencuesta, ['class' => 'form-control','id'=>'observacion_evencuesta']) !!}
+						</div>
+					@else
+						<div class='form-group'>
+							{!! Form::label('', 'Encuestas:') !!}
+							{!! Form::select('id_encuesta[]', $encuestas,$encuestasHorario,['class' => 'select2','multiple','id'=>'id_encuesta', 'style'=>'width:100%']) !!}		
 						</div>
 						<div class='form-group' >
 							{!! Form::label('', 'Observaciones:') !!}
 							{!! Form::textArea('observacion_evencuesta', null, ['class' => 'form-control','id'=>'observacion_evencuesta']) !!}
 						</div>
+					@endif	
 					<div class="box-header">
 						<h3 class="box-title">Participantes</h3>
 					</div>

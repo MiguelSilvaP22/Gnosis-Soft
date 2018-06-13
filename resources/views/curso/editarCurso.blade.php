@@ -12,7 +12,7 @@
 				<div class="box-body">
 					<div class="row">
 						
-					{!! Form::model($curso, [ 'enctype'=>"multipart/form-data",'method' => 'PATCH', 'action' => ['CursoController@update',$curso->id_curso],'id'=>'formCurso']) !!}
+					{!! Form::model($curso, [ 'enctype'=>"multipart/form-data",'method' => 'PATCH', 'action' => ['CursoController@update',$curso->id_curso],'id'=>'formCurso1']) !!}
 						<div class="col-md-12">
 							<div class='form-group'>
 								{!! Form::label('', 'Codigo:') !!}
@@ -78,6 +78,7 @@
 								
 							</div>	
 						<div class='form-group'>
+							<a href="javascript:guardar(2)" >guardar</a>
 							{!! Form::submit("Editar Curso", ['class' => 'form-control btn btn-success ']) !!}
 						</div>
 						{!! Form::close() !!}
@@ -108,16 +109,26 @@ function eliminarContenido(id){
 	$("#btnEliminarContenido"+id).remove();
 }
 
+function guardar(id)
+{
+	if(id == 1)
+	{
+		$('#formCurso1').submit();
+	}
+	else{
+		console.log('asd');
+	}
+	
+}
 $('#formCurso').submit(function (e) {
 	e.preventDefault();
 	var url = e.target.action  // get the target
 	var formData = $(this).serialize() // get form data
-	if(validarCurso())	
-	{
-		/*$.post(url, formData, function (response) { // send; response.data will be what is returned
-			$('#modal').modal('hide');
-		});*/
-	}
+	/*if(validarCurso())	
+	{*/
+		
+		
+	//}
 	});
 $(document).on('click', '#btnVolver', function () {
 		$('#modal').modal('hide');

@@ -15,7 +15,12 @@
 						<div class="col-md-12   ">
 							<div class='form-group'>
 								{!! Form::label('', 'Curso:') !!}
-								{!! Form::select('id_curso', $cursos,null ,['class' => 'select2','placeholder'=>'Seleccione un Curso','id'=>'id_curso', 'style'=>'width:100%']) !!}
+								@if($idCurso > 0)
+									{!! Form::select('id_curso', $cursos,$idCurso  ,['class' => 'select2','placeholder'=>'Seleccione un Curso','id'=>'id_curso','disabled ' => 'true', 'style'=>'width:100%;']) !!}
+									{!! Form::hidden('id_curso',$idCurso) !!}
+								@else
+									{!! Form::select('id_curso', $cursos,null  ,['class' => 'select2','placeholder'=>'Seleccione un Curso','id'=>'id_curso', 'style'=>'width:100%']) !!}
+								@endif
 								{!! Form::label('', '',['id' => 'errIdCurso']) !!}
 							</div>
 							<div class='form-group'>
@@ -74,17 +79,17 @@
 		$('#fechaTermActv').datepicker("option", "dateFormat", 'dd/mm/yy');
 	});
 
-	$('#formActividad').submit(function (e) {
+	/*$('#formActividad').submit(function (e) {
 	e.preventDefault();
 	var url = e.target.action  // get the target
 	var formData = $(this).serialize() // get form data
 	if(validarActividad())
 	{
-		/*$.post(url, formData, function (response) { // send; response.data will be what is returned
+		$.post(url, formData, function (response) { // send; response.data will be what is returned
 			$('#modal').modal('hide');
-		});*/
+		});
 	}
-});
+});*/
 
 $(document).on('click', '#btnVolver', function () {
 	$('#modal').modal('hide');

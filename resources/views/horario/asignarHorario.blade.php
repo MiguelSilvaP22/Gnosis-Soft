@@ -15,13 +15,13 @@
 							<thead>
 								<tr>
 									<th>
-										Fecha Actividad:
+										Fecha 
 									</th>
 									<th>
-										Hora Inicio Actividad:
+										Hora Inicio 
 									</th>
 									<th>
-										Hora Termino Actividad:
+										Hora Termino 
 									</th>
 								</tr>
 							</thead>
@@ -31,10 +31,10 @@
 										<span> {{date('d-m-Y', strtotime($horarioActividad->fecha_horario))}}</span>
 									</td>
 									<td>
-										<span>{{$horarioActividad->hora_inicio_horario}}</span>
+										<span>{{date('H:i',strtotime($horarioActividad->hora_inicio_horario))}}</span>
 									</td>
 									<td>
-										<span>{{$horarioActividad->hora_termino_horario}}</span>
+										<span>{{date('H:i',strtotime($horarioActividad->hora_termino_horario))}}</span>
 									</td>
 								</tr>
 							</tbody>

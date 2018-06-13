@@ -58,7 +58,7 @@
 					@else
 						<div class='form-group'>
 							{!! Form::label('', 'Encuestas:') !!}
-							{!! Form::select('id_encuesta[]', $encuestas,$encuestasHorario,['class' => 'select2','multiple','id'=>'id_encuesta', 'style'=>'width:100%']) !!}		
+							{!! Form::select('id_encuesta[]', $encuestas,null,['class' => 'select2','multiple','id'=>'id_encuesta', 'style'=>'width:100%']) !!}		
 						</div>
 						<div class='form-group' >
 							{!! Form::label('', 'Observaciones:') !!}

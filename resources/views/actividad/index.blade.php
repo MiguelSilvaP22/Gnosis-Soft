@@ -13,34 +13,43 @@
 				</div>
 				<div style="widtn:100%;align:center;">
 					
-					<div id="btnAgregar" class="btn btn-block btn-success" style="float: right;margin-bottom: 10px;margin-right: 10px;width:200px;">
-						<i class="fa fa-plus"></i>	Agregar
-					</div>
+					@if($idCurso!= null)
+						<button id="btnAgregar" value="{{$idCurso}}" class="btn btn-block btn-success" style="float: right;margin-bottom: 10px;margin-right: 10px;width:200px;">
+							<i class="fa fa-plus"></i>	Agregar
+						</button>
+					@else
+						<button id="btnAgregar" value="0" class="btn btn-block btn-success" style="float: right;margin-bottom: 10px;margin-right: 10px;width:200px;">
+							<i class="fa fa-plus"></i>	Agregar
+						</button>
+					@endif
 				</div>
 				<div class="box-body">
 				@if (count($actividades)>0)
 				<table id="tablaActividad" class="table">
 					<thead>
 						<tr>
-							<th>Codigo Actividad</th>
-							<th>Codigo Sence Actividad</th>
+							<th>Codigo</th>
+							<th>Curso</th>	
+							<th>Fechas </th>						
 							<th>Fecha de Modificación</th>
-							<th>Estado</th>
 							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
 						@foreach ($actividades as $actividad) 
 						<tr>
-
-							<td style="width:25%;">{{ $actividad->cod_interno_actividad}}</td>
-							<td style="width:25%;">{{ $actividad->cod_sence_actividad}}</td>
-							<td style="width:25%;">{{ $actividad->fecha_mod_actividad}}</td>
-							@if($actividad->estado_actividad == 1)
-							<td style="width:25%;color:green;">Activo</td>
-							@else
-							<td style="width:25%;color:red">inactivo</td>
-							@endif
+							<td >
+								<p>Codigo: {{ $actividad->cod_interno_actividad}}</p>
+								<p>Sence : {{ $actividad->cod_sence_actividad}}</p>
+							</td>
+							<td >{{ $actividad->curso->nombre_curso}}</td>
+							<td >
+								@foreach ($actividad->horarios->where('estado_horario',1) as $horario) 
+									<p>{{ date('d/m/Y',strtotime($horario->fecha_horario))}}</p>
+								@endforeach
+							</td>
+							
+							<td >{{ $actividad->fecha_mod_actividad}}</td>
 							<td>
 								<button id="btnHorario" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Horario</button>
 								<button id="btnVer" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>						
@@ -177,7 +186,7 @@ $(document).on('click', '#btnHorario', function () {
 
 $(document).on('click', '#btnAgregar', function () {
 		$.ajax({
-		url: "/crearActividad/",
+		url: "/crearActividad/"+this.value,
 		type: "GET",
 		success: function (datos) {
 			$("#datos").html(datos);

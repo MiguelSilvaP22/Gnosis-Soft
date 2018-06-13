@@ -15,13 +15,13 @@
 							<thead>
 								<tr>
 									<th>
-										Fecha Inicio Actividad:
+										Fecha Inicio 
 									</th>
 									<th>
-										Fecha Termino Actividad:
+										Fecha Termino 
 									</th>
 									<th>
-										Cantidad de horas Actividad:
+										Cantidad de Horas
 									</th>
 								</tr>
 							</thead>
@@ -66,11 +66,11 @@
 											{{date('d/m/Y',strtotime($horario->fecha_horario))}}										
 										</td>
 										<td>
-											{{$horario->hora_inicio_horario}}
+											{{date('H:i',strtotime($horario->hora_inicio_horario))}}
 											
 										</td>
 										<td>
-											{{$horario->hora_termino_horario}}
+											{{date('H:i',strtotime($horario->hora_termino_horario))}}
 
 										</td>
 										<td>
@@ -117,6 +117,7 @@
 									{!! Form::hidden('id_actividad',$actividad->id_actividad) !!}
 								</div>
 								<div class='form-group'>
+									<a href="javascript:guardar(2)" >guardar</a>
 									{!! Form::submit("Agregar Horario", ['class' => 'form-control btn btn-success ']) !!}
 								</div>
 						</div>	
@@ -137,7 +138,16 @@
 	$(document).ready(function() {
 		$('.date').datepicker({});		
 	});
-
+function guardar()
+{
+	if(id == 1)
+	{
+		$('#formularioHorario').submit();
+	}
+	else{
+		console.log('asd');
+	}
+}
 function eliminarForm(id){
 		$("#form"+id).remove();		
 	}

@@ -315,7 +315,6 @@ Route::resource('colaborador', 'ColaboradorController');*/
 //Usuarios
 
 Route::get('/usuario', 'UsuarioController@index');
-Route::get('/login', 'LoginController@login');
 
 Route::get('/crearUsuario', 'UsuarioController@create')
 ->name('usuario.crear');
@@ -350,6 +349,7 @@ Route::get('/curso', 'CursoController@index');
 Route::get('/crearCurso', 'CursoController@create')
 ->name('curso.crear');
 
+
 Route::get('/editarCurso/{id}', 'CursoController@edit',function($id) {
     return  $id;
   })
@@ -371,11 +371,17 @@ Route::resource('curso', 'CursoController');
 //-------------------------------------------------------------------------------------------------------------------------
 //Actividad
 
-Route::get('/actividad', 'ActividadController@index');
+//Route::get('/actividad', 'ActividadController@index');
 
-Route::get('/crearActividad', 'ActividadController@create')
-->name('actividad.crear');
+Route::get('actividad/{id?}','ActividadController@index', function ($id = null) {
+    return $id;
+})->name('actividad.index');;
 
+Route::get('/crearActividad/{id}', 'ActividadController@create',function($id) {
+    return  $id;
+  })
+  ->name('actividad.crear');
+  
 Route::get('/editarActividad/{id}', 'ActividadController@edit',function($id) {
     return  $id;
   })
@@ -557,3 +563,7 @@ Route::get('/vistaColaborador/detalle/{id}', 'ColaboradorController@showVista',f
 //Login
 Route::get('/logout', 'LoginController@logout');
 Route::resource('login', 'LoginController');
+  //-------------------------------------------------------------------------------------------------------------------------
+//Vista Empresa
+
+Route::get('/vistaEmpresa', 'VistaEmpresaController@index');

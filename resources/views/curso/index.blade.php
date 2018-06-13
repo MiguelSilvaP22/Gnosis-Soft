@@ -22,9 +22,10 @@
 				<table id="tablaCurso" class="table">
 					<thead>
 						<tr>
+							<th>Codigo</th>
 							<th>Nombre Curso</th>
+							<th>Cantidad de Horas</th>						
 							<th>Fecha de Modificación</th>
-							<th>Estado</th>
 							<th>Acciones</th>
 						</tr>
 					</thead>
@@ -32,19 +33,18 @@
 						@foreach ($cursos as $curso) 
 						<tr>
 
-							<td style="width:25%;">{{ $curso->nombre_curso}}</td>
-							<td style="width:25%;">{{ $curso->fecha_mod_curso}}</td>
-							@if($curso->estado_curso == 1)
-							<td style="width:25%;color:green;">Activo</td>
-							@else
-							<td style="width:25%;color:red">inactivo</td>
-							@endif
+							<td >
+								<p>Codigo: {{ $curso->cod_interno_curso}}</p>
+								<p>Sence : {{ $curso->cod_sence_curso}}</p>
+							</td>
+							<td >{{ $curso->nombre_curso}}</td>
+							<td >{{ $curso->cant_hora_curso}}</td>
+							<td >{{ $curso->fecha_mod_curso}}</td>
 							<td>
-							<button id="btnVer" value="{{ $curso->id_curso}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
-
-							<button id="btnEditar" value="{{ $curso->id_curso}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>
-
-							<button id="deleteCurso" class="btn btn btn-info" value="{{ $curso->id_curso}}"><i class="fa fa-eraser"></i> Eliminar</button>
+								<a id="btnActividades" href="{{route('actividad.index')}}/{{$curso->id_curso}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Actividades</a>
+								<button id="btnVer" value="{{ $curso->id_curso}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
+								<button id="btnEditar" value="{{ $curso->id_curso}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>
+								<button id="deleteCurso" class="btn btn btn-info" value="{{ $curso->id_curso}}"><i class="fa fa-eraser"></i> Eliminar</button>
 							</td>
 						</tr>
 						@endforeach

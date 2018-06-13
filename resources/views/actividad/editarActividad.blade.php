@@ -77,9 +77,9 @@ $('#formCurso').submit(function (e) {
 	var formData = $(this).serialize() // get form data
 	if(validarActividad())
 	{
-		/*$.post(url, formData, function (response) { // send; response.data will be what is returned
-			$('#modal').modal('hide');
-		});*/
+		$.post(url, formData, function (response) { // send; response.data will be what is returned
+			location.href = '/actividad/';
+		});
 	}
 });
 $(document).on('click', '#btnVolver', function () {

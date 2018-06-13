@@ -16,11 +16,19 @@ class ActividadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $actividades = Actividad::all()->where('estado_actividad',1);
-
-        return view('actividad.index', compact('actividades'));
+    public function index($id = null)
+    {     
+        if($id == null )
+        {
+            $actividades = Actividad::all()->where('estado_actividad',1); 
+        }
+        else
+        {
+            $actividades = Actividad::all()->where('id_curso',$id)->where('estado_actividad',1);
+        }
+       //dd($actividades);
+        $idCurso = $id;
+        return view('actividad.index', compact('actividades','idCurso'));
     }
 
     /**
@@ -28,10 +36,11 @@ class ActividadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         $cursos = Curso::all()->where('estado_curso',1)->sortBy('nombre_curso')->pluck('nombre_curso','id_curso');
-        return view('actividad.crearActividad', compact('cursos'));
+        $idCurso = $id;
+        return view('actividad.crearActividad', compact('cursos','idCurso'));
     }
 
     /**

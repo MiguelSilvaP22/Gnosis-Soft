@@ -65,11 +65,11 @@
 								{!! Form::button('Agregar nuevo contenido', ['class' => 'form-control btn btn-success ', 'id'=> 'addContenido']) !!}
 							</div>	
 							@foreach ($contenidosGenerales as $key => $contenidoGeneral)
-							
+							<div class='form-group'>
 								{!! Form::text('contenidoGeneral[]', $contenidoGeneral->nombre_contenidog, ['class' => 'form-control' , 'id'=>'contenidoGeneral'.$key.'']) !!}
 								{!! Form::label('', '',['id' => 'errcontenidoGeneral'.$key.'']) !!}
 								<button type="button" class="btn btn-default" aria-label="Left Align" onclick="eliminarContenido({{$key}})" id="btnEliminarContenido{{$key}}">   <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> </button>
-							
+							</div>	
 							@endforeach
 							<div class='form-group'>
 								{!! Form::label('', 'Temario: ') !!} <a href="{{asset('temario/'.$curso->link_temario_curso)}}" target="_blank">{{$curso->link_temario_curso}}</a>

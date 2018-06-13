@@ -33,11 +33,11 @@
 					{!! Form::button('Agregar nuevo rol', ['class' => 'form-control btn btn-success ', 'id'=> 'addRol']) !!}	
 				</div>				
 				@foreach ($roldesempenos as $key => $rolCompetencia)
-		
+				<div class='form-group'>
 					{!! Form::text('RolDesempenos[]', $rolCompetencia->nombre_roldesempeno, ['class' => 'form-control' , 'id'=>'rolDesempeno'.$key.'']) !!}
 					{!! Form::label('', '',['id' => 'errrolDesempeno'.$key.'']) !!}
 					<button type="button" class="btn btn-default" aria-label="Left Align" onclick="btnEliminarRol({{$key}})" id="btnEliminarRol{{$key}}">   <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> </button>
-			
+				</div>	
 				@endforeach
 
 				<div class='form-group'>

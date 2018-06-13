@@ -1001,7 +1001,7 @@ function validarActividad()
 //=====================================================================VALIDACION COMPETENCIAS=====================================================================
 //=================================================================================================================================================================
 
-function validarCompetencias()
+function validarCompetencias(count)
 {
 	var verificar = true;
 
@@ -1129,7 +1129,32 @@ function validarCompetencias()
 		}	
 	}
 
+	//Validar roles de desempeño
+	if(count != 0)
+	{
+		for ($i = 1; $i <= count; $i++) 
+		{
+			if($.trim( $("#rolDesempeno"+$i).val()) == "" )
+			{
+				verificar = false; marcarErrorGeneral('rolDesempeno'+$i,'errRolDesempeno'+$i);
+			}
+			else
+			{
+				desmarcarError('rolDesempeno'+$i,'errRolDesempeno'+$i);	
+				if(validarChrPunto($("#rolDesempeno"+$i).val()))
+				{
+					verificar = false; marcarErrorChar('rolDesempeno'+$i,'errRolDesempeno'+$i);		
+				}else
+				{
+					desmarcarError('rolDesempeno'+$i,'errRolDesempeno'+$i);
+				}	
+			}
 
+		} 
+		
+	}
+	
+	
 	return verificar;
 }
 //============================================================================================================================================================

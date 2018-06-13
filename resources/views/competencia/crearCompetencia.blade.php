@@ -87,6 +87,8 @@
 
 		$('#addRol').parent().append('<input class="form-control" name="RolDesempenos[]" id="rolDesempeno'+count+'" type="text" ">');
 		$('#addRol').parent().append('<button type="button" class="btn btn-default" aria-label="Left Align" onclick="eliminarRol('+count+')" id="btnEliminarRol'+count+'">   <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> </button>');
+		$('#addRol').parent().append('<label id="errRolDesempeno'+count+'">');
+		
 	});
 
 	function eliminarRol(id){
@@ -98,7 +100,7 @@ $('#formCompetencia').submit(function (e) {
 	e.preventDefault();
 	var url = e.target.action  // get the target
 	var formData = $(this).serialize() // get form data
-	if(validarCompetencias())
+	if(validarCompetencias(count))
 	{
 		$.post(url, formData, function (response) { // send; response.data will be what is returned
 			$('#modal').modal('hide');

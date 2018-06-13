@@ -553,5 +553,7 @@ Route::get('/vistaColaborador/detalle/{id}', 'ColaboradorController@showVista',f
   Route::get('/vistaColaborador/reporte/{id}', 'ColaboradorController@downloadReporte',function($id) {
     return  $id;
   });
-
-  Route::resource('login', 'LoginController');
+  //-------------------------------------------------------------------------------------------------------------------------
+//Login
+Route::get('/logout', 'LoginController@logout');
+Route::resource('login', 'LoginController');

@@ -71,4 +71,13 @@ class LoginController extends Controller
        
         
     }
+    public function logout(Request $request)
+    {
+        Session::forget('Usuario');
+        if(!Session::has('Usuario'))
+        {
+            return redirect('/');
+        }
+        
+    }
 }

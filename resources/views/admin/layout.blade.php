@@ -200,7 +200,8 @@ desired effect
               <!-- The user image in the navbar-->
               <img src="/adminlte/img/user3-128x128.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Catalina</span>
+              @if(session('Usuario')!=null)            
+                <span class="hidden-xs">{{session('Usuario')->nombre_usuario}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -208,12 +209,16 @@ desired effect
                 <img src="/adminlte/img/user3-128x128.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  Catalina - Web Developer
-                  <small>Member since Nov. 2012</small>
+
+                {{session('Usuario')->nombre_usuario}} - {{session('Usuario')->perfil->nombre_perfil}}
+                @if(session('Usuario')->id_perfilocu != null)
+                  <small>{{session('Usuario')->perfilocupacional->nombre_perfilocu}}</small>
+                @endif
+                  
                 </p>
               </li>
               <!-- Menu Body -->
-              <li class="user-body">
+             {{-- <li class="user-body">
                 <div class="row">
                   <div class="col-xs-4 text-center">
                     <a href="#">Followers</a>
@@ -226,18 +231,19 @@ desired effect
                   </div>
                 </div>
                 <!-- /.row -->
-              </li>
+              </li>--}}
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="#" class="btn btn-default btn-flat">Perfil</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="/logout" class="btn btn-default btn-flat">Salir</a>
                 </div>
               </li>
             </ul>
           </li>
+          @endif
           <!-- Control Sidebar Toggle Button -->
           <li>
             <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
@@ -258,9 +264,12 @@ desired effect
           <img src="/adminlte/img/user3-128x128.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Catalina</p>
+          @if(session('Usuario')!=null)         
+            <span class="hidden-xs">{{session('Usuario')->nombre_usuario}}</span>
+            <span class="hidden-xs">{{session('Usuario')->run_usuario}}</span>
+          @endif
           <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        
         </div>
       </div>
       {{--

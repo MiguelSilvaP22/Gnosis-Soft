@@ -9,7 +9,7 @@
 			<div class="box">
 			
 				<div class="box-header">
-					<h1 class="box-title">Tabla de Competencias {{session('Usuario')->nombre_usuario}}</h1>
+					<h1 class="box-title">Tabla de Competencias</h1>
 				</div>
 				<div style="widtn:100%;align:center;">
 					

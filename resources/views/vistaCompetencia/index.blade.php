@@ -4,7 +4,7 @@
 <body> 
 
 <div class="row buscador">
-	<div class="col-xs-3">
+	<div class="col-3 col-md-3 col-xs-10">
 		<h4>cursos</h4>
 		{!! Form::select('competencias', $listaCompetencias,null,['class'=>'form-control', 'id'=>'id_competencia', 'style'=>'width:100%']) !!}
 
@@ -13,7 +13,7 @@
 		
 <div class="row">
 	<div class="box">
-		<div class="col-xs-5">
+		<div class="col-5 col-md-5 col-xs-12">
 			<div class="box">
 				<table class="table table-hover">
 					<thead>
@@ -33,7 +33,7 @@
 		</div>
 
 		
-	<div class="col-xs-3 competenciasTabla"></div>
+	<div class="col-3 col-md-3 col-xs-12 competenciasTabla"></div>
 	</div>
 
 

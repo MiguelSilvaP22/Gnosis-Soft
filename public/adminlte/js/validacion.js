@@ -48,7 +48,7 @@ function validarChr(TCode){
 
 //Validación de caracteres con punto.
 function validarChrPunto(TCode){
-	if( /^[a-zA-Z0-9-(ñÑáéíóúÁÉÍÓÚ)-\s-(\.\,)]*$/.test( TCode ) ) 
+	if( /^[a-zA-Z0-9-(ñÑáéíóúÁÉÍÓÚ)-\s-(\.|\,|\:)]*$/.test( TCode ) ) 
 	{return false;}
     return true;     
 }
@@ -756,7 +756,7 @@ function validarRunColaborador()
 //=====================================================================VALIDACION CURSO=====================================================================
 //==========================================================================================================================================================
 
-function validarCurso()
+function validarCurso(tipo,count,contenido)
 {
 	var verificar = true;
 
@@ -802,7 +802,7 @@ function validarCurso()
 	else
 	{
 		desmarcarError('nombre_curso','errNombreCurso');	
-		if(validarChr($("#nombre_curso").val()))
+		if(validarChrPunto($("#nombre_curso").val()))
 		{
 			verificar = false; marcarErrorChar('nombre_curso','errNombreCurso');			
 		}else
@@ -819,7 +819,7 @@ function validarCurso()
 	else
 	{
 		desmarcarError('objetivo_curso','errObjetivoCurso');	
-		if(validarChr($("#objetivo_curso").val()))
+		if(validarChrPunto($("#objetivo_curso").val()))
 		{
 			verificar = false; marcarErrorChar('objetivo_curso','errObjetivoCurso');			
 		}else
@@ -836,7 +836,7 @@ function validarCurso()
 	else
 	{
 		desmarcarError('desc_curso','errDescripcionCurso');	
-		if(validarChr($("#desc_curso").val()))
+		if(validarChrPunto($("#desc_curso").val()))
 		{
 			verificar = false; marcarErrorChar('desc_curso','errDescripcionCurso');			
 		}else
@@ -878,8 +878,62 @@ function validarCurso()
 	else{desmarcarErrorSelect('errCompetencias');}
 
 	//Validar Contenido Curso 
+	if(tipo == '1')
+	{
+		if(count != 0)
+		{
+			for ($i = 1; $i <= count; $i++) 
+			{
+				if($.trim( $("#contenidoGeneral"+$i).val()) == "" )
+				{
+					verificar = false; marcarErrorGeneral('contenidoGeneral'+$i,'errcontenidoGeneral'+$i);
+				}
+				else
+				{
+					desmarcarError('contenidoGeneral'+$i,'errcontenidoGeneral'+$i);	
+					if(validarChrPunto($("#contenidoGeneral"+$i).val()))
+					{
+						verificar = false; marcarErrorChar('contenidoGeneral'+$i,'errcontenidoGeneral'+$i);		
+					}else
+					{
+						desmarcarError('contenidoGeneral'+$i,'errcontenidoGeneral'+$i);
+					}	
+				}
 
-	//Validar Temario 
+			} 
+			
+		}
+	}
+
+	
+	if(tipo == '2')
+	{
+		if(count != 0)
+		{
+			for ($i = 0; $i <= count; $i++) 
+			{
+				if($.trim( $("#"+contenido[$i].id).val()) == "" )
+				{
+					verificar = false; marcarErrorGeneral(contenido[$i].id,'err'+contenido[$i].id);					
+				}
+				else
+				{
+					desmarcarError(contenido[$i].id,'err'+contenido[$i].id);	
+					if(validarChrPunto($("#"+contenido[$i].id).val()))
+					{
+						verificar = false; marcarErrorChar(contenido[$i].id,'err'+contenido[$i].id);		
+					}else
+					{
+						desmarcarError(contenido[$i].id,'err'+contenido[$i].id);
+					}					
+				}
+			} 
+			
+		}
+	}
+
+
+	//Validar FILE
 	
 
 	return verificar;

@@ -61,7 +61,7 @@ class UsuarioController extends Controller
         $usuario->sexo_usuario = $request->sexo_usuario;
         $usuario->email_usuario = $request->email_usuario;
         $usuario->estado_usuario = 1;
-        $usuario->clave_usuario = mb_substr($request->run_usuario, 0, 4);
+        $usuario->clave_usuario = Hash::make(mb_substr($request->run_usuario, 0, 4));
         $usuario->save();
         return redirect('usuario');
     }

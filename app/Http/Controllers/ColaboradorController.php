@@ -63,7 +63,7 @@ class ColaboradorController extends Controller
         $colaborador->sexo_usuario = $request->sexo_usuario;
         $colaborador->email_usuario = $request->email_usuario;
         $colaborador->estado_usuario = 1;
-        $colaborador->clave_usuario = mb_substr($request->run_usuario, 0, 4);
+        $colaborador->clave_usuario = Hash::make(mb_substr($request->run_usuario, 0, 4));
         $colaborador->save();
         return redirect('colaborador');
 

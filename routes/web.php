@@ -10,13 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('index', function () {
-    return view('index.layoutindex');
-});
 
-Route::get('/', function () {
-    return view('index.layoutindex');
-});
+Route::get('/', 'LoginController@index');
 
 Route::get('admin', function () {
     return view('admin.dashboard');
@@ -559,4 +554,4 @@ Route::get('/vistaColaborador/detalle/{id}', 'ColaboradorController@showVista',f
     return  $id;
   });
 
-
+  Route::resource('login', 'LoginController');

@@ -32,38 +32,45 @@
   <div class="login-logo">
     <a href="/adminlte/index2.html"><b>Gnosis</b>Soft</a>
   </div>
+  @if($errorVali != null)
+  <div class="alert alert-danger alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <h4><i class="icon fa fa-ban"></i> Error de validación!</h4>
+     {{$errorVali}}
+  </div>
+  @endif
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Ingresa al sistema</p>
 
+	  {!! Form::open(['action' => 'LoginController@store','id'=>'formLogin']) !!}
+
     <form action="login" method="post">
+
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        {!! Form::text('run_usuario', null, ['class' => 'form-control','placeholder'=>"Run",'id'=>'run_usuario','maxlength'=>'10']) !!}
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
+
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Contraseña">
+        <input type="password" name="clave_usuario" 'id'='clave_usuario' class="form-control" maxlength="4" placeholder="Contraseña">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
+
       <div class="row">
-        <div class="col-xs-8">
-          <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> Recordar mi cuenta
-            </label>
-          </div>
-        </div>
         <!-- /.col -->
         <div class="col-xs-4">
           <!-- Submit  <button type="submit" class="btn btn-primary btn-block btn-flat">Ingresar</button> -->
-          <a type="button" href="/admin" class="btn btn-primary btn-block btn-flat">Ingresar</a>
+          {!! Form::submit("Ingresar", ['class' => 'btn btn-primary btn-block btn-flat ']) !!}
         </div>
         <!-- /.col -->
       </div>
-    </form>
+      {!! Form::close() !!}
     <!-- /.social-auth-links -->
 
-    <a href="#">Olvide mi contraseña</a><br>
+
+
+    {{-- <a href="#">Olvide mi contraseña</a><br> --}}
     {{-- <a href="register.html" class="text-center">Register a new membership</a> --}}
 
   </div>

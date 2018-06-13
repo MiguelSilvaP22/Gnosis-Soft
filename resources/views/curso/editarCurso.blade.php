@@ -12,7 +12,7 @@
 				<div class="box-body">
 					<div class="row">
 						
-					{!! Form::model($curso, [ 'enctype'=>"multipart/form-data",'method' => 'PATCH', 'action' => ['CursoController@update',$curso->id_curso],'id'=>'formCurso1']) !!}
+					{!! Form::model($curso, [ 'enctype'=>"multipart/form-data",'method' => 'PATCH', 'action' => ['CursoController@update',$curso->id_curso],'id'=>'formCurso']) !!}
 						<div class="col-md-12">
 							<div class='form-group'>
 								{!! Form::label('', 'Codigo:') !!}
@@ -42,7 +42,7 @@
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Cantidad de Horas:') !!}
-								{!! Form::number('cant_hora_curso', null, ['class' => 'form-control','min'=> 0,'id'=>'desc_curso']) !!}
+								{!! Form::number('cant_hora_curso', null, ['class' => 'form-control','min'=> 0,'id'=>'cant_hora_curso']) !!}
 								{!! Form::label('', '',['id' => 'errHorasCurso']) !!}
 							</div>
 							<div class='form-group'>
@@ -62,14 +62,14 @@
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Contenido General') !!}	
-								{!! Form::button('Agregar nuevo contenido', ['class' => 'form-control btn btn-success ', 'id'=> 'addContenido']) !!}	
-								{!! Form::label('', '',['id' => 'errContenidoCurso']) !!}
+								{!! Form::button('Agregar nuevo contenido', ['class' => 'form-control btn btn-success ', 'id'=> 'addContenido']) !!}
 							</div>	
 							@foreach ($contenidosGenerales as $key => $contenidoGeneral)
-				 
+							
 								{!! Form::text('contenidoGeneral[]', $contenidoGeneral->nombre_contenidog, ['class' => 'form-control' , 'id'=>'contenidoGeneral'.$key.'']) !!}
+								{!! Form::label('', '',['id' => 'errcontenidoGeneral'.$key.'']) !!}
 								<button type="button" class="btn btn-default" aria-label="Left Align" onclick="eliminarContenido({{$key}})" id="btnEliminarContenido{{$key}}">   <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> </button>
-		  
+							
 							@endforeach
 							<div class='form-group'>
 								{!! Form::label('', 'Temario: ') !!} <a href="{{asset('temario/'.$curso->link_temario_curso)}}" target="_blank">{{$curso->link_temario_curso}}</a>
@@ -78,7 +78,6 @@
 								
 							</div>	
 						<div class='form-group'>
-							<a href="javascript:guardar(2)" >guardar</a>
 							{!! Form::submit("Editar Curso", ['class' => 'form-control btn btn-success ']) !!}
 						</div>
 						{!! Form::close() !!}
@@ -103,33 +102,29 @@ $('#addContenido').click(function() {
 
 	$('#addContenido').parent().append('<input class="form-control" name="contenidoGeneral[]" id="contenidoGeneral'+count+'" type="text" ">');
 	$('#addContenido').parent().append('<button type="button" class="btn btn-default" aria-label="Left Align" onclick="eliminarContenido('+count+')" id="btnEliminarContenido'+count+'">   <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> </button>');
+	$('#addContenido').parent().append('<label id="errcontenidoGeneral'+count+'">');
+	console.log(count);
 });
 function eliminarContenido(id){
 	$("#contenidoGeneral"+id).remove();
 	$("#btnEliminarContenido"+id).remove();
 }
 
-function guardar(id)
-{
-	if(id == 1)
-	{
-		$('#formCurso1').submit();
-	}
-	else{
-		console.log('asd');
-	}
-	
-}
+
 $('#formCurso').submit(function (e) {
 	e.preventDefault();
 	var url = e.target.action  // get the target
 	var formData = $(this).serialize() // get form data
-	/*if(validarCurso())	
-	{*/
-		
-		
-	//}
-	});
+	var contenido = $('input[id*=contenidoGeneral]');
+	//console.log(contenido);
+	var tipo = '2';
+	if(validarCurso(tipo,count,contenido))	
+	{
+		$.post(url, formData, function (response) { // send; response.data will be what is returned
+			$('#modal').modal('hide');
+		});
+	}
+});
 $(document).on('click', '#btnVolver', function () {
 		$('#modal').modal('hide');
 });

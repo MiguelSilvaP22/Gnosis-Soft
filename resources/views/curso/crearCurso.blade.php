@@ -11,7 +11,7 @@
 
 				<div class="box-body">
 					<div class="row">
-					{!! Form::open([ 'enctype'=>"multipart/form-data",'action' => 'CursoController@store','id'=>'formCurso']) !!}
+					{!! Form::open([ 'enctype'=>"multipart/form-data",'action' => 'CursoController@store','id'=>'formCurso', 'files' => true]) !!}
 						<div class="col-md-12">
 							<div class='form-group'>
 								{!! Form::label('', 'Codigo:') !!}
@@ -99,6 +99,8 @@
 
 		$('#addContenido').parent().append('<input class="form-control" name="contenidoGeneral[]" id="contenidoGeneral'+count+'" type="text" ">');
 		$('#addContenido').parent().append('<button type="button" class="btn btn-default" aria-label="Left Align" onclick="eliminarContenido('+count+')" id="btnEliminarContenido'+count+'">   <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> </button>');
+		$('#addContenido').parent().append('<label id="errcontenidoGeneral'+count+'">');
+
 	});
     function eliminarContenido(id){
 		$("#contenidoGeneral"+id).remove();
@@ -109,7 +111,8 @@
 	e.preventDefault();
 	var url = e.target.action  // get the target
 	var formData = $(this).serialize() // get form data
-	if(validarCurso())	
+	var tipo = '1';
+	if(validarCurso(tipo,count))	
 	{
 		$.post(url, formData, function (response) { // send; response.data will be what is returned
 			$('#modal').modal('hide');

@@ -354,6 +354,17 @@ desired effect
             <li><a href="/facilitador"><i class="fa fa-edit"></i> <span>Actividades</span></a></li>
           </ul>
         </li>
+        <li class="treeview">
+        <a href="#"><i class="fa fa-graduation-cap"></i> <span>Colaborador</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+        <ul class="treeview-menu">  
+          <li class="treeview">
+            <li><a href="/evaluarEncuesta"><i class="fa fa-edit"></i> <span>Encuesta</span></a></li>
+          </ul>
+        </li>
 
         {{--
         <li class="treeview">

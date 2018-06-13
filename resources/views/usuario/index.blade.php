@@ -22,34 +22,29 @@
 				<table id="tablaUsuario" class="table">
 					<thead>
 						<tr>
+							<th>RUN Usuario</th>
 							<th>Nombre Usuario</th>
 							<th>Perfil Usuario</th>
 							<th>Empresa Usuario</th>
 							<th>Perfil Ocupacional Usuario</th>
 							<th>Fecha de Modificación</th>
-							<th>Estado</th>
 							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
 						@foreach ($usuarios  as $usuario) 
 						<tr>
-
-							<td style="width:25%;">{{ $usuario->nombre_usuario." ". $usuario->apellidopat_usuario." ". $usuario->apellidomat_usuario}}</td>
-							<td style="width:25%;">{{ $usuario->perfil->nombre_perfil}}</td>
+							<td >{{ $usuario->run_usuario}}</td>
+							<td >{{ $usuario->nombre_usuario." ". $usuario->apellidopat_usuario." ". $usuario->apellidomat_usuario}}</td>
+							<td >{{ $usuario->perfil->nombre_perfil}}</td>
 							@if($usuario->perfilOcupacional != null)
-								<td style="width:25%;">{{ $usuario->perfilOcupacional->area->gerencia->empresa->nombre_empresa}}</td>
-								<td style="width:25%;">{{ $usuario->perfilOcupacional->nombre_perfilocu}}</td>
+								<td >{{ $usuario->perfilOcupacional->area->gerencia->empresa->nombre_empresa}}</td>
+								<td style=>{{ $usuario->perfilOcupacional->nombre_perfilocu}}</td>
 							@else
-								<td style="width:25%;"></td>
-								<td style="width:25%;"></td>
+								<td></td>
+								<td ></td>
 							@endif
-							<td style="width:25%;">{{ $usuario->fecha_mod_usuario}}</td>
-							@if($usuario->estado_usuario == 1)
-							<td style="width:25%;color:green;">Activo</td>
-							@else
-							<td style="width:25%;color:red">inactivo</td>
-							@endif
+							<td >{{ $usuario->fecha_mod_usuario}}</td>
 							<td>
 							<button id="btnVer" value="{{ $usuario->id_usuario}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
 

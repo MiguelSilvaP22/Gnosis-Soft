@@ -25,6 +25,20 @@ class ColaboradorController extends Controller
     public function index()
     {
         $colaboradores = Usuario::all()->where('id_perfil',2)->where('estado_usuario',1);
+       /* if(session('Usuario')->id_perfil == 3)
+        {
+            $colaboradoresEmpresa = DB::table('usuario')
+            ->join('perfilocupacional', 'usuario.id_perfilocu', '=', 'perfilocupacional.id_perfilocu')
+            ->join('area', 'perfilocupacional.id_area', '=', 'area.id_area')
+            ->join('gerencia', 'area.id_gerencia', '=', 'gerencia.id_gerencia')
+            ->join('empresa', 'gerencia.id_empresa', '=', 'empresa.id_empresa')
+            ->where('empresa.id_empresa',session('Usuario')->perfilocupacional->area->gerencia->empresa->id_empresa)
+            ->where('usuario.id_perfil',2)
+            ->where('usuario.estado_usuario',1)
+            ->select('usuario.*')
+            ->get();
+        }    */
+       // dd($colaboradoresEmpresa);
         return view('colaborador.index', compact('colaboradores'));
     }
 

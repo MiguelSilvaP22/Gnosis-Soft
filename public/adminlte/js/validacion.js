@@ -1001,7 +1001,7 @@ function validarActividad()
 //=====================================================================VALIDACION COMPETENCIAS=====================================================================
 //=================================================================================================================================================================
 
-function validarCompetencias(count)
+function validarCompetencias(tipo,count,roles)
 {
 	var verificar = true;
 
@@ -1130,29 +1130,62 @@ function validarCompetencias(count)
 	}
 
 	//Validar roles de desempeño
-	if(count != 0)
+	console.log(count);
+	if(tipo == '1')
 	{
-		for ($i = 1; $i <= count; $i++) 
+		if(count != 0)
 		{
-			if($.trim( $("#rolDesempeno"+$i).val()) == "" )
+			for ($i = 1; $i <= count; $i++) 
 			{
-				verificar = false; marcarErrorGeneral('rolDesempeno'+$i,'errRolDesempeno'+$i);
-			}
-			else
-			{
-				desmarcarError('rolDesempeno'+$i,'errRolDesempeno'+$i);	
-				if(validarChrPunto($("#rolDesempeno"+$i).val()))
+				if($.trim( $("#rolDesempeno"+$i).val()) == "" )
 				{
-					verificar = false; marcarErrorChar('rolDesempeno'+$i,'errRolDesempeno'+$i);		
-				}else
+					verificar = false; marcarErrorGeneral('rolDesempeno'+$i,'errRolDesempeno'+$i);
+				}
+				else
 				{
-					desmarcarError('rolDesempeno'+$i,'errRolDesempeno'+$i);
-				}	
-			}
+					desmarcarError('rolDesempeno'+$i,'errRolDesempeno'+$i);	
+					if(validarChrPunto($("#rolDesempeno"+$i).val()))
+					{
+						verificar = false; marcarErrorChar('rolDesempeno'+$i,'errRolDesempeno'+$i);		
+					}else
+					{
+						desmarcarError('rolDesempeno'+$i,'errRolDesempeno'+$i);
+					}	
+				}
 
-		} 
-		
+			} 
+			
+		}
 	}
+
+	if(tipo == '2')
+	{
+		if(count != 0)
+		{
+			for ($i = 0; $i <= count; $i++) 
+			{
+				if($.trim( $("#"+roles[$i].id).val()) == "" )
+				{
+					verificar = false; marcarErrorGeneral(roles[$i].id,'err'+roles[$i].id);
+				}
+				else
+				{
+					desmarcarError(roles[$i].id,'err'+roles[$i].id);	
+					if(validarChrPunto($("#"+roles[$i].id).val()))
+					{
+						verificar = false; marcarErrorChar(roles[$i].id,'err'+roles[$i].id);		
+					}else
+					{
+						desmarcarError(roles[$i].id,'err'+roles[$i].id);
+					}	
+				}
+
+			} 
+			
+		}
+	}
+
+	
 	
 	
 	return verificar;

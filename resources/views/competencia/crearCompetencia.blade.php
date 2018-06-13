@@ -100,7 +100,8 @@ $('#formCompetencia').submit(function (e) {
 	e.preventDefault();
 	var url = e.target.action  // get the target
 	var formData = $(this).serialize() // get form data
-	if(validarCompetencias(count))
+	var tipo = '1';
+	if(validarCompetencias(tipo,count))
 	{
 		$.post(url, formData, function (response) { // send; response.data will be what is returned
 			$('#modal').modal('hide');

@@ -31,11 +31,15 @@
 				<div class='form-group'>
 					{!! Form::label('nombre_rolesdesempeno', 'Roles de desempeño:') !!}	
 					{!! Form::button('Agregar nuevo rol', ['class' => 'form-control btn btn-success ', 'id'=> 'addRol']) !!}	
-				</div>	
-				@foreach ($roldesempenos as $key => $rolCompetencia) 
+				</div>				
+				@foreach ($roldesempenos as $key => $rolCompetencia)
+				<div class='form-group'>
 					{!! Form::text('RolDesempenos[]', $rolCompetencia->nombre_roldesempeno, ['class' => 'form-control' , 'id'=>'rolDesempeno'.$key.'']) !!}
+					{!! Form::label('', '',['id' => 'errrolDesempeno'.$key.'']) !!}
 					<button type="button" class="btn btn-default" aria-label="Left Align" onclick="btnEliminarRol({{$key}})" id="btnEliminarRol{{$key}}">   <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> </button>
+				</div>
 				@endforeach
+
 				<div class='form-group'>
 						{!! Form::label('nombre_categoriacomp', 'SUPERLATIVO:') !!}
 						{!! Form::text('niveles[]', $niveles[0], ['class' => 'form-control','id'=>'superlativo','maxlength'=>'1000']) !!}
@@ -84,6 +88,8 @@ $('#addRol').click(function() {
 	count++;
 	$('#addRol').parent().append('<input class="form-control" name="RolDesempenos[]" id="rolDesempeno'+count+'" type="text" ">');
 	$('#addRol').parent().append('<button type="button" class="btn btn-default" aria-label="Left Align" onclick="eliminarRol('+count+')" id="btnEliminarRol'+count+'">   <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> </button>');
+	$('#addRol').parent().append('<label id="errrolDesempeno'+count+'">');
+	console.log(count);
 });
 function eliminarRol(id){
 		$("#rolDesempeno"+id).remove();
@@ -94,7 +100,9 @@ $('#formCompetencia').submit(function (e) {
 	e.preventDefault();
 	var url = e.target.action  // get the target
 	var formData = $(this).serialize() // get form data
-	if(validarCompetencias())
+	var roles = $('input[id*=rolDesempeno]');	
+	var tipo = '2';
+	if(validarCompetencias(tipo,count,roles))
 	{
 		$.post(url, formData, function (response) { // send; response.data will be what is returned
 			$('#modal').modal('hide');

@@ -37,26 +37,29 @@
 					</thead>
 					<tbody>
 						@foreach ($actividades as $actividad) 
-						<tr>
-							<td >
-								<p>Codigo: {{ $actividad->cod_interno_actividad}}</p>
-								<p>Sence : {{ $actividad->cod_sence_actividad}}</p>
-							</td>
-							<td >{{ $actividad->curso->nombre_curso}}</td>
-							<td >
-								@foreach ($actividad->horarios->where('estado_horario',1) as $horario) 
-									<p>{{ date('d/m/Y',strtotime($horario->fecha_horario))}}</p>
-								@endforeach
-							</td>
-							
-							<td >{{ $actividad->fecha_mod_actividad}}</td>
-							<td>
-								<button id="btnHorario" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Horario</button>
-								<button id="btnVer" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>						
-								<button id="btnEditar" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>
-								<button id="deleteActividad" class="btn btn btn-info" value="{{ $actividad->id_actividad}}"><i class="fa fa-eraser"></i> Eliminar</button>
-							</td>
-						</tr>
+							@if($actividad->curso !=null)
+							<tr>
+								<td >
+									<p>Codigo: {{ $actividad->cod_interno_actividad}}</p>
+									<p>Sence : {{ $actividad->cod_sence_actividad}}</p>
+								</td>
+								<td >{{ $actividad->curso->nombre_curso}}</td>
+								<td >
+									@foreach ($actividad->horarios->where('estado_horario',1) as $horario) 
+										<p>{{ date('d/m/Y',strtotime($horario->fecha_horario))}}</p>
+									@endforeach
+								</td>
+								
+								<td >{{ $actividad->fecha_mod_actividad}}</td>
+								<td>
+									<button id="btnHorario" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Horario</button>
+									<button id="btnVer" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>						
+									<button id="btnEditar" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>
+									<button id="deleteActividad" class="btn btn btn-info" value="{{ $actividad->id_actividad}}"><i class="fa fa-eraser"></i> Eliminar</button>
+								</td>
+							</tr>
+							@endif
+
 						@endforeach
 						
 							

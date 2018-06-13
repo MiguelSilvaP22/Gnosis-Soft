@@ -1,4 +1,4 @@
-<div class="col-xs-10">
+<div class="col-xs-12 col-10 col-md-10">
 	<div class="jumbotron">
 		<div class="container">
 			<h3>{{$competencia->nombre_comp}} </h3>
@@ -25,7 +25,7 @@
 	</div>
 </div>	
 
-<div class="col-xs-9">
+<div class="col-9 col-md-9 col-xs-12">
 
 	<h2>Cursos Asociados a la Competencia: {{$competencia->nombre_comp}}  </h2> 
 	<div class="box">

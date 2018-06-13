@@ -1,4 +1,4 @@
-<div class="col-xs-10">
+<div class="col-xs-12 col-md-10 col-10">
 <div class="jumbotron">
 		<div class="container">
 			<h3>{{$curso->nombre_curso}} </h3> 
@@ -28,6 +28,6 @@
 		</div>
 	</div>
 	
-<div class="col-xs-9">
+<div class="col-xs-12">
 
 </div>

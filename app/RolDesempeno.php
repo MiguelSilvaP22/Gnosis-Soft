@@ -15,6 +15,10 @@ class RolDesempeno extends Model
     {
         return $this->hasMany(RolEvaluacion::Class, 'id_roldesempeno');
     }
+    public function competencia()
+    {
+        return $this->belongsTo(Competencia::Class, 'id_comp');
+    }
 
 
 }

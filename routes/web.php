@@ -13,9 +13,16 @@
 
 Route::get('/', 'LoginController@index');
 
-Route::get('admin', function () {
-    return view('admin.dashboard');
+Route::get('admin', 'LoginController@dashboardAdmin', function ($id=null) {
+    return $id;
 });
+
+
+Route::get('perfil/{estado?}', 'PerfilController@index',function($estado = null)
+{
+    return $estado;
+});
+
 
 Route::get('usuario', function () {
     return view('admin.usuario');

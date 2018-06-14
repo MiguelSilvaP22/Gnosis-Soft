@@ -214,14 +214,12 @@ class ColaboradorController extends Controller
         $labelCompetencias= "'".implode("','",$nombreCompetencias)."'";
         
 
-<<<<<<< HEAD
-        dd($labelCompetencias);
+        //dd($labelCompetencias);
 
         \Debugbar::info($colaborador->horariosColaborador->last()->horario->actividad);
-=======
-    
+
         \Debugbar::info($sugerenciasCursos);
->>>>>>> a30b566aee088c43d080af83b0b82b129e18355f
+
        /* $pdf = \PDF::loadView('vistaColaborador.detalle', compact('colaborador', 'labelCompetencias','labelPromedio')); 
         return $pdf->download('ReporteColaborador.pdf'); */
         return view('vistaColaborador.detalle', compact('colaborador', 'labelCompetencias','labelPromedio', 'sugerenciasCursos'));

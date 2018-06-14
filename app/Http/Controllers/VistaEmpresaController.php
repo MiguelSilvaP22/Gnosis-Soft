@@ -444,7 +444,7 @@ class VistaEmpresaController extends Controller
                 "numeroParticipantes" => $numeroParticipantes
             ]);
          }
-       dd($nombresCurso);
+      // dd($nombresCurso);
         return view('vistaEmpresa.index', compact('tablaResumen','tablaResumenTerminadas','tablaResumenFaltante','avance','dataGrafico','nombresCurso'));
     }
 

@@ -101,6 +101,7 @@ $(document).ready(function() {
 	//mostrar giros
 	
 	var idGiro = {{$girosEmpresa}};
+	console.log(idGiro);
 	var idRegion = {{$idRegion}};
 	var empresasHolding = {{$empresasHolding}};
 	

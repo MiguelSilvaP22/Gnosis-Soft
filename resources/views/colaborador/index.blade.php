@@ -26,7 +26,6 @@
 							<th>Empresa Colaborador</th>
 							<th>Perfil Colaborador</th>
 							<th>Fecha de Modificación</th>
-							<th>Estado</th>
 							<th>Acciones</th>
 						</tr>
 					</thead>
@@ -34,15 +33,10 @@
 						@foreach ($colaboradores as $colaborador) 
 						<tr>
 
-							<td style="width:25%;">{{ $colaborador->nombre_usuario. $colaborador->apellidopat_usuario.$colaborador->apellidomat_usuario}}</td>
-							<td style="width:25%;">{{ $colaborador->perfilOcupacional->area->gerencia->empresa->nombre_empresa}}</td>
-							<td style="width:25%;">{{ $colaborador->perfilOcupacional->nombre_perfilocu}}</td>
-							<td style="width:25%;">{{ $colaborador->fecha_mod_usuario}}</td>
-							@if($colaborador->estado_usuario == 1)
-							<td style="width:25%;color:green;">Activo</td>
-							@else
-							<td style="width:25%;color:red">inactivo</td>
-							@endif
+							<td >{{ $colaborador->nombre_usuario. $colaborador->apellidopat_usuario.$colaborador->apellidomat_usuario}}</td>
+							<td >{{ $colaborador->perfilOcupacional->area->gerencia->empresa->nombre_empresa}}</td>
+							<td >{{ $colaborador->perfilOcupacional->nombre_perfilocu}}</td>
+							<td >{{ $colaborador->fecha_mod_usuario}}</td>
 							<td>
 							<button id="btnVer" value="{{ $colaborador->id_usuario}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
 

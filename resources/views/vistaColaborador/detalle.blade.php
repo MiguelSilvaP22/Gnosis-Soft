@@ -105,6 +105,8 @@
 <script>
 var ctx = $("#myChart");
 
+console.log({!! $labelCompetencias!!});
+console.log({!! $labelPromedio!!} );
 var myRadarChart = new Chart(ctx, {
     type: 'polarArea',
     data: {

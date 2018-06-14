@@ -60,7 +60,7 @@
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Nacionalidad:') !!}
-								{!! Form::select('id_nacionalidad', $nacionalidades,null ,['class' => 'select2','placeholder'=>'Seleccione una nacionalidad','id'=>'id_nacionalidad', 'style'=>'width:100%']) !!}
+								{!! Form::select('id_nacionalidad',null ,['class' => 'select2','placeholder'=>'Seleccione una nacionalidad','id'=>'id_nacionalidad', 'style'=>'width:100%']) !!}
 								{!! Form::label('', '',['id' => 'errNacionalidad']) !!}
 							</div>	
 						</div>

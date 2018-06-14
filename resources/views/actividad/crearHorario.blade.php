@@ -143,6 +143,7 @@
 
 function guardar()
 {	
+	$('#formularioHorario').submit();
 	console.log($("#horaIniHora").val() + $("#horaTermHora").val() )
 	if(validarHorario())
 	{

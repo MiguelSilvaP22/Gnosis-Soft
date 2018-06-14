@@ -8,7 +8,7 @@ use App\Empresa;
 use App\Gerencia;
 use App\Area;
 use App\PerfilOcupacional;
-
+use Hash;
 use PDF;
 use DB;
 use App\Quotation;
@@ -76,6 +76,7 @@ class ColaboradorController extends Controller
         $colaborador->apellidomat_usuario = $request->apellidomat_usuario;
         $colaborador->sexo_usuario = $request->sexo_usuario;
         $colaborador->email_usuario = $request->email_usuario;
+        $colaborador->id_nacionalidad = $request->id_nacionalidad;
         $colaborador->estado_usuario = 1;
         $colaborador->clave_usuario = Hash::make(mb_substr($request->run_usuario, 0, 4));
         $colaborador->save();
@@ -130,6 +131,7 @@ class ColaboradorController extends Controller
         $colaborador->apellidomat_usuario = $request->apellidomat_usuario;
         $colaborador->sexo_usuario = $request->sexo_usuario;
         $colaborador->email_usuario = $request->email_usuario;
+        $colaborador->id_nacionalidad = $request->id_nacionalidad;
         $colaborador->save();
         return redirect('colaborador');
 
@@ -200,7 +202,10 @@ class ColaboradorController extends Controller
         }
 
         $labelPromedio= implode(",",$promedioComp);
+        
         $labelCompetencias= "'".implode("','",$nombreCompetencias)."'";
+
+        dd($labelCompetencias);
 
         \Debugbar::info($colaborador->horariosColaborador->last()->horario->actividad);
        /* $pdf = \PDF::loadView('vistaColaborador.detalle', compact('colaborador', 'labelCompetencias','labelPromedio')); 
@@ -233,6 +238,7 @@ class ColaboradorController extends Controller
         }
 
         $labelPromedio= implode(",",$promedioComp);
+        
         $labelCompetencias= "'".implode("','",$nombreCompetencias)."'";
 
 
@@ -240,9 +246,9 @@ class ColaboradorController extends Controller
       
 
         \Debugbar::info($colaborador->horariosColaborador->last()->horario->actividad);
-      $pdf = \PDF::loadView('vistaColaborador.reportePDF', compact('colaborador', 'labelCompetencias','labelPromedio', 'promedioComp', 'now')); 
+        $pdf = \PDF::loadView('vistaColaborador.reportePDF', compact('colaborador', 'labelCompetencias','labelPromedio', 'promedioComp', 'now')); 
         return $pdf->download('ReporteColaborador.pdf');  
-     return view('vistaColaborador.reportePDF', compact('colaborador', 'labelCompetencias','labelPromedio', 'promedioComp'));
+        return view('vistaColaborador.reportePDF', compact('colaborador', 'labelCompetencias','labelPromedio', 'promedioComp'));
     }
 
     public function validarRunColaborador($run_usuario)

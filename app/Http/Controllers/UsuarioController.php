@@ -9,6 +9,7 @@ use App\Empresa;
 use App\Gerencia;
 use App\Area;
 use App\PerfilOcupacional;  
+use Hash;
 use DB;
 use App\Quotation;
 use Illuminate\Http\Request;
@@ -60,6 +61,7 @@ class UsuarioController extends Controller
         $usuario->apellidomat_usuario = $request->apellidomat_usuario;
         $usuario->sexo_usuario = $request->sexo_usuario;
         $usuario->email_usuario = $request->email_usuario;
+        $usuario->id_nacionalidad = $request->id_nacionalidad;
         $usuario->estado_usuario = 1;
         $usuario->clave_usuario = Hash::make(mb_substr($request->run_usuario, 0, 4));
         $usuario->save();
@@ -127,6 +129,7 @@ class UsuarioController extends Controller
         $usuario->apellidomat_usuario = $request->apellidomat_usuario;
         $usuario->sexo_usuario = $request->sexo_usuario;
         $usuario->email_usuario = $request->email_usuario;
+        $usuario->id_nacionalidad = $request->id_nacionalidad;
         $usuario->save();
         return redirect('usuario');
     }

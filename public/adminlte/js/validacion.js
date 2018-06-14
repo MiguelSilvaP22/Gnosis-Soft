@@ -2,6 +2,7 @@
 function marcarErrorGeneral(id,idErr){
 	document.getElementById(idErr).innerHTML='Campo Obligatorio';
 	$('#'+id).parent().addClass('has-error');
+	document.getElementById(idErr).style.color = '#FF3333';
 }
 function marcarErrorChar(id,idErr){
 	document.getElementById(idErr).innerHTML='No se permiten caracteres especiales.';
@@ -15,10 +16,24 @@ function marcarErrorDuplicado(id,idErr){
 	document.getElementById(idErr).innerHTML='El dato ingresado ya existe.';
 	$('#'+id).parent().addClass('has-error');
 }
-
 function marcarErrorFecha(id,idErr){
-	document.getElementById(idErr).innerHTML='La fecha de termino no puede ser anterior a la de inicio.';
+	document.getElementById(idErr).innerHTML='La fecha de termino no puede ser anterior a la fecha de inicio.';
 	$('#'+id).parent().addClass('has-error');
+}
+function marcarErrorFechaInicio(id,idErr){
+	document.getElementById(idErr).innerHTML='La fecha de la actividad no puede ser anterior a la fecha de inicio.';
+	$('#'+id).parent().addClass('has-error');
+	document.getElementById(idErr).style.color = '#FF3333';
+}
+function marcarErrorFechaTermino(id,idErr){
+	document.getElementById(idErr).innerHTML='La fecha de la actividad no puede ser posterior a la fecha de termino.';
+	$('#'+id).parent().addClass('has-error');
+	document.getElementById(idErr).style.color = '#FF3333';
+}
+function marcarErrorHora(id,idErr){
+	document.getElementById(idErr).innerHTML='La hora de termino no puede ser menor a la hora de inicio.';
+	$('#'+id).parent().addClass('has-error');
+	document.getElementById(idErr).style.color = '#FF3333';
 }
 
 //Marcar error select
@@ -139,13 +154,48 @@ function ValidateSingleInput(oInput) {
     return true;
 }
 
+//Compara horas.
+function compararHoras(hora, hora2) 
+{
+	var xHora = hora.substring(0,2);
+	var xMin = hora.substring(3,5);
+	var yHora = hora2.substring(0,2);
+	var yMin = hora2.substring(3,5);
+
+	console.log(xHora+" - "+xMin);
+	console.log(yHora+" - "+yMin);
+	if (xHora > yHora)  
+    {  
+        return true  
+    }  
+    else  
+    {  
+      	if (xHora == yHora)  
+      	{   
+       		if (xMin > yMin)  
+        	{  
+            	return true  
+        	}  
+        	else  
+        	{   
+				if (xMin == yMin)  
+				{  
+					return true;
+				}  
+				else{return false;} 
+        	}  
+      	}  
+      	else{return false;} 
+		  
+    }  
+}
 //Compara fechas.
 function compararFechas(fecha, fecha2)  
 {  
     var xMonth=fecha.substring(3, 5);  
     var xDay=fecha.substring(0, 2);  
     var xYear=fecha.substring(6,10);  
-    var yMonth=fecha2.substring(3, 5);  
+    var yMonth=fecha2.substring(3, 5);
     var yDay=fecha2.substring(0, 2);  
     var yYear=fecha2.substring(6,10);  
     if (xYear> yYear)  
@@ -1278,22 +1328,67 @@ function validarCompetencias(tipo,count,roles)
 function validarHorario()
 {
 	var verificar = true;
+	//Validar Fecha
+	if($.trim( $("#fechaIniHora").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('fechaIniHora','errfechaIniHora');
+	}
+	else
+	{
+		desmarcarError('fechaIniHora','errfechaIniHora');	
+		//Comparar fecha Actividad > Fecha inicio
+		if(compararFechas( $("#fecha_inicio_actividad").val() , $("#fechaIniHora").val() ))
+		{
+			verificar = false; marcarErrorFechaInicio('fechaIniHora','errfechaIniHora');
+		}
+		else
+		{
+			desmarcarError('fechaIniHora','errfechaIniHora');
+			//Comparar fecha Actividad > Fecha Termino
+			if(compararFechas( $("#fechaIniHora").val() , $("#fecha_termino_actividad").val() ))
+			{
+				verificar = false; marcarErrorFechaTermino('fechaIniHora','errfechaIniHora');
+			}
+			else
+			{
+				desmarcarError('fechaIniHora','errfechaIniHora');
+			}	
+		}
+	}
 
+	//Validar Hora inicio
+	if($.trim( $("#horaIniHora").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('horaIniHora','errhoraIniHora');
+	}
+	else
+	{
+		desmarcarError('horaIniHora','errhoraIniHora');			
+	}
 
+	//Validar Hora Termino
+	if($.trim( $("#horaTermHora").val()) == "" )
+	{
+		verificar = false; marcarErrorGeneral('horaTermHora','errhoraTermHora');
+	}
+	else
+	{
+		desmarcarError('horaTermHora','errhoraTermHora');
+		if(compararHoras( $("#horaIniHora").val() , $("#horaTermHora").val() ))
+		{
+			verificar = false; marcarErrorHora('horaTermHora','errhoraTermHora');
+		}
+		else
+		{
+			desmarcarError('horaTermHora','errhoraTermHora');			
+		}	
+			
+	}
+	
 	return verificar;
 }
 
 
-//========================================================================================================================================================================
-//=====================================================================VALIDACION ASIGNACIÓN RECURSOS=====================================================================
-//========================================================================================================================================================================
 
-function validarAsigRecursos()
-{
-	var verificar = true;
-
-
-	return verificar;
-}
 
 

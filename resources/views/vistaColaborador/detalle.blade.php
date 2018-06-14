@@ -47,6 +47,13 @@
                         <td>{{$colaborador->perfilOcupacional->nombre_perfilocu }}</td>
                     </tr>
                 </table>
+              
+
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+            <a href="../reporte/{{$colaborador->id_usuario}}" class="btn btn btn-info"> Expotar Informacion a pdf</a>
+            </div>
         </div>
     </div>
 
@@ -61,40 +68,92 @@
 <div class="row">
     <div class="col-md-10">
         <h3>Informacion de cursos</h3>
-        <div class="box">
-             <div class="table-responsive">
-                <table class="table table-responsive">        
-                    <tr>
-                        <td>Nombre Curso</td>
-                        <td>Competencias</td>
-                        <td>Fecha de incio</td>
-                        <td>Fecha de termino</td>
-                        <td>Información</td>
-                    </tr>
-                    <tr>
-                        <td> {{ $colaborador->horariosColaborador->last()->horario->actividad->curso->nombre_curso }} </td>
-                        <td> 
-                            @foreach($colaborador->horariosColaborador->last()->horario->actividad->curso->listaCompetencias as $comp)
-                                {{ $comp->nombre_comp }} <br>
-                            @endforeach 
-            
-                        </td>
-                        <td>{{ $colaborador->horariosColaborador->last()->horario->actividad->fecha_inicio_actividad }} </td>
-                        <td>{{ $colaborador->horariosColaborador->last()->horario->actividad->fecha_termino_actividad }} </td>
-                        <td><a href="../../vistacurso?area={{ $colaborador->horariosColaborador->last()->horario->actividad->curso->id_areacurso }}&curso={{ $colaborador->horariosColaborador->last()->horario->actividad->curso->id_curso }}"> mas información </a></td>
-                    </tr>
-                </table>
+        
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Informacion de Cursos Realizados
+                    </a>
+                </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-responsive">        
+                                <tr>
+                                    <td>Nombre Curso</td>
+                                    <td>Competencias</td>
+                                    <td>Fecha de incio</td>
+                                    <td>Fecha de termino</td>
+                                    <td>Información</td>
+                                </tr>
+                                <tr>
+                                    <td> {{ $colaborador->horariosColaborador->last()->horario->actividad->curso->nombre_curso }} </td>
+                                    <td> 
+                                        @foreach($colaborador->horariosColaborador->last()->horario->actividad->curso->listaCompetencias as $comp)
+                                            {{ $comp->nombre_comp }} <br>
+                                        @endforeach 
+                        
+                                    </td>
+                                    <td>{{ $colaborador->horariosColaborador->last()->horario->actividad->fecha_inicio_actividad }} </td>
+                                    <td>{{ $colaborador->horariosColaborador->last()->horario->actividad->fecha_termino_actividad }} </td>
+                                    <td><a href="../../vistacurso?area={{ $colaborador->horariosColaborador->last()->horario->actividad->curso->id_areacurso }}&curso={{ $colaborador->horariosColaborador->last()->horario->actividad->curso->id_curso }}"> mas información </a></td>
+                                </tr>
+                            </table>
+                        </div>
+                </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Sugerencias Para la toma de nuevo Cursos
+                    </a>
+                </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-responsive">
+
+                                <tr>
+                                    <td>Nombre Curso</td>
+                                    <td>Competencias</td>
+                                    <td>Información</td>
+                                </tr>
+                                @foreach($sugerenciasCursos as $listaCursos)
+                                    @foreach($listaCursos as $curso)
+                                        
+                                        <tr>
+                                            <td>{{$curso->nombre_curso}}</td>
+                                            <td> 
+                                                @foreach($curso->listaCompetencias as $comp)
+                                                    {{ $comp->nombre_comp }} <br>
+                                                @endforeach 
+                                            </td>
+                                            <td><a href="../../vistacurso?area={{ $curso->id_areacurso }}&curso={{ $curso->id_curso }}"> mas información </a></td>
+
+                                        </tr>
+
+                                    @endforeach
+                                @endforeach
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-
-<div class="row">
-    <div class="col-md-10">
-        <a href="../reporte/{{$colaborador->id_usuario}}" class="btn btn btn-info"> Expotar Informacion a pdf</a>
-    </div>
-</div>
 
 
 </body>
@@ -108,7 +167,7 @@ var ctx = $("#myChart");
 var myRadarChart = new Chart(ctx, {
     type: 'polarArea',
     data: {
-    labels: [  {!! $labelCompetencias!!} ],
+    labels: [  {!! $labelCompetencias !!} ],
     datasets: [{
         data: [{!! $labelPromedio!!} ],
         backgroundColor: ["rgb(255, 99, 132)","rgb(75, 192, 192)","rgb(255, 205, 86)","rgb(201, 203, 207)","rgb(54, 162, 235)"]

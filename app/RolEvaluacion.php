@@ -16,5 +16,10 @@ class RolEvaluacion extends Model
         return $this->belongsTo(EvaluacionDNC::class,'id_evaluacion');
         }
 
+        public function rolDesempeno()
+        {
+        return $this->belongsTo(RolDesempeno::class,'id_roldesempeno');
+        }
+
 }
 

@@ -7,6 +7,7 @@ use App\Nacionalidad;
 use App\Empresa;
 use App\Gerencia;
 use App\Area;
+use App\Competencia;
 use App\PerfilOcupacional;
 
 use PDF;
@@ -180,6 +181,7 @@ class ColaboradorController extends Controller
     {
         
         $colaborador = Usuario::findOrFail($id);
+        $sugerenciasCursos = [];
 
         $nombreCompetencias = [];
         foreach($colaborador->perfilOcupacional->competencias as $comp)
@@ -194,18 +196,26 @@ class ColaboradorController extends Controller
             if(($key+1)%5 ==0)
             {
                 $promedioComp[$count2]=$notasComp/5;
+                if($promedioComp[$count2]<2.5)
+                {
+                    $sugerenciasCursos[]= $nivelEva->rolDesempeno->competencia->cursos;
+                }
                 $count2++;
                 $notasComp=0;
+
             }
         }
 
+
         $labelPromedio= implode(",",$promedioComp);
         $labelCompetencias= "'".implode("','",$nombreCompetencias)."'";
+        
 
-        \Debugbar::info($colaborador->horariosColaborador->last()->horario->actividad);
+    
+        \Debugbar::info($sugerenciasCursos);
        /* $pdf = \PDF::loadView('vistaColaborador.detalle', compact('colaborador', 'labelCompetencias','labelPromedio')); 
         return $pdf->download('ReporteColaborador.pdf'); */
-        return view('vistaColaborador.detalle', compact('colaborador', 'labelCompetencias','labelPromedio'));
+        return view('vistaColaborador.detalle', compact('colaborador', 'labelCompetencias','labelPromedio', 'sugerenciasCursos'));
     }
 
 

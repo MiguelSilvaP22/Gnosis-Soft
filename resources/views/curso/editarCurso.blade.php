@@ -73,7 +73,7 @@
 							@endforeach
 							<div class='form-group'>
 								{!! Form::label('', 'Temario: ') !!} <a href="{{asset('temario/'.$curso->link_temario_curso)}}" target="_blank">{{$curso->link_temario_curso}}</a>
-								{!! Form::file('temario_curso', null, ['class' => 'form-control']) !!}
+								{!! Form::input('file','temario_curso', null, ['class' => 'form-control','id'=> 'temario_curso', 'onChange'=>'ValidateSingleInput(this);']) !!}
 								{!! Form::label('', '',['id' => 'errTemarioCurso']) !!}
 								
 							</div>	
@@ -97,13 +97,14 @@ $(document).ready(function() {
     $('.select2').select2();
 });
 var count ={{Count($contenidosGenerales)}}-1;
+console.log(count);
 $('#addContenido').click(function() {
 	count++;
 
 	$('#addContenido').parent().append('<input class="form-control" name="contenidoGeneral[]" id="contenidoGeneral'+count+'" type="text" ">');
 	$('#addContenido').parent().append('<button type="button" class="btn btn-default" aria-label="Left Align" onclick="eliminarContenido('+count+')" id="btnEliminarContenido'+count+'">   <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> </button>');
 	$('#addContenido').parent().append('<label id="errcontenidoGeneral'+count+'">');
-	console.log(count);
+	
 });
 function eliminarContenido(id){
 	$("#contenidoGeneral"+id).remove();

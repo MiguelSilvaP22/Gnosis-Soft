@@ -109,7 +109,37 @@ function validarDV(rut)
     return false;
 }
 
+//Validar Formato archivo
+var _validFileExtensions = [".pdf"];    
+function ValidateSingleInput(oInput) {
+    if (oInput.type == "file") {
+		var sFileName = oInput.value;
+		var archivo = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '');
+         if (sFileName.length > 0) {
+            var blnValid = false;
+            for (var j = 0; j < _validFileExtensions.length; j++) {
+                var sCurExtension = _validFileExtensions[j];
+                if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+					blnValid = true;
+					document.getElementById('errTemarioCurso').innerHTML='';
+					$('#temario_curso').parent().removeClass('has-error').addClass('has-success');
+                    break;
+                }
+            }
+             
+            if (!blnValid) {
+				document.getElementById('errTemarioCurso').innerHTML="El archivo "+ archivo +" no es valido, las extensiones validas son : " + _validFileExtensions.join(", ");
+				$('#temario_curso').parent().addClass('has-error');
 
+                oInput.value = "";
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+//Compara fechas.
 function compararFechas(fecha, fecha2)  
 {  
     var xMonth=fecha.substring(3, 5);  
@@ -932,9 +962,6 @@ function validarCurso(tipo,count,contenido)
 		}
 	}
 
-
-	//Validar FILE
-	
 
 	return verificar;
 }

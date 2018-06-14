@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Session;
 use Hash;
+use App\Actividad;
 use App\Usuario;
 class LoginController extends Controller
 {
@@ -43,6 +44,7 @@ class LoginController extends Controller
                 if($usuario->id_perfil == 1)
                 {
                     return redirect('admin');
+
                 }
                 elseif ($usuario->id_perfil == 2)
                 {
@@ -79,5 +81,12 @@ class LoginController extends Controller
             return redirect('/');
         }
         
+    }
+
+    public function dashboardAdmin()
+    {
+        $actividades = Actividad::All();
+        \Debugbar::info($actividades);
+        return view('admin.dashboard', compact('actividades'));
     }
 }

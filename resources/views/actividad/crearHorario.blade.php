@@ -28,7 +28,7 @@
 							<tbody>
 								<tr>
 									<td>
-										<span> {{date('d-m-Y', strtotime($actividad->fecha_inicio_actividad))}}</span>
+										<span> {{date('d-m-Y', strtotime($actividad->fecha_inicio_actividad))}}</span>	
 									</td>
 									<td>
 										<span>{{date('d-m-Y', strtotime($actividad->fecha_termino_actividad))}}</span>
@@ -37,6 +37,9 @@
 										<span>{{$actividad->curso->cant_hora_curso}}</span>
 									</td>
 								</tr>
+								{!! Form::hidden('fecha_inicio_actividad',date('d-m-Y', strtotime($actividad->fecha_inicio_actividad)),['id' => 'fecha_inicio_actividad']) !!}
+								{!! Form::hidden('fecha_termino_actividad',date('d-m-Y', strtotime($actividad->fecha_termino_actividad)),['id' => 'fecha_termino_actividad']) !!}
+								{!! Form::hidden('cant_hora_curso',$actividad->curso->cant_hora_curso,['id' => 'cant_hora_curso']) !!}
 							</tbody>
 						</table>
 					   <span onclick="cargarForm()" id="btnAgregarFormulario" value="{{$actividad->id_actividad}}" class="btn btn-block btn-success" style="float: right;margin-bottom: 10px;margin-right: 10px;width:200px;">
@@ -63,15 +66,13 @@
 								@foreach($horarios as $key => $horario)
 									<tr>
 										<td>
-											{{date('d/m/Y',strtotime($horario->fecha_horario))}}										
+											{{date('d/m/Y',strtotime($horario->fecha_horario))}}
 										</td>
 										<td>
-											{{date('H:i',strtotime($horario->hora_inicio_horario))}}
-											
+											{{date('H:i',strtotime($horario->hora_inicio_horario))}}											
 										</td>
 										<td>
 											{{date('H:i',strtotime($horario->hora_termino_horario))}}
-
 										</td>
 										<td>
 											@if(Count($horario->horariosColaborador->where('estado_horacolab',1))>0)
@@ -118,8 +119,7 @@
 									
 								</div>
 								<div class='form-group'>
-									<a href="javascript:guardar(2)" >guardar</a>
-									{!! Form::submit("Agregar Horario", ['class' => 'form-control btn btn-success ']) !!}
+									<a class='form-control btn btn-success' href="javascript:guardar()" >Guardar</a>									
 								</div>
 						</div>	
 						{!! Form::close() !!}							
@@ -139,12 +139,15 @@
 	$(document).ready(function() {
 		$('.date').datepicker({});		
 	});
+
+
 function guardar()
-{
-	if(id == 1)
+{	
+	console.log($("#horaIniHora").val() + $("#horaTermHora").val() )
+	if(validarHorario())
 	{
-		$('#formularioHorario').submit();
-	}
+		//$('#formularioHorario').submit();
+	}		
 	else{
 		console.log('asd');
 	}

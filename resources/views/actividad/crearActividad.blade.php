@@ -79,7 +79,7 @@
 		$('#fechaTermActv').datepicker("option", "dateFormat", 'dd/mm/yy');
 	});
 
-	/*$('#formActividad').submit(function (e) {
+	$('#formActividad').submit(function (e) {
 	e.preventDefault();
 	var url = e.target.action  // get the target
 	var formData = $(this).serialize() // get form data
@@ -89,7 +89,7 @@
 			$('#modal').modal('hide');
 		});
 	}
-});*/
+});
 
 $(document).on('click', '#btnVolver', function () {
 	$('#modal').modal('hide');

@@ -61,11 +61,10 @@
                             <div class='form-group'>
                                 {!! Form::label('', 'Contenido General') !!}	
                                 {!! Form::button('Agregar nuevo contenido', ['class' => 'form-control btn btn-success ', 'id'=> 'addContenido']) !!}
-								{!! Form::label('', '',['id' => 'errContenidoCurso']) !!}
                             </div>	
                             <div class='form-group'>
                                 {!! Form::label('', 'Temario:') !!}
-                                {!! Form::file('temario_curso', null, ['class' => 'form-control','id'=> 'temario_curso']) !!}
+                                {!! Form::input('file','temario_curso', null, ['class' => 'form-control','id'=> 'temario_curso' , 'onChange'=>'ValidateSingleInput(this);']) !!}
 								{!! Form::label('', '',['id' => 'errTemarioCurso']) !!}
                             </div>	
 						</div>
@@ -96,10 +95,11 @@
 	var count =0;
 	$('#addContenido').click(function() {
 		count++;
-
+		
 		$('#addContenido').parent().append('<input class="form-control" name="contenidoGeneral[]" id="contenidoGeneral'+count+'" type="text" ">');
 		$('#addContenido').parent().append('<button type="button" class="btn btn-default" aria-label="Left Align" onclick="eliminarContenido('+count+')" id="btnEliminarContenido'+count+'">   <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> </button>');
 		$('#addContenido').parent().append('<label id="errcontenidoGeneral'+count+'">');
+
 
 	});
     function eliminarContenido(id){

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\HorarioColaborador;
+use App\Empresa;
 use PDF;
 use DB;
 use App\Quotation;
@@ -240,7 +241,7 @@ class VistaEmpresaController extends Controller
 
         */
 
-        if(session('Usuario')!=null)
+        if(session()->has('Usuario'))
         {
             if(session('Usuario')->id_perfil == 3)
             {
@@ -437,15 +438,15 @@ class VistaEmpresaController extends Controller
                 "porcentajeAvanceHora" => round($porcentajeAvanceHora),
             ]);
             $nombresCurso= "'".implode("','",$tablaResumen->pluck('nombre_curso')->toArray())."'";
-
             $numeroParticipantes= implode(",",$tablaResumen->pluck('numero_participantes')->toArray());
             $dataGrafico = collect([
                 "nombresCurso" => $nombresCurso ,
                 "numeroParticipantes" => $numeroParticipantes
             ]);
          }
+         $empresas = Empresa::all()->where('estado_empresa',1)->pluck('nombre_empresa','id_empresa');
       // dd($nombresCurso);
-        return view('vistaEmpresa.index', compact('tablaResumen','tablaResumenTerminadas','tablaResumenFaltante','avance','dataGrafico','nombresCurso'));
+        return view('vistaEmpresa.index', compact('tablaResumen','empresas','tablaResumenTerminadas','tablaResumenFaltante','avance','dataGrafico','nombresCurso'));
     }
 
     /**

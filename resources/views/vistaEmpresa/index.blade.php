@@ -26,25 +26,18 @@
 
 							<tr>
 								<td style="width:25%;">N° de Cursos</td>
-								<td style="width:25%;">{{ $tablaResumen->cantcursos}}</td>
+								<td style="width:25%;">{{ Count($tablaResumen)}}</td>
 							</tr>
 
 							<tr>
 								<td style="width:25%;">N° de Participantes</td>
-								<td style="width:25%;">{{ $tablaResumen->cantusuarios}}</td>
+								<td style="width:25%;">{{ $tablaResumen->sum('numero_participantes')}}</td>
 							</tr>
 
 							<tr>
 								<td style="width:25%;">Horas de Capacitación</td>
-								<td style="width:25%;">{{ $tablaResumen->canthoras}}</td>
-							</tr>
-							<tr>
-								<td style="width:25%;">Ausentimo</td>
-								<td style="width:25%;">{{ $tablaResumen->ausentismo}}</td>
-							</tr>
-
-							
-								
+								<td style="width:25%;">{{ $tablaResumen->sum('cant_hora_curso')}}</td>
+							</tr>					
 						</tbody>
 					</table>
 				</div>

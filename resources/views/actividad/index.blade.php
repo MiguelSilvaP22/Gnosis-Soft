@@ -30,8 +30,8 @@
 						<tr>
 							<th>Codigo</th>
 							<th>Curso</th>	
-							<th>Fechas </th>						
-							<th>Fecha de Modificación</th>
+							<th>Fecha Inicio y Termino</th>
+							<th>Horarios </th>													
 							<th>Acciones</th>
 						</tr>
 					</thead>
@@ -45,12 +45,15 @@
 								</td>
 								<td >{{ $actividad->curso->nombre_curso}}</td>
 								<td >
+									<p>{{ date('d/m/Y',strtotime($actividad->fecha_inicio_actividad))}}  </p>
+									<p>{{ date('d/m/Y',strtotime($actividad->fecha_termino_actividad))}}</p>			
+								</td>
+								<td >
 									@foreach ($actividad->horarios->where('estado_horario',1) as $horario) 
-										<p>{{ date('d/m/Y',strtotime($horario->fecha_horario))}}</p>
+										<p>{{ date('d/m/Y',strtotime($horario->fecha_horario))}} <br/> 
+										desde {{ date('H:i',strtotime($horario->hora_inicio_horario))}}  hasta {{ date('H:i',strtotime($horario->hora_termino_horario))}}  </p>
 									@endforeach
 								</td>
-								
-								<td >{{ $actividad->fecha_mod_actividad}}</td>
 								<td>
 									<button id="btnHorario" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Horario</button>
 									<button id="btnVer" value="{{ $actividad->id_actividad}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>						

@@ -115,6 +115,7 @@
 								</table>	
 								<div class='form-group'>
 									{!! Form::hidden('id_actividad',$actividad->id_actividad) !!}
+									
 								</div>
 								<div class='form-group'>
 									<a href="javascript:guardar(2)" >guardar</a>

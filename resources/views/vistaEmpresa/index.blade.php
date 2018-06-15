@@ -129,9 +129,6 @@ $(document).ready(function() {
 	var myRadarChart = new Chart(ctx, {
 		type: 'doughnut',
 		data: {
-<<<<<<< HEAD
-		labels: ['{{$nombresCurso}}'],
-=======
 		labels: [
 			@foreach($tablaResumen as $key=> $tableNom)
 				@if(Count($tablaResumen) > $key-1)
@@ -142,7 +139,6 @@ $(document).ready(function() {
 			@endforeach
 			  
 		],
->>>>>>> 4ee38ab3eb589eefc77400074ead021fc220ebf0
 		datasets: [{
 			data: [{{$dataGrafico->get('numeroParticipantes')}} ],
 			backgroundColor: ["rgb(255, 99, 132)","rgb(75, 192, 192)","rgb(255, 205, 86)","rgb(201, 203, 207)","rgb(54, 162, 235)"]

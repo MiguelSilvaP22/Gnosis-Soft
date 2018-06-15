@@ -60,7 +60,7 @@
     <div class="col-md-1"></div>
 
     <div class="col-md-4">
-    <h2>Resumen de Competencias: {{ $colaborador->perfilOcupacional->nombre_perfilocu }} </h2>
+    <h2 style="text-align: center">Resumen de Competencias: {{ $colaborador->perfilOcupacional->nombre_perfilocu }} </h2>
         <canvas id="myChart" width="50" height="50"></canvas>
     </div>
 </div>

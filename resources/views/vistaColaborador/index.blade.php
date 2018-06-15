@@ -4,19 +4,14 @@
 
 <body> 
   <div class="row">
-		<div class="col-xs-12">
+		<div class="col-10 col-md-10 col-xs-12">
 			
 			<div class="box">
 			
 				<div class="box-header">
 					<h1 class="box-title">Tabla de Colaboradores</h1>
 				</div>
-				<div style="widtn:100%;align:center;">
-					
-					<div id="btnAgregar" class="btn btn-block btn-success" style="float: right;margin-bottom: 10px;margin-right: 10px;width:200px;">
-						<i class="fa fa-plus"></i>	Descargar Lista Colaboradores
-					</div>
-				</div>
+
 				<div class="box-body">
 				@if (count($colaboradores)>0)
 				<div class="table-responsive">	

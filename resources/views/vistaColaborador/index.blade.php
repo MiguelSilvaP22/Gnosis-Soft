@@ -13,7 +13,32 @@
 				</div>
 
 				<div class="box-body">
-				@if (count($colaboradores)>0)
+				@if (count($colaboradoresEmpresa)>0)
+				<div class="table-responsive">	
+					<table id="tablaPerfil" class="table">
+						<thead>
+							<tr>
+								<th>Nombre Colaborador</th>
+								<th>Empresa Colaborador</th>
+								<th>Perfil Colaborador</th>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach ($colaboradoresEmpresa as $colaborador) 
+							<tr>
+								<td style="width:25%;">{{ $colaborador->nombre_usuario. $colaborador->apellidopat_usuario.$colaborador->apellidomat_usuario}}</td>
+								<td style="width:25%;">{{ $colaborador->nombre_empresa}}</td>
+								<td style="width:25%;">{{ $colaborador->nombre_perfilocu}}</td>
+								<td>
+								<button id="btnVer" value="{{ $colaborador->id_usuario }}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
+								</td>
+							</tr>
+							@endforeach	
+						</tbody>
+					</table>
+				</div>
+				@elseif (count($colaboradores)>0)
 				<div class="table-responsive">	
 					<table id="tablaPerfil" class="table">
 						<thead>
@@ -27,7 +52,6 @@
 						<tbody>
 							@foreach ($colaboradores as $colaborador) 
 							<tr>
-
 								<td style="width:25%;">{{ $colaborador->nombre_usuario. $colaborador->apellidopat_usuario.$colaborador->apellidomat_usuario}}</td>
 								<td style="width:25%;">{{ $colaborador->perfilOcupacional->area->gerencia->empresa->nombre_empresa}}</td>
 								<td style="width:25%;">{{ $colaborador->perfilOcupacional->nombre_perfilocu}}</td>
@@ -35,9 +59,7 @@
 								<button id="btnVer" value="{{ $colaborador->id_usuario }}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
 								</td>
 							</tr>
-							@endforeach
-							
-								
+							@endforeach	
 						</tbody>
 					</table>
 				</div>

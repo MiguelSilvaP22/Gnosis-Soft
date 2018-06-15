@@ -48,7 +48,7 @@ class LoginController extends Controller
                 }
                 elseif ($usuario->id_perfil == 2)
                 {
-                    return redirect('competencia');
+                    return redirect('evaluarEncuesta');
                 }
                 elseif ($usuario->id_perfil == 3)
                 {

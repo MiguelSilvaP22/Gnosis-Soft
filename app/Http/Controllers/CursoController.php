@@ -23,7 +23,25 @@ class CursoController extends Controller
     public function index()
     {
         $cursos = Curso::all()->where('estado_curso',1);
-        return view('curso.index', compact('cursos'));
+        if(session()->exists('Usuario'))
+        {
+            if(session('Usuario')->id_perfil == 1)
+            {
+                return view('curso.index', compact('cursos'));
+            }
+            else
+            {
+                $errorVali = "Usted no esta autorizado a ingresar a este modulo";
+                return view('index.layoutindex', compact('errorVali'));
+            }
+            
+        }
+        else
+        {
+            $errorVali = "Usted no a ingresado al sistema";
+            return view('index.layoutindex', compact('errorVali'));
+        }
+        
     }
 
     /**

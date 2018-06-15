@@ -17,7 +17,25 @@ class OrganigramaController extends Controller
     public function index($id)
     {
         $empresa = Empresa::find($id);
-        return view('organigrama.index', compact('empresa'));
+        if(session()->exists('Usuario'))
+        {
+            if(session('Usuario')->id_perfil == 1)
+            {
+                return view('organigrama.index', compact('empresa'));
+            }
+            else
+            {
+                $errorVali = "Usted no esta autorizado a ingresar a este modulo";
+                return view('index.layoutindex', compact('errorVali'));
+            }
+            
+        }
+        else
+        {
+            $errorVali = "Usted no a ingresado al sistema";
+            return view('index.layoutindex', compact('errorVali'));
+        }
+       
     }
 
     /**

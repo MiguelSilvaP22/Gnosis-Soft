@@ -158,7 +158,6 @@ class CursoController extends Controller
      */
     public function update(Request $request, $id)
     {
-       
         $contenidosGenerales = $request->contenidoGeneral;
         $competencias = $request->id_competencia;
         $curso = Curso::findOrFail($id);
@@ -216,9 +215,7 @@ class CursoController extends Controller
                 
             }
             if($_FILES['temario_curso']!= null)
-            {
-               
-               
+            {            
                 $dir_subida = public_path()."/temario/";
                 $ext = pathinfo($_FILES['temario_curso']['name'], PATHINFO_EXTENSION);
                 $nombreTemario = "temario_curso_".$curso->id_curso.".".$ext;

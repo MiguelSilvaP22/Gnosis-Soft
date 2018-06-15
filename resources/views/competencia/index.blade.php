@@ -16,7 +16,7 @@
 					<div id="btnAgregar" class="btn btn-block btn-success" style="float: right;margin-bottom: 10px;margin-right: 10px;width:200px;">
 						<i class="fa fa-plus"></i>	Agregar
 					</div>
-					<div id="btnVerTrash" class="btn btn-block btn-success" style="float: right;margin-top: 0px;margin-bottom: 10px;margin-right: 10px;width:200px;">
+					{{--<div id="btnVerTrash" class="btn btn-block btn-success" style="float: right;margin-top: 0px;margin-bottom: 10px;margin-right: 10px;width:200px;">
 						<i class="fa fa-trash"></i>	Ver Eliminados
 					</div>
 
@@ -26,7 +26,7 @@
 
 					<div id="btnImportar" class="btn btn-block btn-success" style="float: right;margin-top: 0px;margin-bottom: 10px;margin-right: 10px;width:200px;">
 						<i class="fa fa-trash"></i> Importar Competencias
-					</div>
+					</div>--}}
 
 				</div>
 				<div class="box-body">
@@ -110,6 +110,7 @@ $(document).on('click', '#btnAgregar', function () {
                 });
 			$(document).ready(function() {
 				$('.select').select();
+				location.href = '/competencia';
 			});
 		}
 

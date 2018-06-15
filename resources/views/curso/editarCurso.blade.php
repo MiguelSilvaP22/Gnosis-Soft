@@ -77,7 +77,6 @@
 								{!! Form::label('', 'Temario: ') !!} <a href="{{asset('temario/'.$curso->link_temario_curso)}}" target="_blank">{{$curso->link_temario_curso}}</a>
 								{!! Form::input('file','temario_curso', null, ['class' => 'form-control','id'=> 'temario_curso', 'onChange'=>'ValidateSingleInput(this);']) !!}
 								{!! Form::label('', '',['id' => 'errTemarioCurso']) !!}
-								
 							</div>	
 						<div class='form-group'>
 							{!! Form::submit("Editar Curso", ['class' => 'form-control btn btn-success ']) !!}
@@ -124,6 +123,7 @@ $('#formCurso').submit(function (e) {
 	{
 		$.post(url, formData, function (response) { // send; response.data will be what is returned
 			$('#modal').modal('hide');
+			location.href = '/curso';
 		});
 	}
 });

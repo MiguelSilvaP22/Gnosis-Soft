@@ -38,7 +38,7 @@
 							<td >{{ $colaborador->perfilOcupacional->nombre_perfilocu}}</td>
 							<td >{{ $colaborador->fecha_mod_usuario}}</td>
 							<td>
-							<button id="btnVer" value="{{ $colaborador->id_usuario}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
+							{--<button id="btnVer" value="{{ $colaborador->id_usuario}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>--}
 
 							<button id="btnEditar" value="{{ $colaborador->id_usuario}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>
 

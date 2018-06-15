@@ -26,6 +26,10 @@ class HorarioColaborador extends Model
 
     public function eliminar()
     {
+        foreach($evaluacionesColab as $evColab)
+        {
+            $evColab->eliminar();
+        }
         $this->estado_horacolab = 0;
         $this->save();
     }

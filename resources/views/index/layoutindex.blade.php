@@ -29,8 +29,9 @@
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
-  <div class="login-logo">
-    <a href="/adminlte/index2.html"><b>Gnosis</b>Soft</a>
+  <div class="login-logo">   
+      <img src="/adminlte/img/gnosis.png" class="img-circle" style="width:80px;height:70px;" alt="User Image">
+    <b>Gnosis</b>Soft</a>
   </div>
   @if($errorVali != null)
   <div class="alert alert-danger alert-dismissible">

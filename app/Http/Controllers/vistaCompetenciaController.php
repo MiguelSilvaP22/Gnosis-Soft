@@ -27,7 +27,25 @@ class vistaCompetenciaController extends Controller
         $listaCompetencias =  Competencia::all()->where('estado_comp',1)->sortBy('nombre_comp')->pluck('nombre_comp','id_comp');
         $categoriascompetencias = categoriacompetencia::All()->where('estado_categoriacomp',1);
         \Debugbar::info($competencias);
-        return view('vistacompetencia.index', compact('competencias','categoriascompetencias', 'listaCompetencias'));
+        if(session()->exists('Usuario'))
+        {
+            if(session('Usuario')->id_perfil ==1 || session('Usuario')->id_perfil ==3 )
+            {
+                return view('vistacompetencia.index', compact('competencias','categoriascompetencias', 'listaCompetencias'));
+            }
+            else
+            {
+                $errorVali = "Usted no esta autorizado a ingresar a este modulo";
+                return view('index.layoutindex', compact('errorVali'));
+            }
+            
+        }
+        else
+        {
+            $errorVali = "Usted no a ingresado al sistema";
+            return view('index.layoutindex', compact('errorVali'));
+        }
+        
     }
 
     /**

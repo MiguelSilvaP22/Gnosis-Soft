@@ -12,7 +12,35 @@
 					<h1 class="box-title">Tabla de Actividades</h1>
 				</div>
 				<div class="box-body">
-				@if (count($actividades)>0)
+				@if (count($encuestasColaborador)>0)
+				<table id="tablaActividad" class="table">
+					<thead>
+						<tr>
+							<th>Codigo Actividad</th>
+							<th>Curso</th>
+							<th>Fecha</th>
+							<th>Horarios</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						@foreach ($encuestasColaborador as $encuesta) 	
+							<tr>
+								<td >{{ $encuesta->cod_interno_actividad}}</td>	
+								<td >{{ $encuesta->nombre_curso}}</td>							
+								<td >{{ date('d/m/Y',strtotime($encuesta->fecha_inicio_actividad))."-".date('d/m/Y',strtotime($encuesta->fecha_termino_actividad))}}</td>
+								<td >								
+								<nav class="navbar navbar-light bg-light">
+									<a class="nav-link" href="javascript:verHorarioFacilitador({{$encuesta->id_horario}})">{{ "Dia: ". date('d/m/Y',strtotime($encuesta->fecha_horario))}}						
+										<p>{{ "Facilitador: ".$encuesta->nombre_usuario}}</p>
+									</a>
+								</nav>	
+								</td>		
+							</tr>
+						@endforeach
+					</tbody>
+				</table>
+				@elseif(count($actividades)>0)
 				<table id="tablaActividad" class="table">
 					<thead>
 						<tr>
@@ -31,7 +59,7 @@
 							<td >{{ $actividad->curso->nombre_curso}}</td>							
 							<td >{{ date('d/m/Y',strtotime($actividad->fecha_inicio_actividad))."-".date('d/m/Y',strtotime($actividad->fecha_termino_actividad))}}</td>
 							<td >
-							@foreach ($actividad->horarios->sortBy('fecha_horario') as $horario) 
+							@foreach ($actividad->horarios->where('estado_horario',1)->sortBy('fecha_horario') as $horario) 
 							<nav class="navbar navbar-light bg-light">
 								<a class="nav-link" href="javascript:verHorarioFacilitador({{$horario->id_horario}})">{{ "Dia: ". date('d/m/Y',strtotime($horario->fecha_horario))}}
 							
@@ -52,7 +80,7 @@
 					</tbody>
 				</table>
 				@else
-					<h1>No Hay actividades registrados</h1>
+					<h1>No Hay actividades asociadas a este facilitador</h1>
 				@endif
 				</div>
 			</div>

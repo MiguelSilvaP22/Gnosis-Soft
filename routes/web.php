@@ -574,3 +574,6 @@ Route::resource('login', 'LoginController');
 //Vista Empresa
 
 Route::get('/vistaEmpresa', 'VistaEmpresaController@index');
+//EvaluarEncuesta
+Route::get('/evaluarEncuesta', 'EncuestaController@indexEncuestas');
+  //-------------------------------------------------------------------------------------------------------------------------

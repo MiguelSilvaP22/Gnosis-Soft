@@ -34,7 +34,25 @@ class vistaCursoController extends Controller
         $listaCursos =  Curso::all()->where('estado_curso',1)->sortBy('nombre_curso')->pluck('nombre_curso','id_curso');
         $categoriascompetencias = categoriacompetencia::All()->where('estado_categoriacomp',1);
         \Debugbar::info($areaCursos);
-        return view('vistacurso.index', compact('competencias','areaCursos', 'listaCursos'));
+        if(session()->exists('Usuario'))
+        {
+            if(session('Usuario')->id_perfil ==1 || session('Usuario')->id_perfil ==3 )
+            {
+                return view('vistacurso.index', compact('competencias','areaCursos', 'listaCursos'));
+            }
+            else
+            {
+                $errorVali = "Usted no esta autorizado a ingresar a este modulo";
+                return view('index.layoutindex', compact('errorVali'));
+            }
+            
+        }
+        else
+        {
+            $errorVali = "Usted no a ingresado al sistema";
+            return view('index.layoutindex', compact('errorVali'));
+        }
+        
     }
 
     /**

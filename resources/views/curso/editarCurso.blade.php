@@ -66,9 +66,11 @@
 							</div>	
 							@foreach ($contenidosGenerales as $key => $contenidoGeneral)
 							<div class='form-group'>
+							<div class="input-group"> 
 								{!! Form::text('contenidoGeneral[]', $contenidoGeneral->nombre_contenidog, ['class' => 'form-control' , 'id'=>'contenidoGeneral'.$key.'']) !!}
 								{!! Form::label('', '',['id' => 'errcontenidoGeneral'.$key.'']) !!}
-								<button type="button" class="btn btn-default" aria-label="Left Align" onclick="eliminarContenido({{$key}})" id="btnEliminarContenido{{$key}}">   <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> </button>
+								<span type="button" class="input-group-addon"aria-label="Left Align" onclick="eliminarContenido({{$key}})" id="btnEliminarContenido{{$key}}">  <i class="fa fa-remove"></i> </span>
+							</div>
 							</div>	
 							@endforeach
 							<div class='form-group'>
@@ -101,8 +103,7 @@ console.log(count);
 $('#addContenido').click(function() {
 	count++;
 
-	$('#addContenido').parent().append('<input class="form-control" name="contenidoGeneral[]" id="contenidoGeneral'+count+'" type="text" ">');
-	$('#addContenido').parent().append('<button type="button" class="btn btn-default" aria-label="Left Align" onclick="eliminarContenido('+count+')" id="btnEliminarContenido'+count+'">   <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> </button>');
+	$('#addContenido').parent().append('<div class="input-group">  <input class="form-control" name="contenidoGeneral[]" id="contenidoGeneral'+count+'" type="text" "> <span type="button" class="input-group-addon" aria-label="Left Align" onclick="eliminarContenido('+count+')" id="btnEliminarContenido'+count+'">  <i class="fa fa-remove"></i> </span> </div>');
 	$('#addContenido').parent().append('<label id="errcontenidoGeneral'+count+'">');
 	
 });

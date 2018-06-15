@@ -95,9 +95,7 @@
 	var count =0;
 	$('#addContenido').click(function() {
 		count++;
-		
-		$('#addContenido').parent().append('<input class="form-control" name="contenidoGeneral[]" id="contenidoGeneral'+count+'" type="text" ">');
-		$('#addContenido').parent().append('<button type="button" class="btn btn-default" aria-label="Left Align" onclick="eliminarContenido('+count+')" id="btnEliminarContenido'+count+'">   <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> </button>');
+		$('#addContenido').parent().append('<div class="input-group"> <input class="form-control" name="contenidoGeneral[]" id="contenidoGeneral'+count+'" type="text" "> <span type="button" class="input-group-addon" aria-label="Left Align" onclick="eliminarContenido('+count+')" id="btnEliminarContenido'+count+'"> <i class="fa fa-remove"></i> </span> </div>');
 		$('#addContenido').parent().append('<label id="errcontenidoGeneral'+count+'">');
 
 

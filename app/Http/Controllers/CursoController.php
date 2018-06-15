@@ -217,6 +217,8 @@ class CursoController extends Controller
             }
             if($_FILES['temario_curso']!= null)
             {
+               
+               
                 $dir_subida = public_path()."/temario/";
                 $ext = pathinfo($_FILES['temario_curso']['name'], PATHINFO_EXTENSION);
                 $nombreTemario = "temario_curso_".$curso->id_curso.".".$ext;
@@ -227,6 +229,7 @@ class CursoController extends Controller
                     $curso->save();
                 } 
             }
+            
             
         }
         return redirect('curso');

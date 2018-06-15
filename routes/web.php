@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', 'LoginController@index');
 
 Route::get('admin', 'LoginController@dashboardAdmin', function ($id=null) {

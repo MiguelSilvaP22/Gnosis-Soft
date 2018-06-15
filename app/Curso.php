@@ -19,7 +19,10 @@ class Curso extends Model
     {
         return $this->hasMany(Actividad::Class, 'id_curso');
     }
-
+    public function competenciasCurso()
+    {
+        return $this->hasMany(CompetenciaCurso::Class, 'id_curso');
+    }
     public function listacompetencias()
     {
         return $this->belongsToMany(Competencia::Class, 'competenciacurso', 'id_curso', 'id_comp');
@@ -30,6 +33,11 @@ class Curso extends Model
         {
             $actividad->eliminar();
         }
+        foreach($this->competenciasCurso as $competencia)
+        {
+            $competencia->eliminar();
+        }
+
         $this->estado_curso = 0;
         $this->save();
     }

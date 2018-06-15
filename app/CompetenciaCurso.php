@@ -10,4 +10,9 @@ class CompetenciaCurso extends Model
     protected $primaryKey = 'id_compcurso';
     const CREATED_AT = 'fecha_reg_compcurso';
     const UPDATED_AT = 'fecha_mod_compcurso';
+    public function eliminar()
+    {
+        $this->estado_compcurso = 0;
+        $this->save();
+    }
 }

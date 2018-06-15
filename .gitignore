@@ -27,3 +27,4 @@ Homestead.json
 
 
 # End of https://www.gitignore.io/api/laravel
+resources/views/vistaEmpresa/index.blade.php

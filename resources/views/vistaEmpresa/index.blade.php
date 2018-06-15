@@ -11,13 +11,22 @@
 				</div>
 				<div class="box-body">
 					<div class="col-xs-6">
-							<div class="box">			
-								<div class="box-header">
-									<h1 class="box-title">Filtro</h1>
+							@if(session()->has('Usuario'))
+								@if(session('Usuario')->id_perfil == 1)
+								<div class="box">			
+									<div class="box-header">
+										<h1 class="box-title">Filtro</h1>
+									</div>
+									<div class="box-body">
+										<div class='form-group'>
+											{!! Form::label('', 'Empresa:') !!}
+												{!! Form::select('id_empresa', $empresas,null  ,['class' => 'select2','placeholder'=>'Seleccione un Curso','id'=>'id_empresa', 'style'=>'width:100%']) !!}
+											{!! Form::label('', '',['id' => 'errIdCurso']) !!}
+										</div>
+									</div>
 								</div>
-								<div class="box-body">
-								</div>
-							</div>
+								@endif
+							@endif
 						<div class="box">		
 							<div class="box-header">
 								<h1 class="box-title">Tabla de Empresa</h1>
@@ -73,7 +82,7 @@
 					<div class="col-xs-6">
 						<div class="box">			
 							<div class="box-header">
-								<h1 class="box-title">Graficos</h1>
+								<h1 class="box-title">Grafico: Cantidad de participantes por curso</h1>
 							</div>
 							<div class="box-body">
 							<canvas id="myChart" width="50" height="50"></canvas>
@@ -115,11 +124,25 @@
 <script>
 $(document).ready(function() {
 
+	$(".select2").select2();
 	var ctx = $("#myChart");
 	var myRadarChart = new Chart(ctx, {
 		type: 'doughnut',
 		data: {
+<<<<<<< HEAD
 		labels: ['{{$nombresCurso}}'],
+=======
+		labels: [
+			@foreach($tablaResumen as $key=> $tableNom)
+				@if(Count($tablaResumen) > $key-1)
+				'{{$tableNom->nombre_curso}} ',
+				@else
+				'{{$tableNom->nombre_curso}} '
+				@endif
+			@endforeach
+			  
+		],
+>>>>>>> 4ee38ab3eb589eefc77400074ead021fc220ebf0
 		datasets: [{
 			data: [{{$dataGrafico->get('numeroParticipantes')}} ],
 			backgroundColor: ["rgb(255, 99, 132)","rgb(75, 192, 192)","rgb(255, 205, 86)","rgb(201, 203, 207)","rgb(54, 162, 235)"]
@@ -130,12 +153,6 @@ $(document).ready(function() {
 	});
 
 } );
-$(document).on('click', '#btnVer', function () {
-
-	window.location.replace("/vistaColaborador/detalle/"+this.value);
-
-});	
-
 </script>
 
 <style>

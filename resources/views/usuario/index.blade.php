@@ -44,7 +44,7 @@
 								<td></td>
 								<td ></td>
 							@endif
-							<td >{{ $usuario->fecha_mod_usuario}}</td>
+							<td >{{ date('d/m/Y',strtotime($usuario->fecha_mod_usuario))}}</td>
 							<td>
 							<button id="btnVer" value="{{ $usuario->id_usuario}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
 

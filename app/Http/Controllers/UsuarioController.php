@@ -24,7 +24,7 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuarios = Usuario::all()->where('estado_usuario',1)->where('id_perfil','<>',2);
+        $usuarios = Usuario::all()->where('estado_usuario',1)->where('id_perfil','<>',2)->sortBy('run_usuario');
         if(session()->exists('Usuario'))
         {
             if(session('Usuario')->id_perfil == 1)

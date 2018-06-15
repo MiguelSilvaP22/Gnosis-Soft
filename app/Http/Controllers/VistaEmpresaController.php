@@ -378,7 +378,7 @@ class VistaEmpresaController extends Controller
                 DB::raw('count(horariocolaborador.id_usuario) as numero_participantes') 
                 )->get();
 
-                $tablaResu = DB::table('empresa')
+                $tablaResumen = DB::table('empresa')
                 ->join('gerencia', 'empresa.id_empresa', '=', 'gerencia.id_empresa')
                 ->join('area', 'gerencia.id_gerencia', '=', 'area.id_gerencia')
                 ->join('perfilocupacional', 'area.id_area', '=', 'perfilocupacional.id_area')

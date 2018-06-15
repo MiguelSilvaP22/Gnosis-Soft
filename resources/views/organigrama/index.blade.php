@@ -277,15 +277,15 @@ function refrescarPerfil(id)
 
 
 $(document).on('click', '#btnPerfil', function () {
-		
+		$("#selectAreas").html('');	
 		selectGerenciaArea(this.value,1);
+		
 		$("#datosTabla").html('');
 		
 
 		
 	});
 $(document).on('change', '#select_area', function () {
-	
 	refrescarPerfil(this.value);
 });	     
 

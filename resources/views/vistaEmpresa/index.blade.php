@@ -119,7 +119,7 @@ $(document).ready(function() {
 	var myRadarChart = new Chart(ctx, {
 		type: 'doughnut',
 		data: {
-		labels: [  {{$nombresCurso}} ],
+		labels: ['{{$nombresCurso}}'],
 		datasets: [{
 			data: [{{$dataGrafico->get('numeroParticipantes')}} ],
 			backgroundColor: ["rgb(255, 99, 132)","rgb(75, 192, 192)","rgb(255, 205, 86)","rgb(201, 203, 207)","rgb(54, 162, 235)"]

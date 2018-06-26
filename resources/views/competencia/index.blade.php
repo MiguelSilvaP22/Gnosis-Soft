@@ -110,7 +110,7 @@ $(document).on('click', '#btnAgregar', function () {
                 });
 			$(document).ready(function() {
 				$('.select').select();
-				location.href = '/competencia';
+				//location.href = '/competencia';
 			});
 		}
 

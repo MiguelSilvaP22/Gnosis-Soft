@@ -17,7 +17,7 @@
 					{!! Form::label('', '',['id' => 'errNombreEmpresa']) !!}
 				</div>
 				<div class='form-group'>
-					{!! Form::label('razon_social_empresa', 'Razon Social:') !!}
+					{!! Form::label('razon_social_empresa', 'Razón Social:') !!}
 					{!! Form::text('razon_social_empresa', null, ['class' => 'form-control','id'=>'razon_social_empresa','maxlength'=>'100']) !!}
 					{!! Form::label('', '',['id' => 'errRazonSocial']) !!}
 				</div>
@@ -124,7 +124,6 @@ $(document).on('change', '#id_region', function () {
 			$("#comuna").html(datos);
 		}
 	});
-//alert("asda");
 });	
 
 $(document).on('change', "input[name='tipo_empresa']", function () {
@@ -137,7 +136,6 @@ $(document).on('change', "input[name='tipo_empresa']", function () {
 		$("#id_empresa").val(null).trigger("change"); //Eliminar las empresas de holding luego de cambiar a tipo empresa.
 		$("#empresas").hide();
 	}
-	//alert("asda");
 });
 
 $(document).on('click', '#btnVolver', function () {

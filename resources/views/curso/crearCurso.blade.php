@@ -14,12 +14,12 @@
 					{!! Form::open([ 'enctype'=>"multipart/form-data",'action' => 'CursoController@store','id'=>'formCurso', 'files' => true]) !!}
 						<div class="col-md-12">
 							<div class='form-group'>
-								{!! Form::label('', 'Codigo:') !!}
+								{!! Form::label('', 'Código:') !!}
 								{!! Form::text('cod_interno_curso', null, ['class' => 'form-control','id'=>'cod_interno_curso','maxlength'=>'500']) !!}
 								{!! Form::label('', '',['id' => 'errCodigoCurso']) !!}
 							</div>
 							<div class='form-group'>
-								{!! Form::label('', 'Codigo Sence:') !!}
+								{!! Form::label('', 'Código SENCE:') !!}
 								{!! Form::text('cod_sence_curso', null, ['class' => 'form-control','id'=>'cod_sence_curso','maxlength'=>'500']) !!}
 								{!! Form::label('', '',['id' => 'errCodigoSenceCurso']) !!}
 							</div>

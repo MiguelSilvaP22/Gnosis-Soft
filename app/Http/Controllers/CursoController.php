@@ -214,7 +214,7 @@ class CursoController extends Controller
                 
                 
             }
-            if($_FILES['temario_curso']!= null)
+            if(isset(["file"]['temario_curso']))
             {            
                 $dir_subida = public_path()."/temario/";
                 $ext = pathinfo($_FILES['temario_curso']['name'], PATHINFO_EXTENSION);

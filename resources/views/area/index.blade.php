@@ -1,4 +1,4 @@
-<div style="widtn:100%;align:center;">
+<div style="width:100%;align:center;">
 	<button id="addArea" value="{{$idGerencia}}" class="btn btn btn-info"><i class="fa fa-plus"></i> Agregar area</button>
 </div>
 <table id="tablaArea" class="table">

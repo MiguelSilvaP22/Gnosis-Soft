@@ -11,7 +11,7 @@
 				<div class="box-header">
 					<h1 class="box-title">Tabla de Actividades</h1>
 				</div>
-				<div style="widtn:100%;align:center;">
+				<div style="width:100%;align:center;">
 					
 					@if($idCurso!= null)
 						<button id="btnAgregar" value="{{$idCurso}}" class="btn btn-block btn-success" style="float: right;margin-bottom: 10px;margin-right: 10px;width:200px;">
@@ -28,7 +28,7 @@
 				<table id="tablaActividad" class="table">
 					<thead>
 						<tr>
-							<th>Codigo</th>
+							<th>Código</th>
 							<th>Curso</th>	
 							<th>Fecha Inicio y Termino</th>
 							<th>Horarios </th>													
@@ -40,7 +40,7 @@
 							@if($actividad->curso !=null)
 							<tr>
 								<td >
-									<p>Codigo: {{ $actividad->cod_interno_actividad}}</p>
+									<p>Código: {{ $actividad->cod_interno_actividad}}</p>
 									<p>Sence : {{ $actividad->cod_sence_actividad}}</p>
 								</td>
 								<td >{{ $actividad->curso->nombre_curso}}</td>
@@ -148,7 +148,6 @@ $(document).on('click', '#btnVer', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
 function cargarCrearHorario(id)
@@ -187,7 +186,7 @@ function asignarEncuesta(id)
 }
 $(document).on('click', '#btnHorario', function () {
 		cargarCrearHorario(this.value)
-		//alert("asda");
+
 });	
 
 $(document).on('click', '#btnAgregar', function () {
@@ -204,7 +203,6 @@ $(document).on('click', '#btnAgregar', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
 
@@ -224,7 +222,6 @@ $(document).on('click', '#btnEditar', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
 
@@ -243,7 +240,6 @@ $(document).on('click', '#deleteActividad', function () {
 		}
 
 		});
-		//alert("asda");
 });
 
 

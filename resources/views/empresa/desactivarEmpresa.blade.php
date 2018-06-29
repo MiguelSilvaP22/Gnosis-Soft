@@ -36,10 +36,8 @@ $(document).on('click', '#confirmDelete', function () {
 		}
 
 		});
-		//alert("asda");
 });
 $(document).on('click', '#exit', function () {
 		$('#modal').modal('hide');
-		//alert("asda");
 });
 </script>

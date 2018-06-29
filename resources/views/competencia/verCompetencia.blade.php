@@ -22,7 +22,7 @@
 				  </div>
   
 				  <div class='form-group'>
-					  {!! Form::label('nombre_categoriacomp', 'Categoria:') !!}
+					  {!! Form::label('nombre_categoriacomp', 'Categoría:') !!}
 					  {!! Form::select('id_categoriacomp', $categoriascompetencias,null ,['class' => 'form-control', 'readonly' => true, 'data-placeholder'=>'Seleccione uno o varios giros','id'=>'id_categoriacomp', 'style'=>'width:100%']) !!}
 				  </div>	
 

@@ -9,9 +9,9 @@
 			<div class="box">
 			
 				<div class="box-header">
-					<h1 class="box-title">Tabla de Categorias de Competencias</h1>
+					<h1 class="box-title">Tabla de Categorías de Competencias</h1>
 				</div>
-				<div style="widtn:100%;align:center;">
+				<div style="width:100%;align:center;">
 					
 					<div id="btnAgregar" class="btn btn-block btn-success" style="float: right;margin-bottom: 10px;margin-right: 10px;width:200px;">
 						<i class="fa fa-plus"></i>	Agregar
@@ -25,7 +25,7 @@
 				<table id="tablaPerfil" class="table">
 					<thead>
 						<tr>
-							<th>Nombre de Categoria</th>
+							<th>Nombre de Categoría</th>
 							<th>Fecha de Modificación</th>
 							<th>Estado</th>
 							<th>Acciones</th>
@@ -40,7 +40,7 @@
 							@if($categoriacomp->estado_categoriacomp == 1)
 							<td style="width:25%;color:green;">Activo</td>
 							@else
-							<td style="width:25%;color:red">inactivo</td>
+							<td style="width:25%;color:red">Inactivo</td>
 							@endif
 							<td>
 								<button id="verCompetencia" value="{{ $categoriacomp->id_categoriacomp}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
@@ -111,7 +111,6 @@ $(document).on('click', '#editCompetencia', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
 $(document).on('click', '#verCompetencia', function () {
@@ -126,7 +125,6 @@ $(document).on('click', '#verCompetencia', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
 

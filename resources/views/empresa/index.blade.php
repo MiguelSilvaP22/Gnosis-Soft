@@ -11,7 +11,7 @@
 				<div class="box-header">
 					<h1 class="box-title">Tabla de Empresas </h1>
 				</div>
-				<div style="widtn:100%;align:center;">
+				<div style="width:100%;align:center;">
 					
 					<div id="btnAgregar" class="btn btn-block btn-success" style="float: right;margin-bottom: 10px;margin-right: 10px;width:200px;">
 						<i class="fa fa-plus"></i>	Agregar
@@ -110,7 +110,6 @@ $(document).on('click', '#btnVer', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
 $(document).on('click', '#btnAgregar', function () {
@@ -127,7 +126,6 @@ $(document).on('click', '#btnAgregar', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
 
@@ -146,12 +144,8 @@ $(document).on('click', '#btnEditar', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
-/*$("#btnAgregar").click(function(){
-	location.href = '{{route("empresa.crear")}}';
-	});*/
 $("#btnVerTrash").click(function(){
 	location.href = '/empresa/0';
 	});	
@@ -172,7 +166,6 @@ $(document).on('click', '#deleteEmpresa', function () {
 		}
 
 		});
-		//alert("asda");
 });
 
 

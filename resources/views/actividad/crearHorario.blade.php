@@ -190,7 +190,6 @@ function eliminarHorario(id) {
 		}
 
 		});
-		//alert("asda");
 };
 $(document).on('click', '#btnVolver', function () {
 	$('#modal').modal('hide');

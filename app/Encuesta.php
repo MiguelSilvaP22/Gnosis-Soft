@@ -17,7 +17,11 @@ class Encuesta extends Model
     }
     public function preguntasEncuesta()
     {
-        return $this->hasMany(PreguntaEncuesta::class,'id_encuesta');
+        return $this->hasMany(PreguntaEncuesta::class,'id_encuesta')->where('estado_preguntaencuesta',1);
+    }
+    public function Encuesta()
+    {
+        return $this->belongsToMany(EvaluacionColab::class,'id_encuesta');
     }
 
     public function eliminar()

@@ -10,4 +10,9 @@ class EvaluacionEncuesta extends Model
     protected $primaryKey = 'id_evencuesta';
     const CREATED_AT = 'fecha_reg_evencuesta';
     const UPDATED_AT = 'fecha_mod_evencuesta';
+    
+    public function encuesta()
+    {
+        return $this->belongsTo(Encuesta::class,'id_encuesta')->where('estado_encuesta',1);
+    }
 }

@@ -33,10 +33,10 @@
 								<td style="width:25%;">Codigo : {{ $encuesta->cod_interno_actividad}}
 									{{ date('d/m/Y',strtotime($encuesta->fecha_horario))}}</td>
 								<td>
-								@if(date('d/m/Y',strtotime($encuesta->fecha_horario)) < date('Y-m-d'))
+								@if(date('d/m/Y',strtotime($encuesta->fecha_horario)) > date('d/m/Y'))
 									<button id="btnEvaluar" value="{{ $encuesta->id_evencuesta }}" class="btn btn btn-info"><i class="fa fa-eye"></i> Responder</button>
 								@else	
-								<button id="btnEvaluar" value="{{ $encuesta->id_evencuesta }}" disabled="true" class="btn btn btn-info"><i class="fa fa-eye"></i> Responder</button>
+									<button id="btnEvaluar" value="{{ $encuesta->id_evencuesta }}" disabled="true" class="btn btn btn-info"><i class="fa fa-eye"></i> Responder</button>
 								@endif
 								</td>
 							</tr>
@@ -85,11 +85,18 @@ $(document).ready(function() {
 		});
 } );
 
-$(document).on('click', '#btnVer', function () {
+$(document).on('click', '#btnEvaluar', function () {
+		$.ajax({
+		url: "/crearEvaluarEncuesta/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#datos").html(datos);
+			$('#modal').modal('show');
+		}
 
-		
-
+		});
 });	
+
 
 
 

@@ -343,7 +343,6 @@ class VistaEmpresaController extends Controller
                 ->where('horariocolaborador.estado_horacolab',1)
                 ->where('curso.estado_curso',1)
                 ->where('usuario.estado_usuario',1)
-                ->groupBy('empresa.id_empresa')
                 ->groupBy('curso.id_curso')
                 ->select(
                 'curso.id_curso',
@@ -369,7 +368,6 @@ class VistaEmpresaController extends Controller
                 ->where('horariocolaborador.estado_horacolab',1)
                 ->where('curso.estado_curso',1)
                 ->where('usuario.estado_usuario',1)
-                ->groupBy('empresa.id_empresa')
                 ->groupBy('curso.id_curso')
                 ->select(
                 'curso.id_curso',
@@ -377,7 +375,7 @@ class VistaEmpresaController extends Controller
                 DB::raw('count(DISTINCT actividad.id_actividad) as actividades'),
                 DB::raw('count(horariocolaborador.id_usuario) as numero_participantes') 
                 )->get();
-
+                
                 $tablaResumen = DB::table('empresa')
                 ->join('gerencia', 'empresa.id_empresa', '=', 'gerencia.id_empresa')
                 ->join('area', 'gerencia.id_gerencia', '=', 'area.id_gerencia')
@@ -392,7 +390,6 @@ class VistaEmpresaController extends Controller
                 ->where('horariocolaborador.estado_horacolab',1)
                 ->where('curso.estado_curso',1)
                 ->where('usuario.estado_usuario',1)
-                ->groupBy('empresa.id_empresa')
                 ->groupBy('curso.id_curso')
                 ->select(
                 'curso.id_curso',
@@ -401,6 +398,7 @@ class VistaEmpresaController extends Controller
                 DB::raw('count(DISTINCT actividad.id_actividad) as actividades'),
                 DB::raw('count(horariocolaborador.id_usuario) as numero_participantes') 
                 )->get();
+                
             }
         }
         
@@ -413,13 +411,16 @@ class VistaEmpresaController extends Controller
             //dd($avance['numeroTerminados']);
             foreach($tablaResumen as $actividad)
             {
+                
                 foreach($tablaResumenTerminadas as $terminada)
                 {
+                    
                     if($actividad->id_curso == $terminada->id_curso)
                     {
                         if($actividad->actividades == $terminada->actividades)
                         {
                             $numeroTerminados++;
+                            
                             $horasTerminados= $horasTerminados +$terminada->cant_hora_curso;
                         }
                     }
@@ -446,7 +447,7 @@ class VistaEmpresaController extends Controller
             ]);
          }
          $empresas = Empresa::all()->where('estado_empresa',1)->pluck('nombre_empresa','id_empresa');
-   
+     
       if(session()->exists('Usuario'))
       {
           if(session('Usuario')->id_perfil ==1 || session('Usuario')->id_perfil ==3 )

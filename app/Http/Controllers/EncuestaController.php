@@ -246,7 +246,6 @@ class EncuestaController extends Controller
                 'actividad.cod_interno_actividad'
                 )->get();
         return view('evaluarEncuesta.index',compact('encuestasColaborador'));
-
     }
 
 }

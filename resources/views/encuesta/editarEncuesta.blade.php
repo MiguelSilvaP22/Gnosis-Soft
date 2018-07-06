@@ -35,7 +35,7 @@
 				</div>	
 			</div>
 		</div>
-			{{--<span type="button" class="btn btn-default btn-flat" style="float: right;" aria-label="Left Align" onclick="addColumnaPregunta()" id="btnAddColumnaPregunta"> <i class="fa fa-plus"></i>Nueva Categoria de preguntas </span>--}}
+			{{--<span type="button" class="btn btn-default btn-flat" style="float: right;" aria-label="Left Align" onclick="addColumnaPregunta()" id="btnAddColumnaPregunta"> <i class="fa fa-plus"></i>Nueva Categoría de preguntas </span>--}}
 		<div class="col-xs-12" id="columnaPregunta">
 			<div class="box">
 				<div class="box-header">
@@ -45,7 +45,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div id='categoriaPreguntas0' class='form-group' >								
-								{!! Form::label('', 'Categoria Preguntas:') !!}
+								{!! Form::label('', 'Categoría Preguntas:') !!}
 								<div class="input-group">	
 									{!! Form::select('id_categoriaPregunta[0]', $categoriasPreguntas,$idCategoria->id_categoria ,['class' => 'select2','placeholder'=>'Seleccione una Categoria', 'id'=>'id_categoriaPregunta0', 'style'=>'width:100%']) !!}
 									<span type="button" class="input-group-addon" aria-label="Left Align" onclick="addCategoriaPreguntas(0)" id="btnaddCategoriaPreguntas"> <i class="fa fa-plus"></i> </span>

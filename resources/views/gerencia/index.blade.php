@@ -1,4 +1,4 @@
-<div style="widtn:100%;align:center;">
+<div style="width:100%;align:center;">
 	<button id="addGerencia" value="{{$idEmpresa}}" class="btn btn btn-info"><i class="fa fa-plus"></i> Agregar Gerencia</button>
 </div>
 <table id="tablaGerencia" class="table">

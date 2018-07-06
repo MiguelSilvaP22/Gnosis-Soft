@@ -165,7 +165,7 @@
 			{!! Form::hidden('id_horario',$horarioActividad->id_horario) !!}
 		</div>
 		<div class='form-group'>
-			{!! Form::submit("Agregar Asignacion", ['class' => 'form-control btn btn-success ']) !!}
+			{!! Form::submit("Agregar Asignación", ['class' => 'form-control btn btn-success ']) !!}
 		</div>
 		{!! Form::close() !!}
 		<div class='form-group'>

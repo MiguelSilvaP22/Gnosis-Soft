@@ -4,6 +4,7 @@
 
 <body> 
 <div class="row">
+<<<<<<< HEAD
     <div class="col-xs-12">
         <div class="box">			
             <div class="box-header">
@@ -13,6 +14,102 @@
             <div class="row">  
                 <div class="col-xs-6">
                     <h2>Informacion Colaborador</h2>                   
+=======
+    <div class="col-md-4">
+    <h2>Información Colaborador</h2>
+    <div class="box">
+
+        <table class="table table-bordered"> 
+                    <tr>
+                    <td class="active">RUN</td>
+                    <td>{{ $colaborador->run_usuario }}</td>
+                    </tr>
+
+                    <tr>
+                    <td class="active">Nombre</td>
+                    <td>{{ $colaborador->nombre_usuario }}</td>
+                    </tr>
+                    
+
+                    <tr>
+                        <td class="active">Apellidos</td>
+                        <td>{{ $colaborador->apellidopat_usuario }}  {{ $colaborador->apellidomat_usuario }}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="active">Empresa</td>
+                        <td>{{ $colaborador->perfilOcupacional->area->gerencia->empresa->nombre_empresa }}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="active">Gerencia</td>
+                        <td>{{  $colaborador->perfilOcupacional->area->gerencia->nombre_gerencia }}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="active">Area</td>
+                        <td>{{$colaborador->perfilOcupacional->area->nombre_area }}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="active">Perfil Ocupacional</td>
+                        <td>{{$colaborador->perfilOcupacional->nombre_perfilocu }}</td>
+                    </tr>
+                </table>
+              
+
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+            <a href="../reporte/{{$colaborador->id_usuario}}" class="btn btn btn-info"> Exportar Información a pdf</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-1"></div>
+
+    <div class="col-md-4">
+    <h2 style="text-align: center">Resumen de Competencias: {{ $colaborador->perfilOcupacional->nombre_perfilocu }} </h2>
+        <canvas id="myChart" width="50" height="50"></canvas>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10">
+        <h3>Información de cursos</h3>
+        
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-10">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Información de Cursos Realizados
+                    </a>
+                </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-responsive">        
+                                <tr>
+                                    <td>Nombre Curso</td>
+                                    <td>Competencias</td>
+                                    <td>Fecha de inicio</td>
+                                    <td>Fecha de termino</td>
+                                    <td>Información</td>
+                                </tr>
+                                <tr>
+                                    <td> {{ $colaborador->horariosColaborador->last()->horario->actividad->curso->nombre_curso }} </td>
+                                    <td> 
+                                        @foreach($colaborador->horariosColaborador->last()->horario->actividad->curso->listaCompetencias as $comp)
+                                            {{ $comp->nombre_comp }} <br>
+                                        @endforeach 
+>>>>>>> 483834f01dd6c57cfdd1f476fbf0aad3d992e061
                         
                     <div class="box">
                         <table class="table table-bordered"> 

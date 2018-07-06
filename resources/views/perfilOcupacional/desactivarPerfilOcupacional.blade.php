@@ -6,7 +6,7 @@
 			<div class="box">
 			
 				<div class="box-header">
-					<h3 class="box-title">¿ Desea Desactivar el perfil Ocupaciona? : {{$perfilOcu->nombre_perfilocu}} ?</h3>
+					<h3 class="box-title">¿ Desea Desactivar el perfil Ocupacional? : {{$perfilOcu->nombre_perfilocu}} ?</h3>
 				</div>
 
 				<div class="box-body">
@@ -37,11 +37,9 @@ $(document).on('click', '#confirmDelete', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 $(document).on('click', '#exit', function () {
 		$('#modal').modal('hide');
 		refrescarPerfil({{$perfilOcu->id_area}});
-		//alert("asda");
 });
 </script>

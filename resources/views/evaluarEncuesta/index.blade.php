@@ -30,7 +30,7 @@
 
 								<td style="width:25%;">{{ $encuesta->nombre_encuesta}}</td>
 								<td style="width:25%;">{{ $encuesta->nombre_curso}}</td>
-								<td style="width:25%;">Codigo : {{ $encuesta->cod_interno_actividad}}
+								<td style="width:25%;">Código : {{ $encuesta->cod_interno_actividad}}
 									{{ date('d/m/Y',strtotime($encuesta->fecha_horario))}}</td>
 								<td>
 								@if(Count(App\EvaluacionEncuesta::findOrFail($encuesta->id_evencuesta)->alternativasEvaluacion) > 0)

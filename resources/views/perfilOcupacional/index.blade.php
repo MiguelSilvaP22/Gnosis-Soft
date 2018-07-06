@@ -1,4 +1,4 @@
-<div style="widtn:100%;align:center;">
+<div style="width:100%;align:center;">
 	<button id="addPerfil" value="{{$idArea}}" class="btn btn btn-info"><i class="fa fa-plus"></i> Agregar Perfil Ocupacional</button>
 </div>
 <table id="tablaPerfil" class="table">

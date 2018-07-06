@@ -11,7 +11,7 @@
 				<div class="box-header">
 					<h1 class="box-title">Tabla de Cursos</h1>
 				</div>
-				<div style="widtn:100%;align:center;">
+				<div style="width:100%;align:center;">
 					
 					<div id="btnAgregar" class="btn btn-block btn-success" style="float: right;margin-bottom: 10px;margin-right: 10px;width:200px;">
 						<i class="fa fa-plus"></i>	Agregar
@@ -34,7 +34,7 @@
 						<tr>
 
 							<td >
-								<p>Codigo: {{ $curso->cod_interno_curso}}</p>
+								<p>Código: {{ $curso->cod_interno_curso}}</p>
 								<p>Sence : {{ $curso->cod_sence_curso}}</p>
 							</td>
 							<td >{{ $curso->nombre_curso}}</td>
@@ -105,7 +105,6 @@ $(document).on('click', '#btnVer', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
 $(document).on('click', '#btnAgregar', function () {
@@ -122,7 +121,6 @@ $(document).on('click', '#btnAgregar', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
 
@@ -142,7 +140,6 @@ $(document).on('click', '#btnEditar', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
 
@@ -161,7 +158,6 @@ $(document).on('click', '#deleteCurso', function () {
 		}
 
 		});
-		//alert("asda");
 });
 
 

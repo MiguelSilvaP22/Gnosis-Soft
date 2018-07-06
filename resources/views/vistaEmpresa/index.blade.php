@@ -82,7 +82,7 @@
 					<div class="col-xs-6">
 						<div class="box">			
 							<div class="box-header">
-								<h1 class="box-title">Grafico: Cantidad de participantes por curso</h1>
+								<h1 class="box-title">Gráfico: Cantidad de participantes por curso</h1>
 							</div>
 							<div class="box-body">
 							<canvas id="myChart" width="50" height="50"></canvas>
@@ -130,7 +130,7 @@ $(document).ready(function() {
 		type: 'doughnut',
 		data: {
 		labels: [
-			@foreach($tablaResumen as $key=> $tableNom)
+			@foreach($tablaResumen as $key => $tableNom)
 				@if(Count($tablaResumen) > $key-1)
 				'{{$tableNom->nombre_curso}} ',
 				@else
@@ -140,7 +140,7 @@ $(document).ready(function() {
 			  
 		],
 		datasets: [{
-			data: [{{$dataGrafico->get('numeroParticipantes')}} ],
+			data: [{{$numeroParticipantes}} ],
 			backgroundColor: ["rgb(255, 99, 132)","rgb(75, 192, 192)","rgb(255, 205, 86)","rgb(201, 203, 207)","rgb(54, 162, 235)"]
 			}]
 	},

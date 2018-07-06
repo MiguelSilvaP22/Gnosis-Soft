@@ -20,7 +20,25 @@ class CompetenciaController extends Controller
     public function index()
     {
         $competencias = Competencia::all()->where('estado_comp',1);
-        return view('competencia.index', compact('competencias'));
+        if(session()->exists('Usuario'))
+        {
+            if(session('Usuario')->id_perfil == 1)
+            {
+                return view('competencia.index', compact('competencias'));
+            }
+            else
+            {
+                $errorVali = "Usted no esta autorizado a ingresar a este modulo";
+                return view('index.layoutindex', compact('errorVali'));
+            }
+            
+        }
+        else
+        {
+            $errorVali = "Usted no a ingresado al sistema";
+            return view('index.layoutindex', compact('errorVali'));
+        }
+        
     }
 
     /**

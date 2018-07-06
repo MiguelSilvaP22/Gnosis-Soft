@@ -74,7 +74,7 @@ desired effect
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="#" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>G</b>S</span>
       <!-- logo for regular state and mobile devices -->
@@ -198,16 +198,32 @@ desired effect
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="/adminlte/img/user3-128x128.jpg" class="user-image" alt="User Image">
+              @if(session()->exists('Usuario') && session('Usuario')->id_perfil==1)  
+                <img src="/adminlte/img/usuarioAdm.jpg" class="user-image" alt="User Image">
+              @elseif(session()->exists('Usuario') && session('Usuario')->id_perfil==2)
+               <img src="/adminlte/img/usuarioColab.jpg" class="user-image" alt="User Image">
+              @elseif(session()->exists('Usuario') && session('Usuario')->id_perfil==3)
+               <img src="/adminlte/img/usuarioEmpre.jpg" class="user-image" alt="User Image">
+              @elseif(session()->exists('Usuario') && session('Usuario')->id_perfil==4)
+                <img src="/adminlte/img/usuarioFaci.png" class="user-image" alt="User Image">
+              @endif
+              
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              @if(session('Usuario')!=null)            
+              @if(session()->exists('Usuario'))            
                 <span class="hidden-xs">{{session('Usuario')->nombre_usuario}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="/adminlte/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-
+              @if(session()->exists('Usuario') && session('Usuario')->id_perfil==1)  
+                <img src="/adminlte/img/usuarioAdm.jpg" class="img-circle" alt="User Image">
+              @elseif(session()->exists('Usuario') && session('Usuario')->id_perfil==2)
+                <img src="/adminlte/img/usuarioColab.jpg" class="img-circle" alt="User Image">
+              @elseif(session()->exists('Usuario') && session('Usuario')->id_perfil==3)
+                <img src="/adminlte/img/usuarioEmpre.jpg"class="img-circle" alt="User Image">
+              @elseif(session()->exists('Usuario') && session('Usuario')->id_perfil==4)
+                <img src="/adminlte/img/usuarioFaci.png" class="img-circle" alt="User Image">
+              @endif
                 <p>
 
                 {{session('Usuario')->nombre_usuario}} - {{session('Usuario')->perfil->nombre_perfil}}
@@ -245,9 +261,9 @@ desired effect
           </li>
           @endif
           <!-- Control Sidebar Toggle Button -->
-          <li>
+          {{-- <li>
             <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
+          </li>--}}
         </ul>
       </div>
     </nav>
@@ -261,11 +277,19 @@ desired effect
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="/adminlte/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+               @if(session()->exists('Usuario') && session('Usuario')->id_perfil==1)  
+                <img src="/adminlte/img/usuarioAdm.jpg" class="img-circle" alt="User Image">
+              @elseif(session()->exists('Usuario') && session('Usuario')->id_perfil==2)
+                <img src="/adminlte/img/usuarioColab.jpg" class="img-circle" alt="User Image">
+              @elseif(session()->exists('Usuario') && session('Usuario')->id_perfil==3)
+                <img src="/adminlte/img/usuarioEmpre.jpg"class="img-circle" alt="User Image">
+              @elseif(session()->exists('Usuario') && session('Usuario')->id_perfil==4)
+                <img src="/adminlte/img/usuarioFaci.png" class="img-circle" alt="User Image">
+              @endif
         </div>
         <div class="pull-left info">
-          @if(session('Usuario')!=null)         
-            <span class="hidden-xs">{{session('Usuario')->nombre_usuario}}</span>
+          @if(session()->exists('Usuario'))            
+            <span class="hidden-xs">{{session('Usuario')->nombre_usuario}}</span><br/>
             <span class="hidden-xs">{{session('Usuario')->run_usuario}}</span>
           @endif
           <!-- Status -->
@@ -285,11 +309,15 @@ desired effect
       </form>
       <!-- /.search form -->
       --}}
+      @if(session()->exists('Usuario'))
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">GnosisSoft</li>
         <!-- Optionally, you can add icons to the links -->
+        @if(session('Usuario')->id_perfil==1 || session('Usuario')->id_perfil==3)
         <li><a href="/admin"><i class="fa fa-home"></i> <span>Inicio</span></a></li>
+        @endif
+        @if(session('Usuario')->id_perfil==1 )
         <li class="treeview">
         <a href="#"><i class="fa fa-folder-o"></i> <span>Mantenedores</span>
             <span class="pull-right-container">
@@ -297,7 +325,7 @@ desired effect
               </span>
           </a>
         <ul class="treeview-menu">  
-          <li class="treeview">
+        {{--<li class="treeview">
             <a href="#"><i class="fa fa-group"></i> <span>Usuarios</span>
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
@@ -307,17 +335,18 @@ desired effect
               <li><a href="/usuario"><i class="fa fa-user-secret"></i> <span>Usuarios</span></a></li>
               <li><a href="/perfil"><i class="fa fa-user-secret"></i> <span>Perfiles</span></a></li>
             </ul>
-          </li>
+          </li>--}}
+          <li><a href="/usuario"><i class="fa fa-user-secret"></i> <span>Usuarios</span></a></li>
           <li><a href="/colaborador"><i class="fa fa-user"></i> <span>Colaboradores</span></a></li>
           <li><a href="/empresa"><i class="fa fa-building"></i> <span>Empresas</span></a></li>
           <li><a href="/curso"><i class="fa fa-graduation-cap"></i> <span>Cursos</span></a></li>
           <li><a href="/actividad"><i class="fa fa-book"></i> <span>Actividad</span></a></li>
-          <li><a href="/evaluacion"><i class="fa fa-pencil-square-o"></i> <span>Evaluación</span></a></li>
           <li><a href="/competencia"><i class="fa fa-th-list"></i> <span>Competencias</span></a></li>
           <li><a href="/encuesta"><i class="fa fa-paper-plane"></i> <span>Encuesta</span></a></li>
           </ul>
         </li>
-
+        @endif
+        @if(session('Usuario')->id_perfil==1 || session('Usuario')->id_perfil==3)
         <li class="treeview">
         <a href="#"><i class="fa fa-sitemap"></i> <span>Empresa</span>
             <span class="pull-right-container">
@@ -335,14 +364,15 @@ desired effect
                 </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="#"><i class="fa fa-sticky-note-o"></i> <span>Estado Curso</span></a></li>
+              <li><a href="/verEstadoCurso"><i class="fa fa-sticky-note-o"></i> <span>Estado Curso</span></a></li>
               <li><a href="/vistacurso"><i class="fa fa-exclamation"></i> <span>Información Curso</span></a></li>
             </ul>
           </li>
           <li><a href="/vistacompetencia"><i class="fa fa-street-view"></i> <span>Competencias</span></a></li>
           </ul>
         </li>
-
+        @endif
+        @if(session('Usuario')->id_perfil==1 || session('Usuario')->id_perfil==4)
         <li class="treeview">
         <a href="#"><i class="fa fa-graduation-cap"></i> <span>Facilitador</span>
             <span class="pull-right-container">
@@ -354,6 +384,8 @@ desired effect
             <li><a href="/facilitador"><i class="fa fa-edit"></i> <span>Actividades</span></a></li>
           </ul>
         </li>
+        @endif
+        @if(session('Usuario')->id_perfil==1 || session('Usuario')->id_perfil==2)
         <li class="treeview">
         <a href="#"><i class="fa fa-graduation-cap"></i> <span>Colaborador</span>
             <span class="pull-right-container">
@@ -365,22 +397,9 @@ desired effect
             <li><a href="/evaluarEncuesta"><i class="fa fa-edit"></i> <span>Encuesta</span></a></li>
           </ul>
         </li>
-
-        {{--
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Competencias</span>
-            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
-          </ul>
-        </li>
-        --}}
-
+        @endif
       </ul>
+      @endif
       <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
@@ -389,16 +408,7 @@ desired effect
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Bienvenido a GnosisSoft
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i>Empresa</a></li>
-        <li class="active">Inicio</li>
-      </ol>
-    </section>
-
+    
     <!-- Main content -->
     <section class="content container-fluid">
 

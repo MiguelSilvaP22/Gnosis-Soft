@@ -15,12 +15,12 @@
 					{!! Form::model($curso, [ 'enctype'=>"multipart/form-data",'method' => 'PATCH', 'action' => ['CursoController@update',$curso->id_curso],'id'=>'formCurso']) !!}
 						<div class="col-md-12">
 							<div class='form-group'>
-								{!! Form::label('', 'Codigo:') !!}
+								{!! Form::label('', 'Código:') !!}
 								{!! Form::text('cod_interno_curso', null, ['class' => 'form-control','id'=>'cod_interno_curso','maxlength'=>'500']) !!}
 								{!! Form::label('', '',['id' => 'errCodigoCurso']) !!}
 							</div>
 							<div class='form-group'>
-								{!! Form::label('', 'Codigo Sence:') !!}
+								{!! Form::label('', 'Código SENCE:') !!}
 								{!! Form::text('cod_sence_curso', null, ['class' => 'form-control','id'=>'cod_sence_curso','maxlength'=>'500']) !!}
 								{!! Form::label('', '',['id' => 'errCodigoSenceCurso']) !!}
 							</div>
@@ -66,16 +66,17 @@
 							</div>	
 							@foreach ($contenidosGenerales as $key => $contenidoGeneral)
 							<div class='form-group'>
+							<div class="input-group"> 
 								{!! Form::text('contenidoGeneral[]', $contenidoGeneral->nombre_contenidog, ['class' => 'form-control' , 'id'=>'contenidoGeneral'.$key.'']) !!}
 								{!! Form::label('', '',['id' => 'errcontenidoGeneral'.$key.'']) !!}
-								<button type="button" class="btn btn-default" aria-label="Left Align" onclick="eliminarContenido({{$key}})" id="btnEliminarContenido{{$key}}">   <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> </button>
+								<span type="button" class="input-group-addon"aria-label="Left Align" onclick="eliminarContenido({{$key}})" id="btnEliminarContenido{{$key}}">  <i class="fa fa-remove"></i> </span>
+							</div>
 							</div>	
 							@endforeach
 							<div class='form-group'>
 								{!! Form::label('', 'Temario: ') !!} <a href="{{asset('temario/'.$curso->link_temario_curso)}}" target="_blank">{{$curso->link_temario_curso}}</a>
 								{!! Form::input('file','temario_curso', null, ['class' => 'form-control','id'=> 'temario_curso', 'onChange'=>'ValidateSingleInput(this);']) !!}
 								{!! Form::label('', '',['id' => 'errTemarioCurso']) !!}
-								
 							</div>	
 						<div class='form-group'>
 							{!! Form::submit("Editar Curso", ['class' => 'form-control btn btn-success ']) !!}
@@ -101,8 +102,7 @@ console.log(count);
 $('#addContenido').click(function() {
 	count++;
 
-	$('#addContenido').parent().append('<input class="form-control" name="contenidoGeneral[]" id="contenidoGeneral'+count+'" type="text" ">');
-	$('#addContenido').parent().append('<button type="button" class="btn btn-default" aria-label="Left Align" onclick="eliminarContenido('+count+')" id="btnEliminarContenido'+count+'">   <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> </button>');
+	$('#addContenido').parent().append('<div class="input-group">  <input class="form-control" name="contenidoGeneral[]" id="contenidoGeneral'+count+'" type="text" "> <span type="button" class="input-group-addon" aria-label="Left Align" onclick="eliminarContenido('+count+')" id="btnEliminarContenido'+count+'">  <i class="fa fa-remove"></i> </span> </div>');
 	$('#addContenido').parent().append('<label id="errcontenidoGeneral'+count+'">');
 	
 });
@@ -123,6 +123,7 @@ $('#formCurso').submit(function (e) {
 	{
 		$.post(url, formData, function (response) { // send; response.data will be what is returned
 			$('#modal').modal('hide');
+			location.href = '/curso';
 		});
 	}
 });

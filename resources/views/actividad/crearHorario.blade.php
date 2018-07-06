@@ -143,11 +143,10 @@
 
 function guardar()
 {	
-	$('#formularioHorario').submit();
-	console.log($("#horaIniHora").val() + $("#horaTermHora").val() )
+	//console.log($("#horaIniHora").val() + $("#horaTermHora").val() )
 	if(validarHorario())
 	{
-		//$('#formularioHorario').submit();
+		$('#formularioHorario').submit();
 	}		
 	else{
 		console.log('asd');
@@ -191,7 +190,6 @@ function eliminarHorario(id) {
 		}
 
 		});
-		//alert("asda");
 };
 $(document).on('click', '#btnVolver', function () {
 	$('#modal').modal('hide');

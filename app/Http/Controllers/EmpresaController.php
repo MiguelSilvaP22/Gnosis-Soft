@@ -22,7 +22,25 @@ class EmpresaController extends Controller
     public function index()
     {   
         $empresas = Empresa::all()->where('estado_empresa',1);
-        return view('empresa.index', compact('empresas'));
+        if(session()->exists('Usuario'))
+        {
+            if(session('Usuario')->id_perfil == 1)
+            {
+                return view('empresa.index', compact('empresas'));
+            }
+            else
+            {
+                $errorVali = "Usted no esta autorizado a ingresar a este modulo";
+                return view('index.layoutindex', compact('errorVali'));
+            }
+            
+        }
+        else
+        {
+            $errorVali = "Usted no a ingresado al sistema";
+            return view('index.layoutindex', compact('errorVali'));
+        }
+        
     }
 
     /**

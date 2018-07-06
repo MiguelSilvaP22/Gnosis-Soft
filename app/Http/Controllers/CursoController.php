@@ -23,7 +23,25 @@ class CursoController extends Controller
     public function index()
     {
         $cursos = Curso::all()->where('estado_curso',1);
-        return view('curso.index', compact('cursos'));
+        if(session()->exists('Usuario'))
+        {
+            if(session('Usuario')->id_perfil == 1)
+            {
+                return view('curso.index', compact('cursos'));
+            }
+            else
+            {
+                $errorVali = "Usted no esta autorizado a ingresar a este modulo";
+                return view('index.layoutindex', compact('errorVali'));
+            }
+            
+        }
+        else
+        {
+            $errorVali = "Usted no a ingresado al sistema";
+            return view('index.layoutindex', compact('errorVali'));
+        }
+        
     }
 
     /**
@@ -140,7 +158,6 @@ class CursoController extends Controller
      */
     public function update(Request $request, $id)
     {
-       
         $contenidosGenerales = $request->contenidoGeneral;
         $competencias = $request->id_competencia;
         $curso = Curso::findOrFail($id);
@@ -197,8 +214,8 @@ class CursoController extends Controller
                 
                 
             }
-            if($_FILES['temario_curso']!= null)
-            {
+            if(isset(["file"]['temario_curso']))
+            {            
                 $dir_subida = public_path()."/temario/";
                 $ext = pathinfo($_FILES['temario_curso']['name'], PATHINFO_EXTENSION);
                 $nombreTemario = "temario_curso_".$curso->id_curso.".".$ext;
@@ -209,6 +226,7 @@ class CursoController extends Controller
                     $curso->save();
                 } 
             }
+            
             
         }
         return redirect('curso');

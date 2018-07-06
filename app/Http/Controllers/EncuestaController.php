@@ -20,7 +20,25 @@ class EncuestaController extends Controller
     public function index()
     {   
         $encuestas = Encuesta::all()->where('estado_encuesta',1);
-        return view('encuesta.index', compact('encuestas'));
+        if(session()->exists('Usuario'))
+        {
+            if(session('Usuario')->id_perfil == 1)
+            {
+                return view('encuesta.index', compact('encuestas'));
+            }
+            else
+            {
+                $errorVali = "Usted no esta autorizado a ingresar a este modulo";
+                return view('index.layoutindex', compact('errorVali'));
+            }
+            
+        }
+        else
+        {
+            $errorVali = "Usted no a ingresado al sistema";
+            return view('index.layoutindex', compact('errorVali'));
+        }
+        
     }
     public function create()
     {   
@@ -203,6 +221,31 @@ class EncuestaController extends Controller
         $categoriasPreguntas = Categoria::all()->where('estado_categoria',1)->sortBy('nombre_categoria')->pluck('nombre_categoria','id_categoria');
         return view('encuesta.formCategoriaPreguntas',compact('categoriasPreguntas','id'));
 
+    }
+    public function indexEncuestas()
+    {
+        $encuestasColaborador = DB::table('encuesta')
+                ->join('evaluacionencuesta', 'encuesta.id_encuesta', '=', 'evaluacionencuesta.id_encuesta')
+                ->join('horariocolaborador', 'evaluacionencuesta.id_horacolab', '=', 'horariocolaborador.id_horacolab')
+                ->join('horario', 'horariocolaborador.id_horario', '=', 'horario.id_horario')
+                ->join('actividad', 'horario.id_actividad', '=', 'actividad.id_actividad')
+                ->join('curso', 'actividad.id_curso', '=', 'curso.id_curso')
+                ->where('horariocolaborador.id_usuario',session('Usuario')->id_usuario)
+                ->where('evaluacionencuesta.estado_evencuesta',1)
+                ->where('encuesta.estado_encuesta',1)
+                ->where('actividad.estado_actividad',1)
+                ->where('horariocolaborador.estado_horacolab',1)
+                ->where('curso.estado_curso',1)
+                ->select(
+                'encuesta.nombre_encuesta',
+                'evaluacionencuesta.id_evencuesta',
+                'evaluacionencuesta.id_horacolab',
+                'horario.fecha_horario',
+                'curso.nombre_curso',
+                'actividad.id_actividad',
+                'actividad.cod_interno_actividad'
+                )->get();
+        return view('evaluarEncuesta.index',compact('encuestasColaborador'));
     }
 
 }

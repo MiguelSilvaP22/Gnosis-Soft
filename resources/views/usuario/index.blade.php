@@ -1,7 +1,13 @@
 @extends('admin.layout')
 
+
 @section ('content')
 
+<h1>Mantenedor Usuarios</h1>
+<ol class="breadcrumb">
+	<li><a href="/admin"><i class="fa fa-dashboard"></i>Inicio</a></li>
+	<li class="active">Usuarios</li>
+</ol> 
 <body> 
   <div class="row">
 		<div class="col-xs-12">
@@ -11,7 +17,7 @@
 				<div class="box-header">
 					<h1 class="box-title">Tabla de Usuarios</h1>
 				</div>
-				<div style="widtn:100%;align:center;">
+				<div style="width:100%;align:center;">
 					
 					<div id="btnAgregar" class="btn btn-block btn-success" style="float: right;margin-bottom: 10px;margin-right: 10px;width:200px;">
 						<i class="fa fa-plus"></i>	Agregar
@@ -44,7 +50,7 @@
 								<td></td>
 								<td ></td>
 							@endif
-							<td >{{ $usuario->fecha_mod_usuario}}</td>
+							<td >{{ date('d/m/Y',strtotime($usuario->fecha_mod_usuario))}}</td>
 							<td>
 							<button id="btnVer" value="{{ $usuario->id_usuario}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
 
@@ -111,7 +117,6 @@ $(document).on('click', '#btnVer', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
 $(document).on('click', '#btnAgregar', function () {
@@ -128,7 +133,6 @@ $(document).on('click', '#btnAgregar', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
 
@@ -148,7 +152,6 @@ $(document).on('click', '#btnEditar', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
 
@@ -167,7 +170,6 @@ $(document).on('click', '#deleteUsuario', function () {
 		}
 
 		});
-		//alert("asda");
 });
 
 

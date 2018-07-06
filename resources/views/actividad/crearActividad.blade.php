@@ -24,12 +24,12 @@
 								{!! Form::label('', '',['id' => 'errIdCurso']) !!}
 							</div>
 							<div class='form-group'>
-								{!! Form::label('', 'Codigo:') !!}
+								{!! Form::label('', 'Código:') !!}
 								{!! Form::text('cod_interno_actividad', null, ['class' => 'form-control','id'=>'cod_interno_actividad','maxlength'=>'500']) !!}
 								{!! Form::label('', '',['id' => 'errCodigoInternoActividad']) !!}
 							</div>
 							<div class='form-group'>
-								{!! Form::label('', 'Codigo Sence:') !!}
+								{!! Form::label('', 'Código SENCE:') !!}
 								{!! Form::text('cod_sence_actividad', null, ['class' => 'form-control','id'=>'cod_sence_actividad','maxlength'=>'500']) !!}
 								{!! Form::label('', '',['id' => 'errCodigoSenceActividad']) !!}
 							</div>
@@ -49,7 +49,7 @@
 								{!! Form::label('', '',['id' => 'errFechaTerminoActividad']) !!}
 							</div>
 							<div class='form-group'>
-								{!! Form::label('', 'Observacion:') !!}
+								{!! Form::label('', 'Observación:') !!}
 								{!! Form::textArea('observacion_actividad', null, ['class' => 'form-control','id'=>'observacion_actividad','maxlength'=>'1000']) !!}
 								{!! Form::label('', '',['id' => 'errObservacionActividad']) !!}
 							</div>
@@ -87,6 +87,7 @@
 	{
 		$.post(url, formData, function (response) { // send; response.data will be what is returned
 			$('#modal').modal('hide');
+			location.href = '/actividad';
 		});
 	}
 });

@@ -27,4 +27,8 @@ class Empresa extends Model
             }
         }
     }
+    public function getFullNameAttribute()
+    {
+        return $this->nombre_empresa . ' (' . $this->rut_matriz_empresa.')';
+    }
 }

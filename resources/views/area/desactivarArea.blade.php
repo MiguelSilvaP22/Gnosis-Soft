@@ -37,11 +37,9 @@ $(document).on('click', '#confirmDelete', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 $(document).on('click', '#exit', function () {
 		$('#modal').modal('hide');
 		refrescarArea({{$area->id_gerencia}});
-		//alert("asda");
 });
 </script>

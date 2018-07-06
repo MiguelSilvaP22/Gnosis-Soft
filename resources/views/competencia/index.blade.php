@@ -11,12 +11,12 @@
 				<div class="box-header">
 					<h1 class="box-title">Tabla de Competencias</h1>
 				</div>
-				<div style="widtn:100%;align:center;">
+				<div style="width:100%;align:center;">
 					
 					<div id="btnAgregar" class="btn btn-block btn-success" style="float: right;margin-bottom: 10px;margin-right: 10px;width:200px;">
 						<i class="fa fa-plus"></i>	Agregar
 					</div>
-					<div id="btnVerTrash" class="btn btn-block btn-success" style="float: right;margin-top: 0px;margin-bottom: 10px;margin-right: 10px;width:200px;">
+					{{--<div id="btnVerTrash" class="btn btn-block btn-success" style="float: right;margin-top: 0px;margin-bottom: 10px;margin-right: 10px;width:200px;">
 						<i class="fa fa-trash"></i>	Ver Eliminados
 					</div>
 
@@ -26,7 +26,7 @@
 
 					<div id="btnImportar" class="btn btn-block btn-success" style="float: right;margin-top: 0px;margin-bottom: 10px;margin-right: 10px;width:200px;">
 						<i class="fa fa-trash"></i> Importar Competencias
-					</div>
+					</div>--}}
 
 				</div>
 				<div class="box-body">
@@ -35,7 +35,7 @@
 					<thead>
 						<tr>
 							<th>Nombre Competencia</th>
-							<th>Categoria</th>
+							<th>Categoría</th>
 							<th>Fecha de Modificación</th>
 							<th>Estado</th>
 							<th>Acciones</th>
@@ -110,6 +110,7 @@ $(document).on('click', '#btnAgregar', function () {
                 });
 			$(document).ready(function() {
 				$('.select').select();
+				//location.href = '/competencia';
 			});
 		}
 
@@ -133,7 +134,6 @@ $(document).on('click', '#editCompetencia', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
 $(document).on('click', '#verCompetencia', function () {
@@ -152,7 +152,6 @@ $(document).on('click', '#verCompetencia', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
 
@@ -181,7 +180,6 @@ $(document).on('click', '#btnImportar', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
 

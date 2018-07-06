@@ -24,8 +24,26 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $usuarios = Usuario::all()->where('estado_usuario',1);
-        return view('usuario.index', compact('usuarios'));
+        $usuarios = Usuario::all()->where('estado_usuario',1)->where('id_perfil','<>',2)->sortBy('run_usuario');
+        if(session()->exists('Usuario'))
+        {
+            if(session('Usuario')->id_perfil == 1)
+            {
+                return view('usuario.index', compact('usuarios'));
+            }
+            else
+            {
+                $errorVali = "Usted no esta autorizado a ingresar a este modulo";
+                return view('index.layoutindex', compact('errorVali'));
+            }
+            
+        }
+        else
+        {
+            $errorVali = "Usted no a ingresado al sistema";
+            return view('index.layoutindex', compact('errorVali'));
+        }
+        
     }
 
     /**

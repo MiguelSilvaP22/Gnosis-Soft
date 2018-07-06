@@ -40,7 +40,25 @@ class ColaboradorController extends Controller
             ->get();
         }    */
        // dd($colaboradoresEmpresa);
-        return view('colaborador.index', compact('colaboradores'));
+       if(session()->exists('Usuario'))
+       {
+           if(session('Usuario')->id_perfil == 1)
+           {
+                return view('colaborador.index', compact('colaboradores'));
+           }
+           else
+           {
+               $errorVali = "Usted no esta autorizado a ingresar a este modulo";
+               return view('index.layoutindex', compact('errorVali'));
+           }
+           
+       }
+       else
+       {
+           $errorVali = "Usted no a ingresado al sistema";
+           return view('index.layoutindex', compact('errorVali'));
+       }
+       
     }
 
     /**
@@ -175,8 +193,26 @@ class ColaboradorController extends Controller
 
     public function indexVista()
     {
-        $colaboradores = Usuario::all()->where('id_perfil',2)->where('estado_usuario',1);
-        return view('vistaColaborador.index', compact('colaboradores'));
+        if(session('Usuario')->id_perfil == 3)
+        {
+            $colaboradoresEmpresa = DB::table('usuario')
+            ->join('perfilocupacional', 'usuario.id_perfilocu', '=', 'perfilocupacional.id_perfilocu')
+            ->join('area', 'perfilocupacional.id_area', '=', 'area.id_area')
+            ->join('gerencia', 'area.id_gerencia', '=', 'gerencia.id_gerencia')
+            ->join('empresa', 'gerencia.id_empresa', '=', 'empresa.id_empresa')
+            ->where('empresa.id_empresa',session('Usuario')->perfilocupacional->area->gerencia->empresa->id_empresa)
+            ->where('usuario.id_perfil',2)
+            ->where('usuario.estado_usuario',1)
+            ->select('usuario.*','empresa.nombre_empresa','perfilocupacional.nombre_perfilocu')
+            ->get()
+            ->sortBy('nombre_usuario');
+        }
+        else
+        {
+            $colaboradoresEmpresa = array();
+            $colaboradores = Usuario::all()->where('id_perfil',2)->where('estado_usuario',1);
+        }
+        return view('vistaColaborador.index', compact('colaboradores','colaboradoresEmpresa'));
     }
 
     public function showVista($id)
@@ -191,35 +227,43 @@ class ColaboradorController extends Controller
             $nombreCompetencias []= $comp->nombre_comp;
         }
         
-        $count2=0;$promedioComp=[];$notasComp=0;
-        foreach ($colaborador->evaluacionDNC->last()->rolEvaluacion as $key => $nivelEva)
+
+        if(Count($colaborador->evaluacionDNC) > 0)
         {
-            $notasComp += $nivelEva->nivel_rolevaluacion;
-            if(($key+1)%5 ==0)
+            $count2=0;$promedioComp=[];$notasComp=0;
+            foreach ($colaborador->evaluacionDNC->last()->rolEvaluacion as $key => $nivelEva)
             {
-                $promedioComp[$count2]=$notasComp/5;
-                if($promedioComp[$count2]<2.5)
+                $notasComp += $nivelEva->nivel_rolevaluacion;
+                if(($key+1)%5 ==0)
                 {
-                    $sugerenciasCursos[]= $nivelEva->rolDesempeno->competencia->cursos;
+                    $promedioComp[$count2]=$notasComp/5;
+                    if($promedioComp[$count2]<2.5)
+                    {
+                        $sugerenciasCursos[]= $nivelEva->rolDesempeno->competencia->cursos;
+                    }
+                    $count2++;
+                    $notasComp=0;
                 }
-                $count2++;
-                $notasComp=0;
-
             }
+           
+
+            $labelPromedio= implode(",",$promedioComp);
+            
+            $labelCompetencias= "'".implode("','",$nombreCompetencias)."'";
+            
+            
+            //dd($labelCompetencias);
+
+            \Debugbar::info($colaborador->horariosColaborador->last()->horario->actividad);
+
+            \Debugbar::info($sugerenciasCursos);
+        }else
+        {
+            $labelCompetencias = null;
+            $labelPromedio = null;
+            $sugerenciasCursos = null;
         }
-
-
-        $labelPromedio= implode(",",$promedioComp);
         
-        $labelCompetencias= "'".implode("','",$nombreCompetencias)."'";
-        
-
-        //dd($labelCompetencias);
-
-        \Debugbar::info($colaborador->horariosColaborador->last()->horario->actividad);
-
-        \Debugbar::info($sugerenciasCursos);
-
        /* $pdf = \PDF::loadView('vistaColaborador.detalle', compact('colaborador', 'labelCompetencias','labelPromedio')); 
         return $pdf->download('ReporteColaborador.pdf'); */
         return view('vistaColaborador.detalle', compact('colaborador', 'labelCompetencias','labelPromedio', 'sugerenciasCursos'));

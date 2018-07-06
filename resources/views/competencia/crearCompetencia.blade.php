@@ -26,7 +26,7 @@
 				</div>
 
 				<div class='form-group'>
-					{!! Form::label('nombre_categoriacomp', 'Categoria:') !!}
+					{!! Form::label('nombre_categoriacomp', 'Categoría:') !!}
 					{!! Form::select('id_categoriacomp', $categoriascompetencias,null ,['class' => 'form-control','placeholder'=>'Seleccione una opción.','id'=>'id_categoriacomp', 'style'=>'width:100%']) !!}
 					{!! Form::label('', '',['id' => 'errCategoriaCompetencia']) !!}
 				</div>	

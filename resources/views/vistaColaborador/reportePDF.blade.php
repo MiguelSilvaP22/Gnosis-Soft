@@ -99,7 +99,7 @@ Hora: {{$now->format('H:i:s')}}
 <br>
 
 <div class="tablaCompetencias">
-<h4 class="subtitulo">Informacion de Competencias</h4>
+<h4 class="subtitulo">Informacion de Competencias Asociadas al Perfil Ocupacional</h4>
             <table class="table table-bordered" >        
                 <tr>
                     <td class="active">Nombre Competencia</td>
@@ -141,36 +141,6 @@ Hora: {{$now->format('H:i:s')}}
             </table>
 </div>
 </div>
-<br><br>
-<div class="page-break"></div>
-<div class="row">
-    <div class="col-md-10">
-        <h3>Informacion de cursos</h3>
-        <div class="box">
-            <table class="table table-responsive">        
-                <tr>
-                    <td>Nombre Curso</td>
-                    <td>Competencias</td>
-                    <td>Fecha de incio</td>
-                    <td>Fecha de termino</td>
-                </tr>
-                <tr>
-                    <td> {{ $colaborador->horariosColaborador->last()->horario->actividad->curso->nombre_curso }} </td>
-                    <td> 
-                        @foreach($colaborador->horariosColaborador->last()->horario->actividad->curso->listaCompetencias as $comp)
-                            {{ $comp->nombre_comp }} <br>
-                        @endforeach 
-        
-                    </td>
-                    <td>{{ $colaborador->horariosColaborador->last()->horario->actividad->fecha_inicio_actividad }} </td>
-                    <td>{{ $colaborador->horariosColaborador->last()->horario->actividad->fecha_termino_actividad }} </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-</div>
-</body>
-
 
 <script>
 

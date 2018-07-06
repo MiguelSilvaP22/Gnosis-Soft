@@ -14,12 +14,12 @@
 					{!! Form::open([ 'enctype'=>"multipart/form-data",'action' => 'CursoController@store','id'=>'formCurso', 'files' => true]) !!}
 						<div class="col-md-12">
 							<div class='form-group'>
-								{!! Form::label('', 'Codigo:') !!}
+								{!! Form::label('', 'Código:') !!}
 								{!! Form::text('cod_interno_curso', null, ['class' => 'form-control','id'=>'cod_interno_curso','maxlength'=>'500']) !!}
 								{!! Form::label('', '',['id' => 'errCodigoCurso']) !!}
 							</div>
 							<div class='form-group'>
-								{!! Form::label('', 'Codigo Sence:') !!}
+								{!! Form::label('', 'Código SENCE:') !!}
 								{!! Form::text('cod_sence_curso', null, ['class' => 'form-control','id'=>'cod_sence_curso','maxlength'=>'500']) !!}
 								{!! Form::label('', '',['id' => 'errCodigoSenceCurso']) !!}
 							</div>
@@ -95,9 +95,7 @@
 	var count =0;
 	$('#addContenido').click(function() {
 		count++;
-		
-		$('#addContenido').parent().append('<input class="form-control" name="contenidoGeneral[]" id="contenidoGeneral'+count+'" type="text" ">');
-		$('#addContenido').parent().append('<button type="button" class="btn btn-default" aria-label="Left Align" onclick="eliminarContenido('+count+')" id="btnEliminarContenido'+count+'">   <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> </button>');
+		$('#addContenido').parent().append('<div class="input-group"> <input class="form-control" name="contenidoGeneral[]" id="contenidoGeneral'+count+'" type="text" "> <span type="button" class="input-group-addon" aria-label="Left Align" onclick="eliminarContenido('+count+')" id="btnEliminarContenido'+count+'"> <i class="fa fa-remove"></i> </span> </div>');
 		$('#addContenido').parent().append('<label id="errcontenidoGeneral'+count+'">');
 
 
@@ -116,6 +114,7 @@
 	{
 		$.post(url, formData, function (response) { // send; response.data will be what is returned
 			$('#modal').modal('hide');
+			location.href = '/curso';
 		});
 	}
 	});

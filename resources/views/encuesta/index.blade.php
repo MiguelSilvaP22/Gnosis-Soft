@@ -11,7 +11,7 @@
 				<div class="box-header">
 					<h1 class="box-title">Tabla de Encuestas</h1>
 				</div>
-				<div style="widtn:100%;align:center;">
+				<div style="width:100%;align:center;">
 					
 					<div id="btnAgregar" class="btn btn-block btn-success" style="float: right;margin-bottom: 10px;margin-right: 10px;width:200px;">
 						<i class="fa fa-plus"></i>	Agregar

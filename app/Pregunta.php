@@ -18,7 +18,7 @@ class Pregunta extends Model
 
     public function alternativasPregunta()
     {
-        return $this->hasMany(AlternativaPregunta::class,'id_pregunta');
+        return $this->hasMany(AlternativaPregunta::class,'id_pregunta')->where('estado_altvpre',1);
     }
 
     public function categoria()

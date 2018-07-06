@@ -60,7 +60,7 @@
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Nacionalidad:') !!}
-								{!! Form::select('id_nacionalidad',null ,['class' => 'select2','placeholder'=>'Seleccione una nacionalidad','id'=>'id_nacionalidad', 'style'=>'width:100%']) !!}
+								{!! Form::select('id_nacionalidad',$nacionalidades,null ,['class' => 'select2','placeholder'=>'Seleccione una nacionalidad','id'=>'id_nacionalidad', 'style'=>'width:100%']) !!}
 								{!! Form::label('', '',['id' => 'errNacionalidad']) !!}
 							</div>	
 						</div>
@@ -209,6 +209,7 @@ $('#formUsuario').submit(function (e) {
 	{
 		$.post(url, formData, function (response) { // send; response.data will be what is returned
 			$('#modal').modal('hide');
+			location.href = '/usuario';
 		});
 		
 	}

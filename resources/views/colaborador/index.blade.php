@@ -11,7 +11,7 @@
 				<div class="box-header">
 					<h1 class="box-title">Tabla de Colaboradores</h1>
 				</div>
-				<div style="widtn:100%;align:center;">
+				<div style="width:100%;align:center;">
 					
 					<div id="btnAgregar" class="btn btn-block btn-success" style="float: right;margin-bottom: 10px;margin-right: 10px;width:200px;">
 						<i class="fa fa-plus"></i>	Agregar
@@ -38,8 +38,8 @@
 							<td >{{ $colaborador->perfilOcupacional->nombre_perfilocu}}</td>
 							<td >{{ $colaborador->fecha_mod_usuario}}</td>
 							<td>
-							<button id="btnVer" value="{{ $colaborador->id_usuario}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
-
+							{{--<button id="btnVer" value="{{ $colaborador->id_usuario}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>--}}
+							<button id="btnEvaluar" value="{{ $colaborador->id_usuario}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Evaluar</button>
 							<button id="btnEditar" value="{{ $colaborador->id_usuario}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>
 
 							<button id="deleteColaborador" class="btn btn btn-info" value="{{ $colaborador->id_usuario}}"><i class="fa fa-eraser"></i> Eliminar</button>
@@ -103,9 +103,19 @@ $(document).on('click', '#btnVer', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
+$(document).on('click', '#btnEvaluar', function () {
+		$.ajax({
+		url: "/infoColaborador/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#datos").html(datos);
+			$('#modal').modal('show');
+		}
+
+		});
+});	
 $(document).on('click', '#btnAgregar', function () {
 		$.ajax({
 		url: "/crearColaborador/",
@@ -120,7 +130,6 @@ $(document).on('click', '#btnAgregar', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
 
@@ -140,7 +149,6 @@ $(document).on('click', '#btnEditar', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
 
@@ -159,7 +167,6 @@ $(document).on('click', '#deleteColaborador', function () {
 		}
 
 		});
-		//alert("asda");
 });
 
 

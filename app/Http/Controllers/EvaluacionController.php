@@ -23,16 +23,33 @@ class EvaluacionController extends Controller
     
     public function index()
     {
-        return view('evaluacion.index');
+        if(session()->exists('Usuario'))
+        {
+            if(session('Usuario')->id_perfil == 1)
+            {
+                return view('evaluacion.index');
+            }
+            else
+            {
+                $errorVali = "Usted no esta autorizado a ingresar a este modulo";
+                return view('index.layoutindex', compact('errorVali'));
+            }
+            
+        }
+        else
+        {
+            $errorVali = "Usted no a ingresado al sistema";
+            return view('index.layoutindex', compact('errorVali'));
+        }
+        
     }
 
-    public function create()
+    public function create($id)
     {
-       $colaboradores = Usuario::all()->where('id_perfil',2)->where('estado_usuario',1)->sortBy('rut_usuario')->pluck('run_usuario','id_usuario');
-        
+        //$colaboradores = Usuario::all()->where('id_perfil',2)->where('estado_usuario',1)->sortBy('rut_usuario')->pluck('run_usuario','id_usuario');
+        $colaborador = Usuario::findOrFail($id);
         //$colaboradores = Usuario::all()->where('id_perfil',2)->where('estado_usuario',1);
-        \Debugbar::info($colaboradores);
-        return view('evaluacion.crearEvaluacion', compact('colaboradores'));
+        return view('evaluacion.crearEvaluacion', compact('colaborador'));
         
     }
 
@@ -45,7 +62,6 @@ class EvaluacionController extends Controller
 
     public function store(Request $request)
     {
-
         $evaluaciondnc = new EvaluacionDNC;
         $evaluaciondnc->id_usuario = $request->id_usuario;
         $evaluaciondnc->observacion = $request->observacion;
@@ -67,7 +83,7 @@ class EvaluacionController extends Controller
             }
 
         }
-        return redirect('evaluacion');
+        return redirect('colaborador');
 
     }
     
@@ -78,12 +94,15 @@ class EvaluacionController extends Controller
        $competencias = Competencia::All()->where('estado_comp',1)->where('id_perfilocu',$colaborador->id_perfilocu);
        $listaCompetencias = $perfilOcupacional->competencias->pluck('nombre_comp','id_comp');
        //$colaboradores = Usuario::all()->where('id_perfil',2)->where('estado_usuario',1);
-       $tiponivel = TipoNivel::All()->where('estado_tiponivel',1);
+       $tiponivel = TipoNivel::All()->where('estado_tiponivel',1)->sortByDesc('id_tiponivel');
        //\Debugbar::info($colaborador->perfilOcupacional->competencias->last()->rolDesempenos->last()->rolEvaluaciones->last()->evaluacionDnc);
+
+       \Debugbar::info($tiponivel);
 
       /* \Debugbar::info($colaborador->evaluacionDNC->where('estado_evaluacion',1)->last()->rolEvaluacion);
 
 */
+        \Debugbar::info($tiponivel);
 
         return view('evaluacion.infoColaborador', compact('colaborador','perfilOcupacional', 'listaCompetencias', 'tiponivel'));
         

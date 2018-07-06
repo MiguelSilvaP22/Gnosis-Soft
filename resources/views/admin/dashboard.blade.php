@@ -1,6 +1,8 @@
 @extends('admin.layout')
 
 @section ('content')
+
+<h1>Bienvenido a GnosisSoft - Admin Dashboard</h1>
 <body>
 	<!-- Calendario -->
 	<div class="col-md-10">

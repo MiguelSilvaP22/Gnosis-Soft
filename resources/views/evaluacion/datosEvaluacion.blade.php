@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-5">
-		<h4>Evaluacion de Colaborador</h4>
+		<h4>Evaluación de Colaborador</h4>
 	</div>
 </div>
 
@@ -30,7 +30,7 @@
 <div class="row">
 	<div class="col-md-10">
 		<div class='form-group'>
-					{!! Form::label('', 'Observacion:') !!}
+					{!! Form::label('', 'Observación:') !!}
 					{!! Form::textArea('observacion', null, ['class' => 'form-control']) !!}
 		</div>
 	</div>

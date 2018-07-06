@@ -13,7 +13,7 @@ class PreguntaEncuesta extends Model
 
     public function pregunta()
     {
-        return $this->belongsTo(Pregunta::class,'id_pregunta');
+        return $this->belongsTo(Pregunta::class,'id_pregunta')->where('estado_pregunta',1);
     }
     public function encuesta()
     {

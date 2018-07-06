@@ -24,7 +24,7 @@
 					<div class='form-group'  id="datosEvaluacion"></div>
 
 				<div class='form-group'>
-					{!! Form::submit("Agregar Evaluacion", ['class' => 'form-control btn btn-success ']) !!}
+					{!! Form::submit("Agregar Evaluación", ['class' => 'form-control btn btn-success ']) !!}
 				</div>
 
 				{!! Form::close() !!}

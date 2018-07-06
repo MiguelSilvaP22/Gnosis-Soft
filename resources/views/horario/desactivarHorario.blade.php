@@ -31,11 +31,9 @@ $(document).on('click', '#confirmDelete', function () {
 		}
 
 		});
-		//alert("asda");
 });
 $(document).on('click', '#exit', function () {
 		$('#modalBorrar').modal('hide');
 
-		//alert("asda");
 });
 </script>

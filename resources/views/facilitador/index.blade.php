@@ -16,7 +16,7 @@
 				<table id="tablaActividad" class="table">
 					<thead>
 						<tr>
-							<th>Codigo Actividad</th>
+							<th>Código Actividad</th>
 							<th>Curso</th>
 							<th>Fecha</th>
 							<th>Horarios</th>
@@ -44,7 +44,7 @@
 				<table id="tablaActividad" class="table">
 					<thead>
 						<tr>
-							<th>Codigo Actividad</th>
+							<th>Código Actividad</th>
 							<th>Curso</th>
 							<th>Fecha</th>
 							<th>Horarios</th>
@@ -68,7 +68,7 @@
 									<p>{{ "Facilitador: ".$horarioFacilitador->usuario->nombre_usuario}}</p>
 								@endforeach	
 								@else
-									<p>{{ "Facilitador: Sin Aisgnar"}}</p>
+									<p>{{ "Facilitador: Sin Asignar"}}</p>
 								@endif
 								</a>
 							</nav>	
@@ -161,7 +161,6 @@ function verHorarioFacilitador(id){
 		}
 
 		});
-		//alert("asda");
 };	
 
 

@@ -1,7 +1,7 @@
 <div class="col-xs-12" id="columnaPregunta{{$id}}">
 	<div class="box">
 		<div class="box-header">
-			<h3 class="box-title">Preguntas por Categoria</h3>
+			<h3 class="box-title">Preguntas por Categoría</h3>
 			<span id="btnEliminarColumnaPregunta" onClick="eliminarColumnaPregunta({{$id}});" class="btn btn-default btn-flat" style="float: right;">
 				<i class="fa fa-remove"></i>
 			</span>
@@ -10,9 +10,9 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div id='categoriaPreguntas{{$id}}' class='form-group' >								
-						{!! Form::label('', 'Categoria Preguntas:') !!}
+						{!! Form::label('', 'Categoría Preguntas:') !!}
 						<div class="input-group">	
-							{!! Form::select('id_categoriaPregunta['.$id.']', $categoriasPreguntas,null ,['class' => 'select2','placeholder'=>'Seleccione una Categoria', 'id'=>'id_categoriaPregunta'.$id.'', 'style'=>'width:100%']) !!}
+							{!! Form::select('id_categoriaPregunta['.$id.']', $categoriasPreguntas,null ,['class' => 'select2','placeholder'=>'Seleccione una Categoría', 'id'=>'id_categoriaPregunta'.$id.'', 'style'=>'width:100%']) !!}
 							<span type="button" class="input-group-addon" aria-label="Left Align" onclick="addCategoriaPreguntas({{$id}})" id="btnaddCategoriaPreguntas{{$id}}"> <i class="fa fa-plus"></i> </span>
 						</div>
 					</div>
@@ -34,7 +34,7 @@
 											{!! Form::radio('alternativa['.$id.']', '1'); !!} Satisfacción
 											{!! Form::radio('alternativa['.$id.']', '2'); !!} Escala de Notas	
 											{!! Form::radio('alternativa['.$id.']', '3'); !!} Si / No	
-											{!! Form::radio('alternativa['.$id.']', '4'); !!} Opinion
+											{!! Form::radio('alternativa['.$id.']', '4'); !!} Opinión
 										</div>
 									</td>
 								</tr>	

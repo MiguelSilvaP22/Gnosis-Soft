@@ -66,6 +66,5 @@ function guardarEvaluacion() {
 
 $(document).on('click', '#btnExit', function () {
 		$('#modalEvaluacion').modal('hide');
-		//alert("asda");
 });
 </script>

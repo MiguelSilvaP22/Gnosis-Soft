@@ -126,6 +126,5 @@ function evaluarColaborador(id){
 	}
 
 	});
-	//alert("asda");
 };	
 </script>

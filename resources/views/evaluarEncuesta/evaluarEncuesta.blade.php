@@ -2,7 +2,7 @@
 <div class="col-xs-12">			
 	<div class="box">
 		<div class="box-header">
-			<h1 class="box-title">Evaluacion de {{$evaluacionColaborador->encuesta->nombre_encuesta}}</h1>
+			<h1 class="box-title">Evaluación de {{$evaluacionColaborador->encuesta->nombre_encuesta}}</h1>
 		</div>
 		<div class="box-body">
 		{!! Form::open(['action' => 'EvaluarEncuestaController@store','id'=>'formEvaEncuesta']) !!}

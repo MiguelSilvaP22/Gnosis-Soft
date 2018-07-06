@@ -7,7 +7,7 @@
 
 <div class="row">
     <div class="col-md-4">
-    <h2>Informacion Colaborador</h2>
+    <h2>Información Colaborador</h2>
     <div class="box">
 
         <table class="table table-bordered"> 
@@ -60,14 +60,14 @@
 
 <div class="row">
     <div class="col-md-10">
-        <h3>Informacion de cursos</h3>
+        <h3>Información de cursos</h3>
         <div class="box">
              <div class="table-responsive">
                 <table class="table table-responsive">        
                     <tr>
                         <td>Nombre Curso</td>
                         <td>Competencias</td>
-                        <td>Fecha de incio</td>
+                        <td>Fecha de inicio</td>
                         <td>Fecha de termino</td>
                         <td>Información</td>
                     </tr>
@@ -92,7 +92,7 @@
 
 <div class="row">
     <div class="col-md-10">
-        <a href="../reporte/{{$colaborador->id_usuario}}" class="btn btn btn-info"> Expotar Informacion a pdf</a>
+        <a href="../reporte/{{$colaborador->id_usuario}}" class="btn btn btn-info"> Exportar Información a pdf</a>
     </div>
 </div>
 

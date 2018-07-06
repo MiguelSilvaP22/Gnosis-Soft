@@ -82,7 +82,7 @@
 					<div class="col-xs-6">
 						<div class="box">			
 							<div class="box-header">
-								<h1 class="box-title">Grafico: Cantidad de participantes por curso</h1>
+								<h1 class="box-title">Gráfico: Cantidad de participantes por curso</h1>
 							</div>
 							<div class="box-body">
 							<canvas id="myChart" width="50" height="50"></canvas>

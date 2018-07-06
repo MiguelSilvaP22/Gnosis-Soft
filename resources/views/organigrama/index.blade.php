@@ -112,7 +112,6 @@ $(document).on('click', '#addGerencia', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
 $(document).on('click', '#editGerencia', function () {
@@ -130,7 +129,6 @@ $(document).on('click', '#editGerencia', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
 $(document).on('click', '#deleteGerencia', function () {
@@ -148,7 +146,6 @@ $(document).on('click', '#deleteGerencia', function () {
 		}
 
 		});
-		//alert("asda");
 });
 function refrescarArea(id)
 {
@@ -226,7 +223,6 @@ $(document).on('click', '#addArea', function () {
 		}
 
 		});
-		//alert("asda");
 });	  
 
 $(document).on('click', '#editArea', function () {
@@ -240,7 +236,6 @@ $(document).on('click', '#editArea', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
 $(document).on('click', '#deleteArea', function () {
@@ -254,7 +249,6 @@ $(document).on('click', '#deleteArea', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
 // Perfil-----------------------------------------------
@@ -302,7 +296,6 @@ $(document).on('click', '#addPerfil', function () {
 		}
 
 		});
-		//alert("asda");
 });	  
 
 $(document).on('click', '#editPerfil', function () {
@@ -316,7 +309,6 @@ $(document).on('click', '#editPerfil', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 
 $(document).on('click', '#deletePerfil', function () {
@@ -330,7 +322,6 @@ $(document).on('click', '#deletePerfil', function () {
 		}
 
 		});
-		//alert("asda");
 });	
 </script>
 

@@ -5,12 +5,12 @@
 		</div>
 
 		<div class="container">
-			<p>Informaion del curso</p>
+			<p>Información del curso</p>
 			<h5>  <strong>Objetivo: </strong>  {{$curso->objetivo_curso}}</h5> 
-			<h5>  <strong>Descripcion: </strong>  {{$curso->desc_curso}}</h5> 
+			<h5>  <strong>Descripción: </strong>  {{$curso->desc_curso}}</h5> 
 			<h5>  <strong>Cantidad de Horas: </strong>  {{$curso->cant_hora_curso}} horas.</h5> 
-			<h5>  <strong>Codigo Curso: </strong>  {{$curso->cod_interno_curso}} </h5> 
-			<h5>  <strong>Codigo Sence: </strong>  {{$curso->cod_sence_curso}} </h5> 
+			<h5>  <strong>Código Curso: </strong>  {{$curso->cod_interno_curso}} </h5> 
+			<h5>  <strong>Código Sence: </strong>  {{$curso->cod_sence_curso}} </h5> 
 			<h5>  <strong>Area: </strong>  {{$area->nombre_areacurso}} </h5> 
 			<h5>  <strong>Modalidad: </strong>  {{$modalidad->nombre_modalidad}} </h5> 
 		</div>

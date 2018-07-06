@@ -285,10 +285,6 @@ Route::resource('colaborador', 'ColaboradorController');
 
 Route::get('/evaluacion', 'EvaluacionController@index');
 
-Route::get('/crearEvaluacionDNC', 'EvaluacionController@create')
-->name('evaluacion.crear');
-
-
 Route::get('/infoColaborador/{id}', 'EvaluacionController@infocolaborador',function($id) {
     return  $id;
   })
@@ -498,6 +494,16 @@ Route::get('/vercursos/{id}', 'vistaCursoController@vistacursos',function($id) {
   });
 
   Route::get('/infocurso/{id}', 'vistaCursoController@infocurso',function($id) {
+    return  $id;
+  });
+  Route::get('/verEstadoCurso', 'vistaCursoController@indexEstadoCurso');
+  Route::get('/cursosEmpresa/{id}', 'vistaCursoController@cursoEmpresa',function($id) {
+    return  $id;
+  });
+  Route::get('/actividadesCursoEmpresa/{id}', 'vistaCursoController@actividadesCursoEmpresa',function($id) {
+    return  $id;
+  });
+  Route::get('/informacionCurso/{id}', 'vistaCursoController@informacionCurso',function($id) {
     return  $id;
   });
 //-------------------------------------------------------------------------------------------------------------------------

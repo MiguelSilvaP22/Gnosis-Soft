@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\EvaluacionEncuesta;
+use App\AlternativaEvaluacion;
 
 use DB;
 use App\Quotation;
@@ -34,7 +35,7 @@ class EvaluarEncuestaController extends Controller
                 'actividad.id_actividad',
                 'actividad.cod_interno_actividad'
                 )->get();
-        return view('evaluarEncuesta.index',compact('encuestasColaborador'));
+        return view('evaluarEncuesta.index',compact('encuestasColaborador','evaluacionColaborador'));
     }
 
     public function create($id)
@@ -43,10 +44,18 @@ class EvaluarEncuestaController extends Controller
         //dd($evaluacionColaborador->Encuesta->preguntasEncuesta[0]->pregunta->alternativasPregunta[0]->alternativa);
         return view('evaluarEncuesta.evaluarEncuesta',compact('evaluacionColaborador'));
     }
-    public function store($id)
+    public function store(Request $request)
     {
-        $evaluacionColaborador = EvaluacionEncuesta::findOrFail($id);
-        //dd($evaluacionColaborador->Encuesta->preguntasEncuesta[0]->pregunta->alternativasPregunta[0]->alternativa);
-        return view('evaluarEncuesta.evaluarEncuesta',compact('evaluacionColaborador'));
+
+        foreach($request->respuestas as $idPregunta => $idAlternativa)
+        {
+            $respuestas = new AlternativaEvaluacion();
+            $respuestas->id_evencuesta = $request->id_evencuesta;
+            $respuestas->id_alternativa = $idAlternativa;
+            $respuestas->comentario_altvev = $request->comentario_altvev[$idPregunta];
+            $respuestas->estado_altvev = 1;
+            $respuestas->save();
+        }
+        return redirect('evaluarEncuesta');
     }
 }

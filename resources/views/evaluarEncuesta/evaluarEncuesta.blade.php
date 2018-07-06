@@ -17,9 +17,13 @@
 
 								{!! $alternativaPregunta->alternativa->nombre_alternativa !!}	 
 								
-									{!! Form::radio("evaluacion[".$preguntaEncuesta->pregunta->id_pregunta."]", $alternativaPregunta->alternativa->id_alternativa, null) !!} 
+									{!! Form::radio("respuestas[".$preguntaEncuesta->pregunta->id_pregunta."]", $alternativaPregunta->alternativa->id_alternativa, null) !!} 
 
-								@endforeach	
+								@endforeach
+								<div class='form-group'>
+									{!! Form::label('', 'Comentario:') !!}
+									{!! Form::textArea('comentario_altvev['.$preguntaEncuesta->pregunta->id_pregunta.']', null, ['class' => 'form-control','rows'=>'4','cols'=>'50','id'=>'comentario_altvev','maxlength'=>'1000']) !!}
+								</div>	
 							</div>
 						</div>
 					</div>		
@@ -27,6 +31,7 @@
 				@endforeach
 			</div>
 			<div class='form-group'>
+				{!! Form::hidden('id_evencuesta',$evaluacionColaborador->id_evencuesta, ['class' => 'form-control']) !!}
 				{!! Form::submit("Responder", ['class' => 'form-control btn btn-success ']) !!}
 			</div>
 		{!! Form::close() !!}	

@@ -33,8 +33,10 @@
 								<td style="width:25%;">Codigo : {{ $encuesta->cod_interno_actividad}}
 									{{ date('d/m/Y',strtotime($encuesta->fecha_horario))}}</td>
 								<td>
-								@if(date('d/m/Y',strtotime($encuesta->fecha_horario)) > date('d/m/Y'))
-									<button id="btnEvaluar" value="{{ $encuesta->id_evencuesta }}" class="btn btn btn-info"><i class="fa fa-eye"></i> Responder</button>
+								@if(Count(App\EvaluacionEncuesta::findOrFail($encuesta->id_evencuesta)->alternativasEvaluacion) > 0)
+									<button id="btnEvaluar" value="{{ $encuesta->id_evencuesta }}" disabled="true" class="btn btn btn-info"><i class="fa fa-eye"></i> Respondida</button>
+								@elseif(date('d/m/Y',strtotime($encuesta->fecha_horario)) > date('d/m/Y'))
+									<button id="btnEvaluar" value="{{ $encuesta->id_evencuesta }}"  class="btn btn btn-info"><i class="fa fa-eye"> </i> Responder</button>
 								@else	
 									<button id="btnEvaluar" value="{{ $encuesta->id_evencuesta }}" disabled="true" class="btn btn btn-info"><i class="fa fa-eye"></i> Responder</button>
 								@endif

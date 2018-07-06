@@ -27,7 +27,7 @@
 						<tbody>
 							@foreach ($colaboradoresEmpresa as $colaborador) 
 							<tr>
-								<td style="width:25%;">{{ $colaborador->nombre_usuario. $colaborador->apellidopat_usuario.$colaborador->apellidomat_usuario}}</td>
+								<td style="width:25%;">{{ $colaborador->nombre_usuario." ".$colaborador->apellidopat_usuario." ".$colaborador->apellidomat_usuario}}</td>
 								<td style="width:25%;">{{ $colaborador->nombre_empresa}}</td>
 								<td style="width:25%;">{{ $colaborador->nombre_perfilocu}}</td>
 								<td>
@@ -52,7 +52,7 @@
 						<tbody>
 							@foreach ($colaboradores as $colaborador) 
 							<tr>
-								<td style="width:25%;">{{ $colaborador->nombre_usuario. $colaborador->apellidopat_usuario.$colaborador->apellidomat_usuario}}</td>
+								<td style="width:25%;">{{ $colaborador->nombre_usuario." ". $colaborador->apellidopat_usuario." ".$colaborador->apellidomat_usuario}}</td>
 								<td style="width:25%;">{{ $colaborador->perfilOcupacional->area->gerencia->empresa->nombre_empresa}}</td>
 								<td style="width:25%;">{{ $colaborador->perfilOcupacional->nombre_perfilocu}}</td>
 								<td>

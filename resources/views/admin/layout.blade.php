@@ -341,7 +341,6 @@ desired effect
           <li><a href="/empresa"><i class="fa fa-building"></i> <span>Empresas</span></a></li>
           <li><a href="/curso"><i class="fa fa-graduation-cap"></i> <span>Cursos</span></a></li>
           <li><a href="/actividad"><i class="fa fa-book"></i> <span>Actividad</span></a></li>
-          <li><a href="/evaluacion"><i class="fa fa-pencil-square-o"></i> <span>Evaluación</span></a></li>
           <li><a href="/competencia"><i class="fa fa-th-list"></i> <span>Competencias</span></a></li>
           <li><a href="/encuesta"><i class="fa fa-paper-plane"></i> <span>Encuesta</span></a></li>
           </ul>
@@ -365,7 +364,7 @@ desired effect
                 </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="#"><i class="fa fa-sticky-note-o"></i> <span>Estado Curso</span></a></li>
+              <li><a href="/verEstadoCurso"><i class="fa fa-sticky-note-o"></i> <span>Estado Curso</span></a></li>
               <li><a href="/vistacurso"><i class="fa fa-exclamation"></i> <span>Información Curso</span></a></li>
             </ul>
           </li>

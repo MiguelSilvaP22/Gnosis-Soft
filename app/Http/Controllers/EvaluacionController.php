@@ -44,13 +44,12 @@ class EvaluacionController extends Controller
         
     }
 
-    public function create()
+    public function create($id)
     {
-       $colaboradores = Usuario::all()->where('id_perfil',2)->where('estado_usuario',1)->sortBy('rut_usuario')->pluck('run_usuario','id_usuario');
-        
+        //$colaboradores = Usuario::all()->where('id_perfil',2)->where('estado_usuario',1)->sortBy('rut_usuario')->pluck('run_usuario','id_usuario');
+        $colaborador = Usuario::findOrFail($id);
         //$colaboradores = Usuario::all()->where('id_perfil',2)->where('estado_usuario',1);
-        \Debugbar::info($colaboradores);
-        return view('evaluacion.crearEvaluacion', compact('colaboradores'));
+        return view('evaluacion.crearEvaluacion', compact('colaborador'));
         
     }
 
@@ -63,7 +62,6 @@ class EvaluacionController extends Controller
 
     public function store(Request $request)
     {
-
         $evaluaciondnc = new EvaluacionDNC;
         $evaluaciondnc->id_usuario = $request->id_usuario;
         $evaluaciondnc->observacion = $request->observacion;
@@ -85,7 +83,7 @@ class EvaluacionController extends Controller
             }
 
         }
-        return redirect('evaluacion');
+        return redirect('colaborador');
 
     }
     

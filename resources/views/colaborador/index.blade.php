@@ -38,8 +38,8 @@
 							<td >{{ $colaborador->perfilOcupacional->nombre_perfilocu}}</td>
 							<td >{{ $colaborador->fecha_mod_usuario}}</td>
 							<td>
-							{--<button id="btnVer" value="{{ $colaborador->id_usuario}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>--}
-
+							{{--<button id="btnVer" value="{{ $colaborador->id_usuario}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>--}}
+							<button id="btnEvaluar" value="{{ $colaborador->id_usuario}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Evaluar</button>
 							<button id="btnEditar" value="{{ $colaborador->id_usuario}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>
 
 							<button id="deleteColaborador" class="btn btn btn-info" value="{{ $colaborador->id_usuario}}"><i class="fa fa-eraser"></i> Eliminar</button>
@@ -105,6 +105,17 @@ $(document).on('click', '#btnVer', function () {
 		});
 });	
 
+$(document).on('click', '#btnEvaluar', function () {
+		$.ajax({
+		url: "/infoColaborador/"+this.value,
+		type: "GET",
+		success: function (datos) {
+			$("#datos").html(datos);
+			$('#modal').modal('show');
+		}
+
+		});
+});	
 $(document).on('click', '#btnAgregar', function () {
 		$.ajax({
 		url: "/crearColaborador/",

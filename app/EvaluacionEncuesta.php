@@ -15,4 +15,9 @@ class EvaluacionEncuesta extends Model
     {
         return $this->belongsTo(Encuesta::class,'id_encuesta')->where('estado_encuesta',1);
     }
+    
+    public function alternativasEvaluacion()
+    {
+        return $this->hasMany(AlternativaEvaluacion::class,'id_evencuesta')->where('estado_altvev',1);
+    }
 }

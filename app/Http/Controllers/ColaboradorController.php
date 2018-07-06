@@ -209,7 +209,7 @@ class ColaboradorController extends Controller
         }
         else
         {
-            $colaboradoresEmpresa = null;
+            $colaboradoresEmpresa = array();
             $colaboradores = Usuario::all()->where('id_perfil',2)->where('estado_usuario',1);
         }
         return view('vistaColaborador.index', compact('colaboradores','colaboradoresEmpresa'));
@@ -227,35 +227,43 @@ class ColaboradorController extends Controller
             $nombreCompetencias []= $comp->nombre_comp;
         }
         
-        $count2=0;$promedioComp=[];$notasComp=0;
-        foreach ($colaborador->evaluacionDNC->last()->rolEvaluacion as $key => $nivelEva)
+
+        if(Count($colaborador->evaluacionDNC) > 0)
         {
-            $notasComp += $nivelEva->nivel_rolevaluacion;
-            if(($key+1)%5 ==0)
+            $count2=0;$promedioComp=[];$notasComp=0;
+            foreach ($colaborador->evaluacionDNC->last()->rolEvaluacion as $key => $nivelEva)
             {
-                $promedioComp[$count2]=$notasComp/5;
-                if($promedioComp[$count2]<2.5)
+                $notasComp += $nivelEva->nivel_rolevaluacion;
+                if(($key+1)%5 ==0)
                 {
-                    $sugerenciasCursos[]= $nivelEva->rolDesempeno->competencia->cursos;
+                    $promedioComp[$count2]=$notasComp/5;
+                    if($promedioComp[$count2]<2.5)
+                    {
+                        $sugerenciasCursos[]= $nivelEva->rolDesempeno->competencia->cursos;
+                    }
+                    $count2++;
+                    $notasComp=0;
                 }
-                $count2++;
-                $notasComp=0;
-
             }
+           
+
+            $labelPromedio= implode(",",$promedioComp);
+            
+            $labelCompetencias= "'".implode("','",$nombreCompetencias)."'";
+            
+            
+            //dd($labelCompetencias);
+
+            \Debugbar::info($colaborador->horariosColaborador->last()->horario->actividad);
+
+            \Debugbar::info($sugerenciasCursos);
+        }else
+        {
+            $labelCompetencias = null;
+            $labelPromedio = null;
+            $sugerenciasCursos = null;
         }
-
-
-        $labelPromedio= implode(",",$promedioComp);
         
-        $labelCompetencias= "'".implode("','",$nombreCompetencias)."'";
-        
-
-        //dd($labelCompetencias);
-
-        \Debugbar::info($colaborador->horariosColaborador->last()->horario->actividad);
-
-        \Debugbar::info($sugerenciasCursos);
-
        /* $pdf = \PDF::loadView('vistaColaborador.detalle', compact('colaborador', 'labelCompetencias','labelPromedio')); 
         return $pdf->download('ReporteColaborador.pdf'); */
         return view('vistaColaborador.detalle', compact('colaborador', 'labelCompetencias','labelPromedio', 'sugerenciasCursos'));

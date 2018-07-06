@@ -252,7 +252,7 @@ class CompetenciaController extends Controller
         $competencia->estado_comp = 0;
         if($competencia->save())
         {
-            return redirect('competencia');
+            return Redirect::action('busqueda@index');
         }
     }
 }

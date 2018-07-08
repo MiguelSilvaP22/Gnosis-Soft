@@ -39,7 +39,7 @@ class vistaCursoController extends Controller
         {
             if(session('Usuario')->id_perfil ==1 || session('Usuario')->id_perfil ==3 )
             {
-                return view('vistacurso.index', compact('competencias','areaCursos', 'listaCursos'));
+                return view('vistaCurso.index', compact('competencias','areaCursos', 'listaCursos'));
             }
             else
             {
@@ -65,7 +65,7 @@ class vistaCursoController extends Controller
     {
         $cursos = Curso::All()->where('estado_curso',1)->where('id_areacurso',$idArea);
         \Debugbar::info($cursos);
-        return view('vistacurso.cursos', compact('cursos'));
+        return view('vistaCurso.cursos', compact('cursos'));
     }
 
     public function infocurso($idCurso)
@@ -82,7 +82,7 @@ class vistaCursoController extends Controller
 
         //$nivelesnombre = array_merge($niveles, $tiponivel);
 
-        return view('vistacurso.infocurso', compact('curso','area', 'modalidad'));
+        return view('vistaCurso.infocurso', compact('curso','area', 'modalidad'));
     }
 
     public function indexEstadoCurso()

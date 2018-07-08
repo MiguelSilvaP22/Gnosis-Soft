@@ -31,7 +31,7 @@ class vistaCompetenciaController extends Controller
         {
             if(session('Usuario')->id_perfil ==1 || session('Usuario')->id_perfil ==3 )
             {
-                return view('vistacompetencia.index', compact('competencias','categoriascompetencias', 'listaCompetencias'));
+                return view('vistaCompetencia.index', compact('competencias','categoriascompetencias', 'listaCompetencias'));
             }
             else
             {
@@ -57,7 +57,7 @@ class vistaCompetenciaController extends Controller
     {
         $competencias = Competencia::All()->where('estado_comp',1)->where('id_categoriacomp',$idCategoria);
         \Debugbar::info($competencias);
-        return view('vistacompetencia.competencias', compact('competencias'));
+        return view('vistaCompetencia.competencias', compact('competencias'));
     }
 
     public function infocompetencia($idCompetencia)
@@ -71,7 +71,7 @@ class vistaCompetenciaController extends Controller
         //$nivelesnombre = array_merge($niveles, $tiponivel);
         \Debugbar::info($competencia->cursos);
 
-        return view('vistacompetencia.infocompetencia', compact('competencia','roldesempenos','niveles'));
+        return view('vistaCompetencia.infocompetencia', compact('competencia','roldesempenos','niveles'));
     }
 
     /**

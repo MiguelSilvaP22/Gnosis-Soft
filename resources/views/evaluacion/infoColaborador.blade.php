@@ -1,11 +1,11 @@
 <div class="row">
-<<<<<<< HEAD
+
 	<div class="col-xs-12">
 	{!! Form::open(['action' => 'EvaluacionController@store','id'=>'formEvaluacion']) !!}
 		<div class="box">
 			<div class="box-header">
 				<h1 class="box-title">Datos Colaborador</h1>
-=======
+
 	<div class="col-md-5">
 		<h4>Datos Colaborador</h4>
 	</div>
@@ -53,7 +53,7 @@
 				 {{ $comp->nombre_comp }} 
 				   </a>
 				</h4>
->>>>>>> 483834f01dd6c57cfdd1f476fbf0aad3d992e061
+
 			</div>
 			<div class="box-body">
 				<div class="col-xs-12">

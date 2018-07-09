@@ -63,7 +63,7 @@
 								<tbody>
 									@foreach($infoCurso as $colaborador)
 									<tr>
-										<td >{{$colaborador->run_usuario}}</td>
+										<td ><a href="{{route('encuesta.VerColaborador', ['id' => $colaborador->id_usuario])}}">{{$colaborador->run_usuario}}</a></td>
 										<td >{{$colaborador->nombre_usuario." ".$colaborador->apellidopat_usuario." ".$colaborador->apellidomat_usuario}}</td>
 										<td >{{date('d/m/Y',strtotime($colaborador->fecha_inicio_actividad))}}</td>
 										<td >{{date('d/m/Y',strtotime($colaborador->fecha_termino_actividad))}}</td>

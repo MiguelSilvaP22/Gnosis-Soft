@@ -166,6 +166,7 @@ class vistaCursoController extends Controller
         ->where('usuario.estado_usuario',1)
         ->select(
             DB::raw("DISTINCT usuario.run_usuario") ,
+            'usuario.id_usuario',
             'usuario.nombre_usuario',
             'usuario.apellidopat_usuario',
             'usuario.apellidomat_usuario',

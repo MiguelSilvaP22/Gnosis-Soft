@@ -45,26 +45,9 @@
 									</h4>
 								</div>
 
-								<div id="collapse{{$key0}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{$key0}}">
-									<div class="panel-body">
-									@foreach($comp->rolDesempenos as $key1 => $roldesempeno)
-										{!! Form::label('', $roldesempeno->nombre_roldesempeno) !!}								
-										<p>
-										@foreach($tiponivel as $key2 => $nivel)
-									
-										{!! $nivel->nombre_tiponivel !!}	 
-											@if(($roldesempeno->rolEvaluaciones->count()>0) && ($roldesempeno->rolEvaluaciones->last()->nivel_rolevaluacion == $key2+1 && $roldesempeno->rolEvaluaciones->last()->evaluacionDNC->id_usuario == $colaborador->id_usuario))
-											{!! Form::radio("prueba[$roldesempeno->id_roldesempeno]", $roldesempeno->id_roldesempeno."-".$nivel->id_tiponivel, true) !!} 
-											@else
-											{!! Form::radio("prueba[$roldesempeno->id_roldesempeno]", $roldesempeno->id_roldesempeno."-".$nivel->id_tiponivel, null) !!} 
-											@endif
-										@endforeach
-										</p>
-									@endforeach	
-									</div>
-								</div>
+								
 								@endforeach
-								</div>
+							</div>
 						</div>
 						<div class='form-group'>
 							{!! Form::label('', 'Observacion:') !!}

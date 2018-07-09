@@ -9,6 +9,7 @@ use App\Gerencia;
 use App\Area;
 use App\Competencia;
 use App\PerfilOcupacional;
+use App\rolDesempeno;
 use Hash;
 use PDF;
 use DB;

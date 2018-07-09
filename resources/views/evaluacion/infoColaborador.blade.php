@@ -4,55 +4,6 @@
 		<div class="box">
 			<div class="box-header">
 				<h1 class="box-title">Datos Colaborador</h1>
-
-	<div class="col-md-5">
-		<h4>Datos Colaborador</h4>
-	</div>
-</div>
-<div class="row">
-	<div class="col-md-6">
-		<div class='form-group'>
-			{!! Form::label('', 'Nombre Colaborador:') !!}
-			{!! Form::text('nombre_usuario', $colaborador->nombre_usuario, ['class' => 'form-control','id'=>'nombre_usuario','disabled'=>'disabled']) !!}
-		</div>
-	</div>
-	<div class="col-md-6">
-	<div class='form-group'>
-			{!! Form::label('', 'Apellido Colaborador:') !!}
-			{!! Form::text('nombre_usuario', $colaborador->apellidopat_usuario, ['class' => 'form-control','id'=>'nombre_usuario','disabled'=>'disabled']) !!}
-		</div>
-	</div>
-</div>
-
-<div class="row">
-	<div class="col-md-6">
-		<div class='form-group'>
-			{!! Form::label('', 'Perfil Ocupacional:') !!}
-			{!! Form::text('nombre_usuario', $perfilOcupacional->nombre_perfilocu, ['class' => 'form-control','id'=>'nombre_usuario','disabled'=>'disabled']) !!}
-		</div>
-	</div>
-</div>
-
-
-<div class="row">
-	<div class="col-md-5">
-		<h4>Evaluación de Colaborador</h4>
-	</div>
-</div>
-
-
-<div class="row">
-	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-		<div class="panel panel-default">
-			@foreach($colaborador->perfilOcupacional->competencias as $key0 => $comp)
-			
-			<div class="panel-heading" role="tab" id="heading{{$key0}}">
-				<h4 class="panel-title">
-					<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$key0}}" aria-expanded="false" aria-controls="collapseOne">
-				 {{ $comp->nombre_comp }} 
-				   </a>
-				</h4>
-
 			</div>
 			<div class="box-body">
 				<div class="col-xs-12">

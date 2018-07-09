@@ -18,7 +18,7 @@ class Competencia extends Model
 
     public function rolDesempenos()
     {
-        return $this->hasMany(rolDesempeno::Class, 'id_comp');
+        return $this->hasMany(RolDesempeno::Class, 'id_comp');
     }
 
     public function cursos()

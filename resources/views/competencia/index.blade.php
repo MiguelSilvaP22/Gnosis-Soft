@@ -54,7 +54,7 @@
 							<td style="width:25%;color:red">inactivo</td>
 							@endif
 							<td>
-								<button id="verCompetencia" value="{{ $competencia->id_comp}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
+								{{--<button id="verCompetencia" value="{{ $competencia->id_comp}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>--}}
 
 								<button class="btn btn btn-info" id="editCompetencia" value="{{$competencia->id_comp}}"><i class="fa fa-edit"></i> Editar</button>
 

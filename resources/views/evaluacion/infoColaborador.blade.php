@@ -69,9 +69,9 @@
 						<div class='form-group'>
 							{!! Form::label('', 'Observacion:') !!}
 							@if(Count($colaborador->evaluacionDNC) > 0)
-								{!! Form::textArea('observacion', $colaborador->evaluacionDNC->last()->observacion, ['class' => 'form-control',"rows"=>"4"]) !!}
+								{!! Form::textArea('observacion', $colaborador->evaluacionDNC->last()->observacion, ['class' => 'form-control',"rows"=>"5","cols"=>"5"]) !!}
 							@else
-								{!! Form::textArea('observacion', null, ['class' => 'form-control']) !!}
+								{!! Form::textArea('observacion', null, ['class' => 'form-control',"rows"=>"5","cols"=>"5"]) !!}
 							@endif
 							{!! Form::hidden('id_usuario', $colaborador->id_usuario, ['class' => 'form-control']) !!}
 						</div>

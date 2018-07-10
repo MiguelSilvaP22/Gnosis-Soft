@@ -43,7 +43,7 @@
 							@endif
 							<td>
 								<a id="btnOrg" href="{{ route('organigrama.index', ['id'=>$empresa->id_empresa] ) }}" class="btn btn btn-info"><i class="fa fa-sitemap"></i> Organigrama</a>
-								<button id="btnVer" value="{{ $empresa->id_empresa}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
+								{{--<button id="btnVer" value="{{ $empresa->id_empresa}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>--}}
 
 								<button id="btnEditar" value="{{ $empresa->id_empresa}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>
 

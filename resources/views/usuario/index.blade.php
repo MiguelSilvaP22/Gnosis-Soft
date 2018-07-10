@@ -52,7 +52,7 @@
 							@endif
 							<td >{{ date('d/m/Y',strtotime($usuario->fecha_mod_usuario))}}</td>
 							<td>
-							<button id="btnVer" value="{{ $usuario->id_usuario}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
+							{{--<button id="btnVer" value="{{ $usuario->id_usuario}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>--}}
 
 							<button id="btnEditar" value="{{ $usuario->id_usuario}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>
 

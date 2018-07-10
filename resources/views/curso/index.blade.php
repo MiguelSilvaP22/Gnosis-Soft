@@ -41,8 +41,8 @@
 							<td >{{ $curso->cant_hora_curso}}</td>
 							<td >{{ $curso->fecha_mod_curso}}</td>
 							<td>
-								<a id="btnActividades" href="{{route('actividad.index')}}/{{$curso->id_curso}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Actividades</a>
-								<button id="btnVer" value="{{ $curso->id_curso}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>
+								{{--<a id="btnActividades" href="{{route('actividad.index')}}/{{$curso->id_curso}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Actividades</a>--}}
+								{{--<button id="btnVer" value="{{ $curso->id_curso}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>--}}
 								<button id="btnEditar" value="{{ $curso->id_curso}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>
 								<button id="deleteCurso" class="btn btn btn-info" value="{{ $curso->id_curso}}"><i class="fa fa-eraser"></i> Eliminar</button>
 							</td>

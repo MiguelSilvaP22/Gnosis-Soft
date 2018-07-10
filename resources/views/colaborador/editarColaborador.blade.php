@@ -54,7 +54,7 @@
 								{!! Form::label('', '',['id' => 'errSexo']) !!}
 							</div>
 							<div class='form-group'>
-								{!! Form::label('', 'email_usuario:') !!}
+								{!! Form::label('', 'E-mail:') !!}
 								{!! Form::email('email_usuario', null, ['class' => 'form-control','id'=>'email_usuario','maxlength'=>'500']) !!}
 								{!! Form::label('', '',['id' => 'errEmail']) !!}
 							</div>

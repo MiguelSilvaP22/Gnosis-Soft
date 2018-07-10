@@ -20,11 +20,11 @@
 										<td >{{$infoCurso[0]->nombre_curso}}</td>
 									</tr>	
 									<tr>
-										<td >Codigo SENCE</td>
+										<td >Código SENCE</td>
 										<td >{{$infoCurso[0]->cod_sence_curso}}</td>
 									</tr>	
 									<tr>
-										<td >Codigo Interno</td>
+										<td >Código Interno</td>
 										<td >{{$infoCurso[0]->cod_interno_curso}}</td>
 									</tr>	
 									<tr>

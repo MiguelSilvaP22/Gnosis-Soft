@@ -12,7 +12,7 @@
             <div class="box-body">
             <div class="row">  
                 <div class="col-xs-6">
-                    <h2>Informacion Colaborador</h2>                   
+                    <h2>Información Colaborador</h2>                   
                         
                     <div class="box">
                         <table class="table table-bordered"> 
@@ -58,7 +58,7 @@
 
             <div class="row">
                 <div class="col-md-10">
-                    <h3>Informacion de cursos</h3>
+                    <h3>Información de cursos</h3>
                     
                 </div>
             </div>
@@ -70,7 +70,7 @@
                             <div class="panel-heading" role="tab" id="headingOne">
                             <h4 class="panel-title">
                                 <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                Informacion de Cursos Realizados
+                                Información de Cursos Realizados
                                 </a>
                             </h4>
                             </div>
@@ -81,7 +81,7 @@
                                             <tr>
                                                 <td>Nombre Curso</td>
                                                 <td>Competencias</td>
-                                                <td>Fecha de incio</td>
+                                                <td>Fecha de inicio</td>
                                                 <td>Fecha de termino</td>
                                                 <td>Información</td>
                                             </tr>

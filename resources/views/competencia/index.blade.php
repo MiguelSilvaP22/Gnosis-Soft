@@ -2,7 +2,11 @@
 @extends('admin.layout')
 @section ('content')
 <body> 
-
+<h1>Mantenedor Competencias</h1>
+<ol class="breadcrumb">
+	<li><a href="/admin"><i class="fa fa-dashboard"></i>Inicio</a></li>
+	<li class="active">Competencias</li>
+</ol> 
   <div class="row">
 		<div class="col-xs-12">
 			

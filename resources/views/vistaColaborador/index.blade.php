@@ -1,7 +1,11 @@
 @extends('admin.layout')
 
 @section ('content')
-
+<h1>Colaboradores</h1>
+<ol class="breadcrumb">
+	<li><a href="/vistaEmpresa"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+	<li class="active">Colaboradores</li>
+</ol>
 <body> 
   <div class="row">
 		<div class="col-10 col-md-10 col-xs-12">

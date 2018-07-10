@@ -1,14 +1,11 @@
 @extends('admin.layout')
 
 @section ('content')
-
+<h1>Resumen de Empresa</h1>
 <body> 
   <div class="row">
 		<div class="col-xs-12">
 			<div class="box">			
-				<div class="box-header">
-					<h1 class="box-title">Resumen de Empresa</h1>
-				</div>
 				<div class="box-body">
 					<div class="col-xs-6">
 							@if(session()->has('Usuario'))

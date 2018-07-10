@@ -1,7 +1,11 @@
 @extends('admin.layout')
 
 @section ('content')
-
+<h1>Mantenedor Colaboradores</h1>
+<ol class="breadcrumb">
+	<li><a href="/admin"><i class="fa fa-dashboard"></i>Inicio</a></li>
+	<li class="active">Colaboradores</li>
+</ol> 
 <body> 
   <div class="row">
 		<div class="col-xs-12">
@@ -134,7 +138,11 @@ $(document).on('click', '#btnEvaluar', function () {
 		type: "GET",
 		success: function (datos) {
 			$("#datos").html(datos);
-			$('#modal').modal('show');
+			$('#modal').modal({
+                        backdrop: 'static',
+                        keyboard: true, 
+                        show: true
+                });
 		}
 
 		});

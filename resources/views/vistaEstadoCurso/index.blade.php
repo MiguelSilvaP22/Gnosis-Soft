@@ -1,12 +1,17 @@
 
 @extends('admin.layout')
 @section ('content')
+<h1>Estado de Curso</h1>
+<ol class="breadcrumb">
+	<li><a href="/vistaEmpresa"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+	<li>Curso</li>
+	<li class="active">Estado de Curso</li>
+</ol>
 <body> 
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">			
 				<div class="box-header">
-					<h1 class="box-title">Estado de Curso</h1>
 				</div>
 				<div class="box-body">
 					<div class="col-xs-12">

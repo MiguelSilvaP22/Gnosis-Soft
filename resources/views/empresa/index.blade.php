@@ -1,7 +1,11 @@
 @extends('admin.layout')
 
 @section ('content')
-
+<h1>Mantenedor Empresas</h1>
+<ol class="breadcrumb">
+	<li><a href="/admin"><i class="fa fa-dashboard"></i>Inicio</a></li>
+	<li class="active">Empresas</li>
+</ol> 
 <body> 
   <div class="row">
 		<div class="col-xs-12">

@@ -88,3 +88,8 @@
 		</div>
 	</div>
 </div>
+<script>
+$(document).on('click', '#btnVolver', function () {
+		$('#modal').modal('hide');
+});
+</script>

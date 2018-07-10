@@ -2,7 +2,7 @@
 
 @section ('content')
 
-<h1>Bienvenido a GnosisSoft - Admin Dashboard</h1>
+<h1>Bienvenido a GnosisSoft</h1>
 <body>
 	<!-- Calendario -->
 	<div class="col-md-10">
@@ -16,6 +16,7 @@
 @stop
 @section ('script-js')
 <script type="text/javascript">
+
 $(document).ready(function() {
 
 $('#calendar').fullCalendar({
@@ -56,10 +57,6 @@ $('#calendar').fullCalendar({
 						@endif
 				@endforeach
 		@endforeach
-	{
-	  title: 'Todo el dia',
-	  start: '2018-04-23'
-	}
 
   ]
 });

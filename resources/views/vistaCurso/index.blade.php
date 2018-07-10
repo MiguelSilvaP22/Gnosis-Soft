@@ -2,12 +2,15 @@
 @extends('admin.layout')
 @section ('content')
 <body> 
-
+<h1>Información Curso</h1>
+<ol class="breadcrumb">
+	<li><a href="/vistaEmpresa"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+	<li>Curso</li>
+	<li class="active">Información Curso</li>
+</ol>
 <div class="row buscador">
 	<div class="col-3 col-md-3 col-xs-10">
-		<h4>cursos</h4>
 		{!! Form::select('cursos', $listaCursos,null,['class'=>'form-control', 'id'=>'id_curso', 'style'=>'width:100%']) !!}
-
 	</div>
 </div>
 		

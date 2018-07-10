@@ -55,7 +55,7 @@ Hora: {{$now->format('H:i:s')}}
 <h3 class="titulo">Reporte Colaborador</h3>
 
 <div class="tablaColaborador">
-<h4 class="subtitulo">Informacion Personal Colaborador</h4>
+<h4 class="subtitulo">Información Personal Colaborador</h4>
 
             <table class="table table-bordered"> 
                 <tr>
@@ -85,7 +85,7 @@ Hora: {{$now->format('H:i:s')}}
                 </tr>
 
                 <tr>
-                    <td class="active">Area</td>
+                    <td class="active">Área</td>
                     <td>{{$colaborador->perfilOcupacional->area->nombre_area }}</td>
                 </tr>
 
@@ -99,7 +99,7 @@ Hora: {{$now->format('H:i:s')}}
 <br>
 
 <div class="tablaCompetencias">
-<h4 class="subtitulo">Informacion de Competencias Asociadas al Perfil Ocupacional</h4>
+<h4 class="subtitulo">Información de Competencias Asociadas al Perfil Ocupacional</h4>
             <table class="table table-bordered" >        
                 <tr>
                     <td class="active">Nombre Competencia</td>

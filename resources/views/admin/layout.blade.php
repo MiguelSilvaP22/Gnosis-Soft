@@ -518,11 +518,13 @@ desired effect
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <!--Date Picker-->
 <script src="/adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
 <!--Time Picker-->
 <script src="/adminlte/plugins/timepicker/bootstrap-timepicker.min.js"></script>
 <!-- FullCalendar-->
 <script src="/adminlte/bower_components/moment/moment.js"></script>
 <script src="/adminlte/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+<script src='/adminlte/bower_components/fullcalendar/dist/locale/es.js'></script>
 
 <!--Select2-->
 <script src="/adminlte/bower_components/select2/dist/js/select2.full.min.js"></script>

@@ -20,7 +20,7 @@
 								{!! Form::label('', '',['id' => 'errNombreUsuario']) !!}
 							</div>
 							<div class='form-group'>
-								{!! Form::label('', 'Run Usuario:') !!}
+								{!! Form::label('', 'RUN Usuario:') !!}
 								{!! Form::text('run_usuario', null, ['class' => 'form-control','id'=>'run_usuario','maxlength'=>'10','readonly' => true]) !!}
 								{!! Form::label('', '',['id' => 'errRunUsuario']) !!}
 							</div>

@@ -11,24 +11,52 @@
 				<div class="box-header">
 					<h1 class="box-title">Organigrama {{$empresa->nombre_empresa}}</h1>
 				</div>
-				<div class="btn-group">
-					
-					<button  type="button" id="btnGerencia"  value="{{$empresa->id_empresa}}" class="btn btn-success" >
-						<i class="fa fa-plus"></i>	Gerencias
-					</button>
-					<button type="button" id="btnArea" value="{{$empresa->id_empresa}}" class="btn btn-success" >
-						<i class="fa fa-plus"></i>	Areas
-					</button>
-					<button type="button" id="btnPerfil"  value="{{$empresa->id_empresa}}" class="btn  btn-success" >
-						<i class="fa fa-plus"></i>	Perfiles
-					</button>
-				</div>
-				<div id='selectGerencias'>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Filtro</tr>
+						</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>
+							<button  type="button" id="btnGerencia"  value="{{$empresa->id_empresa}}" class="btn btn-block btn-default" >
+								<i class="fa fa-search"></i>	Gerencias
+							</button>
+						</td>
+						<td>
+							<button type="button" id="btnArea" value="{{$empresa->id_empresa}}" class="btn btn-block btn-default" >
+								<i class="fa fa-search"></i>	Areas
+							</button>
+						</td>
+						<td>
+							<button type="button" id="btnPerfil"  value="{{$empresa->id_empresa}}" class="btn btn-block btn-default" >
+								<i class="fa fa-search"></i>	Perfiles
+							</button>
+						</td>
+					</tr>	
+					</tbody>
+				</table>
 
-				</div>
-				<div id='selectAreas'>
+				<table class="table">
+					<tbody>
+					<tr>
+						<td>
+							<div id='selectGerencias'>
+							</div>
+						</td>
 
-				</div>
+					</tr>
+					<tr>
+						<td>
+							<div id='selectAreas'>
+							</div>
+						</td>
+					</tr>	
+					</tbody>
+				</table>
+				
+			
 				<div class="box-body">
 					
 				</div>
@@ -36,7 +64,7 @@
 			<div class="box">
 			
 				<div class="box-header">
-					<h1 class="box-title">Gerencias {{$empresa->nombre_empresa}}</h1>
+					<h1 class="box-title">Tabla Organigrama {{$empresa->nombre_empresa}}</h1>
 				</div>
 				<div class="box-body" id="datosTabla">
 					
@@ -70,7 +98,7 @@
 
 @section('script-js')
 <script>
-
+refrescarGerencia({{$empresa->id_empresa}});
 function refrescarGerencia(id)
 {
 	$.ajax({

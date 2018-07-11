@@ -30,7 +30,7 @@
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Objetivo:') !!}
-								{!! Form::textArea('objetivo_curso', null, ['class' => 'form-control','id'=>'objetivo_curso','maxlength'=>'1000']) !!}
+								{!! Form::textArea('objetivo_curso', null, ['class' => 'form-control','id'=>'objetivo_curso','rows'=>'5','cols'=>'5','maxlength'=>'1000']) !!}
 								{!! Form::label('', '',['id' => 'errObjetivoCurso']) !!}
 							</div>
 							<div class='form-group'>
@@ -60,7 +60,7 @@
                             </div>
                             <div class='form-group'>
                                 {!! Form::label('', 'Contenido General') !!}	
-                                {!! Form::button('Agregar nuevo contenido', ['class' => 'form-control btn btn-success ', 'id'=> 'addContenido']) !!}
+                                {!! Form::button('Agregar nuevo contenido', ['class' => 'form-control btn btn-success ', 'id'=> 'addContenido']) !!}<br/><br/>
                             </div>	
                             <div class='form-group'>
                                 {!! Form::label('', 'Temario:') !!}

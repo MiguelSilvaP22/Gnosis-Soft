@@ -29,7 +29,6 @@
 							<th>Codigo</th>
 							<th>Nombre Curso</th>
 							<th>Cantidad de Horas</th>						
-							<th>Fecha de Modificación</th>
 							<th>Acciones</th>
 						</tr>
 					</thead>
@@ -43,7 +42,6 @@
 							</td>
 							<td >{{ $curso->nombre_curso}}</td>
 							<td >{{ $curso->cant_hora_curso}}</td>
-							<td >{{ $curso->fecha_mod_curso}}</td>
 							<td>
 								{{--<a id="btnActividades" href="{{route('actividad.index')}}/{{$curso->id_curso}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Actividades</a>--}}
 								{{--<button id="btnVer" value="{{ $curso->id_curso}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>--}}

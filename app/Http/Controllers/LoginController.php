@@ -52,7 +52,7 @@ class LoginController extends Controller
                 }
                 elseif ($usuario->id_perfil == 3)
                 {
-                    return redirect('vistaColaborador');
+                    return redirect('vistaEmpresa');
                 }
                 elseif ($usuario->id_perfil == 4)
                 {

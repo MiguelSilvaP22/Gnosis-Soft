@@ -35,7 +35,7 @@
 				</div>
 
 				<div class='form-group'>
-					{!! Form::label('region_empresa', 'Region:') !!}
+					{!! Form::label('region_empresa', 'Región:') !!}
 					{!! Form::select('id_region', $regiones,null ,['class' => 'select2','placeholder'=>'Seleccione una región','id'=>'id_region', 'style'=>'width:100%']) !!}
 					{!! Form::label('', '',['id' => 'errSelectRegion']) !!}
 				</div>	

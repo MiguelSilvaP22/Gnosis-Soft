@@ -21,7 +21,7 @@ class HorarioColaborador extends Model
     }
     public function evaluacionesColab()
     {
-        return $this->hasMany(EvaluacionColab::class,'id_horacolab')->where('estado_horacolab',1);
+        return $this->hasMany(EvaluacionColab::class,'id_horacolab')->where('estado_evcolab',1);
     }
 
     public function eliminar()

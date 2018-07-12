@@ -75,6 +75,7 @@ class FacilitadorController extends Controller
     public function verHorarioFacilitador($id)
     {
         $colaboradoresHorario = HorarioColaborador::all()->where('estado_horacolab',1)->where('id_horario',$id);   
+        
         return view('facilitador.gestionarColaborador', compact('colaboradoresHorario'));
     }
     public function agregarAsistencia($id)

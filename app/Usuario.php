@@ -15,23 +15,23 @@ class Usuario extends Model
 
     public function perfilOcupacional()
     {
-        return $this->belongsTo(PerfilOcupacional::class,'id_perfilocu');
+        return $this->belongsTo(PerfilOcupacional::class,'id_perfilocu')->where('estado_perfilocu',1);
     }
     public function perfil()
     {
-        return $this->belongsTo(Perfil::class,'id_perfil');
+        return $this->belongsTo(Perfil::class,'id_perfil')->where('estado_perfil',1);
     }
     public function horariosColaborador()
     {
-        return $this->hasMany(HorarioColaborador::class,'id_usuario');
+        return $this->hasMany(HorarioColaborador::class,'id_usuario')->where('estado_horacolab',1);
     }
     public function horariosFacilitador()
     {
-        return $this->hasMany(HorarioFacilitador::class,'id_usuario');
+        return $this->hasMany(HorarioFacilitador::class,'id_usuario')->where('estado_horafaci',1);
     }
     public function evaluacionDNC()
     {
-        return $this->hasMany(EvaluacionDNC::class,'id_usuario');
+        return $this->hasMany(EvaluacionDNC::class,'id_usuario')->where('estado_evaluacion',1);
     }
 
 

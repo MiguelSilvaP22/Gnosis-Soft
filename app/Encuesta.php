@@ -21,7 +21,7 @@ class Encuesta extends Model
     }
     public function Encuesta()
     {
-        return $this->belongsToMany(EvaluacionColab::class,'id_encuesta')->where('estado_encuesta',1);
+        return $this->belongsToMany(EvaluacionColab::class,'id_encuesta')->where('estado_evcolab',1);
     }
 
     public function eliminar()

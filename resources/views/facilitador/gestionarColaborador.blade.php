@@ -29,32 +29,35 @@
 								</tr>
 							</thead>
 							<tbody>
-							@foreach($colaboradoresHorario as $colaboradorHorario)
-								<tr>
-									<td>
-										<span> {{ $colaboradorHorario->usuario->nombre_usuario." ". $colaboradorHorario->usuario->apellidopat_usuario." ". $colaboradorHorario->usuario->apellidomat_usuario}}</span>
-									</td>
-									<td>
-										<span>{{$colaboradorHorario->usuario->run_usuario}}</span>
-									</td>
-									@if($colaboradorHorario->asistencia_horacolab == 1)
-									<td>
-										{{ Form::checkbox('asistencia_horacolab', '1',true, ["onClick"=>"asistenciaColab($colaboradorHorario->id_horacolab)", "id"=>"asistenciaColab$colaboradorHorario->id_horacolab"] ) }}
-									</td>
-									@else
-									<td>
-										{{ Form::checkbox('asistencia_horacolab', '0',null, ["onClick"=>"asistenciaColab($colaboradorHorario->id_horacolab)", "id"=>"asistenciaColab$colaboradorHorario->id_horacolab"] ) }}
-									</td>
-									@endif
-									<td>
-									@if(Count($colaboradorHorario->evaluacionesColab)>0)
-										<button id="evaluacionColaborador" class="btn btn btn-info" onclick="verEvaluacionColaborador({{$colaboradorHorario->id_horacolab}})" ><i class="fa fa-eye"></i></button>
-									@endif
-										<button id="evaluarColaborador" class="btn btn btn-info" onclick="evaluarColaborador({{$colaboradorHorario->id_horacolab}})" ><i class="fa fa-pencil"></i></button>
-									
-									</td>
-								</tr>
-							@endforeach	
+							@if(Count($colaboradoresHorario) > 0)
+								@foreach($colaboradoresHorario as $colaboradorHorario)
+									<tr>
+										<td>
+											<span> {{ $colaboradorHorario->usuario->nombre_usuario." ". $colaboradorHorario->usuario->apellidopat_usuario." ". $colaboradorHorario->usuario->apellidomat_usuario}}</span>
+										</td>
+										<td>
+											<span>{{$colaboradorHorario->usuario->run_usuario}}</span>
+										</td>
+										@if($colaboradorHorario->asistencia_horacolab == 1)
+										<td>
+											{{ Form::checkbox('asistencia_horacolab', '1',true, ["onClick"=>"asistenciaColab($colaboradorHorario->id_horacolab)", "id"=>"asistenciaColab$colaboradorHorario->id_horacolab"] ) }}
+										</td>
+										@else
+										<td>
+											{{ Form::checkbox('asistencia_horacolab', '0',null, ["onClick"=>"asistenciaColab($colaboradorHorario->id_horacolab)", "id"=>"asistenciaColab$colaboradorHorario->id_horacolab"] ) }}
+										</td>
+										@endif
+										<td>
+										@if(Count($colaboradorHorario->evaluacionesColab)>0)
+											<button id="evaluacionColaborador" class="btn btn btn-info" onclick="verEvaluacionColaborador({{$colaboradorHorario->id_horacolab}})" ><i class="fa fa-eye"></i></button>
+										@endif
+											<button id="evaluarColaborador" class="btn btn btn-info" ><i class="fa fa-pencil"></i></button>
+										
+										</td>
+									</tr>
+								@endforeach	
+							@else
+							@endif	
 							</tbody>
 						</table>						
 						

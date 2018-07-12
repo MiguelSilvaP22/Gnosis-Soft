@@ -8,7 +8,7 @@
 </ol>
 <body> 
   <div class="row">
-		<div class="col-10 col-md-10 col-xs-12">
+		<div class="col-xs-12">
 			
 			<div class="box">
 			

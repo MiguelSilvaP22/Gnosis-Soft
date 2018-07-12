@@ -11,7 +11,7 @@
             </div>
             <div class="box-body">
             <div class="row">  
-                <div class="col-xs-6">
+                <div class="col-md-8">
                     <h2>Información Colaborador</h2>                   
                         
                     <div class="box">
@@ -50,7 +50,7 @@
 
                 </div>
             
-                <div class="col-xs-6">
+                <div class="col-md-4">
                 <h2 style="text-align: center">Resumen de Competencias: {{ $colaborador->perfilOcupacional->nombre_perfilocu }} </h2>
                     <canvas id="myChart" width="40" height="40"></canvas>
                 </div>

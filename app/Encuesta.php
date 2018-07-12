@@ -13,7 +13,7 @@ class Encuesta extends Model
 
     public function tipoEncuesta()
     {
-        return $this->belongsTo(TipoEncuesta::class,'id_tipoencuesta');
+        return $this->belongsTo(TipoEncuesta::class,'id_tipoencuesta')->where('estado_tipoencuesta',1);
     }
     public function preguntasEncuesta()
     {
@@ -21,7 +21,7 @@ class Encuesta extends Model
     }
     public function Encuesta()
     {
-        return $this->belongsToMany(EvaluacionColab::class,'id_encuesta');
+        return $this->belongsToMany(EvaluacionColab::class,'id_encuesta')->where('estado_encuesta',1);
     }
 
     public function eliminar()

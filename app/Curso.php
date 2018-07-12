@@ -13,19 +13,19 @@ class Curso extends Model
 
     public function competencias()
     {
-        return $this->hasMany(Competencia::Class, 'competenciacurso', 'id_curso');
+        return $this->hasMany(Competencia::Class, 'competenciacurso', 'id_curso')->where('estado_comp',1);
     }
     public function actividades()
     {
-        return $this->hasMany(Actividad::Class, 'id_curso');
+        return $this->hasMany(Actividad::Class, 'id_curso')->where('estado_actividad',1);
     }
     public function competenciasCurso()
     {
-        return $this->hasMany(CompetenciaCurso::Class, 'id_curso');
+        return $this->hasMany(CompetenciaCurso::Class, 'id_curso')->where('estado_compcurso',1);
     }
     public function listacompetencias()
     {
-        return $this->belongsToMany(Competencia::Class, 'competenciacurso', 'id_curso', 'id_comp');
+        return $this->belongsToMany(Competencia::Class, 'competenciacurso', 'id_curso', 'id_comp')->where('estado_comp',1);
     }
     public function eliminar()
     {

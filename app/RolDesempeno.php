@@ -13,11 +13,11 @@ class RolDesempeno extends Model
 
     public function rolEvaluaciones()
     {
-        return $this->hasMany(RolEvaluacion::Class, 'id_roldesempeno');
+        return $this->hasMany(RolEvaluacion::Class, 'id_roldesempeno')->where('estado_roldesempeno',1);
     }
     public function competencia()
     {
-        return $this->belongsTo(Competencia::Class, 'id_comp');
+        return $this->belongsTo(Competencia::Class, 'id_comp')->where('estado_comp',1);
     }
 
 

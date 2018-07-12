@@ -13,12 +13,12 @@ class EvaluacionDNC extends Model
 
     public function usuario()
     {
-        return $this->belongsTo(Usuario::class,'id_usuario');
+        return $this->belongsTo(Usuario::class,'id_usuario')->where('estado_usuario',1);
     }
 
     public function rolEvaluacion()
     {
-        return $this->hasMany(RolEvaluacion::class,'id_evaluacion');
+        return $this->hasMany(RolEvaluacion::class,'id_evaluacion')->where('estado_rolevaluacion',1);
     }
 
     public function eliminar()

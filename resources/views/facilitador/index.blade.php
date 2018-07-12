@@ -64,7 +64,7 @@
 								<a class="nav-link" href="javascript:verHorarioFacilitador({{$horario->id_horario}})">{{ "Dia: ". date('d/m/Y',strtotime($horario->fecha_horario))}}
 							
 								@if(Count($horario->horariosFacilitador)>0)
-								@foreach ($horario->horariosFacilitador as $horarioFacilitador) 							
+								@foreach ($horario->horariosFacilitador->where('estado_horafaci',1) as $horarioFacilitador) 							
 									<p>{{ "Facilitador: ".$horarioFacilitador->usuario->nombre_usuario}}</p>
 								@endforeach	
 								@else

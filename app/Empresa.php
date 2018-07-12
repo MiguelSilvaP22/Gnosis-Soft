@@ -13,7 +13,7 @@ class Empresa extends Model
 
     public function gerencias()
     {
-        return $this->hasMany(Gerencia::class,'id_empresa');
+        return $this->hasMany(Gerencia::class,'id_empresa')->where('estado_gerencia',1);
     }
 
     public function eliminar()

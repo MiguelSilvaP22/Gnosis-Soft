@@ -13,15 +13,15 @@ class Horario extends Model
 
     public function actividad()
     {
-        return $this->belongsTo(Actividad::class,'id_actividad');
+        return $this->belongsTo(Actividad::class,'id_actividad')->where('estado_actividad',1);
     }
     public function horariosColaborador()
     {
-        return $this->hasMany(HorarioColaborador::class,'id_horario');
+        return $this->hasMany(HorarioColaborador::class,'id_horario')->where('estado_horacolab',1);
     }
     public function horariosFacilitador()
     {
-        return $this->hasMany(HorarioFacilitador::class,'id_horario');
+        return $this->hasMany(HorarioFacilitador::class,'id_horario')->where('estado_horafaci',1);
     }
 
     public function eliminar()

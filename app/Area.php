@@ -13,7 +13,7 @@ class Area extends Model
 
     public function gerencia()
     {
-        return $this->belongsTo(Gerencia::class,'id_gerencia');
+        return $this->belongsTo(Gerencia::class,'id_gerencia')->where('estado_gerencia',1);
     }
 
     public function eliminar()

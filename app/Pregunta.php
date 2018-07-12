@@ -13,7 +13,7 @@ class Pregunta extends Model
 
     public function preguntasEncuesta()
     {
-        return $this->hasMany(PreguntaEncuesta::class,'id_pregunta');
+        return $this->hasMany(PreguntaEncuesta::class,'id_pregunta')->where('estado_preguntaencuesta',1);
     }
 
     public function alternativasPregunta()
@@ -23,7 +23,7 @@ class Pregunta extends Model
 
     public function categoria()
     {
-        return $this->belongsTo(Categoria::class,'id_categoria');
+        return $this->belongsTo(Categoria::class,'id_categoria')->where('estado_categoria',1);
     }
 
     public function eliminar()

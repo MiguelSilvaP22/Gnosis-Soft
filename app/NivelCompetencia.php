@@ -13,8 +13,8 @@ class NivelCompetencia extends Model
 
     public function comunas()
     {
-        return $this->belongsTo(Competencia::Class,'id_comp');
-        return $this->belongsTo(TipoNivel::Class,'id_tiponivel');
+        return $this->belongsTo(Competencia::Class,'id_comp')->where('estado_comp',1);
+        return $this->belongsTo(TipoNivel::Class,'id_tiponivel')->where('estado_tiponivel',1);
 
     }
 }

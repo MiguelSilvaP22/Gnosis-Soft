@@ -13,12 +13,12 @@ class RolEvaluacion extends Model
 
         public function evaluacionDnc()
         {
-        return $this->belongsTo(EvaluacionDNC::class,'id_evaluacion');
+        return $this->belongsTo(EvaluacionDNC::class,'id_evaluacion')->where('estado_evaluacion',1);
         }
 
         public function rolDesempeno()
         {
-        return $this->belongsTo(RolDesempeno::class,'id_roldesempeno');
+        return $this->belongsTo(RolDesempeno::class,'id_roldesempeno')->where('estado_roldesempeno',1);
         }
 
 }

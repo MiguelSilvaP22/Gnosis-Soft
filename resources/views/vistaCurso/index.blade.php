@@ -65,10 +65,7 @@
 											<div class="col-md-6 infoDeCompetencia">
 											</div>	
 										</div>
-										
-										
-									</div>
-									
+									</div>	
 								</div>
 							</div>
 						</div>

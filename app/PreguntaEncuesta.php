@@ -17,7 +17,7 @@ class PreguntaEncuesta extends Model
     }
     public function encuesta()
     {
-        return $this->belongsTo(Encuesta::class,'id_encuesta');
+        return $this->belongsTo(Encuesta::class,'id_encuesta')->where('estado_encuesta',1);
     }
 
     public function eliminar()

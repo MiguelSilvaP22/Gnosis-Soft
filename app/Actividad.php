@@ -13,11 +13,11 @@ class Actividad extends Model
 
     public function curso()
     {
-        return $this->belongsTo(Curso::class,'id_curso');
+        return $this->belongsTo(Curso::class,'id_curso')->where('estado_curso',1);
     }
     public function horarios()
     {
-        return $this->hasMany(Horario::class,'id_actividad');
+        return $this->hasMany(Horario::class,'id_actividad')->where('estado_horario',1);
     }
 
     public function eliminar()

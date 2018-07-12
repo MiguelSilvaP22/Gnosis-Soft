@@ -13,16 +13,16 @@ class Competencia extends Model
 
     public function categoriaCompetencia()
     {
-        return $this->belongsTo(CategoriaCompetencia::Class,'id_categoriacomp');
+        return $this->belongsTo(CategoriaCompetencia::Class,'id_categoriacomp')->where('estado_categoriacomp',1);
     }
 
     public function rolDesempenos()
     {
-        return $this->hasMany(RolDesempeno::Class, 'id_comp');
+        return $this->hasMany(RolDesempeno::Class, 'id_comp')->where('estado_rolDesempeno',1);
     }
 
     public function cursos()
     {
-        return $this->belongsToMany(Curso::Class, 'competenciacurso', 'id_comp', 'id_curso');
+        return $this->belongsToMany(Curso::Class, 'competenciacurso', 'id_comp', 'id_curso')->where('estado_curso',1);
     }
 }

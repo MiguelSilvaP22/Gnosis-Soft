@@ -13,11 +13,11 @@ class Gerencia extends Model
 
     public function empresa()
     {
-        return $this->belongsTo(Empresa::class,'id_empresa');
+        return $this->belongsTo(Empresa::class,'id_empresa')->where('estado_empresa',1);
     }
     public function areas()
     {
-        return $this->hasMany(Area::class,'id_gerencia');
+        return $this->hasMany(Area::class,'id_gerencia')->where('estado_area',1);
     }
 
     public function eliminar()

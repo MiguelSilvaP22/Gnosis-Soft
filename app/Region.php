@@ -13,6 +13,6 @@ class Region extends Model
 
     public function comunas()
     {
-        return $this->hasMany(Comuna::class,'id_region');
+        return $this->hasMany(Comuna::class,'id_region')->where('estado_comuna',1);
     }
 }

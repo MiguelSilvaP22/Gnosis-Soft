@@ -14,6 +14,6 @@ class Perfil extends Model
 
     public function usuarios()
     {
-        return $this->hasMany(Usuario::class,'id_usuario');
+        return $this->hasMany(Usuario::class,'id_usuario')->where('estado_usuario',1);
     }
 }

@@ -29,7 +29,7 @@
 								</tr>
 							</thead>
 							<tbody>
-							@if(Count($colaboradoresHorario) > 0)
+							@if(Count($colaboradoresHorario) > 0 && Count($colaboradorHorario->usuario) > 0)
 								@foreach($colaboradoresHorario as $colaboradorHorario)
 									<tr>
 										<td>

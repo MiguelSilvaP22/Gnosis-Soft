@@ -180,7 +180,7 @@ class CompetenciaController extends Controller
         $roldesempenos = RolDesempeno::All()->where('estado_roldesempeno',1)->where('id_comp', $id);
         $niveles = NivelCompetencia::All()->where('estado_nivelcompetencia',1)->where('id_comp', $id)->pluck('desc_nivelcompetencia');
         \Debugbar::info($niveles);
-        return view('Competencia.verCompetencia', compact('competencia','categoriascompetencias', 'roldesempenos', 'niveles'));
+        return view('competencia.verCompetencia', compact('competencia','categoriascompetencias', 'roldesempenos', 'niveles'));
     }
 
     /**
@@ -195,7 +195,7 @@ class CompetenciaController extends Controller
         $categoriascompetencias = categoriacompetencia::All()->where('estado_categoriacomp',1)->sortBy('nombre_caterogiacomp')->pluck('nombre_categoriacomp','id_categoriacomp');
         $roldesempenos = RolDesempeno::All()->where('estado_roldesempeno',1)->where('id_comp', $id);
         $niveles = NivelCompetencia::All()->where('estado_nivelcompetencia',1)->where('id_comp', $id)->pluck('desc_nivelcompetencia');
-        return view('Competencia.editarCompetencia', compact('competencia','categoriascompetencias','roldesempenos','niveles'));
+        return view('competencia.editarCompetencia', compact('competencia','categoriascompetencias','roldesempenos','niveles'));
     }
 
     /**

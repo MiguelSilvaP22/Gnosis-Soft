@@ -29,8 +29,9 @@
 								</tr>
 							</thead>
 							<tbody>
-							@if(Count($colaboradoresHorario) > 0 && Count($colaboradorHorario->usuario) > 0)
+							@if(Count($colaboradoresHorario) > 0)
 								@foreach($colaboradoresHorario as $colaboradorHorario)
+									@if( Count($colaboradorHorario->usuario) > 0)
 									<tr>
 										<td>
 											<span> {{ $colaboradorHorario->usuario->nombre_usuario." ". $colaboradorHorario->usuario->apellidopat_usuario." ". $colaboradorHorario->usuario->apellidomat_usuario}}</span>
@@ -55,6 +56,7 @@
 										
 										</td>
 									</tr>
+									@endif
 								@endforeach	
 							@else
 							@endif	

@@ -2,48 +2,76 @@
 @extends('admin.layout')
 @section ('content')
 <body> 
-<h1>Competencias</h1>
-<ol class="breadcrumb">
-	<li><a href="/vistaEmpresa"><i class="fa fa-dashboard"></i>Dashboard</a></li>
-	<li class="active">Competencias</li>
-</ol>
-<div class="row buscador">
-	<div class="col-3 col-md-3 col-xs-10">
-		{!! Form::select('competencias', $listaCompetencias,null,['class'=>'form-control', 'id'=>'id_competencia', 'style'=>'width:100%']) !!}
-
-	</div>
-</div>
-		
+	<h1>Competencias</h1>
+	<ol class="breadcrumb">
+		<li><a href="/vistaEmpresa"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+		<li class="active">Competencias</li>
+	</ol>
 <div class="row">
-	<div class="box">
-		<div class="col-5 col-md-5 col-xs-12">
-			<div class="box">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>Categorías de Competencias</th>
-						</tr>
-					</thead>
-					<tbody>
-					@foreach ($categoriascompetencias as $categoriascompetencia)
-						<tr>
-						<td id='{{ $categoriascompetencia->id_categoriacomp  }}' class='categoriaCompTd'> {{ $categoriascompetencia->nombre_categoriacomp }}</td>
-						</tr>
-					@endforeach
-					</tbody>
-				</table>
+	<div class="col-xs-12">
+		<div class="box">			
+			<div class="box-body">	
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="box">
+						<div class="box-header">
+							<h1 class="box-title">Busquedad de Competencia</h1>
+							</div>
+							<div class="box-body">
+								<div class="col-xs-12">
+									<div class='form-group'>
+										{!! Form::label('', 'Competencias:') !!}
+										{!! Form::select('competencias', $listaCompetencias,null,['class'=>'form-control', 'id'=>'id_competencia', 'style'=>'width:100%']) !!}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+					
+				<div class="row">
+					<div class="col-xs-12">	
+						<div class="box">	
+							<div class="box-header">
+							<h1 class="box-title">Competencias por Categoria</h1>
+							</div>
+							<div class="box-body">
+								<div class="col-xs-12">		
+									<div class="row">
+										<div class="col-5 col-md-6 col-xs-12">
+											<div class="box">
+												<table class="table table-hover">
+													<thead>
+														<tr>
+															<th>Categorías de Competencias</th>
+														</tr>
+													</thead>
+													<tbody>
+													@foreach ($categoriascompetencias as $categoriascompetencia)
+														<tr>
+														<td id='{{ $categoriascompetencia->id_categoriacomp  }}' class='categoriaCompTd'> {{ $categoriascompetencia->nombre_categoriacomp }}</td>
+														</tr>
+													@endforeach
+													</tbody>
+												</table>
+											</div>
+											<div class="row">		
+												<div class="col-xs-12 competenciasTabla">
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6 infoDeCompetencia">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>		
 			</div>
 		</div>
-
-		
-	<div class="col-3 col-md-3 col-xs-12 competenciasTabla"></div>
 	</div>
-
-
-</div>
-
-<div class="infoDeCompetencia"></div>
-</div>
+</div>	
 </body>
 
 @stop

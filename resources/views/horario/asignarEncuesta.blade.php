@@ -53,7 +53,7 @@
 						</div>
 						<div class='form-group' >
 							{!! Form::label('', 'Observaciones:') !!}
-							{!! Form::textArea('observacion_evencuesta', $encuestasHorario->first()->observacion_evencuesta, ['class' => 'form-control','id'=>'observacion_evencuesta']) !!}
+							{!! Form::textArea('observacion_evencuesta', $encuestasHorario->first()->observacion_evencuesta, ['class' => 'form-control','cols'=>'5','rows'=>'5','id'=>'observacion_evencuesta']) !!}
 						</div>
 					@else
 						<div class='form-group'>
@@ -62,7 +62,7 @@
 						</div>
 						<div class='form-group' >
 							{!! Form::label('', 'Observaciones:') !!}
-							{!! Form::textArea('observacion_evencuesta', null, ['class' => 'form-control','id'=>'observacion_evencuesta']) !!}
+							{!! Form::textArea('observacion_evencuesta', null, ['class' => 'form-control','cols'=>'5','rows'=>'5','id'=>'observacion_evencuesta']) !!}
 						</div>
 					@endif	
 					<div class="box-header">

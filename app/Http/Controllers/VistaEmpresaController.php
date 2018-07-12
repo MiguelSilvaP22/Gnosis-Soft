@@ -349,7 +349,7 @@ class VistaEmpresaController extends Controller
                 'curso.cant_hora_curso',
                 DB::raw('count(DISTINCT actividad.id_actividad) as actividades'),
                 DB::raw('count(horariocolaborador.id_usuario) as numero_participantes') 
-                )->get();
+                )->toSql();
 
                 $tablaResumenTerminadas = DB::table('empresa')
                 ->join('gerencia', 'empresa.id_empresa', '=', 'gerencia.id_empresa')
@@ -401,8 +401,6 @@ class VistaEmpresaController extends Controller
                 
             }
         }
-        
-
         if(Count($tablaResumen) > 0 )
         {
             $numeroTerminados = 0;
@@ -466,6 +464,237 @@ class VistaEmpresaController extends Controller
           $errorVali = "Usted no a ingresado al sistema";
           return view('index.layoutindex', compact('errorVali'));
       }
+    }
+
+    public function resumenEmpresa($filtroEmpresa)
+    {
+        $filtros = explode(",", $filtroEmpresa);
+        $plan = $filtros[1];
+        $idEmpresa = $filtros[0];
+        
+        if(session()->has('Usuario'))
+        {
+            if(session('Usuario')->id_perfil == 3)
+            {
+                $tablaResumenFaltante = DB::table('empresa')
+                ->join('gerencia', 'empresa.id_empresa', '=', 'gerencia.id_empresa')
+                ->join('area', 'gerencia.id_gerencia', '=', 'area.id_gerencia')
+                ->join('perfilocupacional', 'area.id_area', '=', 'perfilocupacional.id_area')
+                ->join('usuario', 'perfilocupacional.id_perfilocu', '=', 'usuario.id_perfilocu')
+                ->join('horariocolaborador', 'usuario.id_usuario', '=', 'horariocolaborador.id_usuario')
+                ->join('horario', 'horariocolaborador.id_horario', '=', 'horario.id_horario')
+                ->join('actividad', function ($join) {              
+                    $join->on('horario.id_actividad', '=', 'actividad.id_actividad')
+                        ->where("date_trunc('YEAR','actividad.fecha_termino_actividad')", '=', $plan)
+                        ->where('actividad.fecha_termino_actividad', '>', 'now()');
+                })
+                ->join('curso', 'actividad.id_curso', '=', 'curso.id_curso')
+                ->where('empresa.id_empresa',session('Usuario')->perfilocupacional->area->gerencia->empresa->id_empresa)
+                ->where('horario.estado_horario',1)
+                ->where('actividad.estado_actividad',1)
+                ->where('horariocolaborador.estado_horacolab',1)
+                ->where('curso.estado_curso',1)
+                ->where('usuario.estado_usuario',1)
+                ->groupBy('empresa.id_empresa')
+                ->groupBy('curso.id_curso')
+                ->select(
+                'curso.id_curso',
+                'curso.cant_hora_curso',
+                DB::raw('count(DISTINCT actividad.id_actividad) as actividades'),
+                DB::raw('count(horariocolaborador.id_usuario) as numero_participantes') 
+                )->get();
+
+                $tablaResumenTerminadas = DB::table('empresa')
+                ->join('gerencia', 'empresa.id_empresa', '=', 'gerencia.id_empresa')
+                ->join('area', 'gerencia.id_gerencia', '=', 'area.id_gerencia')
+                ->join('perfilocupacional', 'area.id_area', '=', 'perfilocupacional.id_area')
+                ->join('usuario', 'perfilocupacional.id_perfilocu', '=', 'usuario.id_perfilocu')
+                ->join('horariocolaborador', 'usuario.id_usuario', '=', 'horariocolaborador.id_usuario')
+                ->join('horario', 'horariocolaborador.id_horario', '=', 'horario.id_horario')
+                ->join('actividad', function ($join) {
+                    $join->on('horario.id_actividad', '=', 'actividad.id_actividad')
+                        ->where("date_trunc('YEAR','actividad.fecha_termino_actividad')", '=', $plan)
+                        ->where('actividad.fecha_termino_actividad', '<', 'now()');
+                })
+                ->join('curso', 'actividad.id_curso', '=', 'curso.id_curso')
+                ->where('empresa.id_empresa',session('Usuario')->perfilocupacional->area->gerencia->empresa->id_empresa)
+                ->where('horario.estado_horario',1)
+                ->where('actividad.estado_actividad',1)
+                ->where('horariocolaborador.estado_horacolab',1)
+                ->where('curso.estado_curso',1)
+                ->where('usuario.estado_usuario',1)
+                ->groupBy('empresa.id_empresa')
+                ->groupBy('curso.id_curso')
+                ->select(
+                'curso.id_curso',
+                'curso.cant_hora_curso',
+                DB::raw('count(DISTINCT actividad.id_actividad) as actividades'),
+                DB::raw('count(horariocolaborador.id_usuario) as numero_participantes') 
+                )->get();
+
+                $tablaResumen = DB::table('empresa')
+                ->join('gerencia', 'empresa.id_empresa', '=', 'gerencia.id_empresa')
+                ->join('area', 'gerencia.id_gerencia', '=', 'area.id_gerencia')
+                ->join('perfilocupacional', 'area.id_area', '=', 'perfilocupacional.id_area')
+                ->join('usuario', 'perfilocupacional.id_perfilocu', '=', 'usuario.id_perfilocu')
+                ->join('horariocolaborador', 'usuario.id_usuario', '=', 'horariocolaborador.id_usuario')
+                ->join('horario', 'horariocolaborador.id_horario', '=', 'horario.id_horario')
+                ->join('actividad', function ($join) {
+                    $join->on('horario.id_actividad', '=', 'actividad.id_actividad')
+                        ->where("date_trunc('YEAR','actividad.fecha_termino_actividad')", '=', $plan);
+                })
+                ->join('curso', 'actividad.id_curso', '=', 'curso.id_curso')
+                ->where('empresa.id_empresa',session('Usuario')->perfilocupacional->area->gerencia->empresa->id_empresa)
+                ->where('horario.estado_horario',1)
+                ->where('actividad.estado_actividad',1)
+                ->where('horariocolaborador.estado_horacolab',1)
+                ->where('curso.estado_curso',1)
+                ->where('usuario.estado_usuario',1)
+                ->groupBy('empresa.id_empresa')
+                ->groupBy('curso.id_curso')
+                ->select(
+                    'curso.id_curso',
+                    'curso.nombre_curso',
+                    'curso.cant_hora_curso',
+                    DB::raw('count(DISTINCT actividad.id_actividad) as actividades'),
+                    DB::raw('count(horariocolaborador.id_usuario) as numero_participantes') 
+                )->get();
+            }
+            else
+            {
+                $tablaResumenFaltante = DB::table('empresa')
+                ->join('gerencia', 'empresa.id_empresa', '=', 'gerencia.id_empresa')
+                ->join('area', 'gerencia.id_gerencia', '=', 'area.id_gerencia')
+                ->join('perfilocupacional', 'area.id_area', '=', 'perfilocupacional.id_area')
+                ->join('usuario', 'perfilocupacional.id_perfilocu', '=', 'usuario.id_perfilocu')
+                ->join('horariocolaborador', 'usuario.id_usuario', '=', 'horariocolaborador.id_usuario')
+                ->join('horario', 'horariocolaborador.id_horario', '=', 'horario.id_horario')
+                ->join('actividad', function ($join) {              
+                    $join->on('horario.id_actividad', '=', 'actividad.id_actividad')
+                        ->where('actividad.fecha_termino_actividad', '>', 'now()');
+                })
+                ->join('curso', 'actividad.id_curso', '=', 'curso.id_curso')
+                ->where('empresa.id_empresa',$idEmpresa)
+                ->whereBetween('actividad.fecha_termino_actividad', array($plan.'/01/01' , $plan.'/12/30'))
+                ->where('horario.estado_horario',1)
+                ->where('actividad.estado_actividad',1)
+                ->where('horariocolaborador.estado_horacolab',1)
+                ->where('curso.estado_curso',1)
+                ->where('usuario.estado_usuario',1)
+                ->groupBy('curso.id_curso')
+                ->select(
+                'curso.id_curso',
+                'curso.cant_hora_curso',
+                DB::raw('count(DISTINCT actividad.id_actividad) as actividades'),
+                DB::raw('count(horariocolaborador.id_usuario) as numero_participantes') 
+                )->get();
+
+                $tablaResumenTerminadas = DB::table('empresa')
+                ->join('gerencia', 'empresa.id_empresa', '=', 'gerencia.id_empresa')
+                ->join('area', 'gerencia.id_gerencia', '=', 'area.id_gerencia')
+                ->join('perfilocupacional', 'area.id_area', '=', 'perfilocupacional.id_area')
+                ->join('usuario', 'perfilocupacional.id_perfilocu', '=', 'usuario.id_perfilocu')
+                ->join('horariocolaborador', 'usuario.id_usuario', '=', 'horariocolaborador.id_usuario')
+                ->join('horario', 'horariocolaborador.id_horario', '=', 'horario.id_horario')
+                ->join('actividad', function ($join) {              
+                    $join->on('horario.id_actividad', '=', 'actividad.id_actividad')
+                        ->where('actividad.fecha_termino_actividad', '<', 'now()');
+                })
+                ->join('curso', 'actividad.id_curso', '=', 'curso.id_curso')
+                ->where('empresa.id_empresa',$idEmpresa)
+                ->whereBetween('actividad.fecha_termino_actividad', array($plan.'/01/01' , $plan.'/12/30'))
+                ->where('horario.estado_horario',1)
+                ->where('actividad.estado_actividad',1)
+                ->where('horariocolaborador.estado_horacolab',1)
+                ->where('curso.estado_curso',1)
+                ->where('usuario.estado_usuario',1)
+                ->groupBy('curso.id_curso')
+                ->select(
+                'curso.id_curso',
+                'curso.cant_hora_curso',
+                DB::raw('count(DISTINCT actividad.id_actividad) as actividades'),
+                DB::raw('count(horariocolaborador.id_usuario) as numero_participantes') 
+                )->get();
+                
+                $tablaResumen = DB::table('empresa')
+                ->join('gerencia', 'empresa.id_empresa', '=', 'gerencia.id_empresa')
+                ->join('area', 'gerencia.id_gerencia', '=', 'area.id_gerencia')
+                ->join('perfilocupacional', 'area.id_area', '=', 'perfilocupacional.id_area')
+                ->join('usuario', 'perfilocupacional.id_perfilocu', '=', 'usuario.id_perfilocu')
+                ->join('horariocolaborador', 'usuario.id_usuario', '=', 'horariocolaborador.id_usuario')
+                ->join('horario', 'horariocolaborador.id_horario', '=', 'horario.id_horario')
+                ->join('actividad', function ($join) {              
+                    $join->on('horario.id_actividad', '=', 'actividad.id_actividad');
+                })
+                ->join('curso', 'actividad.id_curso', '=', 'curso.id_curso')
+                ->whereBetween('actividad.fecha_termino_actividad', array($plan.'/01/01' , $plan.'/12/31'))
+                ->where('empresa.id_empresa',$idEmpresa)
+                ->where('horario.estado_horario',1)
+                ->where('actividad.estado_actividad',1)
+                ->where('horariocolaborador.estado_horacolab',1)
+                ->where('curso.estado_curso',1)
+                ->where('usuario.estado_usuario',1)
+                ->groupBy('curso.id_curso')
+                ->select(
+                'curso.id_curso',
+                'curso.nombre_curso',
+                'curso.cant_hora_curso',
+                DB::raw('count(DISTINCT actividad.id_actividad) as actividades'),
+                DB::raw('count(horariocolaborador.id_usuario) as numero_participantes') 
+                )->get();
+                
+            }
+        }
+        if(Count($tablaResumen) > 0 )
+        {
+            $numeroTerminados = 0;
+            $horasTerminados = 0;
+        
+            //dd($avance['numeroTerminados']);
+            foreach($tablaResumen as $actividad)
+            {
+                
+                foreach($tablaResumenTerminadas as $terminada)
+                {
+                    
+                    if($actividad->id_curso == $terminada->id_curso)
+                    {
+                        if($actividad->actividades == $terminada->actividades)
+                        {
+                            $numeroTerminados++;
+                            
+                            $horasTerminados= $horasTerminados +$terminada->cant_hora_curso;
+                        }
+                    }
+                }
+            }
+
+            $porcentajeAvanceCurso = (($numeroTerminados*100)/(Count($tablaResumen)));
+            $porcentajeAvanceParticipante = (($tablaResumenTerminadas->sum('numero_participantes')*100)/($tablaResumen->sum('numero_participantes')));
+            $porcentajeAvanceHora = (($horasTerminados*100)/($tablaResumen->sum('cant_hora_curso')));
+
+            $avance = collect([
+                "numeroTerminados" => $numeroTerminados ,
+                "horasTerminados" => $horasTerminados,
+                "porcentajeAvanceCurso" => round($porcentajeAvanceCurso),
+                "porcentajeAvanceParticipante" => round($porcentajeAvanceParticipante),
+                "porcentajeAvanceHora" => round($porcentajeAvanceHora),
+            ]);
+
+            $nombresCurso= "'".implode("','",$tablaResumen->pluck('nombre_curso')->toArray())."'";
+            $numeroParticipantes= implode(",",$tablaResumen->pluck('numero_participantes')->toArray());
+            
+         }
+         else
+         {
+            $avance = null;
+
+            $nombresCurso= null;
+            $numeroParticipantes= null;
+         }
+        
+         return view('vistaEmpresa.resumenEmpresa', compact('tablaResumen','tablaResumenTerminadas','tablaResumenFaltante','avance','numeroParticipantes','nombresCurso'));
+
     }
 
     /**

@@ -582,11 +582,15 @@ Route::resource('login', 'LoginController');
 //Vista Empresa
 
 Route::get('/vistaEmpresa', 'VistaEmpresaController@index');
+Route::get('/resumenEmpresa/{id}', 'VistaEmpresaController@resumenEmpresa',function($id) {
+    return  $id;
+    });
 //EvaluarEncuesta
 Route::get('/evaluarEncuesta', 'EvaluarEncuestaController@index');
 
 Route::get('/crearEvaluarEncuesta/{id}', 'EvaluarEncuestaController@create',function($id) {
     return  $id;
   });
+
   Route::resource('evaluarEncuesta', 'EvaluarEncuestaController');
   //-------------------------------------------------------------------------------------------------------------------------

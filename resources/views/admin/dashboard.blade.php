@@ -46,11 +46,12 @@ $('#calendar').fullCalendar({
         }
       },
   events: [
-		@foreach($actividades as $actividad) 
-				@foreach($actividad->horarios as $horario)
+   
+		@foreach($actividades as $actv) 
+				@foreach(App\Actividad::find($actv->id_actividad)->horarios as $horario)
 						@if($horario->fecha_horario!=null)
 						{
-							title: '{{$actividad->curso->nombre_curso}}',
+							title: '{{App\Actividad::find($actv->id_actividad)->curso->nombre_curso}}',
 							start: '{{date('Y-m-d',strtotime($horario->fecha_horario))}}T{{$horario->hora_inicio_horario}}',
 							end: '{{date('Y-m-d',strtotime($horario->fecha_horario))}}T{{$horario->hora_termino_horario}}'
 						},

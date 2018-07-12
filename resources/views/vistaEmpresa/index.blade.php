@@ -7,7 +7,7 @@
 		<div class="col-xs-12">
 			<div class="box">			
 				<div class="box-body">
-					<div class="col-xs-6">
+					<div class="col-xs-12">
 							@if(session()->has('Usuario'))
 								@if(session('Usuario')->id_perfil == 1)
 								<div class="box">			
@@ -17,14 +17,25 @@
 									<div class="box-body">
 										<div class='form-group'>
 											{!! Form::label('', 'Empresa:') !!}
-												{!! Form::select('id_empresa', $empresas,null  ,['class' => 'select2','placeholder'=>'Seleccione un Curso','id'=>'id_empresa', 'style'=>'width:100%']) !!}
+												{!! Form::select('id_empresa', $empresas,null  ,['class' => 'select2','placeholder'=>'Seleccione una Empresa','id'=>'id_empresa', 'style'=>'width:100%']) !!}
 											{!! Form::label('', '',['id' => 'errIdCurso']) !!}
+										</div>
+										<div class='form-group'>
+											{!! Form::label('', 'Plan Anual:') !!}
+												{!! Form::select('id_plan', array("2018"=>'2018',"2017"=>"2017","2016"=>"2016","2015"=>"2015"),null  ,['class' => 'select2','placeholder'=>'Seleccione un Plan','id'=>'id_plan', 'style'=>'width:100%']) !!}
+											{!! Form::label('', '',['id' => 'errIdPlan']) !!}
+										</div>
+										<div class='form-group'>
+											{!! Form::button("Filtrar Resumen", ['id'=>'btnFiltrar','class' => 'form-control btn btn-success ']) !!}
 										</div>
 									</div>
 								</div>
 								@endif
 							@endif
-						<div class="box">		
+					</div>
+					<div id="resumenEmpresa" >
+					<div class="col-md-8">
+						<div class="box"  >		
 							<div class="box-header">
 								<h1 class="box-title">Tabla de Empresa</h1>
 							</div>
@@ -36,7 +47,7 @@
 									<thead>
 										<tr>
 											<th></th>
-											<th>Plan 2018</th>
+											<th>Plan </th>
 											<th>Avance</th>
 											<th>% Avance</th>
 											<th>% Pendiente</th>
@@ -76,7 +87,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-xs-6">
+					<div class="col-md-4">
 						<div class="box">			
 							<div class="box-header">
 								<h1 class="box-title">Gráfico: Cantidad de participantes por curso</h1>
@@ -86,34 +97,13 @@
 							</div>
 						</div>
 					</div>
-
+				</div>
 				
 				</div>
 			</div>
 		</div>
 	</div>
 </body>
-
-<div class="modal fade bs-example-modal-lg" id="modal">
-	<div class="modal-dialog modal-lg">
-	<div class="modal-content">
-		<div class="modal-body">	
-			<div class="row">
-				<div class="col-xs-12">
-					<div class="box box-primary">
-						<div id="datos" class="box-body">
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- /.modal-content -->
-	</div>
-	<!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
 
 @stop
 
@@ -146,6 +136,18 @@ $(document).ready(function() {
 	});
 
 } );
+
+$(document).on('click', '#btnFiltrar', function () {
+		var filtrosEmpresa = $("#id_empresa").val()+","+$("#id_plan").val();
+		$.ajax({
+		url: "/resumenEmpresa/"+filtrosEmpresa,
+		type: "GET",
+		success: function (datos) {
+			$("#resumenEmpresa").html(datos);
+		}
+
+		});
+});	
 </script>
 
 <style>

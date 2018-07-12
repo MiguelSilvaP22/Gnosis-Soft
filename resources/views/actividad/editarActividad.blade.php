@@ -6,7 +6,7 @@
 			<div class="box">
 			
 				<div class="box-header">
-					<h3 class="box-title">Editar Curso </h3>
+					<h3 class="box-title">Editar Actividad </h3>
 				</div>
 
 				<div class="box-body">
@@ -45,7 +45,7 @@
 							</div>
 							<div class='form-group'>
 								{!! Form::label('', 'Observación:') !!}
-								{!! Form::textArea('observacion_actividad', null, ['class' => 'form-control','id'=>'observacion_actividad','maxlength'=>'1000']) !!}
+								{!! Form::textArea('observacion_actividad', null, ['class' => 'form-control','cols'=>'5','rows'=>'5','id'=>'observacion_actividad','maxlength'=>'1000']) !!}
 								{!! Form::label('', '',['id' => 'errObservacionActividad']) !!}
 							</div>						
 						</div>

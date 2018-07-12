@@ -1,6 +1,7 @@
-<div class="box">
 
-	<table class="table table-hover">
+	<div class="box">			
+		<div class="box-body">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>Lista de Cursos</th>
@@ -13,7 +14,8 @@
 					</tr>
 				@endforeach
 				</tbody>
-	</table>
-</box>
+			</table>
+		</div>
+	</div>
 
 

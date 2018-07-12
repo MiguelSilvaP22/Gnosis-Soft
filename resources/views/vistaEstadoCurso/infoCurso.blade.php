@@ -36,14 +36,10 @@
 										<td >
 										
 										@foreach(App\Curso::findOrFail($infoCurso[0]->id_curso)->listacompetencias as $competencia)
-											{{$competencia->nombre_comp}}
+										<a href="../vistacompetencia?categoria={{$competencia->id_categoriacomp}}&competencia={{$competencia->id_comp}}">{{$competencia->nombre_comp}},</a>
 										@endforeach
 										</td>
-									</tr>	
-									<tr>
-										<td >Exportar</td>
-										<td ></td>
-									</tr>				
+									</tr>		
 								</tbody>
 							</table>
 						</div>	

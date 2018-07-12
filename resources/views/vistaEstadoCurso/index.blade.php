@@ -49,6 +49,7 @@ $(document).on('change', '#empresa', function () {
 		success: function (datos) {
 			$("#selectCurso").html(datos);
 			$(".select2").select2();
+			$("#actividad").attr('disabled', 'disabled');
 		}
 		});
 });

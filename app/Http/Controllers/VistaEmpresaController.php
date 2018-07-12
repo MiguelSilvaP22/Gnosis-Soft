@@ -485,11 +485,11 @@ class VistaEmpresaController extends Controller
                 ->join('horario', 'horariocolaborador.id_horario', '=', 'horario.id_horario')
                 ->join('actividad', function ($join) {              
                     $join->on('horario.id_actividad', '=', 'actividad.id_actividad')
-                        ->where("date_trunc('YEAR','actividad.fecha_termino_actividad')", '=', $plan)
                         ->where('actividad.fecha_termino_actividad', '>', 'now()');
                 })
                 ->join('curso', 'actividad.id_curso', '=', 'curso.id_curso')
                 ->where('empresa.id_empresa',session('Usuario')->perfilocupacional->area->gerencia->empresa->id_empresa)
+                ->whereBetween('actividad.fecha_termino_actividad', array($plan.'/01/01' , $plan.'/12/31'))
                 ->where('horario.estado_horario',1)
                 ->where('actividad.estado_actividad',1)
                 ->where('horariocolaborador.estado_horacolab',1)
@@ -513,11 +513,11 @@ class VistaEmpresaController extends Controller
                 ->join('horario', 'horariocolaborador.id_horario', '=', 'horario.id_horario')
                 ->join('actividad', function ($join) {
                     $join->on('horario.id_actividad', '=', 'actividad.id_actividad')
-                        ->where("date_trunc('YEAR','actividad.fecha_termino_actividad')", '=', $plan)
                         ->where('actividad.fecha_termino_actividad', '<', 'now()');
                 })
                 ->join('curso', 'actividad.id_curso', '=', 'curso.id_curso')
                 ->where('empresa.id_empresa',session('Usuario')->perfilocupacional->area->gerencia->empresa->id_empresa)
+                ->whereBetween('actividad.fecha_termino_actividad', array($plan.'/01/01' , $plan.'/12/31'))
                 ->where('horario.estado_horario',1)
                 ->where('actividad.estado_actividad',1)
                 ->where('horariocolaborador.estado_horacolab',1)
@@ -539,12 +539,10 @@ class VistaEmpresaController extends Controller
                 ->join('usuario', 'perfilocupacional.id_perfilocu', '=', 'usuario.id_perfilocu')
                 ->join('horariocolaborador', 'usuario.id_usuario', '=', 'horariocolaborador.id_usuario')
                 ->join('horario', 'horariocolaborador.id_horario', '=', 'horario.id_horario')
-                ->join('actividad', function ($join) {
-                    $join->on('horario.id_actividad', '=', 'actividad.id_actividad')
-                        ->where("date_trunc('YEAR','actividad.fecha_termino_actividad')", '=', $plan);
-                })
+                ->join('actividad', 'horario.id_actividad', '=', 'actividad.id_actividad')
                 ->join('curso', 'actividad.id_curso', '=', 'curso.id_curso')
                 ->where('empresa.id_empresa',session('Usuario')->perfilocupacional->area->gerencia->empresa->id_empresa)
+                ->whereBetween('actividad.fecha_termino_actividad', array($plan.'/01/01' , $plan.'/12/31'))
                 ->where('horario.estado_horario',1)
                 ->where('actividad.estado_actividad',1)
                 ->where('horariocolaborador.estado_horacolab',1)

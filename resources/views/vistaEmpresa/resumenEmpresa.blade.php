@@ -1,4 +1,5 @@
 <div class="col-md-8">
+<div class="box">	
 		<div class="box-header">
 			<h1 class="box-title">Tabla de Empresa</h1>
 		</div>
@@ -44,7 +45,7 @@
 				</tbody>
 			</table>
 		</div>
-		
+		</div>
 		</div>
 </div>		
 <div class="col-md-4">
@@ -69,9 +70,10 @@ $(document).ready(function() {
 		labels: [
 			@foreach($tablaResumen as $key => $tableNom)
 				@if(Count($tablaResumen) > $key-1)
-				'{{$tableNom->nombre_curso}} ',
+				
+				'{{ str_limit($tableNom->nombre_curso, $limit = 50, $end = '...') }}',
 				@else
-				'{{$tableNom->nombre_curso}} '
+				'{{ str_limit($tableNom->nombre_curso, $limit = 50, $end = '...') }} '
 				@endif
 			@endforeach
 			  

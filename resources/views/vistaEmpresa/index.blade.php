@@ -30,6 +30,22 @@
 										</div>
 									</div>
 								</div>
+								@else
+								<div class="box">			
+									<div class="box-header">
+										<h1 class="box-title">Filtro</h1>
+									</div>
+									<div class="box-body">
+										<div class='form-group'>
+											{!! Form::label('', 'Plan Anual:') !!}
+												{!! Form::select('id_plan', array("2018"=>'2018',"2017"=>"2017","2016"=>"2016","2015"=>"2015"),null  ,['class' => 'select2','placeholder'=>'Seleccione un Plan','id'=>'id_plan', 'style'=>'width:100%']) !!}
+											{!! Form::label('', '',['id' => 'errIdPlan']) !!}
+										</div>
+										<div class='form-group'>
+											{!! Form::button("Filtrar Resumen", ['id'=>'btnFiltrar','class' => 'form-control btn btn-success ']) !!}
+										</div>
+									</div>
+								</div>
 								@endif
 							@endif
 					</div>
@@ -119,9 +135,9 @@ $(document).ready(function() {
 		labels: [
 			@foreach($tablaResumen as $key => $tableNom)
 				@if(Count($tablaResumen) > $key-1)
-				'{{$tableNom->nombre_curso}} ',
+				'{{ str_limit($tableNom->nombre_curso, $limit = 50, $end = '...') }}',
 				@else
-				'{{$tableNom->nombre_curso}} '
+				'{{ str_limit($tableNom->nombre_curso, $limit = 50, $end = '...') }}'
 				@endif
 			@endforeach
 			  
@@ -138,7 +154,14 @@ $(document).ready(function() {
 } );
 
 $(document).on('click', '#btnFiltrar', function () {
-		var filtrosEmpresa = $("#id_empresa").val()+","+$("#id_plan").val();
+		@if(session()->has('Usuario'))
+			@if(session('Usuario')->id_perfil == 1)
+			var filtrosEmpresa = $("#id_empresa").val()+","+$("#id_plan").val();
+			@else 
+			var filtrosEmpresa = "0,"+$("#id_plan").val();
+			@endif
+		@endif	
+		
 		$.ajax({
 		url: "/resumenEmpresa/"+filtrosEmpresa,
 		type: "GET",

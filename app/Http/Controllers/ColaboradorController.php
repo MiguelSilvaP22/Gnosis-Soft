@@ -255,9 +255,9 @@ class ColaboradorController extends Controller
             
             //dd($labelCompetencias);
 
-            \Debugbar::info($colaborador->horariosColaborador->last()->horario->actividad);
+           // \Debugbar::info($colaborador->horariosColaborador->last()->horario->actividad);
 
-            \Debugbar::info($sugerenciasCursos);
+            //\Debugbar::info($sugerenciasCursos);
         }else
         {
             $labelCompetencias = null;

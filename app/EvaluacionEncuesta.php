@@ -20,4 +20,15 @@ class EvaluacionEncuesta extends Model
     {
         return $this->hasMany(AlternativaEvaluacion::class,'id_evencuesta')->where('estado_altvev',1);
     }
+
+    public function eliminar()
+    {
+        foreach($this->alternativasEvaluacion as $alt)
+        {
+            $alt->eliminar();
+        }
+
+        $this->estado_evencuesta= 0;
+        $this->save();
+    }
 }

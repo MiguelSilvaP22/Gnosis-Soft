@@ -15,4 +15,10 @@ class AlternativaEvaluacion extends Model
     {
         return $this->belongsTo(EvaluacionEncuesta::class,'id_evencuesta')->where('estado_evencuesta',1);
     }
+
+    public function eliminar()
+    {
+        $this->estado_altvev = 0;
+        $this->save();
+    }
 }

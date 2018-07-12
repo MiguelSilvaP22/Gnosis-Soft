@@ -94,7 +94,7 @@
 			</div>
 		</div>	
 		<div class='form-group'>
-			{!! Form::submit("Agregar Encuesta", ['class' => 'form-control btn btn-success ']) !!}
+			{!! Form::submit("Editar Encuesta", ['class' => 'form-control btn btn-success ']) !!}
 		</div>
 		{!! Form::close() !!}
 		<div class='form-group'>

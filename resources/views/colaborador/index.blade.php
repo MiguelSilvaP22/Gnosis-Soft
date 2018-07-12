@@ -29,8 +29,7 @@
 							<th>Nombre Colaborador</th>
 							<th>Empresa Colaborador</th>
 							<th>Perfil Colaborador</th>
-							<th>Fecha de Modificación</th>
-							<th>Acciones</th>
+							<th style="text-align:center;">Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -40,8 +39,7 @@
 							<td >{{ $colaborador->nombre_usuario. $colaborador->apellidopat_usuario.$colaborador->apellidomat_usuario}}</td>
 							<td >{{ $colaborador->perfilOcupacional->area->gerencia->empresa->nombre_empresa}}</td>
 							<td >{{ $colaborador->perfilOcupacional->nombre_perfilocu}}</td>
-							<td >{{ $colaborador->fecha_mod_usuario}}</td>
-							<td>
+							<td style="text-align:right;">
 							{{--<button id="btnVer" value="{{ $colaborador->id_usuario}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>--}}
 							<button id="btnEvaluar" value="{{ $colaborador->id_usuario}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Evaluar</button>
 							<button id="btnEditar" value="{{ $colaborador->id_usuario}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>

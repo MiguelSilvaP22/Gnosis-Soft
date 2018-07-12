@@ -24,23 +24,15 @@
 						<tr>
 							<th>Nombre Encuesta</th>
 							<th>Tipo Encuesta</th>
-							<th>Fecha de Modificación</th>
-							<th>Estado</th>
-							<th>Acciones</th>
+							<th style="text-align:center;">Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
 						@foreach ($encuestas as $encuesta) 
 						<tr>
-							<td style="width:25%;">{{ $encuesta->nombre_encuesta}}</td>
-							<td style="width:25%;">{{ $encuesta->tipoEncuesta->nombre_tipoencuesta}}</td>
-							<td style="width:25%;">{{ $encuesta->fecha_mod_encuesta}}</td>
-							@if($encuesta->estado_encuesta == 1)
-							<td style="width:25%;color:green;">Activo</td>
-							@else
-							<td style="width:25%;color:red">inactivo</td>
-							@endif
-							<td>
+							<td >{{ $encuesta->nombre_encuesta}}</td>
+							<td >{{ $encuesta->tipoEncuesta->nombre_tipoencuesta}}</td>
+							<td style="text-align:right;">
 								{{--<button id="btnVer" value="{{ $encuesta->id_encuesta}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>--}}
 
 								<button id="btnEditar" value="{{ $encuesta->id_encuesta}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>

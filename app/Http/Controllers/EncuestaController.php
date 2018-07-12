@@ -248,4 +248,22 @@ class EncuestaController extends Controller
         return view('evaluarEncuesta.index',compact('encuestasColaborador'));
     }
 
+    public function confirmDestroy($id)
+    {
+        $encuesta = Encuesta::findOrFail($id);
+        return view('encuesta.desactivarEncuesta', compact('encuesta'));
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $encuesta = Encuesta::findOrFail($id);
+        $encuesta->eliminar();
+        return redirect('encuesta');
+    }
+
 }

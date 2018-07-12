@@ -33,8 +33,7 @@
 							<th>Perfil Usuario</th>
 							<th>Empresa Usuario</th>
 							<th>Perfil Ocupacional Usuario</th>
-							<th>Fecha de Modificación</th>
-							<th>Acciones</th>
+							<th style="text-align:center;">Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -50,8 +49,7 @@
 								<td></td>
 								<td ></td>
 							@endif
-							<td >{{ date('d/m/Y',strtotime($usuario->fecha_mod_usuario))}}</td>
-							<td>
+							<td style="text-align:right;">
 							{{--<button id="btnVer" value="{{ $usuario->id_usuario}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>--}}
 
 							<button id="btnEditar" value="{{ $usuario->id_usuario}}" class="btn btn btn-info"><i class="fa fa-edit"></i> Editar</button>

@@ -30,7 +30,7 @@ class Encuesta extends Model
         {
             $preguntaEncuesta->eliminar();
         }
-        
+
         $this->estado_encuesta = 0;
         $this->save();
     }

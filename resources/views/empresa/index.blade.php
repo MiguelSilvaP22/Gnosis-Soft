@@ -29,23 +29,18 @@
 				<table id="tablaEmpresa" class="table">
 					<thead>
 						<tr>
+							<th>RUT Matriz</th>
 							<th>Nombre Empresa</th>
-							<th>Fecha de Modificación</th>
-							<th>Estado</th>
-							<th>Acciones</th>
+							<th style="text-align:center;">Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
 						@foreach ($empresas as $empresa) 
 						<tr>
-							<td style="width:25%;">{{ $empresa->nombre_empresa}}</td>
-							<td style="width:25%;">{{ $empresa->fecha_mod_empresa}}</td>
-							@if($empresa->estado_empresa == 1)
-							<td style="width:25%;color:green;">Activo</td>
-							@else
-							<td style="width:25%;color:red">inactivo</td>
-							@endif
-							<td>
+							<td>{{ $empresa->rut_matriz_empresa}}</td>
+							<td>{{ $empresa->nombre_empresa}}</td>
+
+							<td style="text-align:right;">
 								<a id="btnOrg" href="{{ route('organigrama.index', ['id'=>$empresa->id_empresa] ) }}" class="btn btn btn-info"><i class="fa fa-sitemap"></i> Organigrama</a>
 								{{--<button id="btnVer" value="{{ $empresa->id_empresa}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>--}}
 

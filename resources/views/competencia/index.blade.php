@@ -40,24 +40,16 @@
 						<tr>
 							<th>Nombre Competencia</th>
 							<th>Categoría</th>
-							<th>Fecha de Modificación</th>
-							<th>Estado</th>
-							<th>Acciones</th>
+							<th style="text-align:center;">Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
 						@foreach ($competencias as $competencia) 
 						
 						<tr>
-							<td style="width:25%;">{{ $competencia->nombre_comp}}</td>
-							<td style="width:25%;">{{ $competencia->categoriacompetencia->nombre_categoriacomp}}</td>
-							<td style="width:25%;">{{ $competencia->fecha_mod_comp}}</td>
-							@if($competencia->estado_comp == 1)
-							<td style="width:25%;color:green;">Activo</td>
-							@else
-							<td style="width:25%;color:red">inactivo</td>
-							@endif
-							<td>
+							<td>{{ $competencia->nombre_comp}}</td>
+							<td >{{ $competencia->categoriacompetencia->nombre_categoriacomp}}</td>
+							<td style="text-align:right;">
 								{{--<button id="verCompetencia" value="{{ $competencia->id_comp}}" class="btn btn btn-info"><i class="fa fa-eye"></i> Ver</button>--}}
 
 								<button class="btn btn btn-info" id="editCompetencia" value="{{$competencia->id_comp}}"><i class="fa fa-edit"></i> Editar</button>

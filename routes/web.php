@@ -558,6 +558,15 @@ Route::get('/formCategoriaPreguntas/{id}', 'EncuestaController@formCategoriaPreg
     return $id;
   })->name('encuesta.formCategoriaPreguntas'); 
   
+  Route::get('/desactivarEncuesta/{id}', 'EncuestaController@confirmDestroy',function($id) {
+    return  $id;
+    })
+->name('encuesta.delete');  
+
+Route::get('/eliminarEncuesta/{id}', 'EncuestaController@destroy',function($id) {
+    return  $id;
+    })
+->name('encuesta.destroy'); 
 Route::resource('encuesta', 'EncuestaController');
   //-------------------------------------------------------------------------------------------------------------------------
 //Colaborador

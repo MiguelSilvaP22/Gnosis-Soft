@@ -52,7 +52,7 @@
 										@if(Count($colaboradorHorario->evaluacionesColab)>0)
 											<button id="evaluacionColaborador" class="btn btn btn-info" onclick="verEvaluacionColaborador({{$colaboradorHorario->id_horacolab}})" ><i class="fa fa-eye"></i></button>
 										@endif
-											<button id="evaluarColaborador" class="btn btn btn-info" ><i class="fa fa-pencil"></i></button>
+											<button id="evaluarColaborador" class="btn btn btn-info" onclick="evaluarColaborador({{$colaboradorHorario->id_horacolab}})"><i class="fa fa-pencil"></i></button>
 										
 										</td>
 									</tr>

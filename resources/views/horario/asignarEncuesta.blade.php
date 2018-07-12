@@ -84,6 +84,7 @@
 						</thead>
 						<tbody>
 							@foreach($horariosColaborador as $horarioColab)
+							@if($horarioColab->usuario != null)
 							<tr>
 								<td>
 									<span> {{$horarioColab->usuario->run_usuario}}</span>
@@ -95,6 +96,7 @@
 									<span>{{$horarioColab->usuario->email_usuario}}</span>
 								</td>
 							</tr>
+							@endif
 							@endforeach
 						</tbody>
 					</table>

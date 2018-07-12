@@ -128,11 +128,15 @@
                                                         
                                                         <tr>
                                                             <td>{{$curso->nombre_curso}}</td>
+                                                            @if(count($curso->listaCompetencias)>0)
                                                             <td> 
                                                                 @foreach($curso->listaCompetencias as $comp)
                                                                     {{ $comp->nombre_comp }} <br>
                                                                 @endforeach 
                                                             </td>
+                                                            @else
+                                                            <td></td>
+                                                            @endif
                                                             <td><a href="../../vistacurso?area={{ $curso->id_areacurso }}&curso={{ $curso->id_curso }}"> mas información </a></td>
 
                                                         </tr>

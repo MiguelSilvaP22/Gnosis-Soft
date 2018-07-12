@@ -85,6 +85,7 @@
                                                 <td>Fecha de termino</td>
                                                 <td>Información</td>
                                             </tr>
+                                            @if(Count($colaborador->horariosColaborador)>0)
                                             <tr>
                                                 <td> {{ $colaborador->horariosColaborador->last()->horario->actividad->curso->nombre_curso }} </td>
                                                 <td> 
@@ -97,6 +98,7 @@
                                                 <td>{{ date('d/m/Y',strtotime($colaborador->horariosColaborador->last()->horario->actividad->fecha_termino_actividad)) }} </td>
                                                 <td><a href="../../vistacurso?area={{ $colaborador->horariosColaborador->last()->horario->actividad->curso->id_areacurso }}&curso={{ $colaborador->horariosColaborador->last()->horario->actividad->curso->id_curso }}"> Mas información </a></td>
                                             </tr>
+                                            @endif
                                         </table>
                                     </div>
                             </div>

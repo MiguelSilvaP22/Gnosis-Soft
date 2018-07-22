@@ -35,10 +35,10 @@
 								<td>
 								@if(Count(App\EvaluacionEncuesta::findOrFail($encuesta->id_evencuesta)->alternativasEvaluacion) > 0)
 									<button id="btnEvaluar" value="{{ $encuesta->id_evencuesta }}" disabled="true" class="btn btn btn-info"><i class="fa fa-eye"></i> Respondida</button>
-								@elseif(date('d/m/Y',strtotime($encuesta->fecha_horario)) > date('d/m/Y'))
+								@elseif(date('d/m/Y',strtotime($encuesta->fecha_horario)) < date('d/m/Y'))
 									<button id="btnEvaluar" value="{{ $encuesta->id_evencuesta }}"  class="btn btn btn-info"><i class="fa fa-eye"> </i> Responder</button>
 								@else	
-									<button id="btnEvaluar" value="{{ $encuesta->id_evencuesta }}" disabled="true" class="btn btn btn-info"><i class="fa fa-eye"></i> Responder</button>
+									<button id="btnEvaluar" disabled="true" class="btn btn btn-info"><i class="fa fa-eye"></i> Responder</button>
 								@endif
 								</td>
 							</tr>
